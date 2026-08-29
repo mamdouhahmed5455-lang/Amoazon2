@@ -176,7 +176,7 @@ let deckInstance
             };
         }
         const MAP_STYLES = {
-            dark: createRasterStyle("https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png", "CARTO"),
+            dark: "mapbox://styles/mapbox/dark-v11",
             terrain: createRasterStyle("https://tile.opentopomap.org/{z}/{x}/{y}.png", "OpenTopoMap"),
             satellite: createRasterStyle("https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", "Esri")
         };
