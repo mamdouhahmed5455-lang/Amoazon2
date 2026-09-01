@@ -7,10 +7,9 @@
             };
         }
 
-        // Read token from environment (e.g., injected during Vercel build) or fallback to placeholder
-        mapboxgl.accessToken = (typeof process !== 'undefined' && process.env.MAPBOX_TOKEN)
-            ? process.env.MAPBOX_TOKEN
-            : "___MAPBOX_TOKEN_PLACEHOLDER___";
+        // Token injected at build time via Vercel build script (see package.json build command).
+        // DO NOT hardcode a real token here — set MAPBOX_TOKEN in Vercel Environment Variables.
+        mapboxgl.accessToken = "___MAPBOX_TOKEN_PLACEHOLDER___";
         const map = new mapboxgl.Map({
             container: 'spatialMap',
             style: createRasterStyle("https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png"),

@@ -180,10 +180,9 @@ let deckInstance
             terrain: createRasterStyle("https://tile.opentopomap.org/{z}/{x}/{y}.png", "OpenTopoMap"),
             satellite: createRasterStyle("https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", "Esri")
         };
-        // Read token from environment (e.g., injected during Vercel build) or fallback to placeholder
-        const MAPBOX_TOKEN = (typeof process !== 'undefined' && process.env.MAPBOX_TOKEN) 
-            ? process.env.MAPBOX_TOKEN 
-            : "___MAPBOX_TOKEN_PLACEHOLDER___";
+        // Token injected at build time via Vercel build script (see package.json build command).
+        // DO NOT hardcode a real token here — set MAPBOX_TOKEN in Vercel Environment Variables.
+        const MAPBOX_TOKEN = "___MAPBOX_TOKEN_PLACEHOLDER___";
         function assignEventYear(point) {
             const latSeed = Math.round(Math.abs(point.lat) * 1000);
             const lonSeed = Math.round(Math.abs(point.lon) * 1000);
