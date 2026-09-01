@@ -406,8 +406,8 @@
                         <div class="risk-toggle-group">
                             <button id="riskAllBtn" class="risk-toggle-btn active"
                                 onclick="setMinimumRisk(0)">All</button>
-                            <button id="riskMedBtn" class="risk-toggle-btn" onclick="setMinimumRisk(165)">165+</button>
-                            <button id="riskHighBtn" class="risk-toggle-btn" onclick="setMinimumRisk(170)">170+</button>
+                            <button id="riskMedBtn" class="risk-toggle-btn" onclick="setMinimumRisk(162)">50%+</button>
+                            <button id="riskHighBtn" class="risk-toggle-btn" onclick="setMinimumRisk(174)">75%+</button>
                         </div>
                     </div>
                     <div class="control-group">
@@ -1016,15 +1016,19 @@
         <div class="legend-title">Risk Classification</div>
         <div class="legend-row">
             <div class="legend-dot" style="background:#22c55e; color:#22c55e;"></div>
-            <span class="legend-label">Low Risk (&lt; 165)</span>
+            <span class="legend-label">Low Risk (0–25%)</span>
         </div>
         <div class="legend-row">
             <div class="legend-dot" style="background:#f59e0b; color:#f59e0b;"></div>
-            <span class="legend-label">Medium Risk (165-170)</span>
+            <span class="legend-label">Medium Risk (25–50%)</span>
         </div>
         <div class="legend-row">
             <div class="legend-dot" style="background:#ef4444; color:#ef4444;"></div>
-            <span class="legend-label">High Risk (&gt; 170)</span>
+            <span class="legend-label">High Risk (50–75%)</span>
+        </div>
+        <div class="legend-row">
+            <div class="legend-dot" style="background:#7c3aed; color:#7c3aed;"></div>
+            <span class="legend-label">Urgent (&gt; 75%)</span>
         </div>
     </div>
 

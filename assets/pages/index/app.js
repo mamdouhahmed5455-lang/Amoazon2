@@ -215,6 +215,15 @@ let deckInstance
             dataGlobal.forEach(point => {
                 point.event_year = assignEventYear(point);
             });
+            // Fix: populate Monitored Area immediately on load so it never shows '--'
+            const totalAreaEl = document.getElementById('totalArea');
+            if (totalAreaEl) {
+                totalAreaEl.textContent = data.length > 0
+                    ? (data.length * 0.04).toLocaleString(undefined, { maximumFractionDigits: 0 }) + ' km²'
+                    : '0 km²';
+                const cardEl = totalAreaEl.closest('.stat-card-hud');
+                if (cardEl) cardEl.title = 'Cumulative monitored coverage — Rondônia Arc of Deforestation study zone only, not the entire Amazon Basin';
+            }
             deckInstance = new deck.DeckGL({
                 container: "deck-container",
                 mapStyle: MAP_STYLES.dark,
@@ -1366,12 +1375,14 @@ let deckInstance
             if (activeData !== lastRenderedDataResult_FOR_UI || currentFloorYear !== lastUIUpdateYear) {
                 lastRenderedDataResult_FOR_UI = activeData;
                 lastUIUpdateYear = currentFloorYear;
-                let low = 0, medium = 0, high = 0;
+                // Use normalised % bands from SSOT calculatePriority thresholds (0-25/25-50/50-75/>75)
+                let low = 0, medium = 0, high = 0, urgent = 0;
                 activeData.forEach(p => {
-                    const pointScore = getPointScore(p);
-                    if (pointScore <= 165) low++;
-                    else if (pointScore <= 170) medium++;
-                    else high++;
+                    const pct = getProbabilityPercent(getPointScore(p));
+                    if (pct <= 25) low++;
+                    else if (pct <= 50) medium++;
+                    else if (pct <= 75) high++;
+                    else urgent++;
                 });
                 // Update all 7 stats
                 // Fix #7: Update area card; clarify Rondônia Arc scope and cumulative nature
@@ -1382,7 +1393,7 @@ let deckInstance
                     if (cardEl) cardEl.title = `Cumulative monitored coverage as of ${Math.floor(currentYear)} — Rondônia Arc of Deforestation study zone only, not the entire Amazon Basin`;
                 }
                 const highRiskCountEl = document.getElementById("highRiskCount");
-                if (highRiskCountEl) highRiskCountEl.textContent = high.toLocaleString();
+                if (highRiskCountEl) highRiskCountEl.textContent = (high + urgent).toLocaleString();
                 const midRiskCountEl = document.getElementById("midRiskCount");
                 if (midRiskCountEl) midRiskCountEl.textContent = medium.toLocaleString();
                 const lowRiskCountEl = document.getElementById("lowRiskCount");

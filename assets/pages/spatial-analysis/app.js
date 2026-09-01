@@ -55,8 +55,11 @@
         }
 
         function getAnalysisPointBand(score) {
-            if (score > 170) return 'high';
-            if (score > 165) return 'medium';
+            // Convert raw score to normalised % (same mapping as SSOT normalizeRiskScore: 140→0, 185→100)
+            const pct = Math.max(0, Math.min(100, Math.round(((score - 140) / 45) * 100)));
+            if (pct > 75) return 'urgent';
+            if (pct > 50) return 'high';
+            if (pct > 25) return 'medium';
             return 'low';
         }
 
