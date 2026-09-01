@@ -7,7 +7,10 @@
             };
         }
 
-        mapboxgl.accessToken = 'pk.eyJ1IjoibWFtZG91aGFobWVkMTU4MSIsImEiOiJjbTduaXVndjEwMDRsMm9zYXVhcHJ3eGt6In0.H_fBihpC9-p5Qp7q_WKgVw';
+        // Read token from environment (e.g., injected during Vercel build) or fallback to placeholder
+        mapboxgl.accessToken = (typeof process !== 'undefined' && process.env.MAPBOX_TOKEN)
+            ? process.env.MAPBOX_TOKEN
+            : "___MAPBOX_TOKEN_PLACEHOLDER___";
         const map = new mapboxgl.Map({
             container: 'spatialMap',
             style: createRasterStyle("https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png"),
