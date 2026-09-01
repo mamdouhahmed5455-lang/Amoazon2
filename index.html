@@ -231,22 +231,23 @@
 
             <div class="analysis-card">
                 <div class="sidebar-section-title">Top Feature Importance</div>
-                <div class="mini-feature-list">
+                <!-- Values injected from SSOT: scripts/constants.js GEOAI_CONSTANTS.FEATURE_IMPORTANCES -->
+                <div class="mini-feature-list" id="modelTabFeatureBars">
                     <div class="mini-feature-item">
-                        <div class="mini-feature-head"><span>Road Proximity</span><span>47%</span></div>
-                        <div class="mini-feature-track"><div class="mini-feature-fill fill-red" style="width: 47%;"></div></div>
+                        <div class="mini-feature-head"><span>Road Proximity</span><span>41%</span></div>
+                        <div class="mini-feature-track"><div class="mini-feature-fill fill-red" style="width: 41%;"></div></div>
                     </div>
                     <div class="mini-feature-item">
-                        <div class="mini-feature-head"><span>Previous Forest Loss</span><span>34%</span></div>
-                        <div class="mini-feature-track"><div class="mini-feature-fill fill-orange" style="width: 34%;"></div></div>
+                        <div class="mini-feature-head"><span>Forest Loss (Temporal)</span><span>23%</span></div>
+                        <div class="mini-feature-track"><div class="mini-feature-fill fill-orange" style="width: 23%;"></div></div>
                     </div>
                     <div class="mini-feature-item">
-                        <div class="mini-feature-head"><span>Fire Frequency</span><span>22%</span></div>
-                        <div class="mini-feature-track"><div class="mini-feature-fill fill-amber" style="width: 22%;"></div></div>
+                        <div class="mini-feature-head"><span>Population Pressure</span><span>21%</span></div>
+                        <div class="mini-feature-track"><div class="mini-feature-fill fill-amber" style="width: 21%;"></div></div>
                     </div>
                     <div class="mini-feature-item">
-                        <div class="mini-feature-head"><span>NDVI / Vegetation Health</span><span>19%</span></div>
-                        <div class="mini-feature-track"><div class="mini-feature-fill fill-green" style="width: 19%;"></div></div>
+                        <div class="mini-feature-head"><span>Elevation Constraints</span><span>15%</span></div>
+                        <div class="mini-feature-track"><div class="mini-feature-fill fill-green" style="width: 15%;"></div></div>
                     </div>
                 </div>
             </div>
@@ -627,11 +628,7 @@
                                 was performed by comparing predicted hotspots with observed loss proxies,
                                 active fire hotspots, and satellite-based validation indicators.
                             </p>
-                            <div class="highlight-box">
-                                <b>Risk Factors:</b>
-                                Forest loss history (35%), road proximity (22%), hotspot density (18%),
-                                topographic vulnerability (12%), and supporting environmental variables.
-                            </div>
+                            <!-- Risk Factors now rendered from SSOT (see SHAP panel below) -->
                         </div>
                         <div>
                     <img src="assets/images/model_validation_results.png" class="modal-image" alt="Validation results">
@@ -663,7 +660,7 @@
                                 </div>
                             </div>
                             <div class="equation-box">
-                                <span>Risk(x)</span> = w1 * ForestLoss + w2 * Roads + w3 * FireHistory + Bias
+                                <span>Risk(x)</span> = 0.41(Roads) + 0.23(Forest Loss) + 0.21(Population) + 0.15(Elevation)
                             </div>
                         </div>
                         <div class="modal-text">
@@ -677,30 +674,29 @@
                             </h4>
                             <div class="importance-bar-container">
                                 <div class="importance-row">
-                                    <div class="importance-label"><span>Forest Loss (Temporal)</span><span>35%</span>
+                                    <div class="importance-label"><span>Road Proximity</span><span>41%</span>
                                     </div>
                                     <div class="importance-track">
-                                        <div class="importance-fill" style="width: 35%"></div>
+                                        <div class="importance-fill" style="width: 41%"></div>
                                     </div>
                                 </div>
                                 <div class="importance-row">
-                                    <div class="importance-label"><span>Road Proximity
-                                            (Infrastructure)</span><span>22%</span></div>
+                                    <div class="importance-label"><span>Forest Loss (Temporal)</span><span>23%</span></div>
                                     <div class="importance-track">
-                                        <div class="importance-fill" style="width: 22%"></div>
+                                        <div class="importance-fill" style="width: 23%"></div>
                                     </div>
                                 </div>
                                 <div class="importance-row">
-                                    <div class="importance-label"><span>Historical Hotspots</span><span>18%</span></div>
+                                    <div class="importance-label"><span>Population Pressure</span><span>21%</span></div>
                                     <div class="importance-track">
-                                        <div class="importance-fill" style="width: 18%"></div>
+                                        <div class="importance-fill" style="width: 21%"></div>
                                     </div>
                                 </div>
                                 <div class="importance-row">
-                                    <div class="importance-label"><span>Topographic Vulnerability</span><span>12%</span>
+                                    <div class="importance-label"><span>Elevation Constraints</span><span>15%</span>
                                     </div>
                                     <div class="importance-track">
-                                        <div class="importance-fill" style="width: 12%"></div>
+                                        <div class="importance-fill" style="width: 15%"></div>
                                     </div>
                                 </div>
                             </div>
@@ -941,9 +937,9 @@
     </div>
     <!-- Stats HUD -->
     <div id="statsHUD">
-        <div class="stat-card-hud glass-panel">
-            <div id="totalArea" class="stat-card-value">68,500 km�</div>
-            <div class="stat-card-label">Monitored Area</div>
+        <div class="stat-card-hud glass-panel" title="Cumulative monitored coverage as of the selected year — Rondônia Arc of Deforestation study zone only, not the entire Amazon Basin">
+            <div id="totalArea" class="stat-card-value">--</div>
+            <div class="stat-card-label" style="font-size:9px;line-height:1.3;">Monitored Area<br><span style="color:#64748b;font-weight:400;">Rondônia Arc · Cumulative</span></div>
         </div>
         <div class="stat-card-hud glass-panel">
             <div id="highRiskCount" class="stat-card-value" style="color:#fca5a5;">--</div>
@@ -1070,6 +1066,7 @@
         </div>
     </div>
 
+  <script src="scripts/constants.js"></script>
   <script src="assets/pages/index/app.js?v=2"></script>
 </body>
 </html>

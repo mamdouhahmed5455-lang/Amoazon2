@@ -77,7 +77,7 @@ let deckInstance
             road: 20,
             pop: 15,
             fire: 10,
-            policies: ['Strict Forest Reserve'],
+            policies: [],  // Fix #4: Default to no active policies so positive slider values always increase risk
             timestamp: 0
         };
         let simulationState = { ...DEFAULT_SIMULATION_STATE };
@@ -480,8 +480,14 @@ let deckInstance
             return 'Low';
         }
         function getProbabilityPercent(score) {
+            // Fix #3: Route through SSOT normalizeRiskScore to guarantee [0,100] clamp.
+            // SSOT maps raw score 140→0%, 185→100% with strict clamping.
+            if (window.GEOAI_CONSTANTS && window.GEOAI_CONSTANTS.normalizeRiskScore) {
+                return window.GEOAI_CONSTANTS.normalizeRiskScore(score);
+            }
+            // Fallback (SSOT not loaded): same mapping, same clamp
             const normalized = Math.max(0, Math.min(1, (score - 140) / 45));
-            return Math.round(normalized * 100);
+            return Math.max(0, Math.min(100, Math.round(normalized * 100)));
         }
         function getConfidencePercent(score) {
             return Math.min(99, Math.max(72, Math.round(((score - 140) / 45) * 100)));
@@ -773,10 +779,11 @@ let deckInstance
             const popFactor = Math.max(0.08, Math.min(0.25, terrainAccessibility * 0.9));
             const elevFactor = Math.max(0.02, Math.min(0.15, temporalPersistence * 0.5));
             const rawDrivers = [
-                { label: 'Road proximity', value: proximityFactor },
-                { label: 'Previous forest loss', value: lossFactor },
-                { label: 'Population pressure', value: popFactor },
-                { label: 'Elevation', value: elevFactor }
+                // Fix #1: Factor names match SSOT (scripts/constants.js FEATURE_IMPORTANCES)
+                { label: 'Road Proximity',        value: proximityFactor },
+                { label: 'Forest Loss (Temporal)', value: lossFactor },
+                { label: 'Population Pressure',   value: popFactor },
+                { label: 'Elevation Constraints', value: elevFactor }
             ];
             const total = rawDrivers.reduce((sum, item) => sum + item.value, 0) || 1;
             return rawDrivers.map(item => ({
@@ -1185,9 +1192,17 @@ let deckInstance
             renderLayers();
         }
         function getPriorityText(score) {
-            if (score > 170) return 'Immediate';
-            if (score > 165) return 'Priority';
-            return 'Routine';
+            // Fix #5: Derive priority from normalised probability via SSOT calculatePriority.
+            // Thresholds: 0-25% Low, 25-50% Medium, 50-75% High, 75-100% Urgent.
+            const prob = getProbabilityPercent(score);
+            if (window.GEOAI_CONSTANTS && window.GEOAI_CONSTANTS.calculatePriority) {
+                return window.GEOAI_CONSTANTS.calculatePriority(prob);
+            }
+            // Fallback (SSOT not loaded)
+            if (prob > 75) return 'Urgent';
+            if (prob > 50) return 'High';
+            if (prob > 25) return 'Medium';
+            return 'Low';
         }
         function setMinimumRisk(value) {
             markAnalysisReady();
@@ -1357,8 +1372,13 @@ let deckInstance
                     else high++;
                 });
                 // Update all 7 stats
+                // Fix #7: Update area card; clarify Rondônia Arc scope and cumulative nature
                 const totalAreaEl = document.getElementById("totalArea");
-                if (totalAreaEl) totalAreaEl.textContent = activeData.length > 0 ? (activeData.length * 0.04).toLocaleString(undefined, { maximumFractionDigits: 0 }) + " km²" : "0 km²";
+                if (totalAreaEl) {
+                    totalAreaEl.textContent = activeData.length > 0 ? (activeData.length * 0.04).toLocaleString(undefined, { maximumFractionDigits: 0 }) + " km²" : "0 km²";
+                    const cardEl = totalAreaEl.closest('.stat-card-hud');
+                    if (cardEl) cardEl.title = `Cumulative monitored coverage as of ${Math.floor(currentYear)} — Rondônia Arc of Deforestation study zone only, not the entire Amazon Basin`;
+                }
                 const highRiskCountEl = document.getElementById("highRiskCount");
                 if (highRiskCountEl) highRiskCountEl.textContent = high.toLocaleString();
                 const midRiskCountEl = document.getElementById("midRiskCount");

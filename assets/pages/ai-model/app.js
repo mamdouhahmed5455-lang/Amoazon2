@@ -1,21 +1,18 @@
 // ===== Feature Importance Bars =====
-        const features = [
-            { name: 'Road Proximity', value: 47, color: '#ef4444' },
-            { name: 'Previous Forest Loss', value: 34, color: '#f97316' },
-            { name: 'Population Pressure', value: 7, color: '#eab308' },
-            { name: 'Elevation', value: 13, color: '#3b82f6' },
-            { name: 'Slope', value: 8, color: '#06b6d4' },
-            { name: 'River Distance', value: 11, color: '#10b981' },
-            { name: 'Protected Area', value: 15, color: '#8b5cf6' },
-            { name: 'NDVI', value: 19, color: '#22c55e' },
-            { name: 'Soil Moisture', value: 5, color: '#06b6d4' },
-            { name: 'Fire Frequency', value: 22, color: '#ef4444' },
-            { name: 'Logging Concessions', value: 9, color: '#f59e0b' },
-            { name: 'Urban Proximity', value: 6, color: '#a855f7' }
-        ].sort((a, b) => b.value - a.value);
+        // Values sourced from SSOT: scripts/constants.js GEOAI_CONSTANTS.FEATURE_IMPORTANCES
+        // 41 + 23 + 21 + 15 = 100 (exactly)
+        const features = (window.GEOAI_CONSTANTS && window.GEOAI_CONSTANTS.FEATURE_IMPORTANCES)
+            ? window.GEOAI_CONSTANTS.FEATURE_IMPORTANCES
+            : [
+                { name: 'Road Proximity',        value: 41, color: '#ef4444' },
+                { name: 'Forest Loss (Temporal)', value: 23, color: '#f97316' },
+                { name: 'Population Pressure',   value: 21, color: '#eab308' },
+                { name: 'Elevation Constraints', value: 15, color: '#3b82f6' }
+            ];
+        const sortedFeatures = [...features].sort((a, b) => b.value - a.value);
 
         const container = document.getElementById('featureBars');
-        features.forEach((f, i) => {
+        sortedFeatures.forEach((f, i) => {
             const row = document.createElement('div');
             row.className = 'feature-bar';
             row.innerHTML = `

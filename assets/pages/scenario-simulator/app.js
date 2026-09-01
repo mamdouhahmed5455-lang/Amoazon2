@@ -57,7 +57,9 @@ let projChart;
 
             const activePolicies = document.querySelectorAll('.policy-option.active').length;
             const policyReduction = activePolicies * 3.5;
-            const impact = (road * 0.47 + pop * 0.07 + fire * 0.22) * 0.15 - policyReduction;
+            // Fix #4: Use SSOT-consistent weights (Road 41%, Forest Loss 23%, Population 21%)
+            // fire slider maps to Forest Loss temporal component (closest proxy available)
+            const impact = (road * 0.41 + fire * 0.23 + pop * 0.21) * 0.15 - policyReduction;
             const change = Math.round(impact * 10) / 10;
             const baseline = 63.8;
             const simulated = Math.round((baseline + change) * 10) / 10;
