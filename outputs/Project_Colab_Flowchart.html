@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GeoAI Colab Horizontal Flow</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800;900&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Base Reset */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: #000;
+            display: flex; justify-content: center; align-items: center;
+            height: 100vh; width: 100vw;
+            font-family: 'Cairo', sans-serif;
+            overflow: hidden;
+        }
+
+        /* 16:9 Banner Dimension (Perfect for copying into the bottom half of the PPT slide) */
+        /* To take a perfect screenshot, open in F11 */
+        .slide-banner {
+            width: 100vw; 
+            height: 56.25vw; 
+            max-height: 100vh; 
+            max-width: 177.77vh;
+            background-color: transparent; 
+            background-image: 
+                radial-gradient(circle at center, rgba(168, 150, 130, 0.1) 30%, transparent 100%),
+                repeating-radial-gradient(circle at 50% 50%, transparent, transparent 80px, rgba(168, 150, 130, 0.05) 82px, rgba(168, 150, 130, 0.05) 84px);
+            background-color: #eaddcc; /* Match your PPT background */
+            position: relative;
+            display: flex; 
+            align-items: center;
+            justify-content: center;
+            padding: 2vw 4vw;
+        }
+
+        /* The specific flowchart container */
+        .horizontal-flow {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* The glowing connecting line acting as a bridge */
+        .bridge-line {
+            position: absolute;
+            top: 50%;
+            left: 2%;
+            right: 2%;
+            height: 0.6vw;
+            background: linear-gradient(90deg, transparent, #c97a34, #6e4626, transparent);
+            transform: translateY(-50%);
+            z-index: 1;
+            box-shadow: 0 0 15px rgba(201, 122, 52, 0.5);
+            border-radius: 1vw;
+        }
+
+        /* Individual Data Cards */
+        .stage-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 18%; /* Fits 5 items comfortably */
+            background: linear-gradient(145deg, #6e4626, #4a301a); /* Rich dark brown */
+            border: 2px solid #a37551;
+            border-bottom: 0.8vw solid #c97a34;
+            border-radius: 1.5vw;
+            padding: 2.5vw 1vw;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3), inset 0 2px 5px rgba(255,255,255,0.1);
+            position: relative;
+            z-index: 2;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-align: center;
+        }
+
+        .stage-box:hover {
+            transform: translateY(-1vw) scale(1.05);
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
+            border-color: #f3b070;
+            background: linear-gradient(145deg, #7a4f2d, #52351d);
+        }
+
+        /* Active/Main Step (XGBoost) getting a special glow */
+        .stage-box.core-step {
+            background: linear-gradient(145deg, #8a481c, #69330e);
+            border-color: #ff9800;
+            box-shadow: 0 0 40px rgba(255, 152, 0, 0.4);
+            animation: pulseGlow 2s infinite alternate;
+        }
+
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 20px rgba(255, 152, 0, 0.3); }
+            100% { box-shadow: 0 0 50px rgba(255, 152, 0, 0.6); }
+        }
+
+        /* Icon styling inside the card */
+        .icon-container {
+            width: 5vw;
+            height: 5vw;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5vw;
+            margin-bottom: 1.5vw;
+            border: 2px solid rgba(255,255,255,0.2);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Typography */
+        .title {
+            font-size: 1.8vw;
+            font-weight: 900;
+            color: #ffffff;
+            margin-bottom: 0.5vw;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            font-size: 1.1vw;
+            font-weight: 600;
+            color: #e5b382; /* Golden/Tan text */
+            margin-top: 0.5vw;
+        }
+
+        .english-sub {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1vw;
+            font-weight: 800;
+            color: #ffd0a6;
+            margin-top: 0.3vw;
+        }
+
+        /* Arrows between the boxes */
+        .transfer-arrow {
+            font-size: 2vw;
+            font-weight: 900;
+            color: #a87e5b;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 3;
+            background: #eaddcc;
+            padding: 0.5vw;
+            border-radius: 50%;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="slide-banner">
+        
+        <div class="horizontal-flow">
+            <!-- Glowing Line Behind -->
+            <div class="bridge-line"></div>
+
+            <!-- Step 1 (Far Right in Arabic) -->
+            <div class="stage-box">
+                <div class="icon-container">📂</div>
+                <div class="title">تحميل البيانات</div>
+                <div class="subtitle">150,000 نقطة جغرافية</div>
+            </div>
+
+            <div class="transfer-arrow">←</div>
+
+            <!-- Step 2 -->
+            <div class="stage-box">
+                <div class="icon-container">⚖️</div>
+                <div class="title">تصنيف المخاطر</div>
+                <div class="subtitle">عالي / متوسط / منخفض</div>
+            </div>
+
+            <div class="transfer-arrow">←</div>
+
+            <!-- Step 3 (CORE) -->
+            <div class="stage-box core-step">
+                <div class="icon-container">🤖</div>
+                <div class="title">تدريب XGBoost</div>
+                <div class="subtitle">80% تدريب | 20% اختبار</div>
+            </div>
+
+            <div class="transfer-arrow">←</div>
+
+            <!-- Step 4 -->
+            <div class="stage-box">
+                <div class="icon-container">📉</div>
+                <div class="title">دقة النموذج</div>
+                <div class="english-sub">AUC = 0.82 | F1 = 0.77</div>
+            </div>
+
+            <div class="transfer-arrow">←</div>
+
+            <!-- Step 5 (Far Left) -->
+            <div class="stage-box" style="border-bottom-color: #3b7d51;">
+                <div class="icon-container">🗺️</div>
+                <div class="title">خريطة تفاعلية</div>
+                <div class="subtitle">Folium بمفتاح ألوان</div>
+            </div>
+
+        </div>
+        
+    </div>
+
+</body>
+</html>

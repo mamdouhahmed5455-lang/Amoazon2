@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Structure Slide</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Base and Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #d1ccbf; /* Frame outer background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: 'Segoe UI', 'Inter', sans-serif;
+            overflow: hidden;
+        }
+
+        /* 16:9 Slide Form Factor */
+        .slide {
+            width: 1920px;
+            height: 1080px;
+            background-color: #f4f1ea; /* Slide background - Light earthy tone */
+            
+            /* Simulating the PPT watermark background with concentric radar circles */
+            background-image: 
+                repeating-radial-gradient(circle at 10% 10%, transparent, transparent 100px, rgba(168, 150, 130, 0.12) 102px, rgba(168, 150, 130, 0.12) 104px),
+                repeating-radial-gradient(circle at 100% 100%, transparent, transparent 150px, rgba(168, 150, 130, 0.08) 152px, rgba(168, 150, 130, 0.08) 155px);
+            
+            color: #3b332b;
+            position: relative;
+            transform-origin: center center;
+            
+            /* Responsive scaling to fit window */
+            max-width: 100vw;
+            max-height: 56.25vw;
+            aspect-ratio: 16 / 9;
+            
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+            display: flex;
+            flex-direction: column;
+            padding: 80px 100px;
+        }
+
+        @media (max-aspect-ratio: 16/9) {
+            .slide {
+                width: 100vw;
+                height: 56.25vw;
+            }
+        }
+
+        @media (min-aspect-ratio: 16/9) {
+            .slide {
+                height: 100vh;
+                width: 177.77vh;
+            }
+        }
+
+        /* Content scaling */
+        .slide-content-wrapper {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Title */
+        .slide-title {
+            font-size: 3.5vw;
+            font-weight: 700;
+            margin-bottom: 2.5vw;
+            color: #2c251e;
+            border-bottom: 3px solid #dcd5c7;
+            padding-bottom: 1vw;
+            letter-spacing: -1px;
+            text-transform: uppercase;
+        }
+
+        /* Two columns container */
+        .content {
+            display: flex;
+            gap: 3.5vw;
+            flex: 1;
+        }
+
+        /* Columns Base Style matching the solid drop shadow from the screenshots */
+        .left-col, .right-col {
+            background: #ffffff;
+            border-radius: 0.5vw;
+            padding: 2.5vw;
+            border: 2px solid #e5dfd2;
+            box-shadow: 
+                min(1vw, 20px) min(1vw, 20px) 0px rgba(212, 204, 192, 0.6), 
+                0 4px 10px rgba(0,0,0,0.03); 
+        }
+
+        .left-col {
+            flex: 0 0 35%;
+        }
+
+        .right-col {
+            flex: 1;
+        }
+
+        .section-title {
+            font-size: 2vw;
+            font-weight: 700;
+            margin-bottom: 2vw;
+            color: #b56c39; /* Warm earth orange/brown accent */
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 1.8vw;
+            background-color: #b56c39;
+            margin-right: 15px;
+            border-radius: 4px;
+        }
+
+        .file-tree {
+            list-style: none;
+            font-size: 1.3vw;
+            line-height: 1.8;
+            color: #524d46;
+            font-family: 'Consolas', 'Courier New', monospace;
+        }
+
+        .file-tree li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1vw;
+        }
+
+        .file-tree span.icon {
+            font-size: 1.6vw;
+            margin-right: 1vw;
+        }
+
+        .file-tree span.name {
+            font-weight: 700;
+            color: #2c251e;
+            width: 11vw;
+            display: inline-block;
+        }
+
+        .file-tree span.desc {
+            font-size: 1vw;
+            color: #7a7267;
+            font-family: 'Segoe UI', 'Inter', sans-serif;
+            margin-left: 0.5vw;
+        }
+
+        /* Right Column: Files Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 1.2vw;
+            background-color: white;
+        }
+
+        th {
+            text-align: left;
+            padding: 1vw 1.5vw;
+            color: #ffffff;
+            background-color: #5b6d57; /* Natural forest green accent */
+            font-weight: 600;
+            font-size: 1.3vw;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 1px solid #4a5c46;
+        }
+
+        th:first-child {
+            border-top-left-radius: 8px;
+        }
+
+        th:last-child {
+            border-top-right-radius: 8px;
+        }
+
+        td {
+            padding: 1vw 1.5vw;
+            border-bottom: 1px solid #e8e3d8;
+            border-left: 1px solid #e8e3d8;
+            border-right: 1px solid #e8e3d8;
+            transition: all 0.2s ease;
+        }
+
+        tr:nth-child(even) td {
+            background-color: #faf9f6;
+        }
+
+        tr:hover td {
+            background-color: #f1ebd9;
+            cursor: default;
+        }
+
+        td:first-child { 
+            font-weight: 700;
+            color: #3b332b;
+            width: 32%;
+            font-family: 'Consolas', monospace;
+        }
+
+        td:last-child { 
+            color: #524d46;
+            line-height: 1.5;
+        }
+
+        /* Decorative Elements */
+        .decoration {
+            position: absolute;
+            bottom: 2vw;
+            right: 5vw;
+            font-size: 1vw;
+            color: #b0a597;
+            font-weight: 600;
+            letter-spacing: 2px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="slide">
+        <div class="slide-content-wrapper">
+            <h1 class="slide-title">System Architecture & Main Files</h1>
+
+            <div class="content">
+                <!-- Left Column: File Tree -->
+                <div class="left-col">
+                    <h2 class="section-title">Project Structure</h2>
+                    <ul class="file-tree">
+                        <li><span class="icon">📁</span><span class="name">assets/</span><span class="desc">CSS, Images,
+                                Pages</span></li>
+                        <li><span class="icon">📁</span><span class="name">data/</span><span class="desc">Precomputed
+                                data</span></li>
+                        <li><span class="icon">📁</span><span class="name">docs/</span><span class="desc">Project
+                                Reports</span></li>
+                        <li><span class="icon">📁</span><span class="name">outputs/</span><span class="desc">Result
+                                visualizations</span></li>
+                        <li><span class="icon">📁</span><span class="name">pages/</span><span class="desc">Analysis &
+                                Simulators</span></li>
+                        <li><span class="icon">📁</span><span class="name">scripts/</span><span class="desc">Python
+                                Logic</span></li>
+                        <li style="margin-top: 1.5vw;"><span class="icon">📄</span><span
+                                class="name">index.html</span><span class="desc">Main Dashboard</span></li>
+                        <li><span class="icon">📄</span><span class="name">README.md</span><span
+                                class="desc">Documentation</span></li>
+                    </ul>
+                </div>
+
+                <!-- Right Column: Files Table -->
+                <div class="right-col">
+                    <h2 class="section-title">Main Runtime Files</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>File</th>
+                                <th>Role & Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>index.html</td>
+                                <td>Main dashboard entry point</td>
+                            </tr>
+                            <tr>
+                                <td>app.js</td>
+                                <td>Dashboard logic, rendering, and interaction</td>
+                            </tr>
+                            <tr>
+                                <td>styles.css</td>
+                                <td>Dashboard styling and HUD layout</td>
+                            </tr>
+                            <tr>
+                                <td>forest_data.json</td>
+                                <td>Precomputed forest-risk dataset</td>
+                            </tr>
+                            <tr>
+                                <td>spatial-analysis.html</td>
+                                <td>Spatial analysis workspace application</td>
+                            </tr>
+                            <tr>
+                                <td>scenario-simulator.html</td>
+                                <td>Scenario simulation page for modeling</td>
+                            </tr>
+                            <tr>
+                                <td>ai-model.html</td>
+                                <td>Model explanation and metrics page</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="decoration">GEOAI FRAMEWORK - DEFORESTATION RISK 3D</div>
+        </div>
+    </div>
+
+</body>
+
+</html>

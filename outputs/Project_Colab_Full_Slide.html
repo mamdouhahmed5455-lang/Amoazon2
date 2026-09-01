@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GeoAI Google Colab Slide</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800;900&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Base Reset */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: #000;
+            display: flex; justify-content: center; align-items: center;
+            height: 100vh; width: 100vw;
+            font-family: 'Cairo', sans-serif;
+            overflow: hidden;
+        }
+
+        /* 16:9 Exact Slide Dimension */
+        .slide {
+            width: 100vw; height: 56.25vw;
+            max-height: 100vh; max-width: 177.77vh;
+            background-color: #f1ebd9; 
+            background-image: 
+                radial-gradient(circle at center, transparent 30%, rgba(133, 115, 96, 0.05) 100%),
+                repeating-radial-gradient(circle at 10% 10%, transparent, transparent 100px, rgba(168, 150, 130, 0.08) 102px, rgba(168, 150, 130, 0.08) 104px),
+                repeating-radial-gradient(circle at 90% 90%, transparent, transparent 150px, rgba(168, 150, 130, 0.05) 152px, rgba(168, 150, 130, 0.05) 155px);
+            position: relative;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+            display: flex; flex-direction: column;
+        }
+
+        /* Top Half: Text Content */
+        .top-section {
+            flex: 1;
+            padding: 3.5vw 5vw 1vw 5vw;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide-title {
+            font-size: 3.2vw;
+            font-weight: 900;
+            color: #1a1a1a;
+            margin-bottom: 2vw;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+
+        /* The Formal Academic Text */
+        .academic-text {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5vw;
+            width: 90%;
+        }
+
+        .bullet-point {
+            display: flex;
+            align-items: flex-start;
+            gap: 1vw;
+            font-size: 1.6vw;
+            line-height: 1.6;
+            color: #3b2a1a;
+        }
+
+        .bullet-title {
+            font-weight: 900;
+            color: #7b4216;
+            white-space: nowrap;
+        }
+
+        .bullet-desc {
+            font-weight: 600;
+        }
+
+        /* Bottom Half: Chart Section with White Banner */
+        .bottom-section {
+            background-color: #ffffff;
+            height: 38%; /* Matches the exact proportion of the image */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 2vw;
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.03);
+            position: relative;
+        }
+
+        /* The exact Flat Brown Boxes */
+        .horizontal-flow {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 95%;
+        }
+
+        .stage-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 17%;
+            aspect-ratio: 1.2 / 1; /* Giving it that exact rectangular-ish square shape */
+            border-radius: 0.8vw;
+            padding: 1vw;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+
+        /* Color Mapping matching exactly your second picture */
+        .box-1 { background-color: #4a3424; } /* Data Load */
+        .box-2 { background-color: #5e422f; } /* Risk Classify */
+        .box-3 { background-color: #785640; } /* XGBoost */
+        .box-4 { background-color: #93451b; } /* Accuracy */
+        .box-5 { background-color: #3a2310; } /* Map */
+
+        .icon-img {
+            font-size: 2.2vw;
+            margin-bottom: 0.8vw;
+            filter: drop-shadow(0 2px 2px rgba(0,0,0,0.3));
+        }
+
+        .box-title {
+            font-size: 1.5vw;
+            font-weight: 900;
+            color: #ffffff;
+            margin-bottom: 0.3vw;
+        }
+
+        .box-sub {
+            font-size: 1vw;
+            font-weight: 600;
+            color: #f7ceab; /* Golden yellow tan text */
+        }
+
+        .english-sub {
+            font-family: 'Inter', sans-serif;
+            font-size: 1vw;
+            font-weight: 700;
+            color: #f7ceab;
+            direction: ltr; /* Keeps English text correctly aligned */
+        }
+
+        /* Thin flat arrows between boxes */
+        .transfer-arrow {
+            font-size: 1.5vw;
+            color: #333;
+            font-weight: 400; /* Thin look */
+        }
+
+        /* Watermark */
+        .watermark {
+            position: absolute;
+            bottom: 1vw;
+            left: 3vw;
+            font-family: 'Inter', sans-serif;
+            font-weight: 900;
+            font-size: 0.9vw;
+            color: rgba(0, 0, 0, 0.15);
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="slide">
+        
+        <!-- Top Text Section -->
+        <div class="top-section">
+            <h1 class="slide-title">2- منصة Google Colab (بيئة التطوير والذكاء الاصطناعي)</h1>
+            
+            <div class="academic-text">
+                <div class="bullet-point">
+                    <span class="bullet-title">القدرة الحوسبية:</span>
+                    <span class="bullet-desc">تُعد بيئة سحابية فائقة الأداء تُتيح بناء وتشغيل خوارزميات لغة (Python) بالاعتماد على خوادم Google، مما يوفر قدرة معالجة ضخمة للبيانات دون الاعتماد على العتاد المحلي.</span>
+                </div>
+                <div class="bullet-point">
+                    <span class="bullet-title">تكامل البيانات:</span>
+                    <span class="bullet-desc">تم الاعتماد عليها كحلقة وصل أساسية لمعالجة واستيراد الخرائط المكانية (TIF) التي تم استخراجها مسبقاً من الجوجل إيرث إنجين (GEE).</span>
+                </div>
+                <div class="bullet-point">
+                    <span class="bullet-title">هندسة التنبؤ:</span>
+                    <span class="bullet-desc">اُستخدمت كبيئة رئيسية لتدريب وتقييم خوارزمية الذكاء الاصطناعي (XGBoost) لتعلم الأنماط البيئية، والتنبؤ بدقة بالمناطق المُعرضة لخطر إزالة الغابات.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Chart Section (Matching your Picture 2 perfectly) -->
+        <div class="bottom-section">
+            <div class="horizontal-flow">
+                
+                <!-- Box 1 (Rightmost) -->
+                <div class="stage-box box-1">
+                    <div class="icon-img">📁</div>
+                    <div class="box-title">تحميل البيانات</div>
+                    <div class="box-sub">150,000 نقطة جغرافية</div>
+                </div>
+
+                <div class="transfer-arrow">←</div>
+
+                <!-- Box 2 -->
+                <div class="stage-box box-2">
+                    <div class="icon-img">⚖️</div>
+                    <div class="box-title">تصنيف المخاطر</div>
+                    <div class="box-sub">عالي / متوسط / منخفض</div>
+                </div>
+
+                <div class="transfer-arrow">←</div>
+
+                <!-- Box 3 -->
+                <div class="stage-box box-3">
+                    <div class="icon-img">🤖</div>
+                    <div class="box-title">تدريب XGBoost</div>
+                    <div class="box-sub">80% تدريب | 20% اختبار</div>
+                </div>
+
+                <div class="transfer-arrow">←</div>
+
+                <!-- Box 4 -->
+                <div class="stage-box box-4">
+                    <div class="icon-img">📈</div>
+                    <div class="box-title">دقة النموذج</div>
+                    <div class="english-sub">AUC = 0.82 | F1 = 0.77</div>
+                </div>
+
+                <div class="transfer-arrow">←</div>
+
+                <!-- Box 5 (Leftmost) -->
+                <div class="stage-box box-5">
+                    <div class="icon-img">🗺️</div>
+                    <div class="box-title">خريطة تفاعلية</div>
+                    <div class="box-sub">Folium بمفتاح ألوان</div>
+                </div>
+
+            </div>
+            
+            <div class="watermark" dir="ltr">AMAZON DEFORESTATION RISK 3D | GRADUATION PROJECT</div>
+        </div>
+
+    </div>
+
+</body>
+</html>

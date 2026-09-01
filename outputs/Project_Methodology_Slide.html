@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GeoAI Methodology Grid</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800;900&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Base Reset */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: #000;
+            display: flex; justify-content: center; align-items: center;
+            height: 100vh; width: 100vw;
+            font-family: 'Cairo', 'Segoe UI', Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        /* 16:9 Exact Slide Dimension */
+        .slide {
+            width: 100vw; height: 56.25vw;
+            max-height: 100vh; max-width: 177.77vh;
+            background-color: #f1ebd9; 
+            /* Subtle presentation background */
+            background-image: 
+                radial-gradient(circle at center, transparent 30%, rgba(133, 115, 96, 0.05) 100%),
+                repeating-radial-gradient(circle at 10% 10%, transparent, transparent 100px, rgba(168, 150, 130, 0.1) 102px, rgba(168, 150, 130, 0.1) 104px),
+                repeating-radial-gradient(circle at 90% 90%, transparent, transparent 150px, rgba(168, 150, 130, 0.08) 152px, rgba(168, 150, 130, 0.08) 155px);
+            position: relative;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+            display: flex; flex-direction: column;
+            padding: 3vw 5vw 4vw 5vw;
+        }
+
+        /* Title Area */
+        .header-area {
+            text-align: center;
+            margin-bottom: 2vw;
+            position: relative;
+            z-index: 10;
+        }
+
+        .slide-title {
+            font-size: 3.5vw;
+            font-weight: 900;
+            color: #4a3e32;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* The 3-Column Grid Container */
+        .grid-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: stretch;
+            flex: 1;
+            position: relative;
+            gap: 2.5vw;
+        }
+
+        /* Connecting Arrows Background */
+        .connector-line {
+            position: absolute;
+            top: 40%;
+            left: 5%;
+            right: 5%;
+            height: 0.5vw;
+            background: #dcd3c6;
+            z-index: 1;
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+        }
+
+        /* The Columns / Pillars */
+        .grid-col {
+            display: flex;
+            flex-direction: column;
+            width: 31%;
+            background: #ffffff;
+            border-radius: 1.5vw;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+            z-index: 2;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            border: 4px solid #ffffff;
+        }
+
+        .grid-col:hover {
+            transform: translateY(-0.8vw);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
+
+        /* Specific Column Colors */
+        .col-1 { border-color: #3b7d51; }
+        .col-2 { border-color: #c97a34; }
+        .col-3 { border-color: #354a70; }
+
+        /* Pillar Headers */
+        .col-header {
+            text-align: center;
+            color: #ffffff;
+            padding: 2vw 1vw 1.5vw 1vw;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .col-1 .col-header { background: #3b7d51; }
+        .col-2 .col-header { background: #c97a34; }
+        .col-3 .col-header { background: #354a70; }
+
+        /* Big Icon Circle inside header */
+        .icon-box {
+            width: 6vw;
+            height: 6vw;
+            background: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 3vw;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            margin-bottom: 1.5vw;
+        }
+
+        .col-title {
+            font-size: 2.2vw;
+            font-weight: 900;
+            margin-bottom: 0.5vw;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .col-subtitle {
+            font-size: 1.4vw;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            opacity: 0.9;
+        }
+
+        /* Methodology List */
+        .methodology-list {
+            padding: 2vw;
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5vw;
+            flex: 1;
+            background: #faf8f5;
+        }
+
+        .methodology-list li {
+            font-size: 1.3vw;
+            font-weight: 700;
+            color: #4a3e32;
+            display: flex;
+            align-items: center;
+            line-height: 1.4;
+            position: relative;
+            padding-right: 2vw;
+        }
+
+        /* Custom Bullets */
+        .methodology-list li::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0.8vw;
+            height: 0.8vw;
+            border-radius: 50%;
+        }
+
+        .col-1 .methodology-list li::before { background-color: #3b7d51; }
+        .col-2 .methodology-list li::before { background-color: #c97a34; }
+        .col-3 .methodology-list li::before { background-color: #354a70; }
+
+        /* Floating Arrows Between Columns */
+        .step-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4.5vw;
+            height: 4.5vw;
+            background: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2vw;
+            font-weight: 900;
+            color: #8c7251;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            z-index: 10;
+        }
+
+        .arrow-1 { left: 65%; } /* Arrow between 1 and 2 */
+        .arrow-2 { left: 31%; } /* Arrow between 2 and 3 */
+
+        /* Watermark */
+        .watermark {
+            position: absolute;
+            bottom: 1.5vw;
+            left: 4vw;
+            font-family: 'Inter', sans-serif;
+            font-weight: 900;
+            font-size: 1vw;
+            letter-spacing: 0.2vw;
+            color: rgba(131, 113, 96, 0.4);
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="slide">
+        <!-- Header -->
+        <div class="header-area">
+            <h1 class="slide-title">مراحل المشروع الثلاث والمنهجية المُتبعة</h1>
+        </div>
+
+        <div class="grid-container">
+            
+            <div class="connector-line"></div>
+
+            <!-- Stage 1 -->
+            <div class="grid-col col-1">
+                <div class="col-header">
+                    <div class="icon-box">🌍</div>
+                    <div class="col-title">المرحلة الأولى</div>
+                    <div class="col-subtitle" dir="ltr">Google Earth Engine</div>
+                </div>
+                <ul class="methodology-list">
+                    <li>تحميل صور Landsat 2001</li>
+                    <li>تحميل صور Sentinel 2022</li>
+                    <li>حساب مؤشر الغطاء النباتي (NDVI)</li>
+                    <li>استخراج خرائط الغابات الدقيقة</li>
+                    <li>اكتشاف التغير (أحمر/أخضر/رصاصي)</li>
+                    <li>تصدير الخرائط لـ Google Drive</li>
+                </ul>
+            </div>
+
+            <!-- Arrow 1 -->
+            <div class="step-arrow arrow-1">←</div>
+
+            <!-- Stage 2 -->
+            <div class="grid-col col-2">
+                <div class="col-header">
+                    <div class="icon-box">🧠</div>
+                    <div class="col-title">المرحلة الثانية</div>
+                    <div class="col-subtitle" dir="ltr">Google Colab (AI)</div>
+                </div>
+                <ul class="methodology-list">
+                    <li>استدعاء وتحليل 150,000 نقطة جغرافية</li>
+                    <li>تدريب نموذج تنبؤ (XGBoost)</li>
+                    <li>قياس دقة النموذج الفائقة (AUC=0.82)</li>
+                    <li>تحليل وتفسير مخاطر SHAP</li>
+                    <li>رسم واستخراج خرائط المخاطر</li>
+                </ul>
+            </div>
+
+            <!-- Arrow 2 -->
+            <div class="step-arrow arrow-2">←</div>
+
+            <!-- Stage 3 -->
+            <div class="grid-col col-3">
+                <div class="col-header">
+                    <div class="icon-box">💻</div>
+                    <div class="col-title">المرحلة الثالثة</div>
+                    <div class="col-subtitle" dir="ltr">Interactive Dashboard</div>
+                </div>
+                <ul class="methodology-list">
+                    <li>تصدير واجهة Dashboard التفاعلية</li>
+                    <li>تصنيف المناطق أوتوماتيكياً (عالي/متوسط)</li>
+                    <li>تكوين خريطة Folium الحية للمراقبة</li>
+                    <li>توجيه السلطات البيئية لاتخاذ القرار</li>
+                    <li>نظام التحديث الدوري بصور جديدة</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="watermark" dir="ltr">AMAZON DEFORESTATION RISK 3D | GRADUATION PROJECT</div>
+    </div>
+
+</body>
+</html>

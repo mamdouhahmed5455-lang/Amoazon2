@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Workflow Slide</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Base and Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #d1ccbf; /* Frame outer background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: 'Cairo', 'Segoe UI', sans-serif;
+            overflow: hidden;
+        }
+
+        /* 16:9 Slide Form Factor */
+        .slide {
+            width: 1920px;
+            height: 1080px;
+            background-color: #f4f1ea; /* Slide background - Light earthy tone */
+            
+            /* Simulating the PPT watermark background with concentric radar circles */
+            background-image: 
+                repeating-radial-gradient(circle at 10% 10%, transparent, transparent 100px, rgba(168, 150, 130, 0.12) 102px, rgba(168, 150, 130, 0.12) 104px),
+                repeating-radial-gradient(circle at 100% 100%, transparent, transparent 150px, rgba(168, 150, 130, 0.08) 152px, rgba(168, 150, 130, 0.08) 155px);
+            
+            color: #3b332b;
+            position: relative;
+            transform-origin: center center;
+            
+            /* Responsive scaling to fit window */
+            max-width: 100vw;
+            max-height: 56.25vw;
+            aspect-ratio: 16 / 9;
+            
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+            display: flex;
+            flex-direction: column;
+            padding: 60px 80px;
+        }
+
+        @media (max-aspect-ratio: 16/9) {
+            .slide {
+                width: 100vw;
+                height: 56.25vw;
+            }
+        }
+
+        @media (min-aspect-ratio: 16/9) {
+            .slide {
+                height: 100vh;
+                width: 177.77vh;
+            }
+        }
+
+        /* Content scaling */
+        .slide-content-wrapper {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Title */
+        .slide-title {
+            font-size: 3.5vw;
+            font-weight: 800;
+            margin-bottom: 2vw;
+            color: #654c37;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        /* Workflow Container */
+        .workflow-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex: 1;
+            padding: 0 2vw;
+            gap: 1.5vw;
+        }
+
+        /* Step Cards */
+        .step-card {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: #ffffff;
+            border-radius: 1vw;
+            height: 90%;
+            overflow: hidden;
+            box-shadow: 
+                min(0.8vw, 15px) min(0.8vw, 15px) 0px rgba(212, 204, 192, 0.6), 
+                0 10px 25px rgba(0,0,0,0.05); 
+            transition: transform 0.3s ease;
+        }
+
+        .step-card:hover {
+            transform: translateY(-0.5vw);
+        }
+
+        /* Headers with colors from the image */
+        .step-header {
+            padding: 2vw 1vw;
+            text-align: center;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 10vw;
+        }
+
+        .step-header h3 {
+            font-size: 2.2vw;
+            font-weight: 800;
+            margin-bottom: 0.5vw;
+        }
+
+        .step-title {
+            font-size: 1.5vw;
+            font-weight: 600;
+            opacity: 0.9;
+            font-family: 'Inter', sans-serif; /* English text */
+        }
+
+        /* Icon Circle */
+        .icon-circle {
+            width: 6vw;
+            height: 6vw;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2.5vw;
+            margin-bottom: 1.5vw;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .green .step-header { background-color: #3b7d51; }
+        .green .icon-circle { color: #3b7d51; }
+
+        .orange .step-header { background-color: #c97a34; }
+        .orange .icon-circle { color: #c97a34; }
+
+        .blue .step-header { background-color: #354a70; }
+        .blue .icon-circle { color: #354a70; }
+
+        /* List Items */
+        .step-list {
+            list-style: none;
+            padding: 2vw;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2vw;
+            background-color: #fcfbf9;
+            flex: 1;
+        }
+
+        .step-list li {
+            font-size: 1.35vw;
+            font-weight: 600;
+            color: #4a4138;
+            display: flex;
+            align-items: flex-start;
+            line-height: 1.4;
+        }
+
+        .step-list li::before {
+            content: '•';
+            font-size: 2vw;
+            margin-left: 0.8vw;
+            margin-top: -0.5vw;
+        }
+
+        .green .step-list li::before { color: #3b7d51; }
+        .orange .step-list li::before { color: #c97a34; }
+        .blue .step-list li::before { color: #354a70; }
+
+        /* Arrows */
+        .arrow {
+            font-size: 4vw;
+            color: #bfaea0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        /* Decorative Elements */
+        .decoration {
+            position: absolute;
+            bottom: 2vw;
+            left: 5vw;
+            font-size: 1vw;
+            color: #b0a597;
+            font-weight: 700;
+            letter-spacing: 2px;
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="slide">
+        <div class="slide-content-wrapper">
+            <h1 class="slide-title">مراحل المشروع الثلاث</h1>
+
+            <div class="workflow-content">
+                
+                <!-- Stage 1 -->
+                <div class="step-card green">
+                    <div class="step-header">
+                        <div class="icon-circle">🌍</div>
+                        <h3>المرحلة الأولى</h3>
+                        <div class="step-title">Google Earth Engine</div>
+                    </div>
+                    <ul class="step-list">
+                        <li>تحميل صور Landsat 2001</li>
+                        <li>تحميل صور Sentinel 2022</li>
+                        <li>حساب مؤشر الغطاء النباتي (NDVI)</li>
+                        <li>استخراج خرائط الغابات الدقيقة</li>
+                        <li>اكتشاف التغير (أحمر/أخضر/رصاصي)</li>
+                        <li>تصدير الخرائط إلى Google Drive</li>
+                    </ul>
+                </div>
+
+                <!-- Arrow -->
+                <div class="arrow">←</div>
+
+                <!-- Stage 2 -->
+                <div class="step-card orange">
+                    <div class="step-header">
+                        <div class="icon-circle">🧠</div>
+                        <h3>المرحلة الثانية</h3>
+                        <div class="step-title">Google Colab (AI)</div>
+                    </div>
+                    <ul class="step-list">
+                        <li>تحليل 150,000 نقطة بيانات جغرافية</li>
+                        <li>تدريب نموذج تنبؤ (XGBoost)</li>
+                        <li>قياس دقة النموذج الفائقة (AUC=0.82)</li>
+                        <li>تحليل SHAP لتفسير أسباب المخاطر</li>
+                        <li>رسم واستخراج خرائط المخاطر</li>
+                    </ul>
+                </div>
+
+                <!-- Arrow -->
+                <div class="arrow">←</div>
+
+                <!-- Stage 3 -->
+                <div class="step-card blue">
+                    <div class="step-header">
+                        <div class="icon-circle">💻</div>
+                        <h3>المرحلة الثالثة</h3>
+                        <div class="step-title">Interactive Dashboard</div>
+                    </div>
+                    <ul class="step-list">
+                        <li>عرض خرائط المخاطر التفاعلية</li>
+                        <li>تصنيف المناطق أوتوماتيكياً (عالي/متوسط)</li>
+                        <li>خريطة Folium الحية للمراقبة</li>
+                        <li>توجيه السلطات البيئية لاتخاذ القرار</li>
+                        <li>تحديث دوري بصور الأقمار الجديدة</li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="decoration" dir="ltr">GEOAI FRAMEWORK - DEFORESTATION RISK 3D</div>
+        </div>
+    </div>
+
+</body>
+
+</html>

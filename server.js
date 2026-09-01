@@ -12,7 +12,7 @@ const http = require('http');
 const fs   = require('fs');
 const path = require('path');
 
-const PORT = 5500;
+const PORT = process.env.PORT || 5500;
 const ROOT = __dirname;
 
 const MIME = {
@@ -55,7 +55,7 @@ const server = http.createServer((req, res) => {
   });
 });
 
-server.listen(PORT, '127.0.0.1', () => {
+server.listen(PORT, '0.0.0.0', () => {
   console.log('');
   console.log('  GeoAI Server running at:');
   console.log('  \x1b[36mhttp://127.0.0.1:' + PORT + '\x1b[0m');

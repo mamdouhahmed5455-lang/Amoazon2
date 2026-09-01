@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GeoAI Embedded Flowchart Slide</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Base Reset */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: #000;
+            display: flex; justify-content: center; align-items: center;
+            height: 100vh; width: 100vw;
+            font-family: 'Cairo', 'Segoe UI', Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        /* 16:9 Exact Slide Dimension */
+        .slide {
+            width: 100vw; height: 56.25vw;
+            max-height: 100vh; max-width: 177.77vh;
+            background-color: #eaddcc; 
+            
+            /* Creating the exact presentation background */
+            background-image: 
+                radial-gradient(circle at center, transparent 30%, rgba(133, 115, 96, 0.1) 100%),
+                repeating-radial-gradient(circle at 5% 5%, transparent, transparent 80px, rgba(168, 150, 130, 0.15) 82px, rgba(168, 150, 130, 0.15) 84px),
+                repeating-radial-gradient(circle at 95% 95%, transparent, transparent 150px, rgba(168, 150, 130, 0.1) 152px, rgba(168, 150, 130, 0.1) 155px);
+            
+            position: relative;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+            display: flex; flex-direction: column;
+            padding: 2vw 6vw 2vw 6vw;
+        }
+
+        /* Title Area */
+        .header-area {
+            text-align: center;
+            margin-bottom: 2vw;
+            position: relative;
+            z-index: 10;
+        }
+
+        .slide-title {
+            font-size: 2.8vw;
+            font-weight: 900;
+            color: #3b2f2f;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* Flowchart Container */
+        .flow-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Top Start Node */
+        .start-node {
+            background: #2c241b;
+            color: white;
+            padding: 0.6vw 3vw;
+            border-radius: 2vw;
+            font-size: 1.4vw;
+            font-weight: 800;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+            margin-bottom: 1.5vw;
+            position: relative;
+        }
+
+        /* Horizontal Distribution Line */
+        .horizontal-line {
+            width: 66%; /* Spans between the centers of column 1 and 3 */
+            height: 0.4vw;
+            background: #8c7251;
+            position: absolute;
+            top: 4.8vw;
+            border-radius: 1vw;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* Dropdown short lines from horizontal line */
+        .drop-line {
+            width: 0.4vw;
+            height: 1vw;
+            background: #8c7251;
+            margin: 0 auto;
+        }
+
+        /* Main 3 Columns */
+        .columns-container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            flex: 1;
+            padding-top: 1vw;
+        }
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 30%;
+        }
+
+        /* Big Stage Header visually matches the image */
+        .stage-header {
+            width: 100%;
+            text-align: center;
+            color: white;
+            padding: 1vw 0.5vw;
+            border-radius: 1vw;
+            font-size: 1.8vw;
+            font-weight: 900;
+            margin-bottom: 0.2vw;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15), inset 0 2px 0 rgba(255,255,255,0.2);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .stage-header .icon {
+            font-size: 2.2vw;
+            margin-bottom: 0.3vw;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            padding: 0.5vw;
+            display: inline-block;
+        }
+
+        .col-1 .stage-header { background: linear-gradient(135deg, #3b7d51, #2b5e3c); }
+        .col-2 .stage-header { background: linear-gradient(135deg, #c97a34, #9a5b25); }
+        .col-3 .stage-header { background: linear-gradient(135deg, #354a70, #263755); }
+
+        /* The Nodes (Boxes) */
+        .flow-node {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            border: 2px solid rgba(255,255,255,0.8);
+            border-bottom: 0.3vw solid transparent; /* Colored per column */
+            border-radius: 0.8vw;
+            padding: 0.8vw 1vw;
+            width: 95%;
+            text-align: center;
+            font-size: 1.2vw;
+            font-weight: 700;
+            color: #4a3e32;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.2s ease;
+        }
+
+        .flow-node:hover {
+            transform: scale(1.03);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .col-1 .flow-node { border-bottom-color: #3b7d51; }
+        .col-2 .flow-node { border-bottom-color: #c97a34; }
+        .col-3 .flow-node { border-bottom-color: #354a70; }
+
+        /* Small arrows between nodes */
+        .arrow-down {
+            color: #8c7251;
+            font-size: 1.5vw;
+            font-weight: 900;
+            line-height: 1;
+            margin: 0.2vw 0;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* Inter-stage Transfer Arrows */
+        .transfer-arrow {
+            position: absolute;
+            font-size: 3vw;
+            color: #6a513b;
+            font-weight: 900;
+            z-index: 5;
+            top: 72%; /* Adjusted to align with bottom nodes */
+            text-shadow: 0 5px 10px rgba(0,0,0,0.2);
+            animation: bounceLeft 2s infinite ease-in-out;
+        }
+
+        @keyframes bounceLeft {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(-0.5vw); }
+        }
+
+        .transfer-1 { right: 31%; } /* From Col 1 bottom to Col 2 */
+        .transfer-2 { right: 65%; } /* From Col 2 bottom to Col 3 */
+
+        /* Watermark */
+        .watermark {
+            position: absolute;
+            bottom: 1vw;
+            right: 4vw;
+            font-family: 'Inter', sans-serif;
+            font-weight: 900;
+            font-size: 1vw;
+            letter-spacing: 0.2vw;
+            color: rgba(131, 113, 96, 0.4);
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="slide">
+        <!-- Header -->
+        <div class="header-area">
+            <h1 class="slide-title">مخطط تسلسل منهجية المشروع (Flowchart)</h1>
+        </div>
+
+        <div class="flow-wrapper">
+            
+            <!-- Root Node -->
+            <div class="start-node">بداية تجميع البيانات</div>
+            <div class="drop-line" style="height: 1.5vw;"></div>
+            
+            <!-- Horizontal Bridge -->
+            <div class="horizontal-line"></div>
+
+            <div class="columns-container">
+                
+                <!-- Stage 1 -->
+                <div class="column col-1">
+                    <div class="drop-line"></div>
+                    <div class="stage-header">
+                        <span class="icon">🌍</span>
+                        المرحلة الأولى: GEE
+                    </div>
+                    <div class="arrow-down">↓</div>
+                    <div class="flow-node">تحميل صور Landsat 2001</div>
+                    <div class="arrow-down">↓</div>
+                    <div class="flow-node">تحميل صور Sentinel 2022</div>
+                    <div class="arrow-down">↓</div>
+                    <div class="flow-node">حساب مؤشر الغطاء النباتي NDVI</div>
+                    <div class="arrow-down">↓</div>
+                    <div class="flow-node">استخراج خرائط الغابات الدقيقة</div>
+                    <div class="arrow-down">↓</div>
+                    <div class="flow-node">تصدير الخرائط والمستندات (TIF)</div>
+                </div>
+
+                <!-- Jump Arrow 1 -->
+                <div class="transfer-arrow transfer-1">←</div>
+
+                <!-- Stage 2 -->
+                <div class="column col-2">
+                    <div class="drop-line"></div>
+                    <div class="stage-header">
+                        <span class="icon">🧠</span>
+                        المرحلة الثانية: Google Colab
+                    </div>
+                    <div class="arrow-down">↓</div>
+                    <div class="flow-node">تجهيز 150,000 نقطة جغرافية للتحليل</div>
+                    <div class="arrow-down">↓</div>
+                    <div class="flow-node">تدريب خوارزمية (XGBoost)</div>
+                    <div class="arrow-down">↓</div>
+                    <div class="flow-node">قياس دقة تنبؤ النموذج (AUC=0.82)</div>
+                    <div class="arrow-down">↓</div>
+                    <div class="flow-node">تحليل الأسباب بيئياً (SHAP)</div>
+                    <div class="arrow-down">↓</div>
+                    <div class="flow-node">استخراج بيانات المخاطر النهائية</div>
+                </div>
+
+                <!-- Jump Arrow 2 -->
+                <div class="transfer-arrow transfer-2">←</div>
+
+                <!-- Stage 3 -->
+                <div class="column col-3">
+                    <div class="drop-line"></div>
+                    <div class="stage-header">
+                        <span class="icon">💻</span>
+                        المرحلة الثالثة: Dashboard
+                    </div>
+                    <div class="arrow-down">↓</div>
+                    <div class="flow-node">عرض واجهة الخرائط جغرافياً</div>
+                    <div class="arrow-down">↓</div>
+                    <div class="flow-node">تصنيف وتلوين المناطق (عالي/متوسط)</div>
+                    <div class="arrow-down">↓</div>
+                    <div class="flow-node">دوت خرائط Folium التفاعلية الحية</div>
+                    <div class="arrow-down">↓</div>
+                    <div class="flow-node">توجيه السلطات البيئية لاتخاذ التدابير</div>
+                    <div class="arrow-down">↓</div>
+                    <div class="flow-node">تحديث دوري بمخرجات مستدامة</div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="watermark" dir="ltr">AMAZON DEFORESTATION RISK 3D | METHODOLOGY FLOWCHART</div>
+    </div>
+
+</body>
+</html>
