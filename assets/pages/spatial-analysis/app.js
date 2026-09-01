@@ -25,7 +25,12 @@
         const focusYear = analysisParams.get('year');
         const focusMode = analysisParams.get('mode');
         const focusScenario = analysisParams.get('scenario');
-        const focusRisk = analysisParams.get('risk');
+        const focusRiskRaw = analysisParams.get('risk');
+        let focusRisk = focusRiskRaw;
+        // If passed from main dashboard, it might be the raw >100 score
+        if (focusRiskRaw && Number(focusRiskRaw) > 100 && window.GEOAI_CONSTANTS) {
+            focusRisk = window.GEOAI_CONSTANTS.normalizeRiskScore(Number(focusRiskRaw));
+        }
         const hasFocusPoint = Number.isFinite(focusLat) && Number.isFinite(focusLon);
         let focusMarker = null;
 
@@ -45,21 +50,24 @@
 
 
         function getAnalysisPointRisk(point) {
+            let raw;
             if (point.type === 'hotspot') {
                 const intensity = Number.isFinite(point.intensity) ? point.intensity : 0.85;
-                return Math.round(171 + (intensity * 8) + ((point.id || 0) % 2));
+                raw = Math.round(171 + (intensity * 8) + ((point.id || 0) % 2));
+            } else {
+                const radius = Number.isFinite(point.radius) ? point.radius : 30000;
+                raw = Math.round(156 + Math.min(9, radius / 9000));
             }
-
-            const radius = Number.isFinite(point.radius) ? point.radius : 30000;
-            return Math.round(156 + Math.min(9, radius / 9000));
+            return window.GEOAI_CONSTANTS ? window.GEOAI_CONSTANTS.normalizeRiskScore(raw) : Math.max(0, Math.min(100, Math.round(((raw - 140) / 45) * 100)));
         }
 
         function getAnalysisPointBand(score) {
-            // Convert raw score to normalised % (same mapping as SSOT normalizeRiskScore: 140→0, 185→100)
-            const pct = Math.max(0, Math.min(100, Math.round(((score - 140) / 45) * 100)));
-            if (pct > 75) return 'urgent';
-            if (pct > 50) return 'high';
-            if (pct > 25) return 'medium';
+            if (window.GEOAI_CONSTANTS && window.GEOAI_CONSTANTS.calculatePriority) {
+                 return window.GEOAI_CONSTANTS.calculatePriority(score).toLowerCase();
+            }
+            if (score > 75) return 'urgent';
+            if (score > 50) return 'high';
+            if (score > 25) return 'medium';
             return 'low';
         }
 
@@ -154,7 +162,7 @@
                         <div class="map-overlay-badge">SCAN</div>
                     </div>
                     <div class="cluster-stats">
-                        <div><div class="cluster-stat-label">Top signal</div><div class="cluster-stat-val">${capitalizeLabel(topSignal.type)} ${topSignal.score}</div></div>
+                        <div><div class="cluster-stat-label">Top signal</div><div class="cluster-stat-val">${capitalizeLabel(topSignal.type)} ${topSignal.score}%</div></div>
                         <div><div class="cluster-stat-label">Distance</div><div class="cluster-stat-val">${topSignal.distanceKm.toFixed(1)} km</div></div>
                         <div><div class="cluster-stat-label">Center</div><div class="cluster-stat-val">${centerLabel}</div></div>
                         <div><div class="cluster-stat-label">Band</div><div class="cluster-stat-val">${filterLabel}</div></div>
@@ -163,7 +171,7 @@
                         ${results.slice(0, 3).map(item => `
                             <div class="query-result-item">
                                 <span>${capitalizeLabel(item.type)}</span>
-                                <strong>${item.score}</strong>
+                                <strong>${item.score}%</strong>
                                 <em>${item.distanceKm.toFixed(1)} km</em>
                             </div>
                         `).join('')}
@@ -211,7 +219,7 @@
                 scan.textContent = results.length ? `${results.length} result${results.length === 1 ? '' : 's'}` : 'Idle';
             }
             if (signal) {
-                signal.textContent = topSignal ? `${capitalizeLabel(topSignal.type)} ${topSignal.score}` : 'None';
+                signal.textContent = topSignal ? `${capitalizeLabel(topSignal.type)} ${topSignal.score}%` : 'None';
             }
             if (status) {
                 status.textContent = results.length ? (fallbackUsed ? 'Fallback' : 'Exact') : 'Awaiting scan';
