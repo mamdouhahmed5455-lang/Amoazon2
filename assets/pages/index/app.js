@@ -1375,14 +1375,12 @@ let deckInstance
             if (activeData !== lastRenderedDataResult_FOR_UI || currentFloorYear !== lastUIUpdateYear) {
                 lastRenderedDataResult_FOR_UI = activeData;
                 lastUIUpdateYear = currentFloorYear;
-                // Use normalised % bands from SSOT calculatePriority thresholds (0-25/25-50/50-75/>75)
-                let low = 0, medium = 0, high = 0, urgent = 0;
+                let low = 0, medium = 0, high = 0;
                 activeData.forEach(p => {
-                    const pct = getProbabilityPercent(getPointScore(p));
-                    if (pct <= 25) low++;
-                    else if (pct <= 50) medium++;
-                    else if (pct <= 75) high++;
-                    else urgent++;
+                    const pointScore = getPointScore(p);
+                    if (pointScore <= 165) low++;
+                    else if (pointScore <= 170) medium++;
+                    else high++;
                 });
                 // Update all 7 stats
                 // Fix #7: Update area card; clarify Rondônia Arc scope and cumulative nature
@@ -1393,7 +1391,7 @@ let deckInstance
                     if (cardEl) cardEl.title = `Cumulative monitored coverage as of ${Math.floor(currentYear)} — Rondônia Arc of Deforestation study zone only, not the entire Amazon Basin`;
                 }
                 const highRiskCountEl = document.getElementById("highRiskCount");
-                if (highRiskCountEl) highRiskCountEl.textContent = (high + urgent).toLocaleString();
+                if (highRiskCountEl) highRiskCountEl.textContent = high.toLocaleString();
                 const midRiskCountEl = document.getElementById("midRiskCount");
                 if (midRiskCountEl) midRiskCountEl.textContent = medium.toLocaleString();
                 const lowRiskCountEl = document.getElementById("lowRiskCount");
