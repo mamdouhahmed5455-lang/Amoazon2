@@ -12,7 +12,7 @@
         mapboxgl.accessToken = "___MAPBOX_TOKEN_PLACEHOLDER___";
         const map = new mapboxgl.Map({
             container: 'spatialMap',
-            style: createRasterStyle("https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png"),
+            style: "mapbox://styles/mapbox/dark-v11",
             center: [-60.0, -5.0],
             zoom: 3.5,
             attributionControl: false

@@ -996,7 +996,7 @@ let deckInstance
         }
         function syncRiskThresholdUI() {
             const el = document.getElementById('riskThresholdValue');
-            const valueLabel = minRiskThreshold === 0 ? 'All' : `${minRiskThreshold}+`;
+            const valueLabel = minRiskThreshold === 0 ? 'All' : (minRiskThreshold >= 170 ? '75%+' : '50%+');
             if (el) el.innerText = valueLabel;
             const b1 = document.getElementById('riskAllBtn');
             const b2 = document.getElementById('riskMedBtn');
