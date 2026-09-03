@@ -784,18 +784,11 @@ let deckInstance
             const terrainAccessibility = 1 - clamp01(target.elevation / 4000);
             const temporalPersistence = clamp01((target.event_year - 2001) / (2030 - 2001));
             // Generate deterministic percentages matching the requested feature priority
-            // 42%, 31%, 18%, 9% roughly, adapted by the specific point
-            const proximityFactor = Math.max(0.25, Math.min(0.55, localHotspotDensity * 1.8 + 0.15));
-            const lossFactor = Math.max(0.15, Math.min(0.40, frontierExposure * 1.2));
-            const popFactor = Math.max(0.08, Math.min(0.25, terrainAccessibility * 0.9));
-            const elevFactor = Math.max(0.02, Math.min(0.15, temporalPersistence * 0.5));
-            const rawDrivers = [
-                // Fix #1: Factor names match SSOT (scripts/constants.js FEATURE_IMPORTANCES)
-                { label: 'Road Proximity',        value: proximityFactor },
-                { label: 'Forest Loss (Temporal)', value: lossFactor },
-                { label: 'Population Pressure',   value: popFactor },
-                { label: 'Elevation Constraints', value: elevFactor }
-            ];
+            // The user requested that we strictly use the SSOT fixed feature importances for all points
+            const rawDrivers = window.GEOAI_CONSTANTS.FEATURE_IMPORTANCES.map(f => ({
+                label: f.name,
+                value: f.value
+            }));
             const total = rawDrivers.reduce((sum, item) => sum + item.value, 0) || 1;
             return rawDrivers.map(item => ({
                 label: item.label,
@@ -818,7 +811,10 @@ let deckInstance
             const averageRisk = regionPoints.length
                 ? regionPoints.reduce((sum, point) => sum + getPointScore(point), 0) / regionPoints.length
                 : getPointScore(target);
-            const estimatedAreaKm2 = (highRiskPoints * 0.04).toFixed(1);
+            
+            const regionNameStr = getRegionName(target.lat, target.lon);
+            const fixedArea = window.GEOAI_CONSTANTS.ZONE_AREAS[regionNameStr] || 4500;
+            const estimatedAreaKm2 = fixedArea;
             const n = document.getElementById('regionName');
             const h = document.getElementById('regionHighPoints');
             const r = document.getElementById('regionAvgRisk');
