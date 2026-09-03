@@ -71,7 +71,7 @@ window.GEOAI_CONSTANTS = {
     },
 
     // ── 8) PROJECT INFO ───────────────────────────────────────
-    PROJECT_NAME: "Amazon Deforestation Risk 3D",
+    PROJECT_NAME: "AI-Based Deforestation Risk Prediction Model - Amazon Basin",
     
     // ── 9) SPATIAL ANALYSIS INFO ──────────────────────────────
     TOTAL_RISK_CELLS: 150000,
