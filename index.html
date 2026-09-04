@@ -18,6 +18,56 @@
       <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="assets/pages/index/styles.css">
+  <style>
+    .fw-diagram-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+        padding: 5px 0;
+        width: 100%;
+    }
+    
+    .fw-box {
+        width: 100%;
+        max-width: 290px;
+        padding: 12px 14px;
+        border-radius: 10px;
+        background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(7, 12, 22, 0.98));
+        border-width: 1.5px;
+        border-style: solid;
+        text-align: center;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    }
+    
+    .fw-title {
+        font-family: 'Inter', sans-serif;
+        font-size: 12.5px;
+        font-weight: 700;
+        color: #f8fafc;
+        margin-bottom: 4px;
+        letter-spacing: 0.3px;
+    }
+    
+    .fw-desc {
+        font-family: 'Inter', sans-serif;
+        font-size: 10.5px;
+        color: #94a3b8;
+        line-height: 1.35;
+    }
+    
+    .fw-arrow {
+        color: #475569;
+        font-size: 14px;
+        margin: -2px 0;
+    }
+    
+    .fw-blue { border-color: rgba(59, 130, 246, 0.7); }
+    .fw-purple { border-color: rgba(139, 92, 246, 0.7); }
+    .fw-red { border-color: rgba(239, 68, 68, 0.7); }
+    .fw-orange { border-color: rgba(249, 115, 22, 0.7); }
+    .fw-green { border-color: rgba(16, 185, 129, 0.7); }
+  </style>
 </head>
 <body>
 <!-- ===== Platform Navigation Bar ===== -->
@@ -597,8 +647,35 @@
                 <div class="modal-section">
                     <h3>METHODOLOGY FRAMEWORK</h3>
                     <div class="modal-grid">
-                        <div>
-                            <img src="assets/images/geoai_framework.png" class="modal-image" alt="GeoAI framework diagram">
+                        <div class="fw-diagram-container">
+                            <div class="fw-box fw-blue">
+                                <div class="fw-title">Satellite Data Input</div>
+                                <div class="fw-desc">Multispectral imagery & Remote Sensing</div>
+                            </div>
+                            <div class="fw-arrow"><i class="fas fa-arrow-down"></i></div>
+                            
+                            <div class="fw-box fw-purple">
+                                <div class="fw-title">XGBoost Classification Model</div>
+                                <div class="fw-desc">Spatial Feature Extraction & Risk Scoring</div>
+                            </div>
+                            <div class="fw-arrow"><i class="fas fa-arrow-down"></i></div>
+                            
+                            <div class="fw-box fw-red">
+                                <div class="fw-title">Deforestation Risk Prediction</div>
+                                <div class="fw-desc">Probability Scoring & Classification</div>
+                            </div>
+                            <div class="fw-arrow"><i class="fas fa-arrow-down"></i></div>
+                            
+                            <div class="fw-box fw-orange">
+                                <div class="fw-title">Spatial Cluster Analysis</div>
+                                <div class="fw-desc">DBSCAN Hotspot Mapping</div>
+                            </div>
+                            <div class="fw-arrow"><i class="fas fa-arrow-down"></i></div>
+                            
+                            <div class="fw-box fw-green">
+                                <div class="fw-title">Model Validation</div>
+                                <div class="fw-desc">Active Fire Overlay & ROC-AUC Assessment</div>
+                            </div>
                         </div>
                         <div class="modal-text">
                             <p>
