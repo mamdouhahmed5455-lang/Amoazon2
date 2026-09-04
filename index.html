@@ -16,6 +16,7 @@
       <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="assets/pages/index/styles.css">
   <style>
@@ -187,10 +188,16 @@
                             CSV, GeoJSON, and PDF become available once a point is selected.
                         </div>
                     </div>
-                    <button id="reportExportToggle" class="report-export-toggle" type="button" aria-expanded="false" onclick="toggleReportExportPanel()">
-                        <i class="fas fa-sliders-h"></i>
-                        Export Report
-                    </button>
+                    <div style="display: flex; gap: 8px; margin-top: 10px;">
+                        <button id="sendEmailAlertBtn" class="report-export-toggle" style="background: rgba(220, 38, 38, 0.15); border-color: rgba(220, 38, 38, 0.3); color: #fca5a5; flex: 1;" type="button" onclick="sendManualAlert()">
+                            <i class="fas fa-envelope"></i>
+                            Alert
+                        </button>
+                        <button id="reportExportToggle" class="report-export-toggle" type="button" aria-expanded="false" onclick="toggleReportExportPanel()" style="flex: 2; margin-top: 0;">
+                            <i class="fas fa-sliders-h"></i>
+                            Export Report
+                        </button>
+                    </div>
                 </div>
                 <div id="reportExportOptions" class="report-export-options">
                     <button id="reportCsvBtn" class="panel-action-btn report-action-btn" type="button" onclick="exportSelectedPointData('csv')">
@@ -205,6 +212,13 @@
                         <i class="fas fa-file-pdf"></i>
                         PDF
                     </button>
+                </div>
+            </div>
+
+            <div id="alertLogCard" class="analysis-card report-export-card" style="margin-top: 12px; display: none;">
+                <div class="card-label">Alert Log</div>
+                <div id="alertLogContainer" style="font-size: 11.5px; color: #cbd5e1; margin-top: 8px; display: flex; flex-direction: column; gap: 6px;">
+                    <!-- Logs will go here -->
                 </div>
             </div>
         </div>

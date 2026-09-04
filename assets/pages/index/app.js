@@ -26,6 +26,11 @@ let hotspotPulseFrame = null
 let hotspotPulseLastTick = 0
 let appInitialized = false
 let pendingMapStyle = null
+const EMAILJS_SERVICE_ID = "service_ekarjqe";
+const EMAILJS_TEMPLATE_ID = "template_kn7r69s";
+const EMAILJS_PUBLIC_KEY = "Z7eA7KPZNO20vBhhJ";
+let alertedPointsLog = new Set();
+let alertHistory = [];
 let selectedAnalysisPoint = null
 let validationLayerEnabled = false
 let generatedSpatialLayers = null
@@ -373,6 +378,7 @@ function promptForJsonFile() {
     input.click();
 }
 function bootstrapApp() {
+    if (typeof emailjs !== 'undefined') emailjs.init(EMAILJS_PUBLIC_KEY);
     initializeColumnPanel();
     const columnPanel = document.getElementById('columnPanel');
     if (columnPanel) {
@@ -2425,6 +2431,30 @@ function updateAlertState(activeData, highCount) {
     if (headline) headline.innerText = 'High Risk Cluster Detected';
     if (meta) meta.innerText = `Scenario: ${SCENARIO_CONFIG[currentScenario].label} | Probability: ${probability}% | Target Year: ${highest.event_year}`;
     if (icon) icon.innerText = '!';
+    
+    if (typeof emailjs !== 'undefined') {
+        const pointKey = `${highest.lat}_${highest.lon}`;
+        if (!alertedPointsLog.has(pointKey)) {
+            alertedPointsLog.add(pointKey);
+            const pointScore = getPointScore(highest);
+            const region = getRegionName(highest.lat, highest.lon);
+            
+            emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+                region: region,
+                lat: highest.lat.toFixed(4),
+                lon: highest.lon.toFixed(4),
+                probability: probability,
+                risk_class: getRiskClassText(pointScore),
+                priority: getPriorityText(pointScore),
+                response_window: pointScore > 170 ? '24 hrs' : (pointScore > 165 ? '72 hrs' : '7 days')
+            }).then(() => {
+                logAlertToUI(region + ' (Auto)', probability);
+                console.log("Auto alert sent successfully for", pointKey);
+            }).catch((err) => {
+                console.error("Failed to send auto alert:", err);
+            });
+        }
+    }
 }
 function toggleMapStyle(style) {
     if (!deckInstance) return;
@@ -2563,6 +2593,49 @@ window.addEventListener('unhandledrejection', event => {
     }
 });
 window.addEventListener('hashchange', handleDashboardEntryHash);
+
+function logAlertToUI(region, probability) {
+    const logContainer = document.getElementById('alertLogContainer');
+    const logCard = document.getElementById('alertLogCard');
+    if (!logContainer || !logCard) return;
+    
+    logCard.style.display = 'block';
+    const time = new Date().toLocaleTimeString();
+    alertHistory.unshift(`[${time}] ${region} - ${probability}% Risk`);
+    if (alertHistory.length > 5) alertHistory.pop();
+    
+    logContainer.innerHTML = alertHistory.map(log => `<div>${log}</div>`).join('');
+}
+
+function sendManualAlert() {
+    if (!selectedAnalysisPoint) {
+        console.warn('No point selected for manual alert.');
+        return;
+    }
+    if (typeof emailjs === 'undefined') {
+        console.error('EmailJS not loaded.');
+        return;
+    }
+    const pointScore = getPointScore(selectedAnalysisPoint);
+    const region = getRegionName(selectedAnalysisPoint.lat, selectedAnalysisPoint.lon);
+    const probability = getProbabilityPercent(pointScore);
+    
+    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+        region: region,
+        lat: selectedAnalysisPoint.lat.toFixed(4),
+        lon: selectedAnalysisPoint.lon.toFixed(4),
+        probability: probability,
+        risk_class: getRiskClassText(pointScore),
+        priority: getPriorityText(pointScore),
+        response_window: pointScore > 170 ? '24 hrs' : (pointScore > 165 ? '72 hrs' : '7 days')
+    }).then(() => {
+        logAlertToUI(region + ' (Manual)', probability);
+        console.log("Manual alert sent successfully.");
+    }).catch((err) => {
+        console.error("Failed to send manual alert:", err);
+    });
+}
+
 function generateRiskReport() {
     const record = getSelectedPointExportRecord();
     if (!record) {
