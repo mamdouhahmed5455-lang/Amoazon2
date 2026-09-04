@@ -31,7 +31,7 @@
         </ul>
         <div class="nav-status">
             <div class="nav-status-dot"></div>
-            Live Monitoring
+            Pre-calculated Predictive Dashboard
         </div>
     </nav>
 
@@ -124,7 +124,7 @@
                     <canvas id="sideTrajectoryChart" height="140"></canvas>
                 </div>
                 <div id="sideTrajectoryMeta" class="side-trajectory-meta">
-                    Live forecast preview for the active scene. Select a point to inspect its expected pressure trend.
+                    Interactive forecast preview for the active scene. Select a point to inspect its expected pressure trend.
                 </div>
             </div>
 
@@ -603,12 +603,12 @@
                         <div class="modal-text">
                             <p>
                                 The proposed <b>GeoAI framework</b> integrates satellite data,
-                                deep learning segmentation, spatial risk modeling, and interactive
+                                XGBoost machine learning, spatial risk modeling, and interactive
                                 3D visualization to estimate deforestation risk across the Amazon Basin.
                             </p>
                             <div class="highlight-box">
                                 <b>Key Cycle:</b>
-                                Satellite Data -> U-Net Segmentation -> Risk Calculation -> Spatial Validation
+                                Satellite Data -> XGBoost Classification -> Risk Calculation -> Spatial Validation
                             </div>
                             <div class="highlight-box" style="margin-top:12px;">
                                 <b>Model Validation Workflow:</b>
@@ -637,35 +637,16 @@
                 </div>
 
                 <div class="modal-section">
-                    <h3>DEEP LEARNING & MATHEMATICAL MODEL</h3>
+                    <h3>MACHINE LEARNING & MATHEMATICAL MODEL</h3>
                     <div class="modal-grid">
                         <div>
-                            <div class="nn-viz">
-                                <div class="nn-layer">
-                                    <div class="nn-node"></div>
-                                    <div class="nn-node"></div>
-                                    <div class="nn-node"></div>
-                                </div>
-                                <div class="nn-arrow">-></div>
-                                <div class="nn-layer">
-                                    <div class="nn-node hidden"></div>
-                                    <div class="nn-node hidden"></div>
-                                    <div class="nn-node hidden"></div>
-                                    <div class="nn-node hidden"></div>
-                                </div>
-                                <div class="nn-arrow">-></div>
-                                <div class="nn-layer">
-                                    <div class="nn-node output"></div>
-                                    <div class="nn-node output"></div>
-                                </div>
-                            </div>
                             <div class="equation-box">
                                 <span>Risk(x)</span> = 0.41(Roads) + 0.23(Forest Loss) + 0.21(Population) + 0.15(Elevation)
                             </div>
                         </div>
                         <div class="modal-text">
                             <p>
-                                A hybrid pipeline combines segmentation outputs with tabular spatial predictors
+                                A robust pipeline uses tabular spatial predictors
                                 to rank each cell by degradation pressure and expected intervention urgency.
                             </p>
                             <h4
@@ -729,16 +710,16 @@
                                     <div class="spec-value" style="color:#10b981">0.82 (Validated)</div>
                                 </div>
                                 <div class="spec-card">
-                                    <div class="spec-label">Optimizer</div>
-                                    <div class="spec-value">Adam (lr=0.001)</div>
+                                    <div class="spec-label">Algorithm</div>
+                                    <div class="spec-value">Gradient Boosting</div>
                                 </div>
                                 <div class="spec-card">
                                     <div class="spec-label">Resolution</div>
-                                    <div class="spec-value">30m/px (Multi-Band)</div>
+                                    <div class="spec-value">10m/px (Sentinel-2) & Landsat</div>
                                 </div>
                                 <div class="spec-card">
                                     <div class="spec-label">Framework</div>
-                                    <div class="spec-value">PyTorch GeoAI</div>
+                                    <div class="spec-value">XGBoost</div>
                                 </div>
                             </div>
                         </div>
@@ -1001,8 +982,7 @@
                         </div>
                     </div>
                     <div class="metrics-note">
-                        <b>Validation Logic:</b> Train/test split, ROC-AUC evaluation, spatial validation with observed
-                        forest loss proxies, and hotspot comparison.
+                        <b>Validation Logic:</b> Standard Train/Test split (Note: Strict Spatial Split planned for future development), ROC-AUC evaluation, validation with observed forest loss proxies, and hotspot comparison.
                     </div>
                 </div>
             </div>
