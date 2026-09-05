@@ -1004,14 +1004,14 @@ function syncColumnScaleUI() {
 }
 function syncRiskThresholdUI() {
     const el = document.getElementById('riskThresholdValue');
-    const valueLabel = minRiskThreshold === 0 ? 'All' : (minRiskThreshold >= 170 ? '75%+' : '50%+');
+    const valueLabel = minRiskThreshold === 0 ? 'All' : (minRiskThreshold >= 170 || minRiskThreshold >= 174 ? '75%+' : '50%+');
     if (el) el.innerText = valueLabel;
     const b1 = document.getElementById('riskAllBtn');
     const b2 = document.getElementById('riskMedBtn');
     const b3 = document.getElementById('riskHighBtn');
     if (b1) b1.classList.toggle('active', minRiskThreshold === 0);
-    if (b2) b2.classList.toggle('active', minRiskThreshold === 165);
-    if (b3) b3.classList.toggle('active', minRiskThreshold === 170);
+    if (b2) b2.classList.toggle('active', minRiskThreshold === 165 || minRiskThreshold === 162);
+    if (b3) b3.classList.toggle('active', minRiskThreshold === 170 || minRiskThreshold === 174);
 }
 function syncHeatmapIntensityUI() {
     const el = document.getElementById('heatIntensityValue');
@@ -2431,14 +2431,14 @@ function updateAlertState(activeData, highCount) {
     if (headline) headline.innerText = 'High Risk Cluster Detected';
     if (meta) meta.innerText = `Scenario: ${SCENARIO_CONFIG[currentScenario].label} | Probability: ${probability}% | Target Year: ${highest.event_year}`;
     if (icon) icon.innerText = '!';
-    
+
     if (typeof emailjs !== 'undefined') {
         const pointKey = `${highest.lat}_${highest.lon}`;
         if (!alertedPointsLog.has(pointKey)) {
             alertedPointsLog.add(pointKey);
             const pointScore = getPointScore(highest);
             const region = getRegionName(highest.lat, highest.lon);
-            
+
             emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
                 region: region,
                 lat: highest.lat.toFixed(4),
@@ -2598,12 +2598,12 @@ function logAlertToUI(region, probability) {
     const logContainer = document.getElementById('alertLogContainer');
     const logCard = document.getElementById('alertLogCard');
     if (!logContainer || !logCard) return;
-    
+
     logCard.style.display = 'block';
     const time = new Date().toLocaleTimeString();
     alertHistory.unshift(`[${time}] ${region} - ${probability}% Risk`);
     if (alertHistory.length > 5) alertHistory.pop();
-    
+
     logContainer.innerHTML = alertHistory.map(log => `<div>${log}</div>`).join('');
 }
 
@@ -2619,7 +2619,7 @@ function sendManualAlert() {
     const pointScore = getPointScore(selectedAnalysisPoint);
     const region = getRegionName(selectedAnalysisPoint.lat, selectedAnalysisPoint.lon);
     const probability = getProbabilityPercent(pointScore);
-    
+
     emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
         region: region,
         lat: selectedAnalysisPoint.lat.toFixed(4),
