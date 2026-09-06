@@ -188,6 +188,8 @@ const MAP_STYLES = {
 // Token injected at build time via Vercel build script (see package.json build command).
 // DO NOT hardcode a real token here — set MAPBOX_TOKEN in Vercel Environment Variables.
 const MAPBOX_TOKEN = "___MAPBOX_TOKEN_PLACEHOLDER___";
+// Deterministic synthetic sequence hash for 3D timeline animation (2001-2030).
+// Generates reproducible sequence years per coordinate cell for temporal simulation display.
 function assignEventYear(point) {
     const latSeed = Math.round(Math.abs(point.lat) * 1000);
     const lonSeed = Math.round(Math.abs(point.lon) * 1000);
@@ -195,11 +197,11 @@ function assignEventYear(point) {
 }
 async function loadForestData() {
     const controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
-    const timeoutId = controller ? setTimeout(() => controller.abort(), 12000) : null;
+    const timeoutId = controller ? setTimeout(() => controller.abort(), 30000) : null;
     try {
         const response = await fetch("data/forest_data_clean.json", {
             signal: controller ? controller.signal : undefined,
-            cache: "no-store"
+            cache: "default"
         });
         if (!response.ok) {
             throw new Error(`HTTP ${response.status}`);
@@ -287,12 +289,12 @@ function initializeDashboard(data) {
                                 ${(getProbabilityPercent(pointScore) / 100).toFixed(2)} <span style="font-size:10px; color:#64748b; font-weight:400">prob.</span>
                             </div>
                             <span style="color:#94a3b8; font-size:11px;">${displayMetricLabel}: <b style="color:#f8fafc">${displayMetricValue}${currentMetric === 'risk' ? '' : '%'}</b></span><br>
-                            <span style="color:#94a3b8; font-size:11px;">Prediction Year: <b style="color:#f8fafc">${object.event_year}</b></span><br>
+                            <span style="color:#94a3b8; font-size:11px;">Simulated Timeline Year: <b style="color:#f8fafc">${object.event_year}</b></span><br>
                             <span style="color:#94a3b8; font-size:11px;">Scenario: <b style="color:#f8fafc">${SCENARIO_CONFIG[currentScenario].label}</b></span><br>
                             
                             ${driversHtml}
                             <div style="margin-top:8px; font-size:10px; color:#64748b; background:rgba(255,255,255,0.05); padding:6px; border-radius:6px;">
-                                <b>Satellite Validation:</b> ${validationEvidence.observedForestLoss ? 'Evidence Detected' : 'No Evidence'}<br>
+                                <b>Validation Proxy:</b> ${validationEvidence.observedForestLoss ? 'Proxy Match' : 'No Proxy Match'}<br>
                                 <span style="font-size:9px; opacity:0.8">${validationEvidence.satelliteValidation}</span>
                             </div>
                             
@@ -356,7 +358,13 @@ function showLoadingError(message, allowRecovery = false) {
     demoBtn.className = "loading-action-btn";
     demoBtn.type = "button";
     demoBtn.innerText = "Load Demo Data";
-    demoBtn.onclick = () => initializeDashboard(DEMO_DATA.map(point => ({ ...point })));
+    demoBtn.onclick = () => {
+        initializeDashboard(DEMO_DATA.map(point => ({ ...point })));
+        const navStatus = document.querySelector('.nav-status');
+        if (navStatus) {
+            navStatus.innerHTML = '<div class="nav-status-dot" style="background:#f59e0b;"></div> Demo Mode (35 Sample Cells)';
+        }
+    };
     actions.appendChild(demoBtn);
 }
 function promptForJsonFile() {
@@ -399,37 +407,59 @@ function bootstrapApp() {
     updateSideTrajectoryChart();
     bindGlobalShortcuts();
     handleDashboardEntryHash();
-    const autoFallback = () => {
+
+    // Visual loading progress feedback for large dataset
+    const progressTimer = setTimeout(() => {
+        if (!appInitialized) {
+            const msg = document.getElementById('loadingMsg');
+            if (msg) {
+                msg.innerText = "Loading predictive dataset (150,000 cells · 20 MB)...";
+                msg.style.display = "block";
+                msg.removeAttribute("aria-hidden");
+            }
+        }
+    }, 2500);
+
+    const autoFallback = (reason) => {
         if (appInitialized) return;
-        console.warn("Bootstrap: Activating Autonomous Demo Mode.");
+        clearTimeout(progressTimer);
+        console.warn("Bootstrap: Activating Demo Fallback Mode.", reason || "");
         const msg = document.getElementById('loadingMsg');
-        if (msg) msg.innerText = "Connection restricted. Activating Local Preview Mode...";
+        if (msg) {
+            msg.innerText = "Dataset unavailable. Activating Offline Demo Mode (35 sample cells)...";
+            msg.style.display = "block";
+            msg.removeAttribute("aria-hidden");
+        }
         setTimeout(() => {
             if (!appInitialized) {
                 initializeDashboard(DEMO_DATA.map(p => ({ ...p })));
                 setInterfaceReady(true);
-                // Add a small notification to the user
+                // Clear UI indication that fallback/demo dataset is active
+                const navStatus = document.querySelector('.nav-status');
+                if (navStatus) {
+                    navStatus.innerHTML = '<div class="nav-status-dot" style="background:#f59e0b;"></div> Demo Mode (35 Sample Cells)';
+                }
                 const banner = document.getElementById('alertBanner');
                 if (banner) {
                     banner.classList.add('active', 'low');
-                    banner.querySelector('.alert-headline').innerText = "Autonomous Mode Active";
-                    banner.querySelector('.alert-meta').innerText = "Running on local encrypted cache due to restricted server access.";
-                    setTimeout(() => banner.classList.remove('active'), 6000);
+                    const headline = document.getElementById('alertHeadline') || banner.querySelector('.alert-headline');
+                    const meta = document.getElementById('alertMeta') || banner.querySelector('.alert-meta');
+                    if (headline) headline.innerText = "Demo Mode Active (Fallback Dataset)";
+                    if (meta) meta.innerText = "Displaying 35 sample points for offline demonstration. Full 150,000-cell dataset could not be loaded.";
                 }
             }
-        }, 1200);
+        }, 800);
     };
-    let loadTimeout = setTimeout(autoFallback, 4500);
+
     loadForestData()
         .then(data => {
-            clearTimeout(loadTimeout);
+            clearTimeout(progressTimer);
             initializeDashboard(data);
         })
         .catch(error => {
-            clearTimeout(loadTimeout);
-            console.error("Failed to initialize dashboard:", error);
-            // Instead of a hard error, try auto-fallback immediately
-            autoFallback();
+            clearTimeout(progressTimer);
+            console.error("Failed to initialize dashboard with full dataset:", error);
+            autoFallback(error.message);
         });
 }
 function bindGlobalShortcuts() {
@@ -532,6 +562,7 @@ function getPointScore(point, scenario = currentScenario) {
         return baseScore;
     }
     const frontierExposure = clamp01((point.lon - DATA_BOUNDS.minLon) / (DATA_BOUNDS.maxLon - DATA_BOUNDS.minLon));
+    // Note: In forest_data_clean.json, 'elevation' holds the 3D visual extrusion height scale (risk_norm * 4000)
     const terrainAccessibility = 1 - clamp01((point.elevation || 0) / 4000);
     const structuralPressure = clamp01((((point.risk_norm || 0.5) * 0.55) + (frontierExposure * 0.25) + (terrainAccessibility * 0.2)));
     let adjustedScore = baseScore;
@@ -712,6 +743,7 @@ function initSpatialLayers() {
 }
 function getValidationScore(point) {
     const frontier = clamp01((point.lon - DATA_BOUNDS.minLon) / (DATA_BOUNDS.maxLon - DATA_BOUNDS.minLon));
+    // 'elevation' / 4000 represents normalized extrusion height proxy
     const accessibility = 1 - clamp01((point.elevation || 0) / 4000);
     return clamp01((point.risk_norm * 0.62) + (frontier * 0.22) + (accessibility * 0.16));
 }
@@ -1365,6 +1397,7 @@ function getRenderData(activeData) {
         const stride = PERFORMANCE_CONFIG[performanceMode].heatStride;
         resultData = activeData.filter((_, index) => index % stride === 0);
     } else if (currentMode === 'hotspot') {
+        // High-risk hotspot isolation: filters points exceeding the performance tier threshold (score > 160/162/166)
         resultData = activeData.filter(point => getPointScore(point) > PERFORMANCE_CONFIG[performanceMode].hotspotThreshold);
     } else {
         resultData = activeData;
@@ -2552,8 +2585,8 @@ function toggleSidebar(show, obj = null, forceHidden = false) {
         // Update Side Trajectory Chart
         updateSideTrajectoryChart(obj);
         document.getElementById('sideValidationSummary').innerHTML = validationEvidence.observedForestLoss
-            ? `<b>Prediction vs Observation:</b> High predicted risk aligns with observed forest loss evidence. This supports model validity for this cell.`
-            : `<b>Prediction vs Observation:</b> No strong observed loss proxy is visible for this cell yet. This may indicate early warning or overprediction.`;
+            ? `<b>Prediction vs Proxy:</b> High predicted risk aligns with loss proxy indicators. This supports model consistency for this cell.`
+            : `<b>Prediction vs Proxy:</b> No strong loss proxy indicator is active for this cell yet. This may indicate early warning or overprediction.`;
         updateExplainabilityPanel(drivers);
         updateRegionAnalysis(obj, regionPoints);
         const regionAreaValue = document.getElementById('regionArea');
@@ -2810,7 +2843,7 @@ function generateRiskReport() {
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(7.5);
     doc.setTextColor(120, 140, 165);
-    doc.text(`Generated from live dashboard context | ${footerLabel}`, margin, pageHeight - 8);
+    doc.text(`Generated from active dashboard context | ${footerLabel}`, margin, pageHeight - 8);
     doc.save(filename);
     return;
 }

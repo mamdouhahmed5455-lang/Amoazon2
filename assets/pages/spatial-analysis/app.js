@@ -133,7 +133,7 @@
 
             if (summary) {
                 if (results.length) {
-                    summary.textContent = `${results.length} matching point${results.length === 1 ? '' : 's'} found near ${center.label} within ${radiusKm} km.`;
+                    summary.textContent = `${results.length} matching sample point${results.length === 1 ? '' : 's'} found near ${center.label} within ${radiusKm} km.`;
                     if (fallbackUsed) {
                         summary.textContent += ' Showing the nearest eligible zones instead.';
                     }
@@ -325,7 +325,7 @@
                     <div class="cluster-name">Focused Point</div>
                     <div class="cluster-stats">
                         <div><div class="cluster-stat-label">Coordinates</div><div class="cluster-stat-val">${focusLat.toFixed(3)}, ${focusLon.toFixed(3)}</div></div>
-                        <div><div class="cluster-stat-label">Scenario</div><div class="cluster-stat-val">${focusScenario ? capitalizeLabel(focusScenario) : 'Live'}</div></div>
+                        <div><div class="cluster-stat-label">Scenario</div><div class="cluster-stat-val">${focusScenario ? capitalizeLabel(focusScenario) : 'Active'}</div></div>
                         <div><div class="cluster-stat-label">Mode</div><div class="cluster-stat-val">${modeLabel(focusMode)}</div></div>
                         <div><div class="cluster-stat-label">Risk</div><div class="cluster-stat-val" style="color:#22d3ee;">${focusRisk ? `${focusRisk}%` : '—'}</div></div>
                     </div>
@@ -340,6 +340,8 @@
             map.flyTo({ center: [focusLon, focusLat], zoom: 7.8, essential: true });
         }
 
+        // Curated showcase sample points for 2D spatial sandbox inspection (5 sample hotspots, 2 buffer zones).
+        // Representative spatial samples derived from forest_data_clean.json for lightweight client-side Mapbox GL rendering.
         const ANALYSIS_POINTS = [
             { id: 1, lat: -11.918, lon: -63.872, type: 'hotspot', intensity: 0.94 },
             { id: 2, lat: -12.405, lon: -60.806, type: 'hotspot', intensity: 0.88 },

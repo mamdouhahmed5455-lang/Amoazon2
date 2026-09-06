@@ -47,6 +47,10 @@ let projChart;
             });
         }
 
+        // Heuristic policy sensitivity simulation:
+        // Calculates projected percentage risk shifts using model-derived SHAP feature importance
+        // weights (Road 41%, Forest Loss 23%, Population 21%) combined with policy mitigation factors,
+        // rather than live re-inference of the offline-trained XGBoost model.
         function updateScenario() {
             const road = parseInt(document.getElementById('roadSlider').value);
             const pop = parseInt(document.getElementById('popSlider').value);

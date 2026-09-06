@@ -28,7 +28,7 @@
 
   <main class="page-container">
     <div class="page-header">
-      <h1>🧠 AI Model — Hybrid GeoAI Ranking Engine</h1>
+      <h1>🧠 AI Model — XGBoost Classification Model</h1>
       <p>Model architecture, performance metrics, and explainability analysis for deforestation risk prediction</p>
     </div>
 
@@ -62,9 +62,9 @@
 
     <div class="content-grid two-col" style="margin-bottom: 20px;">
       <section class="chart-box">
-        <h3>🏗️ Model Architecture — Hybrid GeoAI Ranking Engine v2.1</h3>
+        <h3>🏗️ Model Architecture — XGBoost Classification Model</h3>
         <div class="model-desc-card" style="margin-bottom: 16px;">
-          <p>A hybrid <strong>deep learning ensemble</strong> combining gradient-boosted decision trees with a 4-layer neural network. The model processes <strong>12 geospatial features</strong> through spatial convolutions to predict cell-level deforestation risk scores ranging from 0–255.</p>
+          <p>An <strong>XGBoost (Gradient Boosted Decision Trees)</strong> classification model trained on <strong>12 geospatial features</strong> to predict cell-level deforestation risk scores ranging from 0–255, with global feature importance validated via <strong>SHAP analysis</strong>.</p>
         </div>
         <div class="nn-container" id="nnWrapper">
           <canvas id="nnCanvas"></canvas>
@@ -109,7 +109,7 @@
         <h3>📊 Feature Importance (SHAP Values)</h3>
         <div class="feature-bar-container" id="featureBars"></div>
         <div class="model-desc-card" style="margin-top: 20px;">
-          <p>Feature importance is calculated using <strong>SHAP (SHapley Additive exPlanations)</strong>, which provides a unified measure of feature contribution. <strong>Road proximity</strong> is the strongest predictor, consistent with empirical deforestation research in the Amazon Basin.</p>
+          <p>Feature importance reflects offline research benchmarks derived from <strong>SHAP (SHapley Additive exPlanations)</strong> analysis during model evaluation, providing a unified measure of feature contribution. <strong>Road proximity</strong> is the strongest predictor (41%), consistent with empirical deforestation research in the Amazon Basin.</p>
         </div>
       </section>
     </div>

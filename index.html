@@ -96,6 +96,16 @@
         <p id="loadingMsg" class="loading-copy" aria-hidden="true"></p>
     </div>
 
+    <!-- Alert Banner -->
+    <div id="alertBanner" class="glass-panel" role="status" aria-live="polite">
+        <div class="alert-icon">!</div>
+        <div class="alert-copy">
+            <div class="alert-eyebrow">ALERT</div>
+            <div id="alertHeadline" class="alert-headline"></div>
+            <div id="alertMeta" class="alert-meta"></div>
+        </div>
+    </div>
+
     <div id="deck-container"></div>
     <div id="vignetteOverlay"></div>
     <div id="hudRadarGrid"></div>
@@ -147,7 +157,7 @@
             </div>
 
             <div class="analysis-card">
-                <div class="card-label">Initial Detection (Historical)</div>
+                <div class="card-label">Simulated Timeline Year</div>
                 <div id="sideYear" class="card-value">--</div>
             </div>
 
@@ -231,7 +241,7 @@
             </div>
 
             <div class="analysis-card">
-                <div class="sidebar-section-title">Explainable AI Drivers (SHAP)</div>
+                <div class="sidebar-section-title">Global Feature Importance (SHAP)</div>
                 <div class="explain-list">
                     <div class="explain-row">
                         <div class="explain-label"><span id="expLabel1">Road proximity</span><span
@@ -256,7 +266,7 @@
                         </div>
                     </div>
                     <div class="explain-row">
-                        <div class="explain-label"><span id="expLabel4">Elevation</span><span id="expPct4">--</span>
+                        <div class="explain-label"><span id="expLabel4">Elevation Constraints</span><span id="expPct4">--</span>
                         </div>
                         <div class="explain-track">
                             <div id="expFill4" class="explain-fill" style="width:0%"></div>
@@ -353,18 +363,18 @@
             </div>
 
             <div class="analysis-card">
-                <div class="sidebar-section-title">Validation Evidence</div>
+                <div class="sidebar-section-title">Validation Proxy Indicators</div>
                 <div class="region-grid">
                     <div class="region-stat">
-                        <div class="region-stat-label">Observed Forest Loss</div>
+                        <div class="region-stat-label">Loss Proxy</div>
                         <div id="sideObservedLoss" class="region-stat-value">--</div>
                     </div>
                     <div class="region-stat">
-                        <div class="region-stat-label">Fire Hotspot</div>
+                        <div class="region-stat-label">Fire Proxy</div>
                         <div id="sideFireHotspot" class="region-stat-value">--</div>
                     </div>
                     <div class="region-stat">
-                        <div class="region-stat-label">Satellite Validation</div>
+                        <div class="region-stat-label">Satellite Proxy</div>
                         <div id="sideSatelliteValidation" class="region-stat-value">--</div>
                     </div>
                     <div class="region-stat">
@@ -373,7 +383,7 @@
                     </div>
                 </div>
                 <div id="sideValidationSummary" class="panel-note" style="margin-top:12px;">
-                    Enable Validation Layer to compare predicted risk with observed evidence.
+                    Enable Validation Layer to compare predicted risk with spatial proxy indicators.
                 </div>
             </div>
         </div>
@@ -681,8 +691,8 @@
                             <div class="fw-arrow"><i class="fas fa-arrow-down"></i></div>
                             
                             <div class="fw-box fw-orange">
-                                <div class="fw-title">Spatial Cluster Analysis</div>
-                                <div class="fw-desc">DBSCAN Hotspot Mapping</div>
+                                <div class="fw-title">Spatial Hotspot Analysis</div>
+                                <div class="fw-desc">High-Risk Threshold Filtering</div>
                             </div>
                             <div class="fw-arrow"><i class="fas fa-arrow-down"></i></div>
                             
@@ -731,13 +741,14 @@
                     <h3>MACHINE LEARNING & MATHEMATICAL MODEL</h3>
                     <div class="modal-grid">
                         <div>
+                            <div style="font-size:11px; font-weight:700; color:#94a3b8; text-transform:uppercase; letter-spacing:0.8px; margin-bottom:8px;">Analytical Risk Index (SHAP-Weighted Formulation)</div>
                             <div class="equation-box">
-                                <span>Risk(x)</span> = 0.41(Roads) + 0.23(Forest Loss) + 0.21(Population) + 0.15(Elevation)
+                                <span>Risk(x)</span> = 0.41(Roads) + 0.23(Forest Loss) + 0.21(Population) + 0.15(Elevation Constraints)
                             </div>
                         </div>
                         <div class="modal-text">
                             <p>
-                                A robust pipeline uses tabular spatial predictors
+                                An analytical risk index synthesizing global SHAP feature contributions
                                 to rank each cell by degradation pressure and expected intervention urgency.
                             </p>
                             <h4
@@ -787,7 +798,7 @@
                             </p>
                             <p>
                                 The operational objective is early warning: prioritize inspections,
-                                reduce field search effort, and surface the most critical clusters first.
+                                reduce field search effort, and surface the most critical hotspots first.
                             </p>
                         </div>
                         <div class="modal-text">
@@ -828,7 +839,7 @@
                             </p>
                             <div class="highlight-box">
                                 <b>Deployment Sequence:</b>
-                                Observe clusters, validate confidence, assign response window, then escalate inspection
+                                Observe hotspots, validate confidence, assign response window, then escalate inspection
                                 resources.
                             </div>
                         </div>
@@ -921,7 +932,7 @@
                             <p>
                                 <b>4. What is the difference between heatmap and hotspot?</b><br>
                                 Heatmap shows the overall spatial intensity of predicted risk across the region,
-                                while hotspot mode isolates the most critical clusters for direct intervention and
+                                while hotspot mode isolates the most critical high-risk cells for direct intervention and
                                 prioritization.
                             </p>
                         </div>
@@ -1032,7 +1043,7 @@
         <div class="stat-card-hud glass-panel" onclick="toggleMetricsPopup(true)"
             style="cursor: pointer; min-width: 100px;">
             <div id="aucScore" class="stat-card-value" style="color:#93c5fd;">0.82</div>
-            <div class="stat-card-label">Accuracy</div>
+            <div class="stat-card-label">ROC-AUC</div>
         </div>
     </div>
 

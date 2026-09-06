@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
       <title>Scenario Simulator — GeoAI Deforestation Platform</title>
-      <meta name="description" content="Simulate environmental scenarios and predict deforestation impact">
+      <meta name="description" content="Policy sensitivity simulation and deforestation risk assessment">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
       <link rel="stylesheet" href="../assets/css/platform.css">
@@ -28,13 +28,13 @@
             <div class="loader-ring"></div>
             <div class="loader-ring-inner"></div>
         </div>
-        <p>Configuring Scenario Engine...</p>
+        <p>Configuring Scenario Simulator Engine...</p>
     </div>
 
     <div class="page-container">
         <div class="page-header">
             <h1>⚡ Scenario Simulator</h1>
-            <p>Modify environmental variables and visualize their predicted impact on deforestation risk</p>
+            <p>Policy sensitivity simulator: evaluate environmental variable shifts and conservation interventions using model-calibrated sensitivity weights</p>
         </div>
 
         <div class="content-grid sidebar-layout">
@@ -117,7 +117,7 @@
                         <button class="btn btn-ghost" onclick="setPreset('reset')">⚪ Reset</button>
                     </div>
                     <button class="btn btn-primary" style="width: 100%; height: 48px; font-weight: 800; border-radius: 12px; box-shadow: 0 8px 16px rgba(59, 130, 246, 0.2);" onclick="applyToDashboard()">
-                        🛰️ Apply to Live Dashboard
+                        🛰️ Apply to Main Dashboard
                     </button>
                 </div>
             </div>
@@ -126,10 +126,10 @@
             <div style="display: flex; flex-direction: column; gap: 20px;">
                 <!-- Impact Result -->
                 <div class="chart-box">
-                    <h3>📊 Predicted Impact</h3>
+                    <h3>📊 Simulated Sensitivity Impact</h3>
                     <div class="scenario-result-box" id="resultBox">
                         <div class="result-big" id="resultValue" style="color: #ef4444;">+12.4%</div>
-                        <div class="result-label">Predicted Deforestation Change</div>
+                        <div class="result-label">Simulated Deforestation Risk Shift</div>
                     </div>
                     <div class="comparison-cards">
                         <div class="comp-card">
@@ -148,7 +148,7 @@
 
                 <!-- Impact Chart -->
                 <div class="chart-box">
-                    <h3>📈 Deforestation Projection (2025–2035)</h3>
+                    <h3>📈 Deforestation Projection (Sensitivity Simulation 2025–2035)</h3>
                     <canvas id="projectionChart" height="220"></canvas>
                 </div>
 
@@ -162,7 +162,7 @@
                             <div style="font-size: 9px; color: #64748b;">EST. ANNUAL OFFSET</div>
                         </div>
                         <div style="background: rgba(245, 158, 11, 0.05); border: 1px solid rgba(245, 158, 11, 0.1); border-radius: 12px; padding: 14px; text-align: center;">
-                            <div style="font-size: 10px; color: #f59e0b; font-weight: 700; text-transform: uppercase;">Affeclted Pop.</div>
+                            <div style="font-size: 10px; color: #f59e0b; font-weight: 700; text-transform: uppercase;">Affected Pop.</div>
                             <div style="font-size: 20px; font-weight: 800; color: #f8fafc; margin: 4px 0;" id="socialVal">12.5k</div>
                             <div style="font-size: 9px; color: #64748b;">DISPLACEMENT RISK</div>
                         </div>

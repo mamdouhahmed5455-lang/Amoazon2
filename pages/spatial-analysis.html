@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
       <title data-ssot="project-name">Amazon Deforestation Risk 3D</title>
-      <meta name="description" content="Spatial analysis of deforestation hotspots, clusters, and regional statistics">
+      <meta name="description" content="Spatial analysis of deforestation hotspots, priority zones, and regional statistics">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
       <link rel="stylesheet" href="../assets/css/platform.css">
@@ -38,25 +38,25 @@
             <div class="hero-copy">
                 <div class="eyebrow">Spatial analysis workspace</div>
                 <h1>Spatial Analysis</h1>
-                <p>Map-first inspection for hotspots, cluster pressure, corridor movement, and focused region review.</p>
+                <p>Map-first inspection for hotspots, regional pressure, corridor movement, and focused region review.</p>
             </div>
         </div>
 
         <div class="kpi-grid analysis-kpis">
             <div class="kpi-card">
-                <div class="kpi-label" title="Aggregated clusters — see dashboard for raw grid cell counts">Total Hotspots <span style="font-size:0.75em; opacity:0.8; font-weight:400; text-transform:none;">(Aggregated clusters)</span></div>
+                <div class="kpi-label" title="Benchmark priority hotspots — see dashboard for raw grid cell counts">Total Hotspots <span style="font-size:0.75em; opacity:0.8; font-weight:400; text-transform:none;">(Benchmark Hotspots)</span></div>
                 <div class="kpi-value red" data-ssot="total-hotspots">847</div>
             </div>
             <div class="kpi-card">
-                <div class="kpi-label">Active Clusters</div>
+                <div class="kpi-label" title="Benchmark priority zones identified across the study area">Priority Hotspot Zones <span style="font-size:0.75em; opacity:0.8; font-weight:400; text-transform:none;">(Benchmark)</span></div>
                 <div class="kpi-value amber">12</div>
             </div>
             <div class="kpi-card">
-                <div class="kpi-label">Corridor Length</div>
+                <div class="kpi-label" title="Benchmark deforestation expansion corridor length">Corridor Length <span style="font-size:0.75em; opacity:0.8; font-weight:400; text-transform:none;">(Benchmark)</span></div>
                 <div class="kpi-value blue">342 km</div>
             </div>
             <div class="kpi-card">
-                <div class="kpi-label">Average Risk</div>
+                <div class="kpi-label" title="Benchmark average risk score across priority hotspot corridors">Average Risk <span style="font-size:0.75em; opacity:0.8; font-weight:400; text-transform:none;">(Benchmark)</span></div>
                 <div class="kpi-value red">74.2%</div>
             </div>
         </div>
@@ -75,10 +75,10 @@
                         <div class="map-overlay-panel map-lens" id="mapContextPanel">
                             <div class="map-overlay-top">
                                 <div>
-                                    <div class="section-kicker">Live context</div>
+                                    <div class="section-kicker">Spatial context</div>
                                     <div class="map-overlay-title" id="mapOverlayTitle">Spatial overview</div>
                                 </div>
-                                <div class="map-overlay-badge" id="mapOverlayBadge">LIVE</div>
+                                <div class="map-overlay-badge" id="mapOverlayBadge">SHOWCASE</div>
                             </div>
                             <div class="map-overlay-grid">
                                 <div class="map-overlay-metric">
@@ -129,7 +129,7 @@
                     <div class="panel-head panel-head-tight">
                         <div>
                             <div class="section-kicker">Spatial brief</div>
-                            <h3 id="analysisBriefTitle">Live field note</h3>
+                            <h3 id="analysisBriefTitle">Spatial field note</h3>
                         </div>
                         <div class="panel-caption" id="analysisBriefBadge">Ready</div>
                     </div>
@@ -211,7 +211,7 @@
                         <div class="range-scale"><span>1 km</span><span>25 km</span><span>50 km</span></div>
                     </div>
                     <button id="runSpatialQueryBtn" class="btn btn-primary query-btn" type="button">Run Spatial Query</button>
-                    <div id="querySummary" class="query-summary">Run a filtered scan to surface matching zones.</div>
+                    <div id="querySummary" class="query-summary">Run a filtered scan across showcase sample points.</div>
                 </section>
             </aside>
         </section>

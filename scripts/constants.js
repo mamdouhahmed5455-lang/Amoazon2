@@ -7,6 +7,7 @@
 window.GEOAI_CONSTANTS = {
 
     // ── 1) FEATURE IMPORTANCE (SHAP) ─────────────────────────
+    // Offline research benchmark values from external Colab model training and SHAP analysis.
     // Canonical values: Road 41, Forest Loss 23, Population 21, Elevation 15 → sum = 100
     // Applied with largest-remainder rounding (values are already exact integers that sum to 100).
     FEATURE_IMPORTANCES: [
@@ -17,6 +18,7 @@ window.GEOAI_CONSTANTS = {
     ],
 
     // ── 2) RISK INDEX FORMULA ─────────────────────────────────
+    // Analytical risk index synthesizing global SHAP feature contribution weights.
     // Exact formula from Graduation_Project_Report.md §4
     // Used verbatim in Methodology modal and Report text — do NOT hand-copy.
     RISK_FORMULA_TEXT:
@@ -74,34 +76,38 @@ window.GEOAI_CONSTANTS = {
     PROJECT_NAME: "AI-Based Deforestation Risk Prediction Model - Amazon Basin",
     
     // ── 9) SPATIAL ANALYSIS INFO ──────────────────────────────
+    // TOTAL_HOTSPOTS (847): Static historical benchmark reference from early project assessment report.
+    // Represents documented high-priority intervention hotspots, distinct from runtime raw cell thresholding.
     TOTAL_RISK_CELLS: 150000,
     TOTAL_HOTSPOTS: 847
 };
 
 // SSOT UI INITIALIZATION
-document.addEventListener('DOMContentLoaded', () => {
-    if (!window.GEOAI_CONSTANTS) return;
-    
-    // 1. Model Metrics
-    document.querySelectorAll('[data-ssot="recall"]').forEach(el => el.innerText = GEOAI_CONSTANTS.MODEL_METRICS.recall);
-    document.querySelectorAll('[data-ssot="f1"]').forEach(el => el.innerText = GEOAI_CONSTANTS.MODEL_METRICS.f1);
+if (typeof document !== 'undefined') {
+    document.addEventListener('DOMContentLoaded', () => {
+        if (!window.GEOAI_CONSTANTS) return;
+        
+        // 1. Model Metrics
+        document.querySelectorAll('[data-ssot="recall"]').forEach(el => el.innerText = GEOAI_CONSTANTS.MODEL_METRICS.recall);
+        document.querySelectorAll('[data-ssot="f1"]').forEach(el => el.innerText = GEOAI_CONSTANTS.MODEL_METRICS.f1);
 
-    // 2. Project Name
-    document.querySelectorAll('[data-ssot="project-name"]').forEach(el => {
-        if (el.tagName === 'TITLE') {
-            el.innerText = GEOAI_CONSTANTS.PROJECT_NAME;
-        } else {
-            el.textContent = GEOAI_CONSTANTS.PROJECT_NAME;
-        }
-    });
+        // 2. Project Name
+        document.querySelectorAll('[data-ssot="project-name"]').forEach(el => {
+            if (el.tagName === 'TITLE') {
+                el.innerText = GEOAI_CONSTANTS.PROJECT_NAME;
+            } else {
+                el.textContent = GEOAI_CONSTANTS.PROJECT_NAME;
+            }
+        });
 
-    // 3. Spatial Analysis (847 hotspots vs 150k cells tooltip explanation)
-    document.querySelectorAll('[data-ssot="total-hotspots"]').forEach(el => {
-        el.innerText = GEOAI_CONSTANTS.TOTAL_HOTSPOTS;
-        el.title = `Total hotspots (clusters) vs ${GEOAI_CONSTANTS.TOTAL_RISK_CELLS.toLocaleString()} raw risk cells analyzed globally`;
+        // 3. Spatial Analysis (847 hotspots vs 150k cells tooltip explanation)
+        document.querySelectorAll('[data-ssot="total-hotspots"]').forEach(el => {
+            el.innerText = GEOAI_CONSTANTS.TOTAL_HOTSPOTS;
+            el.title = `Benchmark priority hotspots vs ${GEOAI_CONSTANTS.TOTAL_RISK_CELLS.toLocaleString()} raw risk cells analyzed globally`;
+        });
+        
+        document.querySelectorAll('[data-ssot="total-cells"]').forEach(el => {
+            el.innerText = GEOAI_CONSTANTS.TOTAL_RISK_CELLS.toLocaleString();
+        });
     });
-    
-    document.querySelectorAll('[data-ssot="total-cells"]').forEach(el => {
-        el.innerText = GEOAI_CONSTANTS.TOTAL_RISK_CELLS.toLocaleString();
-    });
-});
+}
