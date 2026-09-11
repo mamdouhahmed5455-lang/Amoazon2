@@ -56,24 +56,61 @@ Amazon-Deforestation-Risk-3D/
 |  `- GeoAI_INTELLIGENCE_MAP.html
 |- pages/
 |  |- ai-model.html
+|  |- historical-intelligence.html
+|  |- impact-feasibility.html
 |  |- scenario-simulator.html
 |  `- spatial-analysis.html
 `- scripts/
+   |- constants.js
+   |- historical-intelligence.js
    |- framework.py
    `- risk_stats.py
 ```
+
+## Model Baseline & Benchmark Metrics (Locked SSOT)
+
+- **Offline Classifier:** XGBoost (Gradient Boosted Decision Trees)
+- **Pilot Geography:** Rondônia, Brazil (150,000 spatial cells)
+- **Canonical Metrics:**
+  - ROC-AUC: **0.82**
+  - Precision: **0.79**
+  - Recall: **0.84**
+  - F1 Score: **0.81**
+- **Global Feature Importance (SHAP Analysis):**
+  - Road Proximity: **41%**
+  - Forest Loss (Temporal): **23%**
+  - Population Pressure: **21%**
+  - Elevation Constraints: **15%**
+
+## Technical Evidence & Reproducibility Package
+
+For technical reviewers, machine learning evaluators, and competition judges, a comprehensive technical evidence package is provided in [`docs/reproducibility/`](docs/reproducibility/README.md):
+
+- [Technical Evidence Package Overview](docs/reproducibility/README.md): Architecture overview, verified assets, and reproduction status.
+- [Competition Technical Summary](docs/reproducibility/COMPETITION_TECHNICAL_SUMMARY.md): One-page briefing document and verification index.
+- [Model Card](docs/reproducibility/MODEL_CARD.md): Formal model specifications, inputs, outputs, intended use, and limitations.
+- [Data Provenance](docs/reproducibility/DATA_PROVENANCE.md): Complete audit of `data/forest_data_clean.json` and elevation extrusion caveats.
+- [Feature Specification](docs/reproducibility/FEATURE_SPECIFICATION.md): Detailed 12-feature inventory and global SHAP attribution breakdown.
+- [Evaluation Protocol](docs/reproducibility/EVALUATION_PROTOCOL.md): Benchmark test metrics and spatial/temporal validation protocols.
+- [SHAP Methodology](docs/reproducibility/SHAP_METHODOLOGY.md): Global TreeSHAP interpretability framework and verification steps.
+- [Reproducibility Gaps](docs/reproducibility/REPRODUCIBILITY_GAPS.md): Audited breakdown of upstream training code and data gaps.
+- [Full Reproduction Plan](docs/reproducibility/REPRODUCTION_PLAN.md): 12-stage engineering roadmap for independent retraining.
+- [Model Governance](docs/reproducibility/MODEL_GOVERNANCE.md): Ethical boundaries, human-in-the-loop rules, and drift monitoring.
+- [Technical Evidence Index](docs/reproducibility/TECHNICAL_EVIDENCE_INDEX.md): Reviewer question-and-answer evidentiary lookup matrix.
 
 ## Main Runtime Files
 
 | File | Role |
 | --- | --- |
-| [index.html](d:/Amazon-Deforestation-Risk-3D/index.html) | Main dashboard entry point |
-| [assets/pages/index/app.js](d:/Amazon-Deforestation-Risk-3D/assets/pages/index/app.js) | Dashboard logic, dataset loading, rendering, interaction, and export flow |
+| [index.html](d:/Amazon-Deforestation-Risk-3D/index.html) | Main 2D/3D decision-support dashboard |
+| [assets/pages/index/app.js](d:/Amazon-Deforestation-Risk-3D/assets/pages/index/app.js) | Dashboard logic, dataset loading, WebGL rendering, interaction |
 | [assets/pages/index/styles.css](d:/Amazon-Deforestation-Risk-3D/assets/pages/index/styles.css) | Dashboard styling and HUD layout |
-| [data/forest_data_clean.json](d:/Amazon-Deforestation-Risk-3D/data/forest_data_clean.json) | Precomputed forest-risk dataset |
-| [pages/spatial-analysis.html](d:/Amazon-Deforestation-Risk-3D/pages/spatial-analysis.html) | Spatial analysis workspace |
-| [pages/scenario-simulator.html](d:/Amazon-Deforestation-Risk-3D/pages/scenario-simulator.html) | Scenario simulation page |
-| [pages/ai-model.html](d:/Amazon-Deforestation-Risk-3D/pages/ai-model.html) | Model explanation and metrics page |
+| [data/forest_data_clean.json](d:/Amazon-Deforestation-Risk-3D/data/forest_data_clean.json) | Precomputed forest-risk dataset (150,000 cells) |
+| [pages/historical-intelligence.html](d:/Amazon-Deforestation-Risk-3D/pages/historical-intelligence.html) | PRODES 25-Year Historical Intelligence & State Comparison |
+| [pages/impact-feasibility.html](d:/Amazon-Deforestation-Risk-3D/pages/impact-feasibility.html) | Environmental Impact, Operational Feasibility & Roadmap |
+| [pages/spatial-analysis.html](d:/Amazon-Deforestation-Risk-3D/pages/spatial-analysis.html) | Spatial analysis & hotspot workspace |
+| [pages/scenario-simulator.html](d:/Amazon-Deforestation-Risk-3D/pages/scenario-simulator.html) | Client-side policy sensitivity simulator |
+| [pages/ai-model.html](d:/Amazon-Deforestation-Risk-3D/pages/ai-model.html) | Model explanation, feature weights, and validation metrics |
 
 ## How It Works
 

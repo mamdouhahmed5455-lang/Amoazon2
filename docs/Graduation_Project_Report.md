@@ -36,7 +36,7 @@ The model computes a Risk Score based on environmental and anthropogenic variabl
 `0.41 (Roads) + 0.23 (Loss Gap) + 0.21 (Population) + 0.15 (Elevation Constraints)`
 
 ### 5. 3D Spatial Visualization
-An elite interactive 3D map (`forest_risk_3D_v2.html`) was developed to visualize the model's outputs using Deck.gl:
+An elite interactive 3D map (`index.html`) was developed to visualize the model's outputs using Deck.gl:
 - **3D Risk Map:** Columns represent deforestation risk (Height = Risk Score).
 - **Heatmap:** Highlights regions with high concentrations of risk.
 - **Hotspots:** Pinpoints top critical danger zones.
@@ -50,7 +50,7 @@ The Python backend (`analysis.py`) performs rigorous validation to ensure academ
 1. **Model Accuracy (AUC-ROC):** The model achieved an **AUC score of 0.82**, indicating strong and reliable predictive performance against random baselines.
 2. **Confusion Matrix / Classification Metrics:** Precision and Recall metrics confirm the model correctly identifies high-risk frontiers without over-saturating stable protected areas.
 3. **Spatial Hotspot Filtering:** Used to autonomously isolate and display high-risk deforestation hotspots via score thresholding.
-4. **Fire Validation:** The predicted high-risk zones were overlaid with historical active fire data (NASA FIRMS). High correlation proved the model's accuracy.
+4. **Fire Validation:** The predicted high-risk zones were qualitatively compared against historical active fire proxy patterns (NASA FIRMS archive). Spatial alignment provided external contextual validation of elevated pressure corridors without asserting causal proof.
 
 *(See `../assets/images/model_validation_results.png` for the ROC Curve and diagnostic charts).*
 

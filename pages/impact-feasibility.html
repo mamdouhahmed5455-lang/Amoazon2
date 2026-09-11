@@ -1,0 +1,3578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Impact &amp; Feasibility — Environmental Intelligence | GeoAI Platform</title>
+  <meta name="description" content="From spatial risk prediction to environmental decision support — Potential Environmental Impact Analysis">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/css/platform.css">
+  <link rel="stylesheet" href="../assets/pages/index/styles.css">
+  <style>
+    :root {
+      --bg-dark: #070c18;
+      --card-bg: rgba(15, 23, 42, 0.75);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --card-hover-border: rgba(56, 189, 248, 0.35);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --cyan: #38bdf8;
+      --emerald: #10b981;
+      --amber: #f59e0b;
+      --indigo: #818cf8;
+      --rose: #f43f5e;
+    }
+
+    body.if-page {
+      background: var(--bg-dark);
+      background-image: 
+        radial-gradient(circle at 20% 15%, rgba(56, 189, 248, 0.04) 0%, transparent 40%),
+        radial-gradient(circle at 80% 60%, rgba(16, 185, 129, 0.04) 0%, transparent 40%),
+        radial-gradient(circle at 50% 90%, rgba(129, 140, 248, 0.03) 0%, transparent 40%);
+      color: var(--text-main);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      margin: 0;
+      padding-top: 68px;
+      min-height: 100vh;
+      overflow-x: hidden;
+      line-height: 1.5;
+    }
+
+    .if-shell {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 36px 24px 80px 24px;
+    }
+
+    /* Page Header */
+    .if-header {
+      margin-bottom: 36px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .if-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: var(--emerald);
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      padding: 4px 12px;
+      border-radius: 9999px;
+      margin-bottom: 14px;
+    }
+
+    .if-title {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -0.6px;
+      color: #ffffff;
+      margin: 0 0 8px 0;
+      line-height: 1.2;
+    }
+
+    .if-subtitle {
+      font-size: 16px;
+      color: var(--cyan);
+      font-weight: 500;
+      margin: 0 0 16px 0;
+    }
+
+    .if-intro-card {
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      border-left: 4px solid var(--cyan);
+      border-radius: 12px;
+      padding: 16px 20px;
+      font-size: 14px;
+      color: #cbd5e1;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .if-intro-icon {
+      font-size: 20px;
+      color: var(--cyan);
+      flex-shrink: 0;
+    }
+
+    /* Section Styles */
+    .if-section {
+      margin-bottom: 48px;
+    }
+
+    .if-section-header {
+      margin-bottom: 20px;
+    }
+
+    .if-section-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #f1f5f9;
+      margin: 0 0 6px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .if-section-title i {
+      color: var(--cyan);
+      font-size: 18px;
+    }
+
+    .if-section-subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin: 0;
+    }
+
+    /* Section 1: Causal Chain (Why Early Risk Detection Matters) */
+    .if-chain-container {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 24px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+    }
+
+    .if-chain-flow {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      position: relative;
+    }
+
+    .if-chain-step {
+      flex: 1;
+      background: rgba(30, 41, 59, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 10px;
+      padding: 14px 10px;
+      text-align: center;
+      transition: all 0.25s ease;
+      min-height: 84px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .if-chain-step:hover {
+      border-color: var(--card-hover-border);
+      transform: translateY(-2px);
+      background: rgba(30, 41, 59, 0.9);
+    }
+
+    .if-chain-step.highlight {
+      border-color: rgba(16, 185, 129, 0.4);
+      background: rgba(16, 185, 129, 0.08);
+    }
+
+    .if-chain-step-tag {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.6px;
+      color: var(--cyan);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .if-chain-step.highlight .if-chain-step-tag {
+      color: var(--emerald);
+    }
+
+    .if-chain-step-name {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.25;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .if-chain-step-desc {
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-top: 3px;
+      line-height: 1.2;
+    }
+
+    .if-chain-arrow {
+      color: #475569;
+      font-size: 13px;
+      flex-shrink: 0;
+    }
+
+    /* Section 2: Potential Environmental Impact (5-stage pathway) */
+    .if-pathway-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+      margin-bottom: 12px;
+    }
+
+    .if-pathway-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 18px 16px;
+      display: flex;
+      flex-direction: column;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      position: relative;
+      transition: all 0.2s ease;
+    }
+
+    .if-pathway-card:hover {
+      border-color: var(--card-hover-border);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+    }
+
+    .if-pathway-card.highlight {
+      border-color: rgba(16, 185, 129, 0.45);
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.85) 0%, rgba(16, 185, 129, 0.08) 100%);
+    }
+
+    .if-pathway-num {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--cyan);
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .if-pathway-card.highlight .if-pathway-num {
+      color: var(--emerald);
+    }
+
+    .if-pathway-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      margin-bottom: 8px;
+      min-height: 32px;
+      display: flex;
+      align-items: center;
+    }
+
+    .if-pathway-text {
+      font-size: 11.5px;
+      color: #cbd5e1;
+      line-height: 1.45;
+      margin: 0;
+      flex-grow: 1;
+    }
+
+    .if-pathway-badge {
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.25);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 11px;
+      color: #fef08a;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    /* Section 3: Four Environmental Benefit Domains */
+    .if-domains-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .if-domain-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 22px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: all 0.25s ease;
+      display: flex;
+      gap: 18px;
+    }
+
+    .if-domain-card:hover {
+      border-color: var(--card-hover-border);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
+    }
+
+    .if-domain-icon-box {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .icon-emerald {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--emerald);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .icon-cyan {
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--cyan);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+
+    .icon-indigo {
+      background: rgba(129, 140, 248, 0.15);
+      color: var(--indigo);
+      border: 1px solid rgba(129, 140, 248, 0.3);
+    }
+
+    .icon-amber {
+      background: rgba(245, 158, 11, 0.15);
+      color: var(--amber);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    .if-domain-body {
+      flex: 1;
+    }
+
+    .if-domain-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #ffffff;
+      margin: 0 0 6px 0;
+      letter-spacing: 0.2px;
+    }
+
+    .if-domain-quote {
+      font-size: 13px;
+      font-weight: 500;
+      color: #e2e8f0;
+      margin: 0 0 8px 0;
+      line-height: 1.4;
+    }
+
+    .if-domain-evidence {
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.45;
+      margin: 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 8px;
+    }
+
+    /* Section 4: Science vs Project (Two-Column Matrix) */
+    .if-matrix-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .if-matrix-col {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 24px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .if-matrix-col.science-col {
+      border-top: 3px solid #64748b;
+    }
+
+    .if-matrix-col.project-col {
+      border-top: 3px solid var(--cyan);
+    }
+
+    .if-matrix-header {
+      font-size: 14px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .science-col .if-matrix-header {
+      color: #94a3b8;
+    }
+
+    .project-col .if-matrix-header {
+      color: var(--cyan);
+    }
+
+    .if-matrix-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .if-matrix-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 12.5px;
+      color: #cbd5e1;
+      line-height: 1.45;
+    }
+
+    .if-matrix-item i {
+      margin-top: 3px;
+      font-size: 12px;
+      flex-shrink: 0;
+    }
+
+    .science-col .if-matrix-item i {
+      color: #64748b;
+    }
+
+    .project-col .if-matrix-item i {
+      color: var(--emerald);
+    }
+
+    /* Section 5: Project vs Planet Disclaimer */
+    .if-honesty-card {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.7) 100%);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      border-radius: 16px;
+      padding: 28px 32px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
+    }
+
+    .if-honesty-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, #f59e0b, transparent);
+    }
+
+    .if-honesty-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: #ffffff;
+      margin: 0 0 10px 0;
+      letter-spacing: -0.3px;
+      line-height: 1.3;
+    }
+
+    .if-honesty-text {
+      font-size: 13.5px;
+      color: #94a3b8;
+      max-width: 820px;
+      margin: 0 auto;
+      line-height: 1.55;
+    }
+
+    /* Section 6: Future Impact Measurement (5-stage framework) */
+    .if-measurement-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .if-measure-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 16px 14px;
+      display: flex;
+      flex-direction: column;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: all 0.2s ease;
+    }
+
+    .if-measure-card:hover {
+      border-color: rgba(129, 140, 248, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .if-measure-stage {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--indigo);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .if-measure-desc {
+      font-size: 11.5px;
+      color: #cbd5e1;
+      line-height: 1.4;
+      margin: 0;
+    }
+
+    /* Section 7: Current Project Facts */
+    .if-facts-card {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 22px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .if-facts-header {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .if-facts-label {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    .if-facts-headline {
+      font-size: 14px;
+      font-weight: 700;
+      color: #f1f5f9;
+    }
+
+    .if-facts-stats {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      flex-wrap: wrap;
+    }
+
+    .if-fact-item {
+      text-align: center;
+    }
+
+    .if-fact-val {
+      font-size: 20px;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.1;
+    }
+
+    .if-fact-sub {
+      font-size: 10.5px;
+      color: var(--cyan);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 3px;
+    }
+
+    .if-facts-badge {
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px;
+      padding: 6px 12px;
+      font-size: 11px;
+      color: var(--cyan);
+      font-weight: 600;
+    }
+
+    /* Sources Area */
+    .if-sources-container {
+      background: rgba(8, 14, 28, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 18px 22px;
+      margin-top: 40px;
+    }
+
+    .if-sources-title {
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin: 0 0 10px 0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .if-sources-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .if-source-item {
+      font-size: 10.5px;
+      color: var(--text-dim);
+      line-height: 1.35;
+    }
+
+    .if-source-item strong {
+      color: #94a3b8;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 1024px) {
+      .if-pathway-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .if-measurement-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .if-sources-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .if-chain-flow {
+        flex-direction: column;
+        gap: 6px;
+      }
+      .if-chain-step {
+        width: 100%;
+        min-height: auto;
+      }
+      .if-chain-arrow {
+        transform: rotate(90deg);
+        margin: 2px 0;
+      }
+      .if-pathway-grid {
+        grid-template-columns: 1fr;
+      }
+      .if-domains-grid {
+        grid-template-columns: 1fr;
+      }
+      .if-matrix-grid {
+        grid-template-columns: 1fr;
+      }
+      .if-measurement-grid {
+        grid-template-columns: 1fr;
+      }
+      .if-facts-card {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .if-facts-stats {
+        width: 100%;
+        justify-content: space-between;
+      }
+      .if-sources-grid {
+        grid-template-columns: 1fr;
+      }
+      .if-title {
+        font-size: 24px;
+      }
+      .if-honesty-title {
+        font-size: 17px;
+      }
+      .if-honesty-card {
+        padding: 20px 18px;
+      }
+    }
+
+    /* ==========================================================================
+       PHASE 4C — OPERATIONAL & ECONOMIC FEASIBILITY STYLES
+       ========================================================================== */
+
+    .ef-chapter-divider {
+      margin: 64px 0 48px 0;
+      position: relative;
+      text-align: center;
+    }
+
+    .ef-chapter-divider::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.3), rgba(129, 140, 248, 0.3), transparent);
+    }
+
+    .ef-chapter-pill {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 18px;
+      background: #0b1329;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      border-radius: 9999px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--cyan);
+      box-shadow: 0 0 20px rgba(56, 189, 248, 0.15);
+    }
+
+    .ef-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: var(--cyan);
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 4px 12px;
+      border-radius: 9999px;
+      margin-bottom: 14px;
+    }
+
+    .ef-header {
+      margin-bottom: 36px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    /* Role Matrix (Who Can Use It?) */
+    .ef-roles-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .ef-role-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 22px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .ef-role-card:hover {
+      border-color: var(--card-hover-border);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
+    }
+
+    .ef-role-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .ef-role-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .ef-role-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #ffffff;
+      margin: 0;
+    }
+
+    .ef-role-section {
+      font-size: 12px;
+      line-height: 1.45;
+      padding: 8px 12px;
+      border-radius: 8px;
+    }
+
+    .ef-role-need {
+      background: rgba(30, 41, 59, 0.5);
+      color: #cbd5e1;
+      border-left: 3px solid #64748b;
+    }
+
+    .ef-role-support {
+      background: rgba(16, 185, 129, 0.08);
+      color: #a7f3d0;
+      border-left: 3px solid var(--emerald);
+    }
+
+    .ef-role-outside {
+      background: rgba(244, 63, 94, 0.08);
+      color: #fecdd3;
+      border-left: 3px solid var(--rose);
+    }
+
+    .ef-role-label {
+      font-size: 9.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .ef-role-need .ef-role-label { color: #94a3b8; }
+    .ef-role-support .ef-role-label { color: var(--emerald); }
+    .ef-role-outside .ef-role-label { color: var(--rose); }
+
+    /* Operational Workflow */
+    .ef-workflow-container {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 24px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .ef-workflow-steps {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 8px;
+      align-items: stretch;
+      position: relative;
+    }
+
+    .ef-wf-step {
+      background: rgba(30, 41, 59, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 10px;
+      padding: 14px 10px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      position: relative;
+    }
+
+    .ef-wf-step.in-scope {
+      border-color: rgba(56, 189, 248, 0.35);
+      background: rgba(56, 189, 248, 0.07);
+    }
+
+    .ef-wf-step.external {
+      border-color: rgba(148, 163, 184, 0.2);
+      background: rgba(15, 23, 42, 0.7);
+    }
+
+    .ef-wf-num {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .ef-wf-step.in-scope .ef-wf-num { color: var(--cyan); }
+    .ef-wf-step.external .ef-wf-num { color: #94a3b8; }
+
+    .ef-wf-name {
+      font-size: 12px;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.25;
+      margin-bottom: 4px;
+    }
+
+    .ef-wf-desc {
+      font-size: 10px;
+      color: var(--text-muted);
+      line-height: 1.35;
+    }
+
+    .ef-wf-scope-tag {
+      margin-top: auto;
+      padding-top: 8px;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .ef-wf-step.in-scope .ef-wf-scope-tag { color: var(--cyan); }
+    .ef-wf-step.external .ef-wf-scope-tag { color: #64748b; }
+
+    .ef-boundary-banner {
+      margin-top: 16px;
+      padding: 10px 16px;
+      border-radius: 8px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px dashed rgba(56, 189, 248, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: 11px;
+    }
+
+    .ef-boundary-left {
+      color: var(--cyan);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 600;
+    }
+
+    .ef-boundary-right {
+      color: #94a3b8;
+    }
+
+    /* Prioritization Levers */
+    .ef-prioritize-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+    }
+
+    .ef-lever-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 16px 14px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      display: flex;
+      flex-direction: column;
+      transition: all 0.2s ease;
+    }
+
+    .ef-lever-card:hover {
+      border-color: var(--card-hover-border);
+      transform: translateY(-2px);
+    }
+
+    .ef-lever-icon {
+      font-size: 18px;
+      color: var(--cyan);
+      margin-bottom: 8px;
+    }
+
+    .ef-lever-title {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 6px;
+    }
+
+    .ef-lever-desc {
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.4;
+      margin: 0;
+    }
+
+    /* Deployment Feasibility 3-Layers */
+    .ef-layers-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .ef-layer-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 22px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .ef-layer-card.active-layer {
+      border-color: rgba(16, 185, 129, 0.4);
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.85) 0%, rgba(16, 185, 129, 0.06) 100%);
+    }
+
+    .ef-layer-card.future-layer {
+      border-color: rgba(129, 140, 248, 0.25);
+    }
+
+    .ef-layer-badge {
+      font-size: 9.5px;
+      font-weight: 800;
+      letter-spacing: 0.7px;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 4px;
+      width: fit-content;
+      margin-bottom: 12px;
+    }
+
+    .badge-current {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      color: var(--emerald);
+    }
+
+    .badge-future {
+      background: rgba(129, 140, 248, 0.15);
+      border: 1px solid rgba(129, 140, 248, 0.35);
+      color: var(--indigo);
+    }
+
+    .ef-layer-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #ffffff;
+      margin: 0 0 6px 0;
+    }
+
+    .ef-layer-scope {
+      font-size: 11.5px;
+      color: var(--cyan);
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .ef-layer-bullets {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 11.5px;
+      color: #cbd5e1;
+    }
+
+    .ef-layer-bullets li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      line-height: 1.35;
+    }
+
+    .ef-layer-bullets li i {
+      font-size: 11px;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+
+    .active-layer .ef-layer-bullets li i { color: var(--emerald); }
+    .future-layer .ef-layer-bullets li i { color: var(--indigo); }
+
+    /* Qualitative Cost Matrix */
+    .ef-table-wrapper {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      overflow: hidden;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .ef-cost-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+      text-align: left;
+    }
+
+    .ef-cost-table th {
+      background: rgba(15, 23, 42, 0.95);
+      padding: 14px 18px;
+      color: #94a3b8;
+      font-weight: 700;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .ef-cost-table td {
+      padding: 13px 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      color: #cbd5e1;
+      vertical-align: middle;
+    }
+
+    .ef-cost-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .ef-cost-table tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .cost-pill {
+      display: inline-block;
+      padding: 3px 9px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+    }
+
+    .pill-low {
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: #34d399;
+    }
+
+    .pill-mod {
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: #38bdf8;
+    }
+
+    .pill-scale {
+      background: rgba(129, 140, 248, 0.12);
+      border: 1px solid rgba(129, 140, 248, 0.3);
+      color: #a5b4fc;
+    }
+
+    .pill-external {
+      background: rgba(245, 158, 11, 0.12);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      color: #fbbf24;
+    }
+
+    .ef-table-footer-note {
+      padding: 12px 18px;
+      background: rgba(8, 14, 28, 0.6);
+      border-top: 1px solid var(--card-border);
+      font-size: 11px;
+      color: #94a3b8;
+      line-height: 1.45;
+    }
+
+    /* Value Cards */
+    .ef-value-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .ef-val-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 18px 16px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      display: flex;
+      flex-direction: column;
+      transition: all 0.2s ease;
+    }
+
+    .ef-val-card:hover {
+      border-color: var(--card-hover-border);
+      transform: translateY(-2px);
+    }
+
+    .ef-val-icon {
+      font-size: 20px;
+      color: var(--cyan);
+      margin-bottom: 10px;
+    }
+
+    .ef-val-title {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #ffffff;
+      margin: 0 0 6px 0;
+    }
+
+    .ef-val-desc {
+      font-size: 11.5px;
+      color: #cbd5e1;
+      line-height: 1.45;
+      margin: 0;
+    }
+
+    /* Roadmap Checklist */
+    .ef-roadmap-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .ef-road-item {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 14px 12px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .ef-road-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .ef-road-tag {
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: var(--indigo);
+    }
+
+    .ef-road-name {
+      font-size: 12px;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.25;
+    }
+
+    .ef-road-desc {
+      font-size: 10.5px;
+      color: var(--text-muted);
+      line-height: 1.35;
+    }
+
+    /* Responsive adjustments for EF components */
+    @media (max-width: 1024px) {
+      .ef-workflow-steps {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .ef-prioritize-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .ef-value-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .ef-roadmap-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .ef-layers-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .ef-roles-grid {
+        grid-template-columns: 1fr;
+      }
+      .ef-workflow-steps {
+        grid-template-columns: 1fr;
+      }
+      .ef-prioritize-grid {
+        grid-template-columns: 1fr;
+      }
+      .ef-value-grid {
+        grid-template-columns: 1fr;
+      }
+      .ef-roadmap-grid {
+        grid-template-columns: 1fr;
+      }
+      .ef-table-wrapper {
+        overflow-x: auto;
+      }
+      .ef-cost-table {
+        min-width: 600px;
+      }
+      .ef-boundary-banner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    /* ==========================================================================
+       PHASE 4D — COMPETITIVE POSITIONING, TECHNICAL INTEGRATION & ROADMAP STYLES
+       ========================================================================== */
+
+    .cp-chapter-divider {
+      margin: 64px 0 48px 0;
+      position: relative;
+      text-align: center;
+    }
+
+    .cp-chapter-divider::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(129, 140, 248, 0.4), rgba(56, 189, 248, 0.4), transparent);
+    }
+
+    .cp-chapter-pill {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 20px;
+      background: #0d1226;
+      border: 1px solid rgba(129, 140, 248, 0.4);
+      border-radius: 9999px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--indigo);
+      box-shadow: 0 0 24px rgba(129, 140, 248, 0.2);
+    }
+
+    .cp-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: var(--indigo);
+      background: rgba(129, 140, 248, 0.12);
+      border: 1px solid rgba(129, 140, 248, 0.3);
+      padding: 4px 12px;
+      border-radius: 9999px;
+      margin-bottom: 14px;
+    }
+
+    /* Competitor Comparison Grid */
+    .cp-comp-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .cp-comp-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 22px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: all 0.25s ease;
+    }
+
+    .cp-comp-card:hover {
+      border-color: rgba(129, 140, 248, 0.4);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+    }
+
+    .cp-comp-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .cp-comp-title {
+      font-size: 16px;
+      font-weight: 800;
+      color: #ffffff;
+      margin: 0 0 2px 0;
+    }
+
+    .cp-comp-org {
+      font-size: 11px;
+      color: var(--cyan);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .cp-comp-badge {
+      font-size: 9.5px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #cbd5e1;
+      white-space: nowrap;
+    }
+
+    .cp-comp-detail {
+      font-size: 11.5px;
+      color: #cbd5e1;
+      line-height: 1.45;
+      padding: 8px 12px;
+      background: rgba(30, 41, 59, 0.45);
+      border-radius: 8px;
+      border-left: 3px solid #64748b;
+    }
+
+    .cp-comp-relation {
+      font-size: 11.5px;
+      color: #a7f3d0;
+      line-height: 1.45;
+      padding: 8px 12px;
+      background: rgba(16, 185, 129, 0.08);
+      border-radius: 8px;
+      border-left: 3px solid var(--emerald);
+    }
+
+    .cp-comp-label {
+      font-size: 9px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .cp-comp-detail .cp-comp-label { color: #94a3b8; }
+    .cp-comp-relation .cp-comp-label { color: var(--emerald); }
+
+    /* Complementary Flow Visual */
+    .cp-flow-visual {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 20px;
+      margin-top: 18px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .cp-flow-chain {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .cp-flow-node {
+      flex: 1;
+      min-width: 140px;
+      padding: 12px 10px;
+      border-radius: 8px;
+      text-align: center;
+      background: rgba(30, 41, 59, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .cp-flow-node.highlight-geoai {
+      background: rgba(56, 189, 248, 0.1);
+      border-color: rgba(56, 189, 248, 0.4);
+    }
+
+    .cp-flow-node-title {
+      font-size: 11.5px;
+      font-weight: 800;
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .cp-flow-node-sub {
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+
+    .highlight-geoai .cp-flow-node-sub {
+      color: var(--cyan);
+      font-weight: 600;
+    }
+
+    .cp-flow-sep {
+      color: #475569;
+      font-size: 12px;
+    }
+
+    /* Strategic Pipeline Visual (Section 3) */
+    .cp-pipeline-container {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 26px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .cp-pipeline-steps {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 4px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .cp-pipe-step {
+      padding: 10px 8px;
+      border-radius: 8px;
+      text-align: center;
+      flex: 1;
+      min-width: 95px;
+      background: rgba(30, 41, 59, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .cp-pipe-step.active-proto {
+      background: rgba(56, 189, 248, 0.12);
+      border-color: rgba(56, 189, 248, 0.45);
+    }
+
+    .cp-pipe-step.future-layer {
+      background: rgba(129, 140, 248, 0.08);
+      border-color: rgba(129, 140, 248, 0.25);
+    }
+
+    .cp-pipe-name {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #ffffff;
+    }
+
+    .active-proto .cp-pipe-name { color: var(--cyan); }
+    .future-layer .cp-pipe-name { color: var(--indigo); }
+
+    .cp-pipe-desc {
+      font-size: 9.5px;
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+
+    .cp-pipe-brackets {
+      display: grid;
+      grid-template-columns: 2fr 4fr 3fr;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .cp-bracket-card {
+      padding: 12px 14px;
+      border-radius: 10px;
+      font-size: 11px;
+    }
+
+    .bracket-observe {
+      background: rgba(30, 41, 59, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #94a3b8;
+    }
+
+    .bracket-proto {
+      background: rgba(56, 189, 248, 0.08);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      color: #bae6fd;
+    }
+
+    .bracket-future {
+      background: rgba(129, 140, 248, 0.08);
+      border: 1px solid rgba(129, 140, 248, 0.3);
+      color: #c7d2fe;
+    }
+
+    .cp-bracket-title {
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Technical Architecture Diagram (Section 4) */
+    .cp-arch-container {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 26px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .cp-arch-flow {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .cp-arch-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .cp-arch-node {
+      background: rgba(30, 41, 59, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .cp-arch-node.proto-active {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(56, 189, 248, 0.1) 100%);
+      border-color: rgba(56, 189, 248, 0.4);
+    }
+
+    .cp-arch-node.future-arch {
+      background: rgba(15, 23, 42, 0.7);
+      border-color: rgba(129, 140, 248, 0.25);
+      border-style: dashed;
+    }
+
+    .cp-arch-tag {
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+    }
+
+    .proto-active .cp-arch-tag { color: var(--cyan); }
+    .future-arch .cp-arch-tag { color: var(--indigo); }
+
+    .cp-arch-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .cp-arch-desc {
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.35;
+    }
+
+    .cp-arch-connector {
+      text-align: center;
+      color: #475569;
+      font-size: 12px;
+      margin: -4px 0;
+    }
+
+    /* Roadmap Timeline (Section 6) */
+    .cp-roadmap-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .cp-stage-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 20px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .cp-stage-card.stage-active {
+      border-color: rgba(16, 185, 129, 0.45);
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.9) 0%, rgba(16, 185, 129, 0.07) 100%);
+    }
+
+    .cp-stage-card.stage-future {
+      border-color: rgba(129, 140, 248, 0.25);
+    }
+
+    .cp-stage-num {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 4px;
+      width: fit-content;
+      margin-bottom: 10px;
+    }
+
+    .stage-active .cp-stage-num {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      color: var(--emerald);
+    }
+
+    .stage-future .cp-stage-num {
+      background: rgba(129, 140, 248, 0.15);
+      border: 1px solid rgba(129, 140, 248, 0.35);
+      color: var(--indigo);
+    }
+
+    .cp-stage-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #ffffff;
+      margin: 0 0 10px 0;
+    }
+
+    .cp-stage-bullets {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      font-size: 11.5px;
+      color: #cbd5e1;
+    }
+
+    .cp-stage-bullets li {
+      display: flex;
+      align-items: flex-start;
+      gap: 7px;
+      line-height: 1.35;
+    }
+
+    .cp-stage-bullets li i {
+      font-size: 10px;
+      margin-top: 3px;
+      flex-shrink: 0;
+    }
+
+    .stage-active .cp-stage-bullets li i { color: var(--emerald); }
+    .stage-future .cp-stage-bullets li i { color: var(--indigo); }
+
+    /* Validation Flow (Section 7) */
+    .cp-val-flow {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 8px;
+    }
+
+    .cp-val-step {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 14px 10px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .cp-val-step:hover {
+      border-color: rgba(56, 189, 248, 0.35);
+    }
+
+    .cp-val-num {
+      font-size: 9.5px;
+      font-weight: 800;
+      color: var(--cyan);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .cp-val-name {
+      font-size: 12px;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.25;
+    }
+
+    .cp-val-desc {
+      font-size: 10px;
+      color: var(--text-muted);
+      line-height: 1.3;
+    }
+
+    /* Strategic Gaps (Section 8) */
+    .cp-gaps-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .cp-gap-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .cp-gap-title {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .cp-gap-title i {
+      color: var(--amber);
+      font-size: 13px;
+    }
+
+    .cp-gap-box {
+      font-size: 11.5px;
+      line-height: 1.4;
+      padding: 8px 12px;
+      border-radius: 6px;
+    }
+
+    .cp-gap-current {
+      background: rgba(30, 41, 59, 0.5);
+      color: #cbd5e1;
+      border-left: 3px solid #64748b;
+    }
+
+    .cp-gap-next {
+      background: rgba(56, 189, 248, 0.08);
+      color: #bae6fd;
+      border-left: 3px solid var(--cyan);
+    }
+
+    /* Vision 5-Step (Section 10) */
+    .cp-vision-container {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.98) 0%, rgba(30, 41, 59, 0.85) 100%);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      border-radius: 16px;
+      padding: 30px;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
+    }
+
+    .cp-vision-steps {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .cp-vis-step {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      padding: 14px 12px;
+      text-align: center;
+    }
+
+    .cp-vis-name {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--cyan);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 4px;
+    }
+
+    .cp-vis-desc {
+      font-size: 11px;
+      color: #cbd5e1;
+      line-height: 1.35;
+    }
+
+    .cp-vision-closing {
+      font-size: 16px;
+      font-weight: 700;
+      color: #ffffff;
+      text-align: center;
+      padding: 16px 20px;
+      border-radius: 10px;
+      background: rgba(56, 189, 248, 0.08);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      line-height: 1.5;
+    }
+
+    /* Responsive adjustments for CP components */
+    @media (max-width: 1024px) {
+      .cp-comp-grid {
+        grid-template-columns: 1fr;
+      }
+      .cp-arch-row {
+        grid-template-columns: 1fr;
+      }
+      .cp-roadmap-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .cp-val-flow {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .cp-vision-steps {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .cp-pipe-brackets {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .cp-flow-chain {
+        flex-direction: column;
+      }
+      .cp-flow-node {
+        width: 100%;
+      }
+      .cp-flow-sep {
+        transform: rotate(90deg);
+        margin: 2px 0;
+      }
+      .cp-pipeline-steps {
+        flex-direction: column;
+      }
+      .cp-pipe-step {
+        width: 100%;
+      }
+      .cp-roadmap-grid {
+        grid-template-columns: 1fr;
+      }
+      .cp-val-flow {
+        grid-template-columns: 1fr;
+      }
+      .cp-gaps-grid {
+        grid-template-columns: 1fr;
+      }
+      .cp-vision-steps {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body class="if-page">
+  <!-- Platform Navigation Bar -->
+  <nav class="platform-nav" style="position: fixed; top: 0; left: 0; width: 100%; z-index: 9999;">
+    <a href="../index.html" class="nav-brand" style="text-decoration: none;">
+      <div class="nav-brand-text">Geo<span>AI</span> Platform</div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html"><span class="nav-icon"><i class="fas fa-th-large"></i></span> Dashboard</a></li>
+      <li><a href="historical-intelligence.html"><span class="nav-icon"><i class="fas fa-history"></i></span> Historical Intel</a></li>
+      <li><a href="scenario-simulator.html"><span class="nav-icon"><i class="fas fa-sliders-h"></i></span> Scenario Simulator</a></li>
+      <li><a href="spatial-analysis.html"><span class="nav-icon"><i class="fas fa-layer-group"></i></span> Spatial Analysis</a></li>
+      <li><a href="ai-model.html"><span class="nav-icon"><i class="fas fa-brain"></i></span> AI Model</a></li>
+      <li><a href="impact-feasibility.html" class="active"><span class="nav-icon"><i class="fas fa-seedling"></i></span> Impact &amp; Feasibility</a></li>
+      <li><a href="https://github.com/mamdouhahmed5455-lang/Amoazon2" target="_blank" rel="noopener noreferrer" class="nav-ext"><span class="nav-icon"><i class="fab fa-github"></i></span> Research &amp; Docs</a></li>
+    </ul>
+    <div class="nav-status">
+      <div class="nav-status-dot"></div>
+      Environmental Intelligence
+    </div>
+  </nav>
+
+  <main class="if-shell">
+    <!-- Page Header -->
+    <header class="if-header">
+      <div class="if-badge"><i class="fas fa-seedling"></i> Environmental Intelligence</div>
+      <h1 class="if-title">Impact &amp; Feasibility</h1>
+      <p class="if-subtitle">From spatial risk prediction to environmental decision support.</p>
+      
+      <div class="if-intro-card">
+        <i class="fas fa-compass if-intro-icon"></i>
+        <span>
+          <strong>Operational Objective:</strong> This platform is designed to help environmental decision-makers prioritize where monitoring, verification, and intervention should happen first.
+        </span>
+      </div>
+    </header>
+
+    <!-- SECTION 1 — WHY FOREST RISK MATTERS -->
+    <section class="if-section">
+      <div class="if-section-header">
+        <h2 class="if-section-title"><i class="fas fa-sitemap"></i> Why Early Risk Detection Matters</h2>
+        <p class="if-section-subtitle">Bridging the gap between expanding land-use pressures and constrained enforcement capacity.</p>
+      </div>
+
+      <div class="if-chain-container">
+        <div class="if-chain-flow">
+          <div class="if-chain-step">
+            <div class="if-chain-step-tag">Phase 01</div>
+            <div class="if-chain-step-name">Forest Pressure</div>
+            <div class="if-chain-step-desc">Road access &amp; human activity</div>
+          </div>
+
+          <div class="if-chain-arrow"><i class="fas fa-chevron-right"></i></div>
+
+          <div class="if-chain-step">
+            <div class="if-chain-step-tag">Phase 02</div>
+            <div class="if-chain-step-name">Emerging Risk</div>
+            <div class="if-chain-step-desc">Pre-deforestation vulnerability</div>
+          </div>
+
+          <div class="if-chain-arrow"><i class="fas fa-chevron-right"></i></div>
+
+          <div class="if-chain-step">
+            <div class="if-chain-step-tag">Phase 03</div>
+            <div class="if-chain-step-name">Limited Monitoring Resources</div>
+            <div class="if-chain-step-desc">Vast geographic scope</div>
+          </div>
+
+          <div class="if-chain-arrow"><i class="fas fa-chevron-right"></i></div>
+
+          <div class="if-chain-step">
+            <div class="if-chain-step-tag">Phase 04</div>
+            <div class="if-chain-step-name">Prioritization</div>
+            <div class="if-chain-step-desc">Predictive risk scoring</div>
+          </div>
+
+          <div class="if-chain-arrow"><i class="fas fa-chevron-right"></i></div>
+
+          <div class="if-chain-step">
+            <div class="if-chain-step-tag">Phase 05</div>
+            <div class="if-chain-step-name">Earlier Verification</div>
+            <div class="if-chain-step-desc">Targeted satellite check</div>
+          </div>
+
+          <div class="if-chain-arrow"><i class="fas fa-chevron-right"></i></div>
+
+          <div class="if-chain-step highlight">
+            <div class="if-chain-step-tag">Phase 06</div>
+            <div class="if-chain-step-name">Potential Intervention</div>
+            <div class="if-chain-step-desc">Preventative agency action</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2 — POTENTIAL ENVIRONMENTAL IMPACT -->
+    <section class="if-section">
+      <div class="if-section-header">
+        <h2 class="if-section-title"><i class="fas fa-route"></i> Potential Environmental Impact</h2>
+        <p class="if-section-subtitle">How better spatial prioritization can support earlier environmental action.</p>
+      </div>
+
+      <div class="if-pathway-grid">
+        <div class="if-pathway-card">
+          <div class="if-pathway-num">01 <i class="fas fa-crosshairs" style="font-size: 14px; opacity: 0.6;"></i></div>
+          <div class="if-pathway-title">Forest Risk</div>
+          <p class="if-pathway-text">Identify spatial areas with elevated predicted risk.</p>
+        </div>
+
+        <div class="if-pathway-card">
+          <div class="if-pathway-num">02 <i class="fas fa-satellite-dish" style="font-size: 14px; opacity: 0.6;"></i></div>
+          <div class="if-pathway-title">Targeted Monitoring</div>
+          <p class="if-pathway-text">Focus limited monitoring resources on higher-priority locations.</p>
+        </div>
+
+        <div class="if-pathway-card">
+          <div class="if-pathway-num">03 <i class="fas fa-search-location" style="font-size: 14px; opacity: 0.6;"></i></div>
+          <div class="if-pathway-title">Earlier Verification</div>
+          <p class="if-pathway-text">Support independent verification of suspicious locations.</p>
+        </div>
+
+        <div class="if-pathway-card">
+          <div class="if-pathway-num">04 <i class="fas fa-shield-alt" style="font-size: 14px; opacity: 0.6;"></i></div>
+          <div class="if-pathway-title">Potential Intervention</div>
+          <p class="if-pathway-text">Enable authorities to consider earlier preventative action.</p>
+        </div>
+
+        <div class="if-pathway-card highlight">
+          <div class="if-pathway-num">05 <i class="fas fa-tree" style="font-size: 14px;"></i></div>
+          <div class="if-pathway-title">Potential Avoidance of Forest Loss</div>
+          <p class="if-pathway-text">Successful intervention could reduce future forest loss.</p>
+        </div>
+      </div>
+
+      <div class="if-pathway-badge">
+        <i class="fas fa-info-circle"></i>
+        <span><strong>Analytical Boundary:</strong> Potential downstream impact — not a measured outcome of the current prototype.</span>
+      </div>
+    </section>
+
+    <!-- SECTION 3 — FOUR ENVIRONMENTAL BENEFIT DOMAINS -->
+    <section class="if-section">
+      <div class="if-section-header">
+        <h2 class="if-section-title"><i class="fas fa-globe-americas"></i> Four Environmental Benefit Domains</h2>
+        <p class="if-section-subtitle">Ecosystem services supported when primary tropical forest loss is mitigated.</p>
+      </div>
+
+      <div class="if-domains-grid">
+        <!-- 1. Carbon Retention -->
+        <div class="if-domain-card">
+          <div class="if-domain-icon-box icon-emerald">
+            <i class="fas fa-smog"></i>
+          </div>
+          <div class="if-domain-body">
+            <h3 class="if-domain-title">1. Carbon Retention</h3>
+            <p class="if-domain-quote">"Protecting intact forests helps retain carbon stored in vegetation and soils."</p>
+            <p class="if-domain-evidence">Primary tropical rainforest holds large biomass carbon reservoirs. Clearing converts long-term sinks into direct atmospheric emissions and committed future carbon release.</p>
+          </div>
+        </div>
+
+        <!-- 2. Biodiversity Protection -->
+        <div class="if-domain-card">
+          <div class="if-domain-icon-box icon-cyan">
+            <i class="fas fa-paw"></i>
+          </div>
+          <div class="if-domain-body">
+            <h3 class="if-domain-title">2. Biodiversity Protection</h3>
+            <p class="if-domain-quote">"Maintaining connected forest habitat supports biodiversity and reduces fragmentation pressure."</p>
+            <p class="if-domain-evidence">Preserving continuous canopy buffers vulnerable endemic species against destructive edge effects, microclimate degradation, and territorial isolation.</p>
+          </div>
+        </div>
+
+        <!-- 3. Hydrological Stability -->
+        <div class="if-domain-card">
+          <div class="if-domain-icon-box icon-indigo">
+            <i class="fas fa-cloud-rain"></i>
+          </div>
+          <div class="if-domain-body">
+            <h3 class="if-domain-title">3. Hydrological Stability</h3>
+            <p class="if-domain-quote">"Amazon forest evapotranspiration contributes to atmospheric moisture recycling and regional hydrological processes."</p>
+            <p class="if-domain-evidence">Intact forest pumping mechanisms support continental atmospheric vapor transport ("flying rivers") vital for regional rainfall distribution across South America.</p>
+          </div>
+        </div>
+
+        <!-- 4. Ecosystem Resilience -->
+        <div class="if-domain-card">
+          <div class="if-domain-icon-box icon-amber">
+            <i class="fas fa-fire-extinguisher"></i>
+          </div>
+          <div class="if-domain-body">
+            <h3 class="if-domain-title">4. Ecosystem Resilience</h3>
+            <p class="if-domain-quote">"Reducing cumulative disturbance and fragmentation can strengthen ecosystem resilience to drought, fire, and climate stress."</p>
+            <p class="if-domain-evidence">Continuous canopy cover maintains humid forest interior conditions, substantially reducing understory flammability and buffering against compound climate disturbances.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4 — SCIENCE VS PROJECT -->
+    <section class="if-section">
+      <div class="if-section-header">
+        <h2 class="if-section-title"><i class="fas fa-balance-scale"></i> Science vs. Project Role</h2>
+        <p class="if-section-subtitle">Differentiating established biophysical science from the specific analytical scope of this prototype.</p>
+      </div>
+
+      <div class="if-matrix-grid">
+        <!-- Left: What Science Tells Us -->
+        <div class="if-matrix-col science-col">
+          <div class="if-matrix-header">
+            <i class="fas fa-microscope"></i> What Science Tells Us
+          </div>
+          <ul class="if-matrix-list">
+            <li class="if-matrix-item">
+              <i class="fas fa-check-circle"></i>
+              <span>Forest loss reduces carbon storage and can release stored carbon.</span>
+            </li>
+            <li class="if-matrix-item">
+              <i class="fas fa-check-circle"></i>
+              <span>Forest fragmentation increases ecological pressure and habitat isolation.</span>
+            </li>
+            <li class="if-matrix-item">
+              <i class="fas fa-check-circle"></i>
+              <span>Amazon evapotranspiration contributes to continental moisture recycling.</span>
+            </li>
+            <li class="if-matrix-item">
+              <i class="fas fa-check-circle"></i>
+              <span>Increasing cumulative forest loss and climate stress increase ecosystem degradation risks.</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Right: What This Project Contributes -->
+        <div class="if-matrix-col project-col">
+          <div class="if-matrix-header">
+            <i class="fas fa-laptop-code"></i> What This Project Contributes
+          </div>
+          <ul class="if-matrix-list">
+            <li class="if-matrix-item">
+              <i class="fas fa-arrow-alt-circle-right"></i>
+              <span>Spatial risk prioritization across 150,000 empirical cells.</span>
+            </li>
+            <li class="if-matrix-item">
+              <i class="fas fa-arrow-alt-circle-right"></i>
+              <span>Global feature-importance interpretation via calibrated SHAP analysis.</span>
+            </li>
+            <li class="if-matrix-item">
+              <i class="fas fa-arrow-alt-circle-right"></i>
+              <span>Policy sensitivity exploration through interactive scenario simulation.</span>
+            </li>
+            <li class="if-matrix-item">
+              <i class="fas fa-arrow-alt-circle-right"></i>
+              <span>Structured decision-support workflow for environmental planners.</span>
+            </li>
+            <li class="if-matrix-item">
+              <i class="fas fa-arrow-alt-circle-right"></i>
+              <span>Verification planning support to focus scarce monitoring capacity.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5 — PROJECT vs PLANET DISCLAIMER -->
+    <section class="if-section">
+      <div class="if-honesty-card">
+        <h2 class="if-honesty-title">
+          "We do not directly measure climate impact.<br>We help make forest-risk information more actionable."
+        </h2>
+        <p class="if-honesty-text">
+          Environmental benefits described here are potential downstream effects of reduced forest loss and require independent field and environmental validation. The platform calculates empirical predictive spatial risk scores; it does not model biophysical greenhouse gas cycles or planetary thermodynamics.
+        </p>
+      </div>
+    </section>
+
+    <!-- SECTION 6 — FUTURE IMPACT MEASUREMENT -->
+    <section class="if-section">
+      <div class="if-section-header">
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+          <h2 class="if-section-title" style="margin: 0;"><i class="fas fa-tasks"></i> How Environmental Impact Would Be Measured</h2>
+          <span style="font-size: 11px; font-weight: 700; color: var(--indigo); background: rgba(129, 140, 248, 0.12); border: 1px solid rgba(129, 140, 248, 0.28); padding: 3px 10px; border-radius: 4px;">
+            Future operational measurement framework
+          </span>
+        </div>
+        <p class="if-section-subtitle" style="margin-top: 6px;">Quantitative validation stages required during future field deployment pilots.</p>
+      </div>
+
+      <div class="if-measurement-grid">
+        <div class="if-measure-card">
+          <div class="if-measure-stage">Stage 01</div>
+          <p class="if-measure-desc">Measure predicted high-risk areas.</p>
+        </div>
+
+        <div class="if-measure-card">
+          <div class="if-measure-stage">Stage 02</div>
+          <p class="if-measure-desc">Measure verified inspection / tasking rate.</p>
+        </div>
+
+        <div class="if-measure-card">
+          <div class="if-measure-stage">Stage 03</div>
+          <p class="if-measure-desc">Measure time between risk identification and verified clearing.</p>
+        </div>
+
+        <div class="if-measure-card">
+          <div class="if-measure-stage">Stage 04</div>
+          <p class="if-measure-desc">Measure independently verified avoided forest loss.</p>
+        </div>
+
+        <div class="if-measure-card">
+          <div class="if-measure-stage">Stage 05</div>
+          <p class="if-measure-desc">Translate verified avoided forest loss into carbon and ecosystem metrics using established scientific accounting methods.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 7 — CURRENT PROJECT FACTS -->
+    <section class="if-section">
+      <div class="if-facts-card">
+        <div class="if-facts-header">
+          <span class="if-facts-label">Project Verification Benchmark</span>
+          <span class="if-facts-headline">CURRENT PROTOTYPE SPECIFICATION</span>
+        </div>
+
+        <div class="if-facts-stats">
+          <div class="if-fact-item">
+            <div class="if-fact-val">150,000</div>
+            <div class="if-fact-sub">Spatial Cells</div>
+          </div>
+
+          <div class="if-fact-item">
+            <div class="if-fact-val">Rondônia</div>
+            <div class="if-fact-sub">Pilot Region</div>
+          </div>
+
+          <div class="if-fact-item">
+            <div class="if-fact-val">XGBoost</div>
+            <div class="if-fact-sub">Offline-Trained Model</div>
+          </div>
+        </div>
+
+    <!-- ==========================================================================
+         PHASE 4C — OPERATIONAL & ECONOMIC FEASIBILITY
+         ========================================================================== -->
+
+    <div class="ef-chapter-divider">
+      <div class="ef-chapter-pill">
+        <i class="fas fa-chart-pie"></i> Part 2: Operational &amp; Economic Feasibility
+      </div>
+    </div>
+
+    <!-- 1. HERO / SECTION INTRO -->
+    <section class="if-section ef-header">
+      <div class="ef-badge"><i class="fas fa-coins"></i> Operational &amp; Economic Feasibility</div>
+      <h2 class="if-title" style="font-size: 28px; margin: 0 0 6px 0;">Operational &amp; Economic Feasibility</h2>
+      <p class="if-subtitle" style="color: var(--indigo); font-size: 15px; margin: 0 0 16px 0;">From spatial intelligence to practical monitoring prioritization.</p>
+      
+      <div class="if-intro-card" style="border-left-color: var(--indigo); border-color: rgba(129, 140, 248, 0.25);">
+        <i class="fas fa-bullseye if-intro-icon" style="color: var(--indigo);"></i>
+        <span>
+          <strong>Operational Scope:</strong> This platform is designed to support the prioritization of limited monitoring, inspection, and verification resources across high-vulnerability frontiers, rather than replace established institutional environmental monitoring systems.
+        </span>
+      </div>
+    </section>
+
+    <!-- 2. WHO CAN USE IT? (USER-ROLE MATRIX) -->
+    <section class="if-section">
+      <div class="if-section-header">
+        <h3 class="if-section-title"><i class="fas fa-users-cog"></i> Who Can Use It? User-Role Matrix</h3>
+        <p class="if-section-subtitle">How different environmental stakeholders can leverage predictive spatial risk prioritization.</p>
+      </div>
+
+      <div class="ef-roles-grid">
+        <!-- Role 1: Environmental Monitoring Teams -->
+        <div class="ef-role-card">
+          <div class="ef-role-header">
+            <div class="ef-role-icon icon-cyan">
+              <i class="fas fa-satellite-dish"></i>
+            </div>
+            <div>
+              <h4 class="ef-role-title">Environmental Monitoring Teams</h4>
+              <span style="font-size: 10px; color: var(--cyan); font-weight: 600; text-transform: uppercase;">Remote Sensing &amp; Triage Analysts</span>
+            </div>
+          </div>
+          <div class="ef-role-section ef-role-need">
+            <span class="ef-role-label">Decision Need</span>
+            Screening massive territorial jurisdictions to identify where pre-clearing activities warrant high-cadence satellite inspection.
+          </div>
+          <div class="ef-role-section ef-role-support">
+            <span class="ef-role-label">How Platform Can Support</span>
+            Surfaces persistent multi-feature vulnerability clusters, allowing analysts to narrow broad searches to top-decile risk corridors.
+          </div>
+          <div class="ef-role-section ef-role-outside">
+            <span class="ef-role-label">Outside Prototype Scope</span>
+            Does not ingest live satellite telemetry or issue authoritative governmental deforestation alerts (e.g., DETER).
+          </div>
+        </div>
+
+        <!-- Role 2: Forest Protection / Enforcement Planners -->
+        <div class="ef-role-card">
+          <div class="ef-role-header">
+            <div class="ef-role-icon icon-emerald">
+              <i class="fas fa-shield-alt"></i>
+            </div>
+            <div>
+              <h4 class="ef-role-title">Forest Protection &amp; Enforcement Planners</h4>
+              <span style="font-size: 10px; color: var(--emerald); font-weight: 600; text-transform: uppercase;">Field Operations &amp; Patrol Coordinators</span>
+            </div>
+          </div>
+          <div class="ef-role-section ef-role-need">
+            <span class="ef-role-label">Decision Need</span>
+            Scheduling field inspections, ground patrols, and aerial overflights under tight logistical, vehicle, and personnel budgets.
+          </div>
+          <div class="ef-role-section ef-role-support">
+            <span class="ef-role-label">How Platform Can Support</span>
+            Ranks road-accessible frontiers by empirical risk score to help optimize tactical checkpoint and patrol route allocations.
+          </div>
+          <div class="ef-role-section ef-role-outside">
+            <span class="ef-role-label">Outside Prototype Scope</span>
+            Does not manage law enforcement dispatch, arrest warrants, legal chain of custody, or real-time tactical vehicle tracking.
+          </div>
+        </div>
+
+        <!-- Role 3: Conservation Organizations / NGOs -->
+        <div class="ef-role-card">
+          <div class="ef-role-header">
+            <div class="ef-role-icon icon-indigo">
+              <i class="fas fa-hands-helping"></i>
+            </div>
+            <div>
+              <h4 class="ef-role-title">Conservation Organizations &amp; NGOs</h4>
+              <span style="font-size: 10px; color: var(--indigo); font-weight: 600; text-transform: uppercase;">Watchdog &amp; Civil Society Advocates</span>
+            </div>
+          </div>
+          <div class="ef-role-section ef-role-need">
+            <span class="ef-role-label">Decision Need</span>
+            Identifying high-vulnerability corridors encroaching upon indigenous reserves, conservation units, and biodiversity hotspots.
+          </div>
+          <div class="ef-role-section ef-role-support">
+            <span class="ef-role-label">How Platform Can Support</span>
+            Provides explainable global driver attribution (SHAP weights) to ground public reports and early advocacy campaigns.
+          </div>
+          <div class="ef-role-section ef-role-outside">
+            <span class="ef-role-label">Outside Prototype Scope</span>
+            Does not replace community ground surveys, indigenous territorial mapping, or legal enforcement proceedings.
+          </div>
+        </div>
+
+        <!-- Role 4: Research and Policy Teams -->
+        <div class="ef-role-card">
+          <div class="ef-role-header">
+            <div class="ef-role-icon icon-amber">
+              <i class="fas fa-university"></i>
+            </div>
+            <div>
+              <h4 class="ef-role-title">Research &amp; Policy Teams</h4>
+              <span style="font-size: 10px; color: var(--amber); font-weight: 600; text-transform: uppercase;">Environmental Economists &amp; Planners</span>
+            </div>
+          </div>
+          <div class="ef-role-section ef-role-need">
+            <span class="ef-role-label">Decision Need</span>
+            Evaluating how hypothetical infrastructure projects or conservation zoning shifts could influence regional vulnerability.
+          </div>
+          <div class="ef-role-section ef-role-support">
+            <span class="ef-role-label">How Platform Can Support</span>
+            Interactive scenario simulation allows exploring directional sensitivities to road expansion and protected zone enforcement.
+          </div>
+          <div class="ef-role-section ef-role-outside">
+            <span class="ef-role-label">Outside Prototype Scope</span>
+            Does not execute general equilibrium econometric modeling, agricultural commodity modeling, or fiscal impact projections.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. OPERATIONAL WORKFLOW -->
+    <section class="if-section">
+      <div class="if-section-header">
+        <h3 class="if-section-title"><i class="fas fa-project-diagram"></i> Operational Workflow &amp; Prototype Boundary</h3>
+        <p class="if-section-subtitle">Clear demarcation between internal decision-support intelligence and external agency execution.</p>
+      </div>
+
+      <div class="ef-workflow-container">
+        <div class="ef-workflow-steps">
+          <!-- Step 1 -->
+          <div class="ef-wf-step in-scope">
+            <span class="ef-wf-num">Step 01</span>
+            <div class="ef-wf-name">Data / Risk Layer</div>
+            <p class="ef-wf-desc">Spatial features assembled (roads, forest loss, elevation, population).</p>
+            <span class="ef-wf-scope-tag">In Platform Scope</span>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="ef-wf-step in-scope">
+            <span class="ef-wf-num">Step 02</span>
+            <div class="ef-wf-name">Risk Prioritization</div>
+            <p class="ef-wf-desc">Offline ML model calculates risk scores [0–100] across 150k grid cells.</p>
+            <span class="ef-wf-scope-tag">In Platform Scope</span>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="ef-wf-step external">
+            <span class="ef-wf-num">Step 03</span>
+            <div class="ef-wf-name">Analyst Review</div>
+            <p class="ef-wf-desc">Human environmental analyst inspects flagged high-priority hotspots.</p>
+            <span class="ef-wf-scope-tag">External Agency Step</span>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="ef-wf-step external">
+            <span class="ef-wf-num">Step 04</span>
+            <div class="ef-wf-name">Independent Verification</div>
+            <p class="ef-wf-desc">Targeted satellite optical/SAR verification or aerial reconnaissance.</p>
+            <span class="ef-wf-scope-tag">External Agency Step</span>
+          </div>
+
+          <!-- Step 5 -->
+          <div class="ef-wf-step external">
+            <span class="ef-wf-num">Step 05</span>
+            <div class="ef-wf-name">Field / Remote Action</div>
+            <p class="ef-wf-desc">Enforcement dispatch, preventive notices, or targeted ground inspections.</p>
+            <span class="ef-wf-scope-tag">External Agency Step</span>
+          </div>
+
+          <!-- Step 6 -->
+          <div class="ef-wf-step external">
+            <span class="ef-wf-num">Step 06</span>
+            <div class="ef-wf-name">Outcome Measurement</div>
+            <p class="ef-wf-desc">Annual PRODES audit verifies whether canopy loss was deterred or avoided.</p>
+            <span class="ef-wf-scope-tag">External Agency Step</span>
+          </div>
+        </div>
+
+        <div class="ef-boundary-banner">
+          <div class="ef-boundary-left">
+            <i class="fas fa-shield-alt"></i>
+            <span>Prototype Analytical Boundary:</span>
+            <span style="color: #ffffff; font-weight: 500;">The platform delivers spatial risk prioritization (Steps 01–02).</span>
+          </div>
+          <div class="ef-boundary-right">
+            <span>Steps 03–06 are human-in-the-loop operational actions executed by external institutions.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. RESOURCE PRIORITIZATION VALUE -->
+    <section class="if-section">
+      <div class="if-section-header">
+        <h3 class="if-section-title"><i class="fas fa-filter"></i> Resource Prioritization Value</h3>
+        <p class="if-section-subtitle">Operational economic logic: Concentrating limited capacity on higher-priority locations rather than claiming speculative savings.</p>
+      </div>
+
+      <div class="ef-prioritize-grid">
+        <div class="ef-lever-card">
+          <i class="fas fa-eye ef-lever-icon"></i>
+          <h4 class="ef-lever-title">Analyst Attention</h4>
+          <p class="ef-lever-desc">Focuses remote-sensing analysts on the top 10% highest-vulnerability cells rather than manually scanning hundreds of thousands of square kilometers.</p>
+        </div>
+
+        <div class="ef-lever-card">
+          <i class="fas fa-clipboard-list ef-lever-icon"></i>
+          <h4 class="ef-lever-title">Inspection Planning</h4>
+          <p class="ef-lever-desc">Assists field teams in building risk-ranked weekly inspection agendas based on spatial clustering and road proximity corridors.</p>
+        </div>
+
+        <div class="ef-lever-card">
+          <i class="fas fa-satellite ef-lever-icon"></i>
+          <h4 class="ef-lever-title">Satellite Tasking</h4>
+          <p class="ef-lever-desc">Informs commercial or high-resolution satellite imagery tasking requests toward specific spatial coordinates with elevated clearing probability.</p>
+        </div>
+
+        <div class="ef-lever-card">
+          <i class="fas fa-truck-pickup ef-lever-icon"></i>
+          <h4 class="ef-lever-title">Field Verification</h4>
+          <p class="ef-lever-desc">Helps allocate ground enforcement vehicles and fuel allowances to accessible frontier junctions before large-scale clearing events conclude.</p>
+        </div>
+
+        <div class="ef-lever-card">
+          <i class="fas fa-history ef-lever-icon"></i>
+          <h4 class="ef-lever-title">Monitoring Frequency</h4>
+          <p class="ef-lever-desc">Enables stratified temporal surveillance: high-risk frontier zones receive frequent revisit audits while stable interior cores require standard review.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. DEPLOYMENT FEASIBILITY -->
+    <section class="if-section">
+      <div class="if-section-header">
+        <h3 class="if-section-title"><i class="fas fa-layer-group"></i> Deployment Feasibility: Three-Tier Architecture</h3>
+        <p class="if-section-subtitle">Distinguishing current prototype capabilities from future operational deployment horizons.</p>
+      </div>
+
+      <div class="ef-layers-grid">
+        <!-- Tier 1: Pilot -->
+        <div class="ef-layer-card active-layer">
+          <div class="ef-layer-badge badge-current">
+            <i class="fas fa-check-circle"></i> Current Prototype
+          </div>
+          <h4 class="ef-layer-title">Tier 1: Pilot Deployment</h4>
+          <div class="ef-layer-scope">Rondônia Study Area (150,000 Spatial Cells)</div>
+          <ul class="ef-layer-bullets">
+            <li><i class="fas fa-check"></i> Precomputed offline spatial inference pipeline.</li>
+            <li><i class="fas fa-check"></i> 4 canonical environmental drivers with calibrated SHAP weights.</li>
+            <li><i class="fas fa-check"></i> WebGL-accelerated 2D/3D interactive visual exploration.</li>
+            <li><i class="fas fa-check"></i> Sensitivity-driven policy exploration simulator.</li>
+          </ul>
+        </div>
+
+        <!-- Tier 2: Operational Extension -->
+        <div class="ef-layer-card future-layer">
+          <div class="ef-layer-badge badge-future">
+            <i class="fas fa-clock"></i> Future Deployment Path
+          </div>
+          <h4 class="ef-layer-title">Tier 2: Operational Extension</h4>
+          <div class="ef-layer-scope">Scheduled Pipeline &amp; Analyst Interface</div>
+          <ul class="ef-layer-bullets">
+            <li><i class="fas fa-arrow-right"></i> Automated ingestion of periodic cloud-free satellite mosaics.</li>
+            <li><i class="fas fa-arrow-right"></i> Batch model re-inference pipeline with scheduled refresh.</li>
+            <li><i class="fas fa-arrow-right"></i> Role-based analyst dashboard with alert triage queues.</li>
+            <li><i class="fas fa-arrow-right"></i> Integration with spatial notification feeds (e.g., GeoTIFF exports).</li>
+          </ul>
+        </div>
+
+        <!-- Tier 3: Scaling -->
+        <div class="ef-layer-card future-layer">
+          <div class="ef-layer-badge badge-future">
+            <i class="fas fa-clock"></i> Future Deployment Path
+          </div>
+          <h4 class="ef-layer-title">Tier 3: Multi-State Scaling</h4>
+          <div class="ef-layer-scope">Amazonia Legal Jurisdictional Expansion</div>
+          <ul class="ef-layer-bullets">
+            <li><i class="fas fa-arrow-right"></i> Multi-state regional model calibration (Pará, Mato Grosso, Amazonas).</li>
+            <li><i class="fas fa-arrow-right"></i> Incorporation of land tenure, indigenous territory, and CAR layers.</li>
+            <li><i class="fas fa-arrow-right"></i> Cloud-native distributed processing for 5M+ km² territorial coverage.</li>
+            <li><i class="fas fa-arrow-right"></i> Institutional integration with agency enforcement dispatch software.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. COST / ECONOMIC LOGIC -->
+    <section class="if-section">
+      <div class="if-section-header">
+        <h3 class="if-section-title"><i class="fas fa-table"></i> Qualitative Cost &amp; Infrastructure Matrix</h3>
+        <p class="if-section-subtitle">Evaluating operational cost dimensions across prototype and production configurations without speculative currency amounts.</p>
+      </div>
+
+      <div class="ef-table-wrapper">
+        <table class="ef-cost-table">
+          <thead>
+            <tr>
+              <th style="width: 22%;">Cost Dimension</th>
+              <th style="width: 20%;">Current Prototype</th>
+              <th style="width: 24%;">Future Operational System</th>
+              <th style="width: 34%;">Primary Operational Cost Driver</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Data Ingestion</strong></td>
+              <td><span class="cost-pill pill-low">Minimal</span></td>
+              <td><span class="cost-pill pill-mod">Moderate</span></td>
+              <td>Satellite API query volume, multi-temporal composite extraction, and cloud-free tile filtering.</td>
+            </tr>
+            <tr>
+              <td><strong>Model Inference</strong></td>
+              <td><span class="cost-pill pill-low">Pre-computed</span></td>
+              <td><span class="cost-pill pill-mod">Moderate</span></td>
+              <td>Frequency of scheduled batch re-scoring runs across expanded spatial cell grids.</td>
+            </tr>
+            <tr>
+              <td><strong>Cloud Hosting &amp; Delivery</strong></td>
+              <td><span class="cost-pill pill-low">Low</span></td>
+              <td><span class="cost-pill pill-mod">Moderate</span></td>
+              <td>Edge caching, API concurrency, authentication, and service-level availability (SLA) guarantees.</td>
+            </tr>
+            <tr>
+              <td><strong>Data Storage</strong></td>
+              <td><span class="cost-pill pill-low">Low</span></td>
+              <td><span class="cost-pill pill-scale">Scale-Dependent</span></td>
+              <td>Retention duration for historical spatial raster tiles and multi-year raster stacks.</td>
+            </tr>
+            <tr>
+              <td><strong>Analyst Review</strong></td>
+              <td><span class="cost-pill pill-low">N/A (Demonstration)</span></td>
+              <td><span class="cost-pill pill-scale">Scale-Dependent</span></td>
+              <td>Human labor hours required for daily verification triage of high-risk priority flags.</td>
+            </tr>
+            <tr>
+              <td><strong>Field Verification</strong></td>
+              <td><span class="cost-pill pill-low">N/A (Outside Scope)</span></td>
+              <td><span class="cost-pill pill-external">External Agency</span></td>
+              <td>Fuel, vehicles, logistics, and personnel for on-the-ground environmental agency operations.</td>
+            </tr>
+            <tr>
+              <td><strong>Integration &amp; Maintenance</strong></td>
+              <td><span class="cost-pill pill-low">Low</span></td>
+              <td><span class="cost-pill pill-mod">Moderate</span></td>
+              <td>API maintenance, security patches, jurisdictional spatial data updates, and institutional training.</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="ef-table-footer-note">
+          <i class="fas fa-info-circle" style="color: var(--cyan); margin-right: 6px;"></i>
+          <strong>Operational Reality:</strong> Actual operational costs are fundamentally determined by data refresh cadence, territorial surface area, cloud compute architecture, and institutional inspection protocols.
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. VALUE PROPOSITION -->
+    <section class="if-section">
+      <div class="if-section-header">
+        <h3 class="if-section-title"><i class="fas fa-award"></i> Core Operational Value Proposition</h3>
+        <p class="if-section-subtitle">How proactive spatial intelligence can support more effective environmental governance.</p>
+      </div>
+
+      <div class="ef-value-grid">
+        <div class="ef-val-card">
+          <i class="fas fa-bullseye ef-val-icon"></i>
+          <h4 class="ef-val-title">Better Prioritization</h4>
+          <p class="ef-val-desc">Can support decision-makers by distilling millions of hectares into prioritized, score-ranked spatial cells, ensuring scarce patrol capacity is focused where pressure is highest.</p>
+        </div>
+
+        <div class="ef-val-card">
+          <i class="fas fa-bolt ef-val-icon"></i>
+          <h4 class="ef-val-title">Faster Review Cycles</h4>
+          <p class="ef-val-desc">Can help reduce the lead time required for analysts to spot emerging pressure fronts by preemptively highlighting spatial convergence along expanding road networks.</p>
+        </div>
+
+        <div class="ef-val-card">
+          <i class="fas fa-chart-line ef-val-icon"></i>
+          <h4 class="ef-val-title">Explainable Risk Signals</h4>
+          <p class="ef-val-desc">Designed to provide interpretable feature contributions (SHAP values), allowing operators to understand why an area is flagged rather than trusting an opaque black box.</p>
+        </div>
+
+        <div class="ef-val-card">
+          <i class="fas fa-expand-arrows-alt ef-val-icon"></i>
+          <h4 class="ef-val-title">Scalable Spatial Coverage</h4>
+          <p class="ef-val-desc">Designed with modular cell geometry that can be adapted and calibrated across additional regional jurisdictions without requiring architectural redesign.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. WHAT WOULD BE REQUIRED FOR REAL-WORLD DEPLOYMENT? -->
+    <section class="if-section">
+      <div class="if-section-header">
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+          <h3 class="if-section-title" style="margin: 0;"><i class="fas fa-clipboard-check"></i> Real-World Deployment Requirements</h3>
+          <span style="font-size: 11px; font-weight: 700; color: var(--indigo); background: rgba(129, 140, 248, 0.12); border: 1px solid rgba(129, 140, 248, 0.28); padding: 3px 10px; border-radius: 4px;">
+            Operational Readiness Roadmap
+          </span>
+        </div>
+        <p class="if-section-subtitle" style="margin-top: 6px;">Prerequisites distinguishing this decision-support prototype from production government systems.</p>
+      </div>
+
+      <div class="ef-roadmap-grid">
+        <div class="ef-road-item">
+          <div class="ef-road-top">
+            <span class="ef-road-tag">Data Ingestion</span>
+            <i class="fas fa-arrow-circle-right" style="color: var(--indigo); font-size: 12px;"></i>
+          </div>
+          <div class="ef-road-name">Live / Scheduled Pipelines</div>
+          <p class="ef-road-desc">Automated, fault-tolerant connectors to official satellite streams and road registry updates.</p>
+        </div>
+
+        <div class="ef-road-item">
+          <div class="ef-road-top">
+            <span class="ef-road-tag">ML Engineering</span>
+            <i class="fas fa-arrow-circle-right" style="color: var(--indigo); font-size: 12px;"></i>
+          </div>
+          <div class="ef-road-name">Reproducible Inference Package</div>
+          <p class="ef-road-desc">Containerized MLOps pipelines with model versioning, feature store caching, and drift monitoring.</p>
+        </div>
+
+        <div class="ef-road-item">
+          <div class="ef-road-top">
+            <span class="ef-road-tag">Quality Assurance</span>
+            <i class="fas fa-arrow-circle-right" style="color: var(--indigo); font-size: 12px;"></i>
+          </div>
+          <div class="ef-road-name">Formal Validation Protocol</div>
+          <p class="ef-road-desc">Independent cross-validation with local environmental authorities across seasonal weather patterns.</p>
+        </div>
+
+        <div class="ef-road-item">
+          <div class="ef-road-top">
+            <span class="ef-road-tag">Operational Human</span>
+            <i class="fas fa-arrow-circle-right" style="color: var(--indigo); font-size: 12px;"></i>
+          </div>
+          <div class="ef-road-name">Human Analyst Review</div>
+          <p class="ef-road-desc">Mandatory human-in-the-loop verification protocol before any field alert dispatch is authorized.</p>
+        </div>
+
+        <div class="ef-road-item">
+          <div class="ef-road-top">
+            <span class="ef-road-tag">Security &amp; IT</span>
+            <i class="fas fa-arrow-circle-right" style="color: var(--indigo); font-size: 12px;"></i>
+          </div>
+          <div class="ef-road-name">Secure Infrastructure</div>
+          <p class="ef-road-desc">Role-based access control (RBAC), audit logging, and encrypted spatial data storage.</p>
+        </div>
+
+        <div class="ef-road-item">
+          <div class="ef-road-top">
+            <span class="ef-road-tag">Governance</span>
+            <i class="fas fa-arrow-circle-right" style="color: var(--indigo); font-size: 12px;"></i>
+          </div>
+          <div class="ef-road-name">Institutional Integration</div>
+          <p class="ef-road-desc">API integration with existing environmental command systems and field communication tools.</p>
+        </div>
+
+        <div class="ef-road-item">
+          <div class="ef-road-top">
+            <span class="ef-road-tag">Ground Truth</span>
+            <i class="fas fa-arrow-circle-right" style="color: var(--indigo); font-size: 12px;"></i>
+          </div>
+          <div class="ef-road-name">Field Validation Pilot</div>
+          <p class="ef-road-desc">Comparative pilot study measuring patrol response speed and accuracy against historical baseline workflows.</p>
+        </div>
+
+        <div class="ef-road-item">
+          <div class="ef-road-top">
+            <span class="ef-road-tag">Evaluation</span>
+            <i class="fas fa-arrow-circle-right" style="color: var(--indigo); font-size: 12px;"></i>
+          </div>
+          <div class="ef-road-name">Monitoring KPIs</div>
+          <p class="ef-road-desc">Quantitative operational metrics tracking false-alarm rates, inspection tasking latency, and avoided loss.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. IMPORTANT HONESTY BOX -->
+    <section class="if-section">
+      <div class="if-honesty-card" style="border-color: rgba(245, 158, 11, 0.4); background: linear-gradient(135deg, rgba(15, 23, 42, 0.98) 0%, rgba(30, 41, 59, 0.8) 100%);">
+        <h3 class="if-honesty-title" style="color: #fef08a;">
+          "This prototype demonstrates decision-support feasibility, not a proven financial return."
+        </h3>
+        <p class="if-honesty-text" style="color: #cbd5e1; font-size: 13.5px;">
+          Real economic benefit would need to be measured through an operational pilot comparing monitoring effort, verification time, and outcomes against a baseline workflow. No commercial contracts, dollar savings, or operational cost reductions are claimed for this prototype.
+        </p>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         PHASE 4D — COMPETITIVE POSITIONING, TECHNICAL INTEGRATION & FUTURE ROADMAP
+         ========================================================================== -->
+
+    <div class="cp-chapter-divider">
+      <div class="cp-chapter-pill">
+        <i class="fas fa-chess-knight"></i> Part 3: Competitive Positioning, Technical Integration &amp; Future Roadmap
+      </div>
+    </div>
+
+    <!-- 1. COMPETITIVE LANDSCAPE -->
+    <section class="if-section cp-header">
+      <div class="cp-badge"><i class="fas fa-shield-alt"></i> Complementary Ecosystem Positioning</div>
+      <h2 class="if-title" style="font-size: 28px; margin: 0 0 6px 0;">Competitive Landscape</h2>
+      <p class="if-subtitle" style="color: var(--indigo); font-size: 15px; margin: 0 0 16px 0;">Situating this prototype within Brazil's established forest monitoring architecture.</p>
+      
+      <div class="if-intro-card" style="border-left-color: var(--indigo); border-color: rgba(129, 140, 248, 0.25);">
+        <i class="fas fa-info-circle if-intro-icon" style="color: var(--indigo);"></i>
+        <span>
+          Existing Brazilian and Amazon monitoring systems provide critical observation and alerting capabilities. This project is positioned as a <strong>complementary decision-support layer</strong> focused on spatial risk prioritization, explanation, scenario exploration, and operational workflow.
+        </span>
+      </div>
+    </section>
+
+    <!-- SYSTEM COMPARISONS -->
+    <section class="if-section">
+      <div class="if-section-header">
+        <h3 class="if-section-title"><i class="fas fa-network-wired"></i> Established Forest Monitoring Systems</h3>
+        <p class="if-section-subtitle">Comparing primary purpose, analytical role, and complementary positioning across verified platforms.</p>
+      </div>
+
+      <div class="cp-comp-grid">
+        <!-- 1. INPE PRODES -->
+        <div class="cp-comp-card">
+          <div class="cp-comp-header">
+            <div>
+              <h4 class="cp-comp-title">INPE PRODES</h4>
+              <span class="cp-comp-org">National Institute for Space Research (INPE)</span>
+            </div>
+            <span class="cp-comp-badge">Official Benchmark</span>
+          </div>
+          <div class="cp-comp-detail">
+            <span class="cp-comp-label">Primary Role &amp; Methodology</span>
+            Official annual consolidated primary forest clear-cut census (&ge;6.25 ha) using cloud-free optical mosaics (Landsat, Sentinel, CBERS). Retrospective accounting standard since 1988.
+          </div>
+          <div class="cp-comp-detail">
+            <span class="cp-comp-label">Analytical Nature</span>
+            Pure retrospective measurement; deterministic post-event clear-cut mapping without forward-looking risk prediction or sensitivity simulation.
+          </div>
+          <div class="cp-comp-relation">
+            <span class="cp-comp-label">Complementary Relation to This Project</span>
+            PRODES serves as the foundational ground-truth baseline for this project's historical intelligence (2001–2025) and model calibration anchor.
+          </div>
+        </div>
+
+        <!-- 2. INPE DETER -->
+        <div class="cp-comp-card">
+          <div class="cp-comp-header">
+            <div>
+              <h4 class="cp-comp-title">INPE DETER</h4>
+              <span class="cp-comp-org">INPE / IBAMA Enforcement Support</span>
+            </div>
+            <span class="cp-comp-badge">Daily / Weekly Alerts</span>
+          </div>
+          <div class="cp-comp-detail">
+            <span class="cp-comp-label">Primary Role &amp; Methodology</span>
+            Near-real-time deforestation and forest degradation detection system (&ge;3 ha) designed for tactical field enforcement dispatch (IBAMA/ICMBio) since 2004.
+          </div>
+          <div class="cp-comp-detail">
+            <span class="cp-comp-label">Analytical Nature</span>
+            Rapid reactive detection; identifies canopy loss after clearing activities have commenced, subject to persistent optical cloud cover.
+          </div>
+          <div class="cp-comp-relation">
+            <span class="cp-comp-label">Complementary Relation to This Project</span>
+            DETER flags active clearings; our project operates upstream by predicting multi-feature structural vulnerability *before* tree cover removal begins.
+          </div>
+        </div>
+
+        <!-- 3. PrevisIA -->
+        <div class="cp-comp-card">
+          <div class="cp-comp-header">
+            <div>
+              <h4 class="cp-comp-title">PrevisIA</h4>
+              <span class="cp-comp-org">Imazon / Microsoft / Fundo Vale</span>
+            </div>
+            <span class="cp-comp-badge">Annual Predictive Risk</span>
+          </div>
+          <div class="cp-comp-detail">
+            <span class="cp-comp-label">Primary Role &amp; Methodology</span>
+            AI-based predictive risk model estimating deforestation probability across the Legal Amazon in 25 km&sup2; spatial blocks over a 12-month forward horizon.
+          </div>
+          <div class="cp-comp-detail">
+            <span class="cp-comp-label">Analytical Nature</span>
+            Regional risk surface generation published annually to mobilize civil society, public prosecutors, and state environmental secretariats.
+          </div>
+          <div class="cp-comp-relation">
+            <span class="cp-comp-label">Complementary Relation to This Project</span>
+            Closest predictive counterpart; this project complements PrevisIA by evaluating granular spatial pilot density (150,000 cells in Rondônia), explicit SHAP driver attribution (41% road, 23% loss, 21% pop, 15% elevation), interactive 2D/3D visual triage, and client-side policy sensitivity simulation.
+          </div>
+        </div>
+
+        <!-- 4. MapBiomas Alert -->
+        <div class="cp-comp-card">
+          <div class="cp-comp-header">
+            <div>
+              <h4 class="cp-comp-title">MapBiomas Alert</h4>
+              <span class="cp-comp-org">Multi-Institutional NGO Consortium</span>
+            </div>
+            <span class="cp-comp-badge">High-Resolution Validation</span>
+          </div>
+          <div class="cp-comp-detail">
+            <span class="cp-comp-label">Primary Role &amp; Methodology</span>
+            Validates and refines all published deforestation alerts (DETER, SAD, GLAD) using 3-meter PlanetScope daily imagery, cross-referencing rural environmental registries (CAR).
+          </div>
+          <div class="cp-comp-detail">
+            <span class="cp-comp-label">Analytical Nature</span>
+            Post-alert spatial verification reports providing definitive parcel-level audit trails for legal and supply-chain due diligence.
+          </div>
+          <div class="cp-comp-relation">
+            <span class="cp-comp-label">Complementary Relation to This Project</span>
+            Represents a future independent verification partner that could validate whether predicted high-risk frontier cells experienced confirmed clearing.
+          </div>
+        </div>
+      </div>
+
+      <!-- Complementary Positioning Flow Visual -->
+      <div class="cp-flow-visual">
+        <div style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.6px; color: var(--indigo); margin-bottom: 12px;">
+          <i class="fas fa-layer-group"></i> Complementary Pipeline: How Systems Interlock
+        </div>
+        <div class="cp-flow-chain">
+          <div class="cp-flow-node">
+            <div class="cp-flow-node-title">Historical Baseline</div>
+            <div class="cp-flow-node-sub">INPE PRODES</div>
+          </div>
+          <div class="cp-flow-sep"><i class="fas fa-arrow-right"></i></div>
+          <div class="cp-flow-node">
+            <div class="cp-flow-node-title">Tactical Alerting</div>
+            <div class="cp-flow-node-sub">INPE DETER</div>
+          </div>
+          <div class="cp-flow-sep"><i class="fas fa-arrow-right"></i></div>
+          <div class="cp-flow-node highlight-geoai">
+            <div class="cp-flow-node-title">Risk Prioritization</div>
+            <div class="cp-flow-node-sub">GeoAI Platform</div>
+          </div>
+          <div class="cp-flow-sep"><i class="fas fa-arrow-right"></i></div>
+          <div class="cp-flow-node highlight-geoai">
+            <div class="cp-flow-node-title">Feature Explanation</div>
+            <div class="cp-flow-node-sub">SHAP Attribution</div>
+          </div>
+          <div class="cp-flow-sep"><i class="fas fa-arrow-right"></i></div>
+          <div class="cp-flow-node highlight-geoai">
+            <div class="cp-flow-node-title">Scenario Sensitivity</div>
+            <div class="cp-flow-node-sub">Policy Simulator</div>
+          </div>
+          <div class="cp-flow-sep"><i class="fas fa-arrow-right"></i></div>
+          <div class="cp-flow-node">
+            <div class="cp-flow-node-title">Decision Workflow</div>
+            <div class="cp-flow-node-sub">Proposed Extension</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. DIFFERENTIATION MATRIX -->
+    <section class="if-section">
+      <div class="if-section-header">
+        <h3 class="if-section-title"><i class="fas fa-th-list"></i> Ecosystem Differentiation Matrix</h3>
+        <p class="if-section-subtitle">Factual capabilities comparison across established monitoring systems, this prototype, and future expansion paths.</p>
+      </div>
+
+      <div class="ef-table-wrapper">
+        <table class="ef-cost-table">
+          <thead>
+            <tr>
+              <th style="width: 24%;">Dimension</th>
+              <th style="width: 26%;">Existing Ecosystem</th>
+              <th style="width: 24%;">This Prototype</th>
+              <th style="width: 26%;">Future Opportunity</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Historical Monitoring</strong></td>
+              <td><span class="cost-pill pill-low">Existing</span> (PRODES 1988–2025)</td>
+              <td><span class="cost-pill pill-mod">Prototype</span> (2001–2025 Series)</td>
+              <td><span class="cost-pill pill-scale">Potential Extension</span> (Multi-decadal harmonized ingestion)</td>
+            </tr>
+            <tr>
+              <td><strong>Near-Real-Time Alerts</strong></td>
+              <td><span class="cost-pill pill-low">Existing</span> (DETER daily alerts)</td>
+              <td><span class="cost-pill pill-external">Not Implemented</span> (Out of scope)</td>
+              <td><span class="cost-pill pill-scale">Potential Extension</span> (Automated DETER/GLAD overlay)</td>
+            </tr>
+            <tr>
+              <td><strong>Predictive Risk Modeling</strong></td>
+              <td><span class="cost-pill pill-mod">Existing</span> (PrevisIA 25 km&sup2;)</td>
+              <td><span class="cost-pill pill-mod">Prototype</span> (XGBoost 150k cells)</td>
+              <td><span class="cost-pill pill-scale">Future</span> (Multi-model ensemble &amp; seasonal calibration)</td>
+            </tr>
+            <tr>
+              <td><strong>Spatial Prioritization</strong></td>
+              <td><span class="cost-pill pill-low">Existing</span> (Regional risk maps)</td>
+              <td><span class="cost-pill pill-mod">Prototype</span> (Sorted 0–100 risk rank)</td>
+              <td><span class="cost-pill pill-scale">Future</span> (Automated patrol tasking queue generation)</td>
+            </tr>
+            <tr>
+              <td><strong>Global Feature Explanation</strong></td>
+              <td><span class="cost-pill pill-external">Not Implemented</span> (Opaque models)</td>
+              <td><span class="cost-pill pill-mod">Prototype</span> (SHAP: Road 41%, Loss 23%...)</td>
+              <td><span class="cost-pill pill-scale">Future</span> (Cell-level localized TreeSHAP overlays)</td>
+            </tr>
+            <tr>
+              <td><strong>Scenario Policy Sensitivity</strong></td>
+              <td><span class="cost-pill pill-external">Not Implemented</span> (Static outputs)</td>
+              <td><span class="cost-pill pill-mod">Prototype</span> (Client-side sensitivity sliders)</td>
+              <td><span class="cost-pill pill-scale">Future</span> (Macroeconomic spatial policy simulation)</td>
+            </tr>
+            <tr>
+              <td><strong>3D Spatial Exploration</strong></td>
+              <td><span class="cost-pill pill-external">Not Implemented</span> (2D GIS viewers)</td>
+              <td><span class="cost-pill pill-mod">Prototype</span> (WebGL Deck.gl 3D mesh)</td>
+              <td><span class="cost-pill pill-scale">Future</span> (Immersive multi-temporal spatial analytics)</td>
+            </tr>
+            <tr>
+              <td><strong>Analyst Decision Workflow</strong></td>
+              <td><span class="cost-pill pill-low">Existing</span> (Independent agency tools)</td>
+              <td><span class="cost-pill pill-mod">Prototype</span> (Structured Decision Story)</td>
+              <td><span class="cost-pill pill-scale">Future</span> (Full role-based case management UI)</td>
+            </tr>
+            <tr>
+              <td><strong>Field Verification Handoff</strong></td>
+              <td><span class="cost-pill pill-low">Existing</span> (IBAMA fiscalização apps)</td>
+              <td><span class="cost-pill pill-external">Not Implemented</span> (Handoff boundary)</td>
+              <td><span class="cost-pill pill-scale">Future</span> (Direct digital sync with field ranger tablets)</td>
+            </tr>
+            <tr>
+              <td><strong>Multi-State Scaling</strong></td>
+              <td><span class="cost-pill pill-low">Existing</span> (Amazonia Legal wide)</td>
+              <td><span class="cost-pill pill-mod">Prototype</span> (Rondônia pilot area)</td>
+              <td><span class="cost-pill pill-scale">Future</span> (Calibrated 9-state Legal Amazon coverage)</td>
+            </tr>
+            <tr>
+              <td><strong>API &amp; Institutional Integration</strong></td>
+              <td><span class="cost-pill pill-low">Existing</span> (TerraBrasilis APIs)</td>
+              <td><span class="cost-pill pill-external">Not Implemented</span> (Static frontend)</td>
+              <td><span class="cost-pill pill-scale">Future</span> (Secure enterprise REST / GeoTIFF services)</td>
+            </tr>
+            <tr>
+              <td><strong>Continuous Model Refresh</strong></td>
+              <td><span class="cost-pill pill-mod">Existing</span> (Annual/periodic cycles)</td>
+              <td><span class="cost-pill pill-external">Not Implemented</span> (Offline-trained)</td>
+              <td><span class="cost-pill pill-scale">Future</span> (Cloud-native MLOps drift &amp; retraining pipelines)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 3. WHERE THIS PROJECT FITS -->
+    <section class="if-section">
+      <div class="if-section-header">
+        <h3 class="if-section-title"><i class="fas fa-crosshairs"></i> Where This Project Fits</h3>
+        <p class="if-section-subtitle">From monitoring data to actionable intelligence: Mapping the decision continuum.</p>
+      </div>
+
+      <div class="cp-pipeline-container">
+        <div class="cp-pipeline-steps">
+          <div class="cp-pipe-step">
+            <div class="cp-pipe-name">01 Observe</div>
+            <div class="cp-pipe-desc">Satellite Feeds</div>
+          </div>
+          <div style="color: #475569; font-size: 11px;"><i class="fas fa-chevron-right"></i></div>
+          <div class="cp-pipe-step">
+            <div class="cp-pipe-name">02 Detect</div>
+            <div class="cp-pipe-desc">Anomaly Alerts</div>
+          </div>
+          <div style="color: #475569; font-size: 11px;"><i class="fas fa-chevron-right"></i></div>
+          <div class="cp-pipe-step active-proto">
+            <div class="cp-pipe-name">03 Predict</div>
+            <div class="cp-pipe-desc">Risk Scores</div>
+          </div>
+          <div style="color: var(--cyan); font-size: 11px;"><i class="fas fa-chevron-right"></i></div>
+          <div class="cp-pipe-step active-proto">
+            <div class="cp-pipe-name">04 Explain</div>
+            <div class="cp-pipe-desc">SHAP Drivers</div>
+          </div>
+          <div style="color: var(--cyan); font-size: 11px;"><i class="fas fa-chevron-right"></i></div>
+          <div class="cp-pipe-step active-proto">
+            <div class="cp-pipe-name">05 Prioritize</div>
+            <div class="cp-pipe-desc">Ranked Focus</div>
+          </div>
+          <div style="color: var(--cyan); font-size: 11px;"><i class="fas fa-chevron-right"></i></div>
+          <div class="cp-pipe-step active-proto">
+            <div class="cp-pipe-name">06 Simulate</div>
+            <div class="cp-pipe-desc">Policy Sliders</div>
+          </div>
+          <div style="color: #475569; font-size: 11px;"><i class="fas fa-chevron-right"></i></div>
+          <div class="cp-pipe-step future-layer">
+            <div class="cp-pipe-name">07 Verify</div>
+            <div class="cp-pipe-desc">Remote Ground</div>
+          </div>
+          <div style="color: var(--indigo); font-size: 11px;"><i class="fas fa-chevron-right"></i></div>
+          <div class="cp-pipe-step future-layer">
+            <div class="cp-pipe-name">08 Act</div>
+            <div class="cp-pipe-desc">Intervention</div>
+          </div>
+          <div style="color: var(--indigo); font-size: 11px;"><i class="fas fa-chevron-right"></i></div>
+          <div class="cp-pipe-step future-layer">
+            <div class="cp-pipe-name">09 Measure</div>
+            <div class="cp-pipe-desc">Audit Loss</div>
+          </div>
+        </div>
+
+        <div class="cp-pipe-brackets">
+          <div class="cp-bracket-card bracket-observe">
+            <div class="cp-bracket-title"><i class="fas fa-database"></i> Observation Layer</div>
+            Sovereign Earth Observation (INPE PRODES, DETER, Sentinel, Landsat) capturing raw spectral data and retrospective clear-cut measurements.
+          </div>
+
+          <div class="cp-bracket-card bracket-proto">
+            <div class="cp-bracket-title" style="color: var(--cyan);"><i class="fas fa-microchip"></i> Current Prototype Scope</div>
+            Transforms observation signals into forward-looking spatial prioritization, SHAP explainability, and sensitivity simulation across 150k cells.
+          </div>
+
+          <div class="cp-bracket-card bracket-future">
+            <div class="cp-bracket-title" style="color: var(--indigo);"><i class="fas fa-shield-alt"></i> Future Operational Layer</div>
+            Human-in-the-loop operational actions executed by environmental authorities (IBAMA, ICMBio) to verify, inspect, and evaluate deterrent outcomes.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. TECHNICAL INTEGRATION ARCHITECTURE -->
+    <section class="if-section">
+      <div class="if-section-header">
+        <h3 class="if-section-title"><i class="fas fa-sitemap"></i> Technical Integration Architecture</h3>
+        <p class="if-section-subtitle">Conceptual dataflow distinguishing the current standalone decision prototype from future cloud-native pipelines.</p>
+      </div>
+
+      <div class="cp-arch-container">
+        <div class="cp-arch-flow">
+          <!-- Row 1: Ingestion & Validation -->
+          <div class="cp-arch-row">
+            <div class="cp-arch-node future-arch">
+              <span class="cp-arch-tag">01 · Future Pipeline</span>
+              <div class="cp-arch-title">External Data Sources</div>
+              <p class="cp-arch-desc">Automated ingestion from INPE (PRODES/DETER), OpenStreetMap, IBGE census, and SRTM elevation APIs.</p>
+            </div>
+            <div class="cp-arch-node future-arch">
+              <span class="cp-arch-tag">02 · Future Pipeline</span>
+              <div class="cp-arch-title">ETL &amp; Harmonization</div>
+              <p class="cp-arch-desc">Spatial coordinate reprojection (SIRGAS 2000), cloud-mask filtering, and temporal boundary alignment.</p>
+            </div>
+            <div class="cp-arch-node future-arch">
+              <span class="cp-arch-tag">03 · Future Pipeline</span>
+              <div class="cp-arch-title">Feature Engineering</div>
+              <p class="cp-arch-desc">Euclidean road distance calculations, historical temporal loss extraction, and density surfaces.</p>
+            </div>
+          </div>
+
+          <div class="cp-arch-connector"><i class="fas fa-arrow-down"></i></div>
+
+          <!-- Row 2: Inference & Grid Indexing -->
+          <div class="cp-arch-row">
+            <div class="cp-arch-node proto-active">
+              <span class="cp-arch-tag">04 · Prototype Core</span>
+              <div class="cp-arch-title">XGBoost Classification Model</div>
+              <p class="cp-arch-desc">Gradient boosted tree scoring (AUC 0.82, Precision 0.79, Recall 0.84, F1 0.81) calibrated on 150k samples.</p>
+            </div>
+            <div class="cp-arch-node proto-active">
+              <span class="cp-arch-tag">05 · Prototype Core</span>
+              <div class="cp-arch-title">Spatial Risk Grid Index</div>
+              <p class="cp-arch-desc">Optimized spatial data structure linking normalized risk scores [0–100] to geographic coordinates.</p>
+            </div>
+            <div class="cp-arch-node proto-active">
+              <span class="cp-arch-tag">06 · Prototype Core</span>
+              <div class="cp-arch-title">Global SHAP Attribution</div>
+              <p class="cp-arch-desc">Quantitative feature driver weights (Road 41%, Loss 23%, Pop 21%, Elevation 15%) for transparent triage.</p>
+            </div>
+          </div>
+
+          <div class="cp-arch-connector"><i class="fas fa-arrow-down"></i></div>
+
+          <!-- Row 3: Decision Support & Operational Extension -->
+          <div class="cp-arch-row">
+            <div class="cp-arch-node proto-active">
+              <span class="cp-arch-tag">07 · Prototype Core</span>
+              <div class="cp-arch-title">Decision Intelligence Layer</div>
+              <p class="cp-arch-desc">Interactive WebGL 2D/3D interface with dynamic risk filtering, hotspot discovery, and sensitivity simulation.</p>
+            </div>
+            <div class="cp-arch-node future-arch">
+              <span class="cp-arch-tag">08 · Future Integration</span>
+              <div class="cp-arch-title">Analyst Triage &amp; Tasking</div>
+              <p class="cp-arch-desc">Role-based dispatch queues allowing human operators to confirm anomalies and commission high-res tasking.</p>
+            </div>
+            <div class="cp-arch-node future-arch">
+              <span class="cp-arch-tag">09 · Future Integration</span>
+              <div class="cp-arch-title">MLOps Feedback &amp; Retraining</div>
+              <p class="cp-arch-desc">Annual PRODES audit comparison feeding performance metrics back into scheduled model retraining pipelines.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. DATA INTEGRATION ROADMAP -->
+    <section class="if-section">
+      <div class="if-section-header">
+        <h3 class="if-section-title"><i class="fas fa-database"></i> Data Integration Roadmap</h3>
+        <p class="if-section-subtitle">Current ingestion status versus future architectural integration roles across 11 spatial data layers.</p>
+      </div>
+
+      <div class="ef-table-wrapper">
+        <table class="ef-cost-table">
+          <thead>
+            <tr>
+              <th style="width: 22%;">Data Layer</th>
+              <th style="width: 20%;">Current Status</th>
+              <th style="width: 26%;">Future Integration Role</th>
+              <th style="width: 32%;">Decision It Could Improve</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>PRODES Deforestation</strong></td>
+              <td><span class="cost-pill pill-low">Precomputed</span></td>
+              <td>Automated annual census ingestion</td>
+              <td>Ground-truth validation &amp; multi-year retrospective benchmark.</td>
+            </tr>
+            <tr>
+              <td><strong>DETER Rapid Alerts</strong></td>
+              <td><span class="cost-pill pill-external">Methodology Delineated</span></td>
+              <td>Near-real-time alert stream overlay</td>
+              <td>Accelerates verification by flagging active clearings within high-risk zones.</td>
+            </tr>
+            <tr>
+              <td><strong>Optical / SAR Imagery</strong></td>
+              <td><span class="cost-pill pill-low">Precomputed Context</span></td>
+              <td>High-cadence cloud-free mosaics</td>
+              <td>Enables remote inspection beneath persistent cloud cover via SAR.</td>
+            </tr>
+            <tr>
+              <td><strong>Fire / Thermal Indicators</strong></td>
+              <td><span class="cost-pill pill-external">Proxy Indicators Only</span></td>
+              <td>NASA FIRMS / INPE Queimadas feed</td>
+              <td>Distinguishes agricultural pasture management from primary clear-cut fires.</td>
+            </tr>
+            <tr>
+              <td><strong>Roads &amp; Accessibility</strong></td>
+              <td><span class="cost-pill pill-mod">Static Feature (41% SHAP)</span></td>
+              <td>Dynamic unofficial logging track extraction</td>
+              <td>Identifies illegal frontier penetrations advancing ahead of official road grids.</td>
+            </tr>
+            <tr>
+              <td><strong>Population Pressure</strong></td>
+              <td><span class="cost-pill pill-mod">Static Feature (21% SHAP)</span></td>
+              <td>Inter-census settlement growth feeds</td>
+              <td>Highlights expanding agricultural settlement fringes encroaching on forest borders.</td>
+            </tr>
+            <tr>
+              <td><strong>Elevation &amp; Terrain</strong></td>
+              <td><span class="cost-pill pill-mod">Static Feature (15% SHAP)</span></td>
+              <td>High-res LiDAR / hydrological modeling</td>
+              <td>Filters inaccessible steep slopes and models seasonal flooding barriers.</td>
+            </tr>
+            <tr>
+              <td><strong>Protected Areas (UCs)</strong></td>
+              <td><span class="cost-pill pill-low">Spatial Boundary Context</span></td>
+              <td>Statutory legal weighting multipliers</td>
+              <td>Escalates prioritization rank for infractions inside strictly protected reserves.</td>
+            </tr>
+            <tr>
+              <td><strong>Indigenous Territories</strong></td>
+              <td><span class="cost-pill pill-low">Spatial Boundary Context</span></td>
+              <td>Dedicated boundary intrusion alerts</td>
+              <td>Directs monitoring focus to vulnerable demarcation perimeter zones.</td>
+            </tr>
+            <tr>
+              <td><strong>Rural Cadastre (CAR)</strong></td>
+              <td><span class="cost-pill pill-external">Not Currently Ingested</span></td>
+              <td>Property boundary cross-referencing</td>
+              <td>Associates spatial risk with registered rural properties for targeted compliance.</td>
+            </tr>
+            <tr>
+              <td><strong>Weather &amp; Drought</strong></td>
+              <td><span class="cost-pill pill-external">Not Currently Ingested</span></td>
+              <td>Dynamic soil moisture / drought indexes</td>
+              <td>Adjusts seasonal fire susceptibility weights during acute El Ni&ntilde;o events.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 6. FUTURE DEVELOPMENT ROADMAP -->
+    <section class="if-section">
+      <div class="if-section-header">
+        <h3 class="if-section-title"><i class="fas fa-road"></i> Future Development Roadmap</h3>
+        <p class="if-section-subtitle">A progressive four-stage evolution from standalone decision prototype to operational regional platform.</p>
+      </div>
+
+      <div class="cp-roadmap-grid">
+        <!-- Stage 1: Current Prototype -->
+        <div class="cp-stage-card stage-active">
+          <div class="cp-stage-num"><i class="fas fa-check-circle"></i> Stage 1 · Current Prototype</div>
+          <h4 class="cp-stage-title">Proof of Concept</h4>
+          <ul class="cp-stage-bullets">
+            <li><i class="fas fa-check"></i> Rondônia pilot study area (150,000 cells).</li>
+            <li><i class="fas fa-check"></i> Offline XGBoost classifier (AUC 0.82, F1 0.81).</li>
+            <li><i class="fas fa-check"></i> Interactive 2D/3D WebGL risk visualization.</li>
+            <li><i class="fas fa-check"></i> Client-side policy sensitivity simulator.</li>
+            <li><i class="fas fa-check"></i> PRODES historical intelligence (2001–2025).</li>
+          </ul>
+        </div>
+
+        <!-- Stage 2: Validation Pilot -->
+        <div class="cp-stage-card stage-future">
+          <div class="cp-stage-num"><i class="fas fa-clock"></i> Stage 2 · Future Pilot</div>
+          <h4 class="cp-stage-title">Validation Pilot</h4>
+          <ul class="cp-stage-bullets">
+            <li><i class="fas fa-arrow-right"></i> Standalone reproducible Python model package.</li>
+            <li><i class="fas fa-arrow-right"></i> Spatial &amp; temporal holdout validation trials.</li>
+            <li><i class="fas fa-arrow-right"></i> Ground &amp; satellite verification protocol design.</li>
+            <li><i class="fas fa-arrow-right"></i> False-positive vs. false-negative cost auditing.</li>
+            <li><i class="fas fa-arrow-right"></i> Analyst triage usability &amp; tasking evaluation.</li>
+          </ul>
+        </div>
+
+        <!-- Stage 3: Operational Platform -->
+        <div class="cp-stage-card stage-future">
+          <div class="cp-stage-num"><i class="fas fa-clock"></i> Stage 3 · Future Platform</div>
+          <h4 class="cp-stage-title">Operational Platform</h4>
+          <ul class="cp-stage-bullets">
+            <li><i class="fas fa-arrow-right"></i> Cloud-native scheduled data ingestion pipelines.</li>
+            <li><i class="fas fa-arrow-right"></i> Automated feature generation &amp; spatial caching.</li>
+            <li><i class="fas fa-arrow-right"></i> Continuous model drift monitoring &amp; versioning.</li>
+            <li><i class="fas fa-arrow-right"></i> Role-based analyst dashboard &amp; dispatch queues.</li>
+            <li><i class="fas fa-arrow-right"></i> Secure REST API endpoints for institutional GIS.</li>
+          </ul>
+        </div>
+
+        <!-- Stage 4: Regional Scaling -->
+        <div class="cp-stage-card stage-future">
+          <div class="cp-stage-num"><i class="fas fa-clock"></i> Stage 4 · Future Scaling</div>
+          <h4 class="cp-stage-title">Regional Scaling</h4>
+          <ul class="cp-stage-bullets">
+            <li><i class="fas fa-arrow-right"></i> Extension across Legal Amazon (Pará, MT, AM).</li>
+            <li><i class="fas fa-arrow-right"></i> Sub-regional XGBoost model recalibration.</li>
+            <li><i class="fas fa-arrow-right"></i> Land tenure (CAR) &amp; indigenous layers.</li>
+            <li><i class="fas fa-arrow-right"></i> Cross-state comparative governance dashboards.</li>
+            <li><i class="fas fa-arrow-right"></i> Academic &amp; NGO public intelligence portal.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. VALIDATION ROADMAP -->
+    <section class="if-section">
+      <div class="if-section-header">
+        <h3 class="if-section-title"><i class="fas fa-vial"></i> Validation Roadmap: How the Prototype Becomes Evidence</h3>
+        <p class="if-section-subtitle">Methodological criteria required to transition algorithmic metrics into independently verified operational utility.</p>
+      </div>
+
+      <div class="cp-val-flow">
+        <div class="cp-val-step">
+          <span class="cp-val-num">Step 01</span>
+          <div class="cp-val-name">Prototype Metrics</div>
+          <p class="cp-val-desc">Established baseline test split performance (AUC 0.82, F1 0.81).</p>
+        </div>
+
+        <div class="cp-val-step">
+          <span class="cp-val-num">Step 02</span>
+          <div class="cp-val-name">Spatial Holdout</div>
+          <p class="cp-val-desc">Validation across geographically isolated test quadrants to verify transferability.</p>
+        </div>
+
+        <div class="cp-val-step">
+          <span class="cp-val-num">Step 03</span>
+          <div class="cp-val-name">Temporal Holdout</div>
+          <p class="cp-val-desc">Training on historical years T-1 and testing predictions against subsequent year T.</p>
+        </div>
+
+        <div class="cp-val-step">
+          <span class="cp-val-num">Step 04</span>
+          <div class="cp-val-name">Top-K Precision</div>
+          <p class="cp-val-desc">Measuring precision within operational field capacity limits (e.g. top 500 cells).</p>
+        </div>
+
+        <div class="cp-val-step">
+          <span class="cp-val-num">Step 05</span>
+          <div class="cp-val-name">Operational Pilot</div>
+          <p class="cp-val-desc">Side-by-side comparison of patrol inspection yield against conventional workflows.</p>
+        </div>
+
+        <div class="cp-val-step">
+          <span class="cp-val-num">Step 06</span>
+          <div class="cp-val-name">Outcome Audit</div>
+          <p class="cp-val-desc">Annual PRODES confirmation of independently verified avoided forest loss.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. STRATEGIC GAP -->
+    <section class="if-section">
+      <div class="if-section-header">
+        <h3 class="if-section-title"><i class="fas fa-wrench"></i> What Remains to Become an Operational System?</h3>
+        <p class="if-section-subtitle">Transparent assessment of the gap between current prototype code and production enterprise deployment.</p>
+      </div>
+
+      <div class="cp-gaps-grid">
+        <!-- Gap 1 -->
+        <div class="cp-gap-card">
+          <div class="cp-gap-title"><i class="fas fa-box-open"></i> 1. Reproducible Model Package</div>
+          <div class="cp-gap-box cp-gap-current"><strong>Current State:</strong> Model trained offline; serialized artifacts not bundled in frontend repository.</div>
+          <div class="cp-gap-box cp-gap-next"><strong>Required Step:</strong> Package Python training code, hyperparameter configs, and ONNX weights into a versioned repo.</div>
+        </div>
+
+        <!-- Gap 2 -->
+        <div class="cp-gap-card">
+          <div class="cp-gap-title"><i class="fas fa-cloud-download-alt"></i> 2. Live / Scheduled Data Pipelines</div>
+          <div class="cp-gap-box cp-gap-current"><strong>Current State:</strong> Static precomputed JSON dataset representing the Rondônia pilot grid.</div>
+          <div class="cp-gap-box cp-gap-next"><strong>Required Step:</strong> Construct automated cloud-native DAGs (e.g., Airflow) to harvest official satellite and road updates.</div>
+        </div>
+
+        <!-- Gap 3 -->
+        <div class="cp-gap-card">
+          <div class="cp-gap-title"><i class="fas fa-check-double"></i> 3. Formal Temporal Validation</div>
+          <div class="cp-gap-box cp-gap-current"><strong>Current State:</strong> Cross-validated on empirical sample subset; timeline is simulated representation.</div>
+          <div class="cp-gap-box cp-gap-next"><strong>Required Step:</strong> Multi-year backtesting measuring lead time between high-risk flags and confirmed PRODES clearing.</div>
+        </div>
+
+        <!-- Gap 4 -->
+        <div class="cp-gap-card">
+          <div class="cp-gap-title"><i class="fas fa-user-shield"></i> 4. Operational Analyst Workflow</div>
+          <div class="cp-gap-box cp-gap-current"><strong>Current State:</strong> Executive presentation interface with decision-support walkthroughs.</div>
+          <div class="cp-gap-box cp-gap-next"><strong>Required Step:</strong> Build authenticated case triage software with task assignment, notes, and verification tracking.</div>
+        </div>
+
+        <!-- Gap 5 -->
+        <div class="cp-gap-card">
+          <div class="cp-gap-title"><i class="fas fa-sync-alt"></i> 5. Field Verification Feedback Loop</div>
+          <div class="cp-gap-box cp-gap-current"><strong>Current State:</strong> Clear conceptual boundary; handoff ends at spatial prioritization.</div>
+          <div class="cp-gap-box cp-gap-next"><strong>Required Step:</strong> Bi-directional sync with mobile field apps to ingest ground inspection results as new training labels.</div>
+        </div>
+
+        <!-- Gap 6 -->
+        <div class="cp-gap-card">
+          <div class="cp-gap-title"><i class="fas fa-chart-bar"></i> 6. Model Monitoring &amp; Drift Detection</div>
+          <div class="cp-gap-box cp-gap-current"><strong>Current State:</strong> Static model weights and calibrated global SHAP feature importances.</div>
+          <div class="cp-gap-box cp-gap-next"><strong>Required Step:</strong> Automated data drift and concept drift telemetry triggering model retraining alerts.</div>
+        </div>
+
+        <!-- Gap 7 -->
+        <div class="cp-gap-card" style="grid-column: span 2;">
+          <div class="cp-gap-title"><i class="fas fa-plug"></i> 7. Institutional API Integration</div>
+          <div class="cp-gap-box cp-gap-current"><strong>Current State:</strong> Standalone client-side application with zero live government server integration.</div>
+          <div class="cp-gap-box cp-gap-next"><strong>Required Step:</strong> Develop standardized OGC-compliant Web Feature Services (WFS) and REST APIs for environmental agency GIS compatibility.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. COMPETITIVE POSITIONING STATEMENT -->
+    <section class="if-section">
+      <div class="if-honesty-card" style="border-color: rgba(56, 189, 248, 0.4); background: linear-gradient(135deg, rgba(15, 23, 42, 0.98) 0%, rgba(30, 41, 59, 0.8) 100%);">
+        <h3 class="if-honesty-title" style="color: #ffffff; font-size: 19px;">
+          "This project is not designed to replace Brazil's established forest-monitoring infrastructure. Its role is to complement observation and alert systems by turning heterogeneous environmental signals into spatially prioritized, explainable, and scenario-aware decision support."
+        </h3>
+        <p class="if-honesty-text" style="color: #94a3b8; font-size: 13.5px; margin-top: 10px;">
+          Within its current scope, the prototype demonstrates technical feasibility of the decision-support layer. Operational impact and economic value require external validation through pilot deployment.
+        </p>
+      </div>
+    </section>
+
+    <!-- 10. FINAL FUTURE VISION -->
+    <section class="if-section">
+      <div class="cp-vision-container">
+        <div style="text-align: center; margin-bottom: 20px;">
+          <span style="font-size: 10px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: var(--cyan);">Strategic Horizon</span>
+          <h3 style="font-size: 24px; font-weight: 800; color: #ffffff; margin: 4px 0 6px 0;">From Prototype to Environmental Intelligence Infrastructure</h3>
+          <p style="font-size: 13px; color: var(--text-muted); margin: 0;">A closed-loop paradigm for proactive territorial protection.</p>
+        </div>
+
+        <div class="cp-vision-steps">
+          <div class="cp-vis-step">
+            <div class="cp-vis-name">01 Connect</div>
+            <p class="cp-vis-desc">Integrate trusted sovereign Earth observation data and local geospatial infrastructure.</p>
+          </div>
+
+          <div class="cp-vis-step">
+            <div class="cp-vis-name">02 Predict</div>
+            <p class="cp-vis-desc">Estimate empirical spatial risk with calibrated machine learning models.</p>
+          </div>
+
+          <div class="cp-vis-step">
+            <div class="cp-vis-name">03 Prioritize</div>
+            <p class="cp-vis-desc">Focus scarce monitoring, satellite tasking, and inspection capacity where risk is concentrated.</p>
+          </div>
+
+          <div class="cp-vis-step">
+            <div class="cp-vis-name">04 Verify</div>
+            <p class="cp-vis-desc">Close the decision loop with independent satellite optical/SAR and field inspection evidence.</p>
+          </div>
+
+          <div class="cp-vis-step">
+            <div class="cp-vis-name">05 Learn</div>
+            <p class="cp-vis-desc">Use validated ground-truth outcomes to adaptively retrain models and refine policy scenarios.</p>
+          </div>
+        </div>
+
+        <div class="cp-vision-closing">
+          "The long-term opportunity is not simply better prediction. It is a measurable feedback loop between environmental risk, human attention, verification, intervention, and learning."
+        </div>
+      </div>
+    </section>
+
+    <!-- 11. AUTHORITATIVE SOURCES & METHODOLOGY -->
+    <footer class="if-sources-container">
+      <div class="if-sources-title">
+        <i class="fas fa-book-open"></i> Authoritative Scientific Sources &amp; Institutional References
+      </div>
+      <div class="if-sources-grid">
+        <div class="if-source-item">
+          <strong>INPE PRODES (TerraBrasilis)</strong>
+          Official annual consolidated clear-cut deforestation monitoring methodology across the Legal Amazon.
+        </div>
+        <div class="if-source-item">
+          <strong>INPE DETER (TerraBrasilis)</strong>
+          Near-real-time satellite alert system methodology for IBAMA environmental law enforcement support.
+        </div>
+        <div class="if-source-item">
+          <strong>PrevisIA (Imazon / Microsoft)</strong>
+          Artificial intelligence risk modeling methodology for 12-month forward deforestation estimation.
+        </div>
+        <div class="if-source-item">
+          <strong>MapBiomas Alert</strong>
+          Multi-institutional high-resolution satellite validation and rural cadastre (CAR) overlay methodology.
+        </div>
+        <div class="if-source-item">
+          <strong>Hydro-Ecological Literature</strong>
+          Peer-reviewed studies on Amazon moisture recycling and tipping-point dynamics (Nobre et al.; Lovejoy &amp; Nobre).
+        </div>
+        <div class="if-source-item">
+          <strong>IPCC Guidelines</strong>
+          Good Practice Guidance for LULUCF carbon stock accounting and emissions estimation principles.
+        </div>
+        <div class="if-source-item">
+          <strong>IBAMA / MMA Operational Context</strong>
+          Enforcement command structures and field inspection logistics referenced as design assumptions.
+        </div>
+        <div class="if-source-item">
+          <strong>Decision-Support Boundary</strong>
+          Clear demarcation isolating algorithmic risk prioritization from sovereign state enforcement.
+        </div>
+      </div>
+    </footer>
+  </main>
+</body>
+</html>

@@ -1,0 +1,31 @@
+{
+  "cell_id": 6553,
+  "lat": -8.849999999999932,
+  "lon": -62.15000000000026,
+  "target_year": 2024,
+  "ground_truth_label": 0,
+  "model_predicted_probability": 0.81657,
+  "base_value_expected": -2.68377,
+  "feature_contributions": {
+    "dist_road_km": {
+      "feature_value": 178.4595,
+      "shap_attribution": 0.92035
+    },
+    "dist_hist_loss_km": {
+      "feature_value": 0.5643,
+      "shap_attribution": 1.71971
+    },
+    "prior_loss_dens": {
+      "feature_value": 64.0,
+      "shap_attribution": 0.5045
+    },
+    "pop_pressure": {
+      "feature_value": 2.978,
+      "shap_attribution": -0.07527
+    },
+    "elevation_m": {
+      "feature_value": 261.5,
+      "shap_attribution": 1.10773
+    }
+  }
+}

@@ -1,0 +1,132 @@
+Starting run_model_v2...
+
+===========================================================================
+  Validated XGBoost Model V2 -- End-to-End Training Pipeline
+  Experiment ID: GEOAI-MODEL-V2-20260908
+===========================================================================
+
+[Step 1/5] Verifying authoritative data sources...
+  [OK] rondonia_boundary     :  298,552 bytes | SHA-256: b51cab47423e...
+  [OK] rondonia_no_forest    : 8,008,892 bytes | SHA-256: ad5572bfa5b6...
+  [OK] prodes_2021           : 8,045,033 bytes | SHA-256: e170f0b44761...
+  [OK] prodes_2022           : 8,330,650 bytes | SHA-256: 7e39c218627e...
+  [OK] prodes_2023           : 5,959,016 bytes | SHA-256: fc35febac4a3...
+  [OK] prodes_2024           : 5,791,181 bytes | SHA-256: aca4f2979133...
+  [OK] highways              : 1,859,460 bytes | SHA-256: 57ff44f23f82...
+  [OK] ibge_pop              :    6,671 bytes | SHA-256: ae902117cc49...
+
+[Step 2/5] Assembling multi-year panel dataset...
+[1/4] Building neutral validation grid...
+      Grid: 7045 eligible primary forest cells
+[2/4] Building features and labels per temporal partition...
+
+  === TRAIN SPLIT (target_year=2022) ===
+
+  Building features for target year 2022...
+    [A] Computing road proximity distances (cKDTree)...
+    [B] Historical loss from prior years: [2021]...
+    [C] Computing population gravity index...
+    [D] Fetching real terrain elevation from Copernicus DEM...
+  Elevation API notice for chunk 0: HTTP Error 414: Request-URI Too Large. Using terrain proxy.
+  Elevation API notice for chunk 500: HTTP Error 414: Request-URI Too Large. Using terrain proxy.
+  Elevation API notice for chunk 1000: HTTP Error 414: Request-URI Too Large. Using terrain proxy.
+  Elevation API notice for chunk 1500: HTTP Error 414: Request-URI Too Large. Using terrain proxy.
+  Elevation API notice for chunk 2000: HTTP Error 414: Request-URI Too Large. Using terrain proxy.
+  Elevation API notice for chunk 2500: HTTP Error 414: Request-URI Too Large. Using terrain proxy.
+  Elevation API notice for chunk 3000: HTTP Error 414: Request-URI Too Large. Using terrain proxy.
+  Elevation API notice for chunk 3500: HTTP Error 414: Request-URI Too Large. Using terrain proxy.
+  Elevation API notice for chunk 4000: HTTP Error 414: Request-URI Too Large. Using terrain proxy.
+  Elevation API notice for chunk 4500: HTTP Error 414: Request-URI Too Large. Using terrain proxy.
+  Elevation API notice for chunk 5000: HTTP Error 414: Request-URI Too Large. Using terrain proxy.
+  Elevation API notice for chunk 5500: HTTP Error 414: Request-URI Too Large. Using terrain proxy.
+  Elevation API notice for chunk 6000: HTTP Error 414: Request-URI Too Large. Using terrain proxy.
+  Elevation API notice for chunk 6500: HTTP Error 414: Request-URI Too Large. Using terrain proxy.
+  Features built for 7045 cells (target_year=2022)
+    Labels for 2022: 41 positives / 7045 cells (0.5820%)
+
+  === VAL SPLIT (target_year=2023) ===
+
+  Building features for target year 2023...
+    [A] Computing road proximity distances (cKDTree)...
+    [B] Historical loss from prior years: [2021, 2022]...
+    [C] Computing population gravity index...
+    [D] Fetching real terrain elevation from Copernicus DEM...
+  Features built for 7045 cells (target_year=2023)
+    Labels for 2023: 23 positives / 7045 cells (0.3265%)
+
+  === TEST SPLIT (target_year=2024) ===
+
+  Building features for target year 2024...
+    [A] Computing road proximity distances (cKDTree)...
+    [B] Historical loss from prior years: [2021, 2022, 2023]...
+    [C] Computing population gravity index...
+    [D] Fetching real terrain elevation from Copernicus DEM...
+  Features built for 7045 cells (target_year=2024)
+    Labels for 2024: 10 positives / 7045 cells (0.1419%)
+
+[3/4] Concatenating panel dataset...
+[4/4] Exporting artifacts...
+
+Dataset assembled: 21135 total panel rows across 3 years.
+Positive events: Train=41 Val=23 Test=10
+
+[Step 3/5] Training XGBoost Model V2...
+
+Train: 7045 cells | 41 positives (0.582%)
+Val:   7045 cells | 23 positives (0.326%)
+Test:  7045 cells | 10 positives (0.142%)
+
+Baselines on held-out test set:
+  Random baseline ROC-AUC:      0.5192
+  Latitude heuristic ROC-AUC:   0.5301
+  Road distance ROC-AUC:        0.5001
+  Hist. loss distance ROC-AUC:  0.7797
+  Ablation A_road_only: AUC=0.4495
+  Ablation B_road_loss: AUC=0.7349
+  Ablation C_road_loss_pop: AUC=0.7500
+  Ablation D_all_features: AUC=0.7474
+
+Training final model (all features, early-stopped on validation AUC)...
+Evaluating on held-out test set (PRODES 2024)...
+Model saved to D:\Amazon-Deforestation-Risk-3D\artifacts\model-v2\model_v2.json
+
+Final Test Results:
+  roc_auc: 0.7474
+  pr_auc: 0.0055
+  brier_score: 0.0069
+  balanced_accuracy: 0.4972
+  precision: 0.0
+  recall: 0.0
+  f1: 0.0
+
+Top-5% Lift: 4.0x
+Spatial Holdout South AUC: 0.9092
+
+[Step 4/5] Computing SHAP feature importance...
+Computing SHAP TreeExplainer values...
+
+Model V2 SHAP Global Feature Importance:
+Feature                         Mean |SHAP|   Normalized %
+------------------------------------------------------------
+dist_hist_loss_km                  1.413035         41.28%
+dist_road_km                       0.596890         17.44%
+elevation_m                        0.560424         16.37%
+pop_pressure                       0.426583         12.46%
+prior_loss_dens                    0.426037         12.45%
+
+SHAP summary saved to D:\Amazon-Deforestation-Risk-3D\artifacts\model-v2\shap\shap_summary.json
+
+[Step 5/5] Writing model manifest...
+Model manifest saved to: D:\Amazon-Deforestation-Risk-3D\artifacts\model-v2\model_manifest.json
+
+===========================================================================
+  Model V2 Pipeline Complete -- Summary
+===========================================================================
+  Train AUC: 0.9998  |  Val AUC: 0.8089
+  Test AUC: 0.7474  |  Test Brier: 0.0069
+  Baselines -- Random: 0.5192  Latitude: 0.5301  Road: 0.5001
+  Top-5% Lift: 4.0x
+  Spatial Holdout South AUC: 0.9092
+===========================================================================
+
+Finished run_model_v2 successfully.

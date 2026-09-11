@@ -79,6 +79,18 @@
         <ul class="nav-links">
             <li><a href="index.html" class="active"><span class="nav-icon"><i class="fas fa-th-large"></i></span>
                     Dashboard</a></li>
+            <li><a href="pages/historical-intelligence.html"><span class="nav-icon"><i class="fas fa-history"></i></span>
+                    Historical Intel</a></li>
+            <li><a href="pages/scenario-simulator.html"><span class="nav-icon"><i class="fas fa-sliders-h"></i></span>
+                    Scenario Simulator</a></li>
+            <li><a href="pages/spatial-analysis.html"><span class="nav-icon"><i class="fas fa-layer-group"></i></span>
+                    Spatial Analysis</a></li>
+            <li><a href="pages/ai-model.html"><span class="nav-icon"><i class="fas fa-brain"></i></span>
+                    AI Model</a></li>
+            <li><a href="pages/impact-feasibility.html"><span class="nav-icon"><i class="fas fa-seedling"></i></span>
+                    Impact &amp; Feasibility</a></li>
+            <li><a href="https://github.com/mamdouhahmed5455-lang/Amoazon2" target="_blank" rel="noopener noreferrer" class="nav-ext"><span class="nav-icon"><i class="fab fa-github"></i></span>
+                    Research &amp; Docs</a></li>
         </ul>
         <div class="nav-status">
             <div class="nav-status-dot"></div>
@@ -137,12 +149,24 @@
 
         <div class="tab-header">
             <button class="tab-btn active" onclick="switchTab('tab-overview')">Point</button>
+            <button class="tab-btn" id="tabBtnDecisionStory" onclick="switchTab('tab-story')"><i class="fas fa-route"></i> Story</button>
             <button class="tab-btn" id="tabBtnInsights" onclick="switchTab('tab-insights')">Insights</button>
             <button class="tab-btn" onclick="switchTab('tab-model')">Model</button>
             <button class="tab-btn" onclick="switchTab('tab-region')">Region</button>
+            <button class="tab-btn" id="tabBtnHistory" onclick="switchTab('tab-history')"><i class="fas fa-history"></i> PRODES</button>
         </div>
 
         <div id="tab-overview" class="tab-content active">
+            <div class="analysis-card ds-quick-card" onclick="openDecisionStory()">
+                <div class="card-label" style="display:flex; justify-content:space-between; align-items:center;">
+                    <span>THE DECISION SEQUENCE</span>
+                    <span style="color:#60a5fa; font-weight:700; font-size:11px;">Explore Story →</span>
+                </div>
+                <div class="ds-quick-flow">
+                    <span>Location</span> → <span>Risk</span> → <span>Drivers</span> → <span>Scenario</span> → <span>Next Step</span>
+                </div>
+            </div>
+
             <div class="analysis-card">
                 <div class="card-label">Selected Location</div>
                 <div id="sideCoords" class="card-value" style="font-size: 14px; font-family: monospace;">--</div>
@@ -175,7 +199,7 @@
                     <div id="sideWindow" class="side-metric-value">--</div>
                 </div>
                 <div class="side-metric">
-                    <div class="side-metric-label">Confidence</div>
+                    <div class="side-metric-label" title="UI heuristic derived from spatial risk normalization, not calibrated probability">Confidence <span style="font-size:0.75em; opacity:0.8; font-weight:400; text-transform:none;">(Heuristic)</span></div>
                     <div id="sideConfidence" class="side-metric-value">--</div>
                 </div>
             </div>
@@ -229,6 +253,135 @@
                 <div class="card-label">Alert Log</div>
                 <div id="alertLogContainer" style="font-size: 11.5px; color: #cbd5e1; margin-top: 8px; display: flex; flex-direction: column; gap: 6px;">
                     <!-- Logs will go here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- PHASE 1B: The Decision Story -->
+        <div id="tab-story" class="tab-content">
+            <div class="ds-header-card">
+                <div class="sidebar-section-title" style="margin-bottom:2px; display:flex; justify-content:space-between; align-items:center;">
+                    <span>THE DECISION STORY</span>
+                    <span class="badge-tag">5-Step Sequence</span>
+                </div>
+                <div class="panel-note">From risk score to targeted field verification protocol.</div>
+            </div>
+
+            <!-- 01 — WHERE IS THE RISK? -->
+            <div class="analysis-card ds-card" id="dsCardLocation">
+                <div class="ds-step-num">01</div>
+                <div class="ds-step-body">
+                    <div class="card-label">WHERE IS THE RISK?</div>
+                    <div id="dsLocationName" class="ds-primary-val">Rondônia Arc Hotspot</div>
+                    <div id="dsLocationCoords" class="ds-secondary-val">LAT -11.9182 | LON -63.8722</div>
+                    <div class="ds-pill-row">
+                        <span id="dsLocationRiskBadge" class="ds-badge red">84% Risk Probability</span>
+                        <span id="dsLocationPriorityBadge" class="ds-badge urgent">Priority: Urgent</span>
+                    </div>
+                    <button id="dsTargetHotspotBtn" class="btn-hotspot-target" type="button" onclick="focusTopHotspot()">
+                        <i class="fas fa-crosshairs"></i> Target Highest-Risk Hotspot
+                    </button>
+                </div>
+            </div>
+
+            <!-- 02 — WHY IS IT AT RISK? -->
+            <div class="analysis-card ds-card">
+                <div class="ds-step-num">02</div>
+                <div class="ds-step-body">
+                    <div class="card-label">WHY IS IT AT RISK?</div>
+                    <div class="ds-driver-list">
+                        <div class="ds-driver-row">
+                            <span class="ds-driver-name">Road Proximity</span>
+                            <span class="ds-driver-bar-wrap"><span class="ds-driver-bar" style="width:41%; background:#ef4444;"></span></span>
+                            <span class="ds-driver-pct">41%</span>
+                        </div>
+                        <div class="ds-driver-row">
+                            <span class="ds-driver-name">Forest Loss</span>
+                            <span class="ds-driver-bar-wrap"><span class="ds-driver-bar" style="width:23%; background:#f97316;"></span></span>
+                            <span class="ds-driver-pct">23%</span>
+                        </div>
+                        <div class="ds-driver-row">
+                            <span class="ds-driver-name">Population</span>
+                            <span class="ds-driver-bar-wrap"><span class="ds-driver-bar" style="width:21%; background:#eab308;"></span></span>
+                            <span class="ds-driver-pct">21%</span>
+                        </div>
+                        <div class="ds-driver-row">
+                            <span class="ds-driver-name">Elevation Constraints</span>
+                            <span class="ds-driver-bar-wrap"><span class="ds-driver-bar" style="width:15%; background:#3b82f6;"></span></span>
+                            <span class="ds-driver-pct">15%</span>
+                        </div>
+                    </div>
+                    <div class="ds-disclaimer-note">
+                        <i class="fas fa-info-circle"></i> Global feature-importance benchmarks from offline model evaluation.
+                    </div>
+                </div>
+            </div>
+
+            <!-- 03 — WHAT CHANGES THE RISK? -->
+            <div class="analysis-card ds-card">
+                <div class="ds-step-num">03</div>
+                <div class="ds-step-body">
+                    <div class="card-label">WHAT CHANGES THE RISK?</div>
+                    <div class="ds-scenario-box">
+                        <div class="ds-scenario-item">
+                            <span class="ds-arrow-up"><i class="fas fa-arrow-up"></i></span>
+                            <span><strong>Road pressure ↑</strong> → simulated risk sensitivity ↑</span>
+                        </div>
+                        <div class="ds-scenario-item">
+                            <span class="ds-arrow-down"><i class="fas fa-arrow-down"></i></span>
+                            <span><strong>Conservation intervention ↑</strong> → simulated risk sensitivity ↓</span>
+                        </div>
+                    </div>
+                    <div class="ds-disclaimer-note">
+                        <i class="fas fa-sliders-h"></i> Analytical sensitivity simulation (calibrated with SHAP weights, not live XGBoost re-training).
+                    </div>
+                    <a href="pages/scenario-simulator.html" target="_blank" class="panel-action-btn ds-scenario-launch">
+                        <i class="fas fa-external-link-alt"></i> Open Scenario Simulator
+                    </a>
+                </div>
+            </div>
+
+            <!-- 04 — WHAT SHOULD HAPPEN NEXT? -->
+            <div class="analysis-card ds-card">
+                <div class="ds-step-num">04</div>
+                <div class="ds-step-body">
+                    <div class="card-label">WHAT SHOULD HAPPEN NEXT?</div>
+                    <div class="ds-action-box">
+                        <div class="ds-action-title">
+                            <i class="fas fa-clipboard-check"></i> Prioritize independent verification / targeted field inspection.
+                        </div>
+                        <div id="dsActionWindow" class="ds-action-meta">
+                            Assigned Response Window: <strong>24–72 hours</strong> for priority frontier inspection.
+                        </div>
+                    </div>
+                    <button class="panel-action-btn ds-alert-dispatch-btn" type="button" onclick="sendManualAlert()">
+                        <i class="fas fa-paper-plane"></i> Dispatch Targeted Inspection Alert
+                    </button>
+                </div>
+            </div>
+
+            <!-- 05 — WHAT IS THE POTENTIAL VALUE? -->
+            <div class="analysis-card ds-card">
+                <div class="ds-step-num">05</div>
+                <div class="ds-step-body">
+                    <div class="card-label">WHAT IS THE POTENTIAL VALUE?</div>
+                    <div class="ds-value-flow">
+                        <div class="ds-flow-node">Better Risk Prioritization</div>
+                        <div class="ds-flow-arrow"><i class="fas fa-arrow-down"></i></div>
+                        <div class="ds-flow-node">More Focused Monitoring</div>
+                        <div class="ds-flow-arrow"><i class="fas fa-arrow-down"></i></div>
+                        <div class="ds-flow-node">Potentially Faster Verification</div>
+                        <div class="ds-flow-arrow"><i class="fas fa-arrow-down"></i></div>
+                        <div class="ds-flow-node">Potentially Faster Intervention</div>
+                        <div class="ds-flow-arrow"><i class="fas fa-arrow-down"></i></div>
+                        <div class="ds-flow-node highlight">Potential Avoidance of Forest Loss</div>
+                    </div>
+                    <div class="ds-disclaimer-note" style="margin-top:8px;">
+                        <i class="fas fa-info-circle"></i> Operational workflow impact model. Prototype does not claim historical loss prevention.
+                    </div>
+                    <a href="pages/impact-feasibility.html" target="_blank" class="panel-action-btn ds-scenario-launch" style="margin-top: 8px;">
+                        <i class="fas fa-seedling"></i> Explore Environmental Impact Analysis
+                    </a>
                 </div>
             </div>
         </div>
@@ -385,6 +538,39 @@
                 <div id="sideValidationSummary" class="panel-note" style="margin-top:12px;">
                     Enable Validation Layer to compare predicted risk with spatial proxy indicators.
                 </div>
+            </div>
+        </div>
+
+        <!-- PHASE 3A: Historical Intelligence Sidebar Tab -->
+        <div id="tab-history" class="tab-content">
+            <div class="analysis-card">
+                <div class="sidebar-section-title" style="display:flex; justify-content:space-between; align-items:center;">
+                    <span>HISTORICAL INTELLIGENCE</span>
+                    <span class="badge-tag">2001–2025</span>
+                </div>
+                <div class="panel-note" style="margin-bottom:12px;">
+                    Official PRODES annual consolidated clear-cut trajectory across the Legal Amazon.
+                </div>
+                <div class="hi-latest-table" style="margin-bottom:14px;">
+                    <div class="hi-latest-row">
+                        <div class="hi-latest-col-state">Legal Amazon (2025)</div>
+                        <div class="hi-latest-col-vals"><strong>5,731 km²</strong></div>
+                        <div class="hi-latest-col-badge badge-down">↓ 12.07%</div>
+                    </div>
+                    <div class="hi-latest-row">
+                        <div class="hi-latest-col-state">Rondônia (Pilot)</div>
+                        <div class="hi-latest-col-vals"><strong>229 km²</strong></div>
+                        <div class="hi-latest-col-badge badge-down">↓ 36.39%</div>
+                    </div>
+                    <div class="hi-latest-row">
+                        <div class="hi-latest-col-state">Mato Grosso</div>
+                        <div class="hi-latest-col-vals"><strong>1,593 km²</strong></div>
+                        <div class="hi-latest-col-badge badge-up">↑ 26.73%</div>
+                    </div>
+                </div>
+                <button class="panel-action-btn wide" type="button" onclick="toggleHistoricalModal(true)" style="background: rgba(56, 189, 248, 0.16) !important; color: #38bdf8 !important; border-color: rgba(56, 189, 248, 0.4) !important;">
+                    <i class="fas fa-chart-line"></i> Open 25-Year Trajectory
+                </button>
             </div>
         </div>
 
@@ -809,7 +995,7 @@
                             <div class="specs-grid">
                                 <div class="spec-card">
                                     <div class="spec-label">AUC Score</div>
-                                    <div class="spec-value" style="color:#10b981">0.82 (Validated)</div>
+                                    <div class="spec-value" style="color:#10b981">0.82 (Documented Benchmark)</div>
                                 </div>
                                 <div class="spec-card">
                                     <div class="spec-label">Algorithm</div>
@@ -833,7 +1019,7 @@
                     <div class="modal-grid">
                         <div class="modal-text">
                             <p>
-                                The dashboard serves as an operational screening interface. Analysts can filter
+                                The dashboard serves as a decision-support screening interface. Analysts can filter
                                 the basin, isolate high-risk cells, and translate model output into action-ready
                                 priorities.
                             </p>
@@ -1036,9 +1222,9 @@
             <div id="lowRiskCount" class="stat-card-value" style="color:#86efac;">--</div>
             <div class="stat-card-label">Low Risk <span style="font-size:0.75em; opacity:0.8; font-weight:400; text-transform:none;">(Raw grid cells)</span></div>
         </div>
-        <div class="stat-card-hud glass-panel">
+        <div class="stat-card-hud glass-panel" title="UI heuristic derived from spatial risk normalization, not calibrated probability">
             <div id="predictionConfidence" class="stat-card-value" style="color:#a5f3fc;">--</div>
-            <div class="stat-card-label">Model Conf.</div>
+            <div class="stat-card-label">Model Conf. <span style="font-size:0.75em; opacity:0.8; font-weight:400; text-transform:none;">(Heuristic)</span></div>
         </div>
         <div class="stat-card-hud glass-panel" onclick="toggleMetricsPopup(true)"
             style="cursor: pointer; min-width: 100px;">
@@ -1085,6 +1271,199 @@
                     </div>
                     <div class="metrics-note">
                         <b>Validation Logic:</b> Standard Train/Test split (Note: Strict Spatial Split planned for future development), ROC-AUC evaluation, validation with observed forest loss proxies, and hotspot comparison.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PHASE 3A: Historical Intelligence Modal Overlay -->
+    <div id="historicalIntelligenceModal" class="hi-modal-overlay" onclick="if(event.target === this) toggleHistoricalModal(false)">
+        <div class="hi-modal-container glass-panel">
+            <div class="hi-modal-header">
+                <div class="hi-header-brand">
+                    <div class="hi-badge-tag"><i class="fas fa-satellite"></i> OFFICIAL PRODES TIME SERIES</div>
+                    <h2 class="hi-title">How the Deforestation Landscape Changed — 2001–2025</h2>
+                    <p class="hi-subtitle">Official PRODES annual deforestation trajectory across the Legal Amazon.</p>
+                </div>
+                <div class="hi-header-actions">
+                    <span class="hi-source-label"><i class="fas fa-database"></i> Source: INPE / TerraBrasilis — PRODES</span>
+                    <button class="hi-close-btn" onclick="toggleHistoricalModal(false)" aria-label="Close modal">&times;</button>
+                </div>
+            </div>
+
+            <div class="hi-modal-body">
+                <!-- Interactive Controls Bar (Parts C & D) -->
+                <div class="hi-controls-bar">
+                    <div class="hi-control-group">
+                        <label for="hiStateSelect"><i class="fas fa-map-marker-alt"></i> Select Jurisdiction:</label>
+                        <select id="hiStateSelect" class="hi-select" onchange="onHistoricalStateChange(this.value)">
+                            <option value="Amazônia Legal">Amazônia Legal (Total)</option>
+                            <option value="Acre">Acre</option>
+                            <option value="Amapá">Amapá</option>
+                            <option value="Amazonas">Amazonas</option>
+                            <option value="Maranhão">Maranhão</option>
+                            <option value="Mato Grosso">Mato Grosso</option>
+                            <option value="Pará">Pará</option>
+                            <option value="Rondônia">Rondônia</option>
+                            <option value="Roraima">Roraima</option>
+                            <option value="Tocantins">Tocantins</option>
+                        </select>
+                    </div>
+
+                    <div class="hi-control-group hi-compare-group">
+                        <label class="hi-toggle-label">
+                            <input type="checkbox" id="hiCompareRondonia" onchange="onHistoricalCompareToggle(this.checked)">
+                            <span><i class="fas fa-layer-group"></i> Compare with Rondônia</span>
+                        </label>
+                    </div>
+
+                    <div class="hi-active-pill" id="hiActivePill">
+                        <span class="hi-pill-dot"></span>
+                        <span id="hiActivePillText">Viewing: Amazônia Legal</span>
+                    </div>
+                </div>
+
+                <!-- Main Chart Workspace (Part B) -->
+                <div class="hi-chart-wrapper">
+                    <div class="hi-chart-header">
+                        <div class="hi-chart-title-wrap">
+                            <span class="hi-chart-title" id="hiChartTitle">Amazônia Legal: Annual Deforestation (km²)</span>
+                            <span class="hi-chart-range">2001 → 2025</span>
+                        </div>
+                        <div class="hi-chart-legend" id="hiChartLegend">
+                            <div class="hi-legend-item">
+                                <span class="hi-legend-line" style="background:#38bdf8;"></span>
+                                <span id="hiLegendPrimary">Amazônia Legal</span>
+                            </div>
+                            <div class="hi-legend-item hi-legend-rondonia" id="hiLegendRondonia" style="display:none;">
+                                <span class="hi-legend-line dashed" style="background:#f59e0b;"></span>
+                                <span>Rondônia Benchmark</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hi-canvas-shell">
+                        <canvas id="hiChartCanvas" height="250"></canvas>
+                    </div>
+                </div>
+
+                <!-- Key Historical Moments Callout Strip (Part F) -->
+                <div class="hi-moments-grid">
+                    <div class="hi-moment-card" onclick="highlightHistoricalMoment(2004)">
+                        <div class="hi-moment-year">2004</div>
+                        <div class="hi-moment-title">Historical Peak</div>
+                        <div class="hi-moment-stat">27,772 km²</div>
+                        <div class="hi-moment-desc">Peak basin clearing prior to PPCDAm coordinated governance.</div>
+                    </div>
+                    <div class="hi-moment-card" onclick="highlightHistoricalMoment(2012)">
+                        <div class="hi-moment-year">2012</div>
+                        <div class="hi-moment-title">Long-Term Low</div>
+                        <div class="hi-moment-stat">4,571 km²</div>
+                        <div class="hi-moment-desc">Historic trough achieved via satellite alert enforcement.</div>
+                    </div>
+                    <div class="hi-moment-card" onclick="highlightHistoricalMoment(2021)">
+                        <div class="hi-moment-year">2021</div>
+                        <div class="hi-moment-title">Major Rebound</div>
+                        <div class="hi-moment-stat">13,038 km²</div>
+                        <div class="hi-moment-desc">Renewed surge along active AMACRO frontier zones.</div>
+                    </div>
+                    <div class="hi-moment-card" onclick="highlightHistoricalMoment(2025)">
+                        <div class="hi-moment-year">2025</div>
+                        <div class="hi-moment-title">Lowest Since 2014</div>
+                        <div class="hi-moment-stat">5,731 km²</div>
+                        <div class="hi-moment-desc">-12.07% consolidated drop from 6,518 km² in 2024.</div>
+                    </div>
+                </div>
+
+                <!-- 3-Column Evidence Grid (Parts E, H, G) -->
+                <div class="hi-evidence-grid">
+                    <!-- Column 1: Summary Intelligence (Part E) -->
+                    <div class="hi-card hi-summary-card">
+                        <div class="hi-card-kicker"><i class="fas fa-calculator"></i> SUMMARY INTELLIGENCE</div>
+                        <h4 class="hi-card-title" id="hiSummaryTitle">Amazônia Legal Metrics</h4>
+                        <div class="hi-stat-rows">
+                            <div class="hi-stat-row">
+                                <span class="hi-stat-name">Peak Loss Year:</span>
+                                <strong class="hi-stat-val" id="hiPeakYearVal">2004 (27,772 km²)</strong>
+                            </div>
+                            <div class="hi-stat-row">
+                                <span class="hi-stat-name">Historical Low Year:</span>
+                                <strong class="hi-stat-val" id="hiLowYearVal">2012 (4,571 km²)</strong>
+                            </div>
+                            <div class="hi-stat-row">
+                                <span class="hi-stat-name">2025 Deforestation:</span>
+                                <strong class="hi-stat-val text-emerald" id="hi2025Val">5,731 km²</strong>
+                            </div>
+                            <div class="hi-stat-row">
+                                <span class="hi-stat-name">2024 → 2025 YoY:</span>
+                                <strong class="hi-stat-val" id="hiDeltaVal">-787 km² (-12.07%)</strong>
+                            </div>
+                        </div>
+                        <div class="hi-direction-box">
+                            <div class="hi-direction-label">Long-Term Trajectory:</div>
+                            <div class="hi-direction-text" id="hiDirectionText">79.4% below 2004 peak; declining recently (-12.1% in 2025)</div>
+                        </div>
+                    </div>
+
+                    <!-- Column 2: 2024 vs 2025 Comparison (Part H) -->
+                    <div class="hi-card hi-latest-card">
+                        <div class="hi-card-kicker"><i class="fas fa-exchange-alt"></i> LATEST PRODES CHANGE</div>
+                        <h4 class="hi-card-title">PRODES 2024 vs 2025</h4>
+                        <div class="hi-latest-table">
+                            <div class="hi-latest-row">
+                                <div class="hi-latest-col-state">Legal Amazon</div>
+                                <div class="hi-latest-col-vals">6,518 → <strong>5,731 km²</strong></div>
+                                <div class="hi-latest-col-badge badge-down">↓ 12.07%</div>
+                            </div>
+                            <div class="hi-latest-row">
+                                <div class="hi-latest-col-state">Rondônia (Pilot)</div>
+                                <div class="hi-latest-col-vals">360 → <strong>229 km²</strong></div>
+                                <div class="hi-latest-col-badge badge-down">↓ 36.39%</div>
+                            </div>
+                            <div class="hi-latest-row">
+                                <div class="hi-latest-col-state">Mato Grosso</div>
+                                <div class="hi-latest-col-vals">1,257 → <strong>1,593 km²</strong></div>
+                                <div class="hi-latest-col-badge badge-up">↑ 26.73%</div>
+                            </div>
+                        </div>
+                        <div class="hi-card-footer-note">
+                            <i class="fas fa-info-circle"></i> Regional behavior is heterogeneous: Mato Grosso experienced expansion (+26.73%) while 8 other states recorded declines in 2025.
+                        </div>
+                    </div>
+
+                    <!-- Column 3: Rondônia Context (Part G) -->
+                    <div class="hi-card hi-rondonia-card">
+                        <div class="hi-card-kicker"><i class="fas fa-microscope"></i> STUDY AREA RATIONALE</div>
+                        <h4 class="hi-card-title">Why Rondônia?</h4>
+                        <div class="hi-rondonia-lead">
+                            <strong>Rondônia is the current prototype study area.</strong>
+                        </div>
+                        <p class="hi-rondonia-p">
+                            The pilot focuses on a highly fragmented, road-influenced landscape, providing a useful setting for testing spatial risk prioritization.
+                        </p>
+                        <div class="hi-rondonia-facts-grid">
+                            <div class="hi-rf-item"><span class="hi-rf-label">2004 Peak:</span> <strong>3,858 km²</strong></div>
+                            <div class="hi-rf-item"><span class="hi-rf-label">2021 Rebound:</span> <strong>1,673 km²</strong></div>
+                            <div class="hi-rf-item"><span class="hi-rf-label">2024 Clearing:</span> <strong>360 km²</strong></div>
+                            <div class="hi-rf-item"><span class="hi-rf-label">2025 Clearing:</span> <strong>229 km²</strong></div>
+                            <div class="hi-rf-item full-width"><span class="hi-rf-label">2024 → 2025 Trend:</span> <strong class="text-emerald">↓ 36.39%</strong></div>
+                        </div>
+                        <div class="hi-card-footer-note">
+                            Rondônia is selected for its dense road access (BR-364 fishbone) and sharp protected enclaves, not as an absolute highest-risk claim.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PHASE 3B: Amazonia Legal State-by-State Intelligence -->
+                <div id="hiStateIntelligenceContainer"></div>
+
+                <!-- Scientific Honesty Disclaimer (Part I) -->
+                <div class="hi-honesty-note">
+                    <div class="hi-honesty-icon"><i class="fas fa-shield-alt"></i></div>
+                    <div class="hi-honesty-text">
+                        <strong>Scientific Methodology & System Separation:</strong>
+                        PRODES measures annual consolidated primary forest clear-cutting via cloud-free Landsat/Sentinel/CBERS mosaics (≥6.25 ha). It should not be interpreted as a real-time alert stream.
+                        DETER provides rapid daily/weekly radiometric alerts (≥3 ha) for operational field enforcement (IBAMA), subject to persistent cloud cover. PRODES and DETER figures represent distinct monitoring methodologies and cannot be mathematically conflated.
                     </div>
                 </div>
             </div>
@@ -1142,17 +1521,66 @@
             oninput="updateYear(this.value)">
     </div>
 
-    <div id="intelBar">
-        <div class="intel-brand">
-            <div>
-                <div class="intel-title" data-ssot="project-name">AI-Based Deforestation Risk Prediction Model - Amazon Basin</div>
-                <div class="intel-subtitle">GeoAI scene active with live ranking, hotspot surfacing, and timeline
-                    playback.</div>
+    <!-- PHASE 1A: 30-Second Hero Story -->
+    <div id="intelBar" class="hero-story-panel">
+        <div class="hero-story-header">
+            <div class="hero-story-brand">
+                <div class="hero-story-badge"><i class="fas fa-satellite"></i> 30-SEC EXECUTIVE STORY</div>
+                <h1 class="hero-story-headline">From Forest Risk to Actionable Intelligence</h1>
+            </div>
+            <div class="hero-story-actions">
+                <button class="hero-story-btn-cta" onclick="openDecisionStory()" title="Open Interactive Decision Story">
+                    <i class="fas fa-route"></i> The Decision Story
+                </button>
+                <button class="hero-story-btn-cta hi-cta-btn" onclick="toggleHistoricalModal(true)" title="Open PRODES Historical Intelligence (2001–2025)">
+                    <i class="fas fa-chart-line"></i> Historical Intelligence
+                </button>
+                <button id="heroStoryToggle" class="hero-story-toggle" onclick="toggleHeroStory()" aria-label="Toggle story expansion" title="Minimize / Expand Story">
+                    <i class="fas fa-chevron-up" id="heroToggleIcon"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="heroStoryContent" class="hero-story-body">
+            <p class="hero-story-copy">
+                Identify where deforestation risk is concentrated, understand the dominant drivers, test policy sensitivity, and prioritize where verification and intervention should happen first.
+            </p>
+
+            <div class="hero-story-facts">
+                <div class="hero-fact-item">
+                    <span class="hero-fact-value">150,000</span>
+                    <span class="hero-fact-label">Spatial Cells</span>
+                </div>
+                <div class="hero-fact-sep">·</div>
+                <div class="hero-fact-item">
+                    <span class="hero-fact-value">Rondônia</span>
+                    <span class="hero-fact-label">Pilot Region</span>
+                </div>
+                <div class="hero-fact-sep">·</div>
+                <div class="hero-fact-item">
+                    <span class="hero-fact-value">XGBoost</span>
+                    <span class="hero-fact-label">Offline-Trained Model</span>
+                </div>
+            </div>
+
+            <div class="hero-story-chain">
+                <span class="chain-step">PREDICT</span>
+                <span class="chain-arrow">→</span>
+                <span class="chain-step">EXPLAIN</span>
+                <span class="chain-arrow">→</span>
+                <span class="chain-step">PRIORITIZE</span>
+                <span class="chain-arrow">→</span>
+                <span class="chain-step">SIMULATE</span>
+                <span class="chain-arrow">→</span>
+                <span class="chain-step">VERIFY</span>
+                <span class="chain-arrow">→</span>
+                <span class="chain-step active">ACT</span>
             </div>
         </div>
     </div>
 
   <script src="scripts/constants.js"></script>
+  <script src="scripts/historical-intelligence.js"></script>
   <script src="assets/pages/index/app.js?v=3"></script>
 </body>
 </html>

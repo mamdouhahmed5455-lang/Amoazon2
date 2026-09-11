@@ -1,0 +1,178 @@
+{
+  "experiment_id": "GEOAI-VAL-REDESIGN-20260908",
+  "experiment_name": "Full-Coverage Rond\u00f4nia Validation & Baseline Benchmarking",
+  "timestamp": "2026-09-07T21:14:42.216800+00:00",
+  "methodology": {
+    "validation_type": "Retrospective Spatial Association Validation",
+    "eligibility_mask": "INPE TerraBrasilis sovereign boundary + no_forest natural exclusions",
+    "sampling_method": "Neutral systematic geographic lattice",
+    "score_transfer": "Spatial nearest-neighbor within modeled frontier; zero baseline in deep forest"
+  },
+  "sources": {
+    "production_grid": {
+      "path": "D:\\Amazon-Deforestation-Risk-3D\\data\\forest_data_clean.json",
+      "sha256": "858b0ab2a2dccb104a87b1d935e72cf0678f235d1c83185edc3af247d310147e",
+      "size_bytes": 20411439
+    },
+    "rondonia_boundary": {
+      "path": "D:\\Amazon-Deforestation-Risk-3D\\data\\external\\prodes-validation\\rondonia_boundary.geojson",
+      "sha256": "b51cab47423e306012f6229d68b1ab9a75ce40c873ff76c9333a1f35c77de4b7",
+      "size_bytes": 298552
+    },
+    "rondonia_no_forest": {
+      "path": "D:\\Amazon-Deforestation-Risk-3D\\data\\external\\prodes-validation\\rondonia_no_forest.geojson",
+      "sha256": "ad5572bfa5b640c7c900c10aa2b585bac074d624812964269e1ad4ab6efe6790",
+      "size_bytes": 8008892
+    },
+    "prodes_2024": {
+      "path": "D:\\Amazon-Deforestation-Risk-3D\\data\\external\\prodes\\prodes_ro_2024.geojson",
+      "sha256": "aca4f29791332b27edbee9993f3cedb744cbf609241788b88cf4aacb8982443c",
+      "size_bytes": 5791181
+    },
+    "prodes_2023": {
+      "path": "D:\\Amazon-Deforestation-Risk-3D\\data\\external\\prodes\\prodes_ro_2023.geojson",
+      "sha256": "fc35febac4a31b7b4d6a4e9fa9d8e637fb63a3e4d4873305e1011e8079eeca3a",
+      "size_bytes": 5959016
+    }
+  },
+  "population_audit": {
+    "validation_cells_total": 7045,
+    "positives_2024": 10,
+    "prevalence_2024_pct": 0.1419,
+    "positives_recent": 33,
+    "prevalence_recent_pct": 0.4684,
+    "negatives_intact_forest_2024": 7035,
+    "output_csv_gz": "D:\\Amazon-Deforestation-Risk-3D\\artifacts\\validation-redesign\\redesigned_validation_population.csv.gz"
+  },
+  "evaluation_2024": {
+    "evaluation_target": "prodes_label_2024",
+    "population_size": 7045,
+    "total_positives": 10,
+    "base_prevalence": 0.001419,
+    "model_performance": {
+      "roc_auc": 0.486,
+      "pr_auc": 0.001649,
+      "brier_score": 0.429
+    },
+    "baseline_comparison": {
+      "baseline_random_auc": 0.5192,
+      "baseline_uniform_auc": 0.5,
+      "baseline_latitude_heuristic_auc": 0.5301,
+      "model_vs_random_delta_auc": -0.0331,
+      "model_vs_latitude_delta_auc": -0.0441
+    },
+    "top_k_operational_tiers": [
+      {
+        "tier_percentage": "Top 1%",
+        "flagged_cells_k": 70,
+        "captured_positives": 0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "lift_over_base": 0.0
+      },
+      {
+        "tier_percentage": "Top 5%",
+        "flagged_cells_k": 352,
+        "captured_positives": 1,
+        "precision": 0.00284,
+        "recall": 0.1,
+        "lift_over_base": 2.0
+      },
+      {
+        "tier_percentage": "Top 10%",
+        "flagged_cells_k": 704,
+        "captured_positives": 1,
+        "precision": 0.00142,
+        "recall": 0.1,
+        "lift_over_base": 1.0
+      },
+      {
+        "tier_percentage": "Top 20%",
+        "flagged_cells_k": 1409,
+        "captured_positives": 2,
+        "precision": 0.00142,
+        "recall": 0.2,
+        "lift_over_base": 1.0
+      }
+    ],
+    "spatial_holdout": {
+      "latitude_partition": -11.0,
+      "northern_sector": {
+        "samples": 3777,
+        "positives": 6,
+        "roc_auc": 0.4532
+      },
+      "southern_sector": {
+        "samples": 3268,
+        "positives": 4,
+        "roc_auc": 0.5413
+      }
+    }
+  },
+  "evaluation_recent": {
+    "evaluation_target": "prodes_label_recent",
+    "population_size": 7045,
+    "total_positives": 33,
+    "base_prevalence": 0.004684,
+    "model_performance": {
+      "roc_auc": 0.5192,
+      "pr_auc": 0.004806,
+      "brier_score": 0.4288
+    },
+    "baseline_comparison": {
+      "baseline_random_auc": 0.4254,
+      "baseline_uniform_auc": 0.5,
+      "baseline_latitude_heuristic_auc": 0.6162,
+      "model_vs_random_delta_auc": 0.0938,
+      "model_vs_latitude_delta_auc": -0.097
+    },
+    "top_k_operational_tiers": [
+      {
+        "tier_percentage": "Top 1%",
+        "flagged_cells_k": 70,
+        "captured_positives": 0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "lift_over_base": 0.0
+      },
+      {
+        "tier_percentage": "Top 5%",
+        "flagged_cells_k": 352,
+        "captured_positives": 2,
+        "precision": 0.00568,
+        "recall": 0.0606,
+        "lift_over_base": 1.21
+      },
+      {
+        "tier_percentage": "Top 10%",
+        "flagged_cells_k": 704,
+        "captured_positives": 2,
+        "precision": 0.00284,
+        "recall": 0.0606,
+        "lift_over_base": 0.61
+      },
+      {
+        "tier_percentage": "Top 20%",
+        "flagged_cells_k": 1409,
+        "captured_positives": 7,
+        "precision": 0.00497,
+        "recall": 0.2121,
+        "lift_over_base": 1.06
+      }
+    ],
+    "spatial_holdout": {
+      "latitude_partition": -11.0,
+      "northern_sector": {
+        "samples": 3777,
+        "positives": 23,
+        "roc_auc": 0.4872
+      },
+      "southern_sector": {
+        "samples": 3268,
+        "positives": 10,
+        "roc_auc": 0.5758
+      }
+    }
+  },
+  "status": "PHASE_5D_REDESIGNED_VALIDATION_COMPLETE"
+}

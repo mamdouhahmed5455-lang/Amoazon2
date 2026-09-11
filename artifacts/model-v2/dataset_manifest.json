@@ -1,0 +1,69 @@
+{
+  "experiment_id": "GEOAI-MODEL-V2-20260908",
+  "timestamp": "2026-09-11T14:08:45.274609+00:00",
+  "crs": "EPSG:4674 / EPSG:4326",
+  "grid_metadata": {
+    "candidate_lattice_points": 15732,
+    "eligible_primary_forest_cells": 7045,
+    "lattice_step_degrees": 0.05,
+    "lat_min": -13.65,
+    "lat_max": -7.99999999999992,
+    "lon_min": -66.75,
+    "lon_max": -59.90000000000039
+  },
+  "temporal_design": {
+    "train": "Features <= 2021 -> Labels 2022",
+    "val": "Features <= 2022 -> Labels 2023",
+    "test": "Features <= 2023 -> Labels 2024"
+  },
+  "label_statistics": {
+    "2022": {
+      "split": "train",
+      "total_cells": 7045,
+      "positives": 41,
+      "negatives": 7004,
+      "prevalence_pct": 0.582
+    },
+    "2023": {
+      "split": "val",
+      "total_cells": 7045,
+      "positives": 23,
+      "negatives": 7022,
+      "prevalence_pct": 0.3265
+    },
+    "2024": {
+      "split": "test",
+      "total_cells": 7045,
+      "positives": 10,
+      "negatives": 7035,
+      "prevalence_pct": 0.1419
+    }
+  },
+  "feature_groups_count": 4,
+  "feature_columns": [
+    "dist_road_km",
+    "dist_hist_loss_km",
+    "prior_loss_dens",
+    "pop_pressure",
+    "elevation_m"
+  ],
+  "total_panel_rows": 21135,
+  "artifacts": {
+    "features_parquet": {
+      "path": "D:\\Amazon-Deforestation-Risk-3D\\artifacts\\model-v2\\features.parquet",
+      "sha256": "2e02e319960375e4168ab1adb407f96df12ff49e118773789b10ffd0fe27f5fb"
+    },
+    "features_csv_gz": {
+      "path": "D:\\Amazon-Deforestation-Risk-3D\\artifacts\\model-v2\\features.csv.gz",
+      "sha256": "1201d0eaed4aa3637881a4e79c91d2c9d932213e2201673b93b60100e54a5c9d"
+    },
+    "labels_parquet": {
+      "path": "D:\\Amazon-Deforestation-Risk-3D\\artifacts\\model-v2\\labels.parquet",
+      "sha256": "7b8d67ba610be414f8d9e31d5756db48e3457bacfadfbd6bf5c31991c9422bca"
+    },
+    "labels_csv_gz": {
+      "path": "D:\\Amazon-Deforestation-Risk-3D\\artifacts\\model-v2\\labels.csv.gz",
+      "sha256": "47c40b02ec80f71b3916541652ae8cdb06c8e38e826b850e50cebf52669901a0"
+    }
+  }
+}

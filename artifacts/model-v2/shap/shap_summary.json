@@ -1,0 +1,40 @@
+{
+  "experiment": "GEOAI-MODEL-V2-20260908",
+  "scientific_classification": "TreeSHAP Attribution on Retrospective Out-of-Time Test Set",
+  "note": "Model V2 SHAP values are independently calculated and NOT identical to legacy 41/23/21/15 benchmark weights.",
+  "test_samples_evaluated": 7045,
+  "feature_count": 5,
+  "global_importance": {
+    "dist_road_km": {
+      "mean_abs_shap": 0.59689,
+      "normalized_pct": 17.44
+    },
+    "dist_hist_loss_km": {
+      "mean_abs_shap": 1.413035,
+      "normalized_pct": 41.28
+    },
+    "prior_loss_dens": {
+      "mean_abs_shap": 0.426037,
+      "normalized_pct": 12.45
+    },
+    "pop_pressure": {
+      "mean_abs_shap": 0.426583,
+      "normalized_pct": 12.46
+    },
+    "elevation_m": {
+      "mean_abs_shap": 0.560424,
+      "normalized_pct": 16.37
+    }
+  },
+  "feature_ranking_descending": [
+    "dist_hist_loss_km",
+    "dist_road_km",
+    "elevation_m",
+    "pop_pressure",
+    "prior_loss_dens"
+  ],
+  "artifacts": {
+    "summary_plot": "D:\\Amazon-Deforestation-Risk-3D\\artifacts\\model-v2\\shap\\shap_summary_plot.png",
+    "local_example": "D:\\Amazon-Deforestation-Risk-3D\\artifacts\\model-v2\\shap\\local_shap_example.json"
+  }
+}

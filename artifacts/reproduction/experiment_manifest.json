@@ -1,0 +1,111 @@
+{
+  "experiment_id": "GEOAI-REP-20260907-EXP01",
+  "experiment_name": "Independent Model Reproduction & Validation Experiment",
+  "experiment_type": "independent_reconstruction",
+  "timestamp": "2026-09-07T19:31:28.184177+00:00",
+  "environment": {
+    "python_version": "3.14.6",
+    "platform": "Windows-10-10.0.19045-SP0"
+  },
+  "dataset": {
+    "file_path": "D:\\Amazon-Deforestation-Risk-3D\\data\\forest_data_clean.json",
+    "sha256": "858b0ab2a2dccb104a87b1d935e72cf0678f235d1c83185edc3af247d310147e",
+    "row_count": 150000,
+    "columns": [
+      "lat",
+      "lon",
+      "risk_score",
+      "risk_norm",
+      "elevation",
+      "color"
+    ],
+    "null_counts": {
+      "lat": 0,
+      "lon": 0,
+      "risk_score": 0,
+      "risk_norm": 0,
+      "elevation": 0,
+      "color": 0
+    },
+    "lat_range": [
+      -13.6273979443,
+      -7.9822948674
+    ],
+    "lon_range": [
+      -66.7213346654,
+      -59.9041996373
+    ],
+    "risk_score_range": [
+      160,
+      178
+    ],
+    "risk_norm_range": [
+      0.8988764045,
+      1.0
+    ],
+    "elevation_range": [
+      3595.5056179775,
+      4000.0
+    ]
+  },
+  "features": {
+    "dataset_columns_present": [
+      "lat",
+      "lon",
+      "risk_score",
+      "risk_norm",
+      "elevation",
+      "color"
+    ],
+    "empirical_spatial_features": [
+      "lat",
+      "lon"
+    ],
+    "precomputed_model_outputs": [
+      "risk_score",
+      "risk_norm"
+    ],
+    "visualization_artifacts": [
+      "elevation",
+      "color"
+    ],
+    "documented_training_features_count": 12,
+    "documented_training_features_present_in_file": 0,
+    "raw_raster_features_status": "NOT STORED IN PRODUCTION REPOSITORY",
+    "elevation_column_is_physical_meters": false,
+    "elevation_column_derivation": "elevation = risk_norm * 4000",
+    "elevation_formula_max_deviation": 1.9780009097303264e-07
+  },
+  "target_audit": {
+    "status": "NOT_RECOVERABLE",
+    "has_authentic_labels": false,
+    "blocked": true,
+    "reason": "The repository contains only precomputed model inference outputs (risk_score, risk_norm) in data/forest_data_clean.json. Ground-truth binary clear-cut labels (y in {0, 1}) are absent.",
+    "remediation_required": "Acquire INPE PRODES deforestation vector shapefiles for Rond\u00f4nia and perform spatial intersection against coordinate centroids."
+  },
+  "benchmark_comparison": {
+    "canonical_benchmark_metrics": {
+      "roc_auc": 0.82,
+      "precision": 0.79,
+      "recall": 0.84,
+      "f1": 0.81,
+      "accuracy": 0.9622,
+      "threshold": 0.5,
+      "total_cells": 150000,
+      "confusion_matrix": {
+        "true_positives": 12450,
+        "false_negatives": 2380,
+        "false_positives": 3290,
+        "true_negatives": 131880
+      }
+    },
+    "canonical_shap_importance": {
+      "Road Proximity": 0.41,
+      "Forest Loss (Temporal)": 0.23,
+      "Population Pressure": 0.21,
+      "Elevation Constraints": 0.15
+    }
+  },
+  "status": "COMPLETED_AUDIT_HALTED_ON_TARGET",
+  "reproduction_status": "BLOCKED_ABSENT_GROUND_TRUTH"
+}

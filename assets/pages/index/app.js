@@ -2526,6 +2526,7 @@ function toggleSidebar(show, obj = null, forceHidden = false) {
             syncInsightVisibility();
             updateSideTrajectoryChart();
             updateInsightBox(getVisibleScenarioData());
+            updateDecisionStory(null);
             switchTab('tab-overview');
         }
     }
@@ -2561,6 +2562,7 @@ function toggleSidebar(show, obj = null, forceHidden = false) {
             meterFill.style.width = riskPercent + '%';
             meterFill.style.background = pointScore > 170 ? '#dc2626' : (pointScore > 165 ? '#f59e0b' : '#22c55e');
         }
+        updateDecisionStory(obj, pointScore, probability, priority);
         let advice = "";
         if (pointScore > 170) {
             advice = `<b>CRITICAL THREAT:</b> ${SCENARIO_CONFIG[currentScenario].label} pushes this cell into immediate response range. Prioritize drone verification and corridor monitoring.`;
@@ -2856,4 +2858,135 @@ try {
 window.onfocus = () => {
     if (appInitialized) syncSimulatorState();
 };
+
+// ==================== PHASE 1: HERO & DECISION STORY HELPERS ====================
+function updateDecisionStory(obj, pointScore, probability, priority) {
+    const nameEl = document.getElementById('dsLocationName');
+    const coordsEl = document.getElementById('dsLocationCoords');
+    const riskBadge = document.getElementById('dsLocationRiskBadge');
+    const priorityBadge = document.getElementById('dsLocationPriorityBadge');
+    const actionWinEl = document.getElementById('dsActionWindow');
+    if (!obj) {
+        if (nameEl) nameEl.textContent = "Rondônia Arc Hotspot";
+        if (coordsEl) coordsEl.textContent = "LAT -11.9182 | LON -63.8722 (Baseline)";
+        if (riskBadge) {
+            riskBadge.textContent = "84% Risk Probability";
+            riskBadge.className = "ds-badge red";
+        }
+        if (priorityBadge) {
+            priorityBadge.textContent = "Priority: Urgent";
+            priorityBadge.className = "ds-badge urgent";
+        }
+        return;
+    }
+    const regionName = getRegionName(obj.lat, obj.lon);
+    if (nameEl) nameEl.textContent = regionName;
+    if (coordsEl) coordsEl.textContent = `LAT ${obj.lat.toFixed(4)} | LON ${obj.lon.toFixed(4)}`;
+    if (riskBadge) {
+        riskBadge.textContent = `${probability}% Risk Probability`;
+        riskBadge.className = pointScore > 170 ? 'ds-badge red' : 'ds-badge';
+    }
+    if (priorityBadge) {
+        priorityBadge.textContent = `Priority: ${priority}`;
+        priorityBadge.className = priority === 'Urgent' ? 'ds-badge urgent' : 'ds-badge';
+    }
+    if (actionWinEl) {
+        const win = pointScore > 170 ? '24 hours' : (pointScore > 165 ? '72 hours' : '7 days');
+        actionWinEl.innerHTML = `Assigned Response Window: <strong>${win}</strong> for targeted inspection.`;
+    }
+}
+
+function focusTopHotspot() {
+    const list = (dataGlobal && dataGlobal.length) ? dataGlobal : [];
+    if (!list.length) return;
+    let top = list[0];
+    let maxScore = getPointScore(top);
+    for (let i = 1; i < list.length; i++) {
+        const sc = getPointScore(list[i]);
+        if (sc > maxScore) {
+            maxScore = sc;
+            top = list[i];
+        }
+    }
+    toggleSidebar(true, top);
+    switchTab('tab-story');
+    if (mapInstance && typeof mapInstance.flyTo === 'function') {
+        mapInstance.flyTo({ center: [top.lon, top.lat], zoom: 7.8, essential: true });
+    }
+}
+
+function openDecisionStory() {
+    if (!selectedAnalysisPoint) {
+        focusTopHotspot();
+    } else {
+        ensureSidebarOpen('tab-story');
+    }
+}
+
+function toggleHeroStory() {
+    const bar = document.getElementById('intelBar');
+    const icon = document.getElementById('heroToggleIcon');
+    if (!bar) return;
+    bar.classList.toggle('minimized');
+    if (icon) {
+        icon.className = bar.classList.contains('minimized') ? 'fas fa-chevron-down' : 'fas fa-chevron-up';
+    }
+}
+
+// ─── PHASE 3A: Historical Intelligence Functions ─────────────────────────────
+function toggleHistoricalModal(show) {
+    const modal = document.getElementById('historicalIntelligenceModal');
+    if (!modal) return;
+    modal.classList.toggle('active', show);
+    if (show && window.PRODES_HISTORICAL_DATA) {
+        const stateSelect = document.getElementById('hiStateSelect');
+        const compareToggle = document.getElementById('hiCompareRondonia');
+        const state = stateSelect ? stateSelect.value : 'Amazônia Legal';
+        const compare = compareToggle ? compareToggle.checked : false;
+        setTimeout(() => {
+            window.PRODES_HISTORICAL_DATA.initOrUpdateHistoricalChart('hiChartCanvas', state, compare);
+            if (typeof window.PRODES_HISTORICAL_DATA.renderStateIntelligenceDOM === 'function') {
+                window.PRODES_HISTORICAL_DATA.renderStateIntelligenceDOM('hiStateIntelligenceContainer');
+            }
+        }, 50);
+    }
+}
+
+function toggleModal(show) {
+    const modal = document.getElementById('modalOverlay');
+    if (!modal) return;
+    modal.classList.toggle('active', show);
+}
+
+function onHistoricalStateChange(stateName) {
+    if (!window.PRODES_HISTORICAL_DATA) return;
+    const compareToggle = document.getElementById('hiCompareRondonia');
+    const compare = compareToggle ? compareToggle.checked : false;
+    window.PRODES_HISTORICAL_DATA.initOrUpdateHistoricalChart('hiChartCanvas', stateName, compare);
+}
+
+function onHistoricalCompareToggle(checked) {
+    if (!window.PRODES_HISTORICAL_DATA) return;
+    const stateSelect = document.getElementById('hiStateSelect');
+    const state = stateSelect ? stateSelect.value : 'Amazônia Legal';
+    window.PRODES_HISTORICAL_DATA.initOrUpdateHistoricalChart('hiChartCanvas', state, checked);
+}
+
+function highlightHistoricalMoment(year) {
+    if (!window.PRODES_HISTORICAL_DATA) return;
+    const stateSelect = document.getElementById('hiStateSelect');
+    if (stateSelect && stateSelect.value !== 'Amazônia Legal') {
+        stateSelect.value = 'Amazônia Legal';
+        onHistoricalStateChange('Amazônia Legal');
+    }
+}
+
+// Window attachments for HTML onclick attributes
+window.toggleHistoricalModal = toggleHistoricalModal;
+window.toggleModal = toggleModal;
+window.onHistoricalStateChange = onHistoricalStateChange;
+window.onHistoricalCompareToggle = onHistoricalCompareToggle;
+window.highlightHistoricalMoment = highlightHistoricalMoment;
+
+
 

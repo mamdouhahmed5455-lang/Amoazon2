@@ -1,0 +1,420 @@
+{
+  "model_version": "2.0.0-validated",
+  "experiment_name": "Independent Reproducible Model V2",
+  "experiment_id": "GEOAI-MODEL-V2-20260908",
+  "timestamp": "2026-09-11T14:09:04.105565+00:00",
+  "scientific_classification": "Retrospective Out-of-Time Spatial Evaluation",
+  "original_benchmark_preserved": {
+    "roc_auc": 0.82,
+    "precision": 0.79,
+    "recall": 0.84,
+    "f1": 0.81,
+    "note": "Original documented benchmark -- preserved untouched as historical reference."
+  },
+  "environment": {
+    "python_version": "3.14.6",
+    "xgboost_version": "3.4.1",
+    "sklearn_version": "1.9.1",
+    "numpy_version": "2.5.3",
+    "platform": "Windows-10-10.0.19045-SP0"
+  },
+  "sources": {
+    "rondonia_boundary": "b51cab47423e306012f6229d68b1ab9a75ce40c873ff76c9333a1f35c77de4b7",
+    "rondonia_no_forest": "ad5572bfa5b640c7c900c10aa2b585bac074d624812964269e1ad4ab6efe6790",
+    "prodes_2021": "e170f0b4476127988bdfb65af9b6bd99923c98a1d7db64bf01876dd3e5259f18",
+    "prodes_2022": "7e39c218627e382a00515028a8551fdc2c8a2f17c818491dbaad2fed8f05b4a1",
+    "prodes_2023": "fc35febac4a31b7b4d6a4e9fa9d8e637fb63a3e4d4873305e1011e8079eeca3a",
+    "prodes_2024": "aca4f29791332b27edbee9993f3cedb744cbf609241788b88cf4aacb8982443c",
+    "highways": "57ff44f23f82316466c74ba32222a85b868838519b0688249e8036c47af9053f",
+    "ibge_pop": "ae902117cc495fc3f8251fb08ae88d626b75df41b40deb1167827558b415eee6"
+  },
+  "feature_groups_count": 4,
+  "features": [
+    "dist_road_km",
+    "dist_hist_loss_km",
+    "prior_loss_dens",
+    "pop_pressure",
+    "elevation_m"
+  ],
+  "hyperparameters": {
+    "objective": "binary:logistic",
+    "eval_metric": "auc",
+    "max_depth": 4,
+    "learning_rate": 0.05,
+    "n_estimators": 150,
+    "subsample": 0.8,
+    "colsample_bytree": 0.8,
+    "scale_pos_weight": 10.0,
+    "random_state": 42,
+    "tree_method": "hist"
+  },
+  "temporal_design": {
+    "train_target": 2022,
+    "val_target": 2023,
+    "test_target": 2024
+  },
+  "results": {
+    "model_version": "2.0.0-validated",
+    "experiment_name": "Independent Reproducible Model V2",
+    "training_timestamp": "2026-09-11T14:09:01.667040+00:00",
+    "temporal_partitions": {
+      "train": {
+        "target_year": 2022,
+        "observation_period": "2021-08-01 to 2022-07-31",
+        "feature_cutoff": "2021-07-31",
+        "historical_loss_years": [
+          2021
+        ]
+      },
+      "val": {
+        "target_year": 2023,
+        "observation_period": "2022-08-01 to 2023-07-31",
+        "feature_cutoff": "2022-07-31",
+        "historical_loss_years": [
+          2021,
+          2022
+        ]
+      },
+      "test": {
+        "target_year": 2024,
+        "observation_period": "2023-08-01 to 2024-07-31",
+        "feature_cutoff": "2023-07-31",
+        "historical_loss_years": [
+          2021,
+          2022,
+          2023
+        ]
+      }
+    },
+    "train_metrics": {
+      "roc_auc": 0.9998,
+      "pr_auc": 0.978017,
+      "brier_score": 0.0028,
+      "balanced_accuracy": 0.9749,
+      "precision": 0.7959,
+      "recall": 0.9512,
+      "f1": 0.8667,
+      "positives": 41,
+      "total_samples": 7045,
+      "prevalence_pct": 0.582
+    },
+    "val_metrics": {
+      "roc_auc": 0.8089,
+      "pr_auc": 0.014695,
+      "brier_score": 0.00825,
+      "balanced_accuracy": 0.5187,
+      "precision": 0.0227,
+      "recall": 0.0435,
+      "f1": 0.0299,
+      "positives": 23,
+      "total_samples": 7045,
+      "prevalence_pct": 0.3265
+    },
+    "test_metrics": {
+      "roc_auc": 0.7474,
+      "pr_auc": 0.005534,
+      "brier_score": 0.00693,
+      "balanced_accuracy": 0.4972,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "positives": 10,
+      "total_samples": 7045,
+      "prevalence_pct": 0.1419
+    },
+    "test_bootstrap_ci": {
+      "roc_auc_mean": 0.7462,
+      "roc_auc_ci_lower": 0.5837,
+      "roc_auc_ci_upper": 0.9036,
+      "pr_auc_mean": 0.006725,
+      "pr_auc_ci_lower": 0.001854,
+      "pr_auc_ci_upper": 0.014138,
+      "n_bootstraps": 1000
+    },
+    "test_top_k_operational": {
+      "top_0.1pct": {
+        "capacity_pct": 0.1,
+        "k_cells": 7,
+        "captured_positives": 0,
+        "total_positives": 10,
+        "precision": 0.0,
+        "recall": 0.0,
+        "lift": 0.0
+      },
+      "top_0.5pct": {
+        "capacity_pct": 0.5,
+        "k_cells": 35,
+        "captured_positives": 0,
+        "total_positives": 10,
+        "precision": 0.0,
+        "recall": 0.0,
+        "lift": 0.0
+      },
+      "top_1pct": {
+        "capacity_pct": 1.0,
+        "k_cells": 70,
+        "captured_positives": 0,
+        "total_positives": 10,
+        "precision": 0.0,
+        "recall": 0.0,
+        "lift": 0.0
+      },
+      "top_5pct": {
+        "capacity_pct": 5.0,
+        "k_cells": 352,
+        "captured_positives": 2,
+        "total_positives": 10,
+        "precision": 0.00568,
+        "recall": 0.2,
+        "lift": 4.0
+      },
+      "top_10pct": {
+        "capacity_pct": 10.0,
+        "k_cells": 704,
+        "captured_positives": 5,
+        "total_positives": 10,
+        "precision": 0.0071,
+        "recall": 0.5,
+        "lift": 5.0
+      },
+      "top_20pct": {
+        "capacity_pct": 20.0,
+        "k_cells": 1409,
+        "captured_positives": 6,
+        "total_positives": 10,
+        "precision": 0.00426,
+        "recall": 0.6,
+        "lift": 3.0
+      }
+    },
+    "test_calibration": {
+      "brier_score": 0.00693,
+      "binned_calibration": [
+        {
+          "mean_predicted": 0.0009,
+          "observed_frequency": 0.0
+        },
+        {
+          "mean_predicted": 0.0019,
+          "observed_frequency": 0.0007
+        },
+        {
+          "mean_predicted": 0.0051,
+          "observed_frequency": 0.0021
+        },
+        {
+          "mean_predicted": 0.0169,
+          "observed_frequency": 0.0
+        },
+        {
+          "mean_predicted": 0.1158,
+          "observed_frequency": 0.0043
+        }
+      ],
+      "semantic_designation": "probability",
+      "recommendation": "Output should be interpreted as relative spatial risk score rather than literal physical probability."
+    },
+    "baselines": {
+      "random_baseline": {
+        "mean_auc": 0.5091,
+        "std_auc": 0.0885,
+        "expected_theoretical": 0.5,
+        "seeds_evaluated": 50
+      },
+      "latitude_heuristic": {
+        "roc_auc": 0.5301,
+        "hypothesis": "Northern frontier latitude correlates with deforestation"
+      },
+      "road_proximity_heuristic": {
+        "roc_auc": 0.5001,
+        "hypothesis": "Proximity to federal highway correlates with deforestation"
+      },
+      "historical_loss_heuristic": {
+        "roc_auc": 0.7797,
+        "hypothesis": "Proximity to prior clear-cuts correlates with deforestation"
+      }
+    },
+    "ablation_study": {
+      "Model_A_road_only": {
+        "feature_count": 1,
+        "features": [
+          "dist_road_km"
+        ],
+        "roc_auc": 0.4495,
+        "pr_auc": 0.001833,
+        "brier_score": 0.01027
+      },
+      "Model_B_road_loss": {
+        "feature_count": 3,
+        "features": [
+          "dist_road_km",
+          "dist_hist_loss_km",
+          "prior_loss_dens"
+        ],
+        "roc_auc": 0.7349,
+        "pr_auc": 0.003753,
+        "brier_score": 0.00902
+      },
+      "Model_C_road_loss_pop": {
+        "feature_count": 4,
+        "features": [
+          "dist_road_km",
+          "dist_hist_loss_km",
+          "prior_loss_dens",
+          "pop_pressure"
+        ],
+        "roc_auc": 0.75,
+        "pr_auc": 0.008011,
+        "brier_score": 0.00824
+      },
+      "Model_D_all_four_groups": {
+        "feature_count": 5,
+        "features": [
+          "dist_road_km",
+          "dist_hist_loss_km",
+          "prior_loss_dens",
+          "pop_pressure",
+          "elevation_m"
+        ],
+        "roc_auc": 0.7474,
+        "pr_auc": 0.005534,
+        "brier_score": 0.00693
+      }
+    },
+    "spatial_evaluation": {
+      "spatial_holdout_latitude": -11.0,
+      "north_region": {
+        "description": "Northern Agricultural Frontier (Lat > -11.0)",
+        "samples": 3777,
+        "positives": 6,
+        "metrics": {
+          "roc_auc": 0.6109,
+          "pr_auc": 0.00403,
+          "brier_score": 0.01034,
+          "balanced_accuracy": 0.4951,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "positives": 6,
+          "total_samples": 3777,
+          "prevalence_pct": 0.1589
+        }
+      },
+      "south_region": {
+        "description": "Southern Interior Core (Lat <= -11.0)",
+        "samples": 3268,
+        "positives": 4,
+        "metrics": {
+          "roc_auc": 0.9092,
+          "pr_auc": 0.01677,
+          "brier_score": 0.00299,
+          "balanced_accuracy": 0.4997,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "positives": 4,
+          "total_samples": 3268,
+          "prevalence_pct": 0.1224
+        }
+      }
+    },
+    "spatio_temporal_evaluation": {
+      "train_north2022_test_south2024": {
+        "train_samples": 3777,
+        "train_positives": 34,
+        "test_samples": 3268,
+        "test_positives": 4,
+        "metrics": {
+          "roc_auc": 0.8795,
+          "pr_auc": 0.015207,
+          "brier_score": 0.00392,
+          "balanced_accuracy": 0.4985,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "positives": 4,
+          "total_samples": 3268,
+          "prevalence_pct": 0.1224
+        }
+      },
+      "train_south2022_test_north2024": {
+        "train_samples": 3268,
+        "train_positives": 7,
+        "test_samples": 3777,
+        "test_positives": 6,
+        "metrics": {
+          "roc_auc": 0.5614,
+          "pr_auc": 0.00346,
+          "brier_score": 0.00166,
+          "balanced_accuracy": 0.5,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "positives": 6,
+          "total_samples": 3777,
+          "prevalence_pct": 0.1589
+        }
+      }
+    },
+    "feature_importances_gain": {
+      "dist_road_km": 0.168337,
+      "dist_hist_loss_km": 0.301183,
+      "prior_loss_dens": 0.208966,
+      "pop_pressure": 0.151018,
+      "elevation_m": 0.170496
+    },
+    "hyperparameters": {
+      "objective": "binary:logistic",
+      "eval_metric": "auc",
+      "max_depth": 4,
+      "learning_rate": 0.05,
+      "n_estimators": 150,
+      "subsample": 0.8,
+      "colsample_bytree": 0.8,
+      "scale_pos_weight": 10.0,
+      "random_state": 42,
+      "tree_method": "hist"
+    }
+  },
+  "shap_summary": {
+    "experiment": "GEOAI-MODEL-V2-20260908",
+    "scientific_classification": "TreeSHAP Attribution on Retrospective Out-of-Time Test Set",
+    "note": "Model V2 SHAP values are independently calculated and NOT identical to legacy 41/23/21/15 benchmark weights.",
+    "test_samples_evaluated": 7045,
+    "feature_count": 5,
+    "global_importance": {
+      "dist_road_km": {
+        "mean_abs_shap": 0.59689,
+        "normalized_pct": 17.44
+      },
+      "dist_hist_loss_km": {
+        "mean_abs_shap": 1.413035,
+        "normalized_pct": 41.28
+      },
+      "prior_loss_dens": {
+        "mean_abs_shap": 0.426037,
+        "normalized_pct": 12.45
+      },
+      "pop_pressure": {
+        "mean_abs_shap": 0.426583,
+        "normalized_pct": 12.46
+      },
+      "elevation_m": {
+        "mean_abs_shap": 0.560424,
+        "normalized_pct": 16.37
+      }
+    },
+    "feature_ranking_descending": [
+      "dist_hist_loss_km",
+      "dist_road_km",
+      "elevation_m",
+      "pop_pressure",
+      "prior_loss_dens"
+    ],
+    "artifacts": {
+      "summary_plot": "D:\\Amazon-Deforestation-Risk-3D\\artifacts\\model-v2\\shap\\shap_summary_plot.png",
+      "local_example": "D:\\Amazon-Deforestation-Risk-3D\\artifacts\\model-v2\\shap\\local_shap_example.json"
+    }
+  },
+  "status": "VALIDATED_XGBOOST_MODEL_V2_COMPLETE"
+}

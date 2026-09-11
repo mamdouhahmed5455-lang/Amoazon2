@@ -1,0 +1,175 @@
+{
+  "experiment_id": "GEOAI-VAL-PRODES-20260907",
+  "experiment_name": "Official INPE PRODES Deforestation Spatial Validation",
+  "timestamp": "2026-09-07T20:59:43.139094+00:00",
+  "ground_truth_source": {
+    "institution": "INPE / TerraBrasilis",
+    "layer": "prodes-legal-amz:yearly_deforestation",
+    "crs": "urn:ogc:def:crs:EPSG::4674",
+    "sha256_2024": "aca4f29791332b27edbee9993f3cedb744cbf609241788b88cf4aacb8982443c",
+    "sha256_2023": "fc35febac4a31b7b4d6a4e9fa9d8e637fb63a3e4d4873305e1011e8079eeca3a",
+    "polygons_2024": 2773
+  },
+  "grid": {
+    "file": "data/forest_data_clean.json",
+    "sha256": "858b0ab2a2dccb104a87b1d935e72cf0678f235d1c83185edc3af247d310147e",
+    "rows": 150000
+  },
+  "spatial_join_audit": {
+    "total_cells_evaluated": 150000,
+    "prodes_2024_polygon_count": 2773,
+    "prodes_2023_polygon_count": 5055,
+    "cells_intersecting_2024": 27,
+    "prevalence_2024_pct": 0.018,
+    "cells_intersecting_recent": 101,
+    "prevalence_recent_pct": 0.067,
+    "join_execution_seconds": 6.22
+  },
+  "evaluation_2024": {
+    "evaluation_target": "prodes_label_2024",
+    "sample_size": 150000,
+    "positive_ground_truth_count": 27,
+    "prevalence_rate": 0.00018,
+    "metrics": {
+      "roc_auc": 0.1151,
+      "pr_auc": 0.000108,
+      "brier_score": 0.9293
+    },
+    "precision_at_k": {
+      "precision_at_100": 0.0,
+      "precision_at_500": 0.0,
+      "precision_at_1000": 0.0
+    },
+    "threshold_grid": [
+      {
+        "threshold": 0.9,
+        "predicted_positives": 147063,
+        "precision": 0.00016,
+        "recall": 0.88889,
+        "f1": 0.00033
+      },
+      {
+        "threshold": 0.92,
+        "predicted_positives": 136667,
+        "precision": 0.0001,
+        "recall": 0.48148,
+        "f1": 0.00019
+      },
+      {
+        "threshold": 0.94,
+        "predicted_positives": 116861,
+        "precision": 3e-05,
+        "recall": 0.14815,
+        "f1": 7e-05
+      },
+      {
+        "threshold": 0.96,
+        "predicted_positives": 95804,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      {
+        "threshold": 0.98,
+        "predicted_positives": 55413,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      }
+    ],
+    "confusion_matrix_at_0_94": {
+      "threshold": 0.94,
+      "true_positives": 4,
+      "false_negatives": 23,
+      "false_positives": 116857,
+      "true_negatives": 33116
+    },
+    "spatial_holdout": {
+      "latitude_partition": -11.0,
+      "northern_sector": {
+        "samples": 82968,
+        "positives": 17,
+        "roc_auc": 0.1181
+      },
+      "southern_sector": {
+        "samples": 67032,
+        "positives": 10,
+        "roc_auc": 0.0988
+      }
+    }
+  },
+  "evaluation_recent": {
+    "evaluation_target": "prodes_label_recent",
+    "sample_size": 150000,
+    "positive_ground_truth_count": 101,
+    "prevalence_rate": 0.000673,
+    "metrics": {
+      "roc_auc": 0.226,
+      "pr_auc": 0.000421,
+      "brier_score": 0.9289
+    },
+    "precision_at_k": {
+      "precision_at_100": 0.0,
+      "precision_at_500": 0.0,
+      "precision_at_1000": 0.0
+    },
+    "threshold_grid": [
+      {
+        "threshold": 0.9,
+        "predicted_positives": 147063,
+        "precision": 0.00063,
+        "recall": 0.91089,
+        "f1": 0.00125
+      },
+      {
+        "threshold": 0.92,
+        "predicted_positives": 136667,
+        "precision": 0.00048,
+        "recall": 0.64356,
+        "f1": 0.00095
+      },
+      {
+        "threshold": 0.94,
+        "predicted_positives": 116861,
+        "precision": 0.0003,
+        "recall": 0.34653,
+        "f1": 0.0006
+      },
+      {
+        "threshold": 0.96,
+        "predicted_positives": 95804,
+        "precision": 0.00022,
+        "recall": 0.20792,
+        "f1": 0.00044
+      },
+      {
+        "threshold": 0.98,
+        "predicted_positives": 55413,
+        "precision": 0.00018,
+        "recall": 0.09901,
+        "f1": 0.00036
+      }
+    ],
+    "confusion_matrix_at_0_94": {
+      "threshold": 0.94,
+      "true_positives": 35,
+      "false_negatives": 66,
+      "false_positives": 116826,
+      "true_negatives": 33073
+    },
+    "spatial_holdout": {
+      "latitude_partition": -11.0,
+      "northern_sector": {
+        "samples": 82968,
+        "positives": 79,
+        "roc_auc": 0.232
+      },
+      "southern_sector": {
+        "samples": 67032,
+        "positives": 22,
+        "roc_auc": 0.1727
+      }
+    }
+  },
+  "status": "VALIDATED_AGAINST_OFFICIAL_PRODES"
+}

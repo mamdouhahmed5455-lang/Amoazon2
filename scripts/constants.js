@@ -54,6 +54,8 @@ window.GEOAI_CONSTANTS = {
 
     // ── 6) MODEL METRICS ──────────────────────────────────────
     MODEL_METRICS: {
+        auc: 0.82,
+        precision: 0.79,
         recall: 0.84,
         f1: 0.81
     },

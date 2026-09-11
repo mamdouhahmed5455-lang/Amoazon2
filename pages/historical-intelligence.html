@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>How the Deforestation Landscape Changed — 2001–2025 | GeoAI Platform</title>
+  <meta name="description" content="Official PRODES annual deforestation trajectory across the Legal Amazon (2001-2025)">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/css/platform.css">
+  <link rel="stylesheet" href="../assets/pages/index/styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body.hi-page {
+      background: #070c18;
+      color: #f8fafc;
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding-top: 64px;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    .hi-standalone-shell {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 32px 24px 60px 24px;
+    }
+    .hi-page-header {
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+  </style>
+</head>
+<body class="hi-page">
+  <!-- Platform Navigation -->
+  <nav class="platform-nav" style="position: fixed; top: 0; left: 0; width: 100%; z-index: 9999;">
+    <a href="../index.html" class="nav-brand" style="text-decoration: none;">
+      <div class="nav-brand-text">Geo<span>AI</span> Platform</div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html"><span class="nav-icon"><i class="fas fa-th-large"></i></span> Dashboard</a></li>
+      <li><a href="historical-intelligence.html" class="active"><span class="nav-icon"><i class="fas fa-history"></i></span> Historical Intel</a></li>
+      <li><a href="scenario-simulator.html"><span class="nav-icon"><i class="fas fa-sliders-h"></i></span> Scenario Simulator</a></li>
+      <li><a href="spatial-analysis.html"><span class="nav-icon"><i class="fas fa-layer-group"></i></span> Spatial Analysis</a></li>
+      <li><a href="ai-model.html"><span class="nav-icon"><i class="fas fa-brain"></i></span> AI Model</a></li>
+      <li><a href="impact-feasibility.html"><span class="nav-icon"><i class="fas fa-seedling"></i></span> Impact &amp; Feasibility</a></li>
+      <li><a href="https://github.com/mamdouhahmed5455-lang/Amoazon2" target="_blank" rel="noopener noreferrer" class="nav-ext"><span class="nav-icon"><i class="fab fa-github"></i></span> Research &amp; Docs</a></li>
+    </ul>
+    <div class="nav-status">
+      <div class="nav-status-dot"></div>
+      PRODES Historical Intelligence (2001–2025)
+    </div>
+  </nav>
+
+  <div class="hi-standalone-shell">
+    <div class="hi-page-header">
+      <div>
+        <div class="hi-badge-tag"><i class="fas fa-satellite"></i> OFFICIAL PRODES TIME SERIES</div>
+        <h1 class="hi-title" style="font-size: 26px; margin: 8px 0 4px 0;">How the Deforestation Landscape Changed — 2001–2025</h1>
+        <p class="hi-subtitle" style="font-size: 14px;">Official PRODES annual deforestation trajectory across the Legal Amazon.</p>
+      </div>
+      <div class="hi-header-actions">
+        <span class="hi-source-label"><i class="fas fa-database"></i> Source: INPE / TerraBrasilis — PRODES</span>
+      </div>
+    </div>
+
+    <!-- Interactive Controls Bar (Parts C & D) -->
+    <div class="hi-controls-bar">
+      <div class="hi-control-group">
+        <label for="hiStateSelect"><i class="fas fa-map-marker-alt"></i> Select Jurisdiction:</label>
+        <select id="hiStateSelect" class="hi-select" onchange="onStateSelectChange(this.value)">
+          <option value="Amazônia Legal">Amazônia Legal (Total)</option>
+          <option value="Acre">Acre</option>
+          <option value="Amapá">Amapá</option>
+          <option value="Amazonas">Amazonas</option>
+          <option value="Maranhão">Maranhão</option>
+          <option value="Mato Grosso">Mato Grosso</option>
+          <option value="Pará">Pará</option>
+          <option value="Rondônia">Rondônia</option>
+          <option value="Roraima">Roraima</option>
+          <option value="Tocantins">Tocantins</option>
+        </select>
+      </div>
+
+      <div class="hi-control-group hi-compare-group">
+        <label class="hi-toggle-label">
+          <input type="checkbox" id="hiCompareRondonia" onchange="onCompareToggle(this.checked)">
+          <span><i class="fas fa-layer-group"></i> Compare with Rondônia</span>
+        </label>
+      </div>
+
+      <div class="hi-active-pill" id="hiActivePill">
+        <span class="hi-pill-dot"></span>
+        <span id="hiActivePillText">Viewing: Amazônia Legal</span>
+      </div>
+    </div>
+
+    <!-- Main Chart Workspace (Part B) -->
+    <div class="hi-chart-wrapper">
+      <div class="hi-chart-header">
+        <div class="hi-chart-title-wrap">
+          <span class="hi-chart-title" id="hiChartTitle">Amazônia Legal: Annual Deforestation (km²)</span>
+          <span class="hi-chart-range">2001 → 2025</span>
+        </div>
+        <div class="hi-chart-legend" id="hiChartLegend">
+          <div class="hi-legend-item">
+            <span class="hi-legend-line" style="background:#38bdf8;"></span>
+            <span id="hiLegendPrimary">Amazônia Legal</span>
+          </div>
+          <div class="hi-legend-item hi-legend-rondonia" id="hiLegendRondonia" style="display:none;">
+            <span class="hi-legend-line dashed" style="background:#f59e0b;"></span>
+            <span>Rondônia Benchmark</span>
+          </div>
+        </div>
+      </div>
+      <div class="hi-canvas-shell" style="height: 300px;">
+        <canvas id="hiChartCanvas"></canvas>
+      </div>
+    </div>
+
+    <!-- Key Historical Moments Callout Strip (Part F) -->
+    <div class="hi-moments-grid">
+      <div class="hi-moment-card" onclick="highlightMoment(2004)">
+        <div class="hi-moment-year">2004</div>
+        <div class="hi-moment-title">Historical Peak</div>
+        <div class="hi-moment-stat">27,772 km²</div>
+        <div class="hi-moment-desc">Peak basin clearing prior to PPCDAm coordinated governance.</div>
+      </div>
+      <div class="hi-moment-card" onclick="highlightMoment(2012)">
+        <div class="hi-moment-year">2012</div>
+        <div class="hi-moment-title">Long-Term Low</div>
+        <div class="hi-moment-stat">4,571 km²</div>
+        <div class="hi-moment-desc">Historic trough achieved via satellite alert enforcement.</div>
+      </div>
+      <div class="hi-moment-card" onclick="highlightMoment(2021)">
+        <div class="hi-moment-year">2021</div>
+        <div class="hi-moment-title">Major Rebound</div>
+        <div class="hi-moment-stat">13,038 km²</div>
+        <div class="hi-moment-desc">Renewed surge along active AMACRO frontier zones.</div>
+      </div>
+      <div class="hi-moment-card" onclick="highlightMoment(2025)">
+        <div class="hi-moment-year">2025</div>
+        <div class="hi-moment-title">Lowest Since 2014</div>
+        <div class="hi-moment-stat">5,731 km²</div>
+        <div class="hi-moment-desc">-12.07% consolidated drop from 6,518 km² in 2024.</div>
+      </div>
+    </div>
+
+    <!-- 3-Column Evidence Grid (Parts E, H, G) -->
+    <div class="hi-evidence-grid">
+      <!-- Column 1: Summary Intelligence (Part E) -->
+      <div class="hi-card hi-summary-card">
+        <div class="hi-card-kicker"><i class="fas fa-calculator"></i> SUMMARY INTELLIGENCE</div>
+        <h4 class="hi-card-title" id="hiSummaryTitle">Amazônia Legal Metrics</h4>
+        <div class="hi-stat-rows">
+          <div class="hi-stat-row">
+            <span class="hi-stat-name">Peak Loss Year:</span>
+            <strong class="hi-stat-val" id="hiPeakYearVal">2004 (27,772 km²)</strong>
+          </div>
+          <div class="hi-stat-row">
+            <span class="hi-stat-name">Historical Low Year:</span>
+            <strong class="hi-stat-val" id="hiLowYearVal">2012 (4,571 km²)</strong>
+          </div>
+          <div class="hi-stat-row">
+            <span class="hi-stat-name">2025 Deforestation:</span>
+            <strong class="hi-stat-val text-emerald" id="hi2025Val">5,731 km²</strong>
+          </div>
+          <div class="hi-stat-row">
+            <span class="hi-stat-name">2024 → 2025 YoY:</span>
+            <strong class="hi-stat-val" id="hiDeltaVal">-787 km² (-12.07%)</strong>
+          </div>
+        </div>
+        <div class="hi-direction-box">
+          <div class="hi-direction-label">Long-Term Trajectory:</div>
+          <div class="hi-direction-text" id="hiDirectionText">79.4% below 2004 peak; declining recently (-12.1% in 2025)</div>
+        </div>
+      </div>
+
+      <!-- Column 2: 2024 vs 2025 Comparison (Part H) -->
+      <div class="hi-card hi-latest-card">
+        <div class="hi-card-kicker"><i class="fas fa-exchange-alt"></i> LATEST PRODES CHANGE</div>
+        <h4 class="hi-card-title">PRODES 2024 vs 2025</h4>
+        <div class="hi-latest-table">
+          <div class="hi-latest-row">
+            <div class="hi-latest-col-state">Legal Amazon</div>
+            <div class="hi-latest-col-vals">6,518 → <strong>5,731 km²</strong></div>
+            <div class="hi-latest-col-badge badge-down">↓ 12.07%</div>
+          </div>
+          <div class="hi-latest-row">
+            <div class="hi-latest-col-state">Rondônia (Pilot)</div>
+            <div class="hi-latest-col-vals">360 → <strong>229 km²</strong></div>
+            <div class="hi-latest-col-badge badge-down">↓ 36.39%</div>
+          </div>
+          <div class="hi-latest-row">
+            <div class="hi-latest-col-state">Mato Grosso</div>
+            <div class="hi-latest-col-vals">1,257 → <strong>1,593 km²</strong></div>
+            <div class="hi-latest-col-badge badge-up">↑ 26.73%</div>
+          </div>
+        </div>
+        <div class="hi-card-footer-note">
+          <i class="fas fa-info-circle"></i> Regional behavior is heterogeneous: Mato Grosso experienced expansion (+26.73%) while 8 other states recorded declines in 2025.
+        </div>
+      </div>
+
+      <!-- Column 3: Rondônia Context (Part G) -->
+      <div class="hi-card hi-rondonia-card">
+        <div class="hi-card-kicker"><i class="fas fa-microscope"></i> STUDY AREA RATIONALE</div>
+        <h4 class="hi-card-title">Why Rondônia?</h4>
+        <div class="hi-rondonia-lead">
+          <strong>Rondônia is the current prototype study area.</strong>
+        </div>
+        <p class="hi-rondonia-p">
+          The pilot focuses on a highly fragmented, road-influenced landscape, providing a useful setting for testing spatial risk prioritization.
+        </p>
+        <div class="hi-rondonia-facts-grid">
+          <div class="hi-rf-item"><span class="hi-rf-label">2004 Peak:</span> <strong>3,858 km²</strong></div>
+          <div class="hi-rf-item"><span class="hi-rf-label">2021 Rebound:</span> <strong>1,673 km²</strong></div>
+          <div class="hi-rf-item"><span class="hi-rf-label">2024 Clearing:</span> <strong>360 km²</strong></div>
+          <div class="hi-rf-item"><span class="hi-rf-label">2025 Clearing:</span> <strong>229 km²</strong></div>
+          <div class="hi-rf-item full-width"><span class="hi-rf-label">2024 → 2025 Trend:</span> <strong class="text-emerald">↓ 36.39%</strong></div>
+        </div>
+        <div class="hi-card-footer-note">
+          Rondônia is selected for its dense road access (BR-364 fishbone) and sharp protected enclaves, not as an absolute highest-risk claim.
+        </div>
+      </div>
+    </div>
+
+    <!-- PHASE 3B: Amazonia Legal State-by-State Intelligence -->
+    <div id="hiStateIntelligenceContainer"></div>
+
+    <!-- Scientific Honesty Disclaimer (Part I) -->
+    <div class="hi-honesty-note">
+      <div class="hi-honesty-icon"><i class="fas fa-shield-alt"></i></div>
+      <div class="hi-honesty-text">
+        <strong>Scientific Methodology & System Separation:</strong>
+        PRODES measures annual consolidated primary forest clear-cutting via cloud-free Landsat/Sentinel/CBERS mosaics (≥6.25 ha). It should not be interpreted as a real-time alert stream.
+        DETER provides rapid daily/weekly radiometric alerts (≥3 ha) for operational field enforcement (IBAMA), subject to persistent cloud cover. PRODES and DETER figures represent distinct monitoring methodologies and cannot be mathematically conflated.
+      </div>
+    </div>
+  </div>
+
+  <script src="../scripts/historical-intelligence.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      if (window.PRODES_HISTORICAL_DATA) {
+        window.PRODES_HISTORICAL_DATA.initOrUpdateHistoricalChart('hiChartCanvas', 'Amazônia Legal', false);
+        if (typeof window.PRODES_HISTORICAL_DATA.renderStateIntelligenceDOM === 'function') {
+          window.PRODES_HISTORICAL_DATA.renderStateIntelligenceDOM('hiStateIntelligenceContainer');
+        }
+      }
+    });
+
+    function onStateSelectChange(state) {
+      if (!window.PRODES_HISTORICAL_DATA) return;
+      const compare = document.getElementById('hiCompareRondonia').checked;
+      window.PRODES_HISTORICAL_DATA.initOrUpdateHistoricalChart('hiChartCanvas', state, compare);
+    }
+
+    function onCompareToggle(checked) {
+      if (!window.PRODES_HISTORICAL_DATA) return;
+      const state = document.getElementById('hiStateSelect').value;
+      window.PRODES_HISTORICAL_DATA.initOrUpdateHistoricalChart('hiChartCanvas', state, checked);
+    }
+
+    function highlightMoment(year) {
+      const select = document.getElementById('hiStateSelect');
+      if (select && select.value !== 'Amazônia Legal') {
+        select.value = 'Amazônia Legal';
+        onStateSelectChange('Amazônia Legal');
+      }
+    }
+  </script>
+</body>
+</html>
