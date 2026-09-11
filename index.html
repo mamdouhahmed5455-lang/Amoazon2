@@ -18,7 +18,7 @@
       <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
       <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="assets/pages/index/styles.css">
+  <link rel="stylesheet" href="assets/pages/index/styles.css?v=visual-polish-v3">
   <style>
     .fw-diagram-container {
         display: flex;
@@ -72,7 +72,7 @@
 </head>
 <body>
 <!-- ===== Platform Navigation Bar ===== -->
-    <nav class="platform-nav" style="z-index: 9999;">
+    <nav class="platform-nav">
         <a href="index.html" class="nav-brand" style="text-decoration: none;">
             <div class="nav-brand-text">Geo<span>AI</span> Platform</div>
         </a>
@@ -124,7 +124,7 @@
     <div id="spatialHoverTooltip" class="spatial-hover-tooltip" aria-hidden="true"></div>
 
     <!-- Unified Top-Right Map Controls -->
-    <div id="mapControls" style="top: 80px; right: 24px; position: absolute; z-index: 2200; display: flex; gap: 8px;">
+    <div id="mapControls">
         <!-- Perspective Modes -->
         <div class="glass-panel" style="padding: 6px; display: flex; gap: 4px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);">
             <button id="btn3d" class="style-btn active" onclick="setMode('3d')">3D</button>
