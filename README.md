@@ -155,6 +155,6 @@ http://localhost:8000/index.html
 ## Supporting Files
 
 - [docs/Graduation_Project_Report.md](d:/Amazon-Deforestation-Risk-3D/docs/Graduation_Project_Report.md)
-- [docs/implementation_plan.md](d:/Amazon-Deforestation-Risk-3D/docs/implementation_plan.md)
+- [docs/archive/implementation_plan.md](d:/Amazon-Deforestation-Risk-3D/docs/archive/implementation_plan.md)
 - [scripts/framework.py](d:/Amazon-Deforestation-Risk-3D/scripts/framework.py)
 - [scripts/risk_stats.py](d:/Amazon-Deforestation-Risk-3D/scripts/risk_stats.py)
