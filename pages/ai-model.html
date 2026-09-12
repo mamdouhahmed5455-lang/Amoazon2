@@ -2,14 +2,127 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-      <title data-ssot="project-name">Amazon Deforestation Risk 3D</title>
-      <meta name="description" content="AI model architecture, metrics, and explainability for deforestation risk prediction">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-      <link rel="stylesheet" href="../assets/css/platform.css">
-      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <title data-ssot="project-name">Amazon Deforestation Risk 3D</title>
+  <meta name="description" content="AI model architecture, dual-track scientific benchmarks, and explainability analysis for deforestation risk prediction">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/css/platform.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link rel="stylesheet" href="../assets/pages/ai-model/styles.css">
+  <style>
+    .tree-ensemble-container {
+      display: flex;
+      align-items: stretch;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 20px;
+      background: rgba(15, 23, 42, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      border-radius: 16px;
+      margin: 16px 0;
+      overflow-x: auto;
+    }
+    .tree-stage {
+      flex: 1;
+      min-width: 140px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .tree-stage-header {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .tree-badge {
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #3b82f6;
+    }
+    .tree-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: #e2e8f0;
+    }
+    .tree-box {
+      flex: 1;
+      background: rgba(2, 6, 23, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 10px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      justify-content: center;
+    }
+    .tree-spec-item {
+      font-size: 11px;
+      color: #cbd5e1;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .tree-node-split {
+      font-size: 10px;
+      color: #94a3b8;
+      background: rgba(59, 130, 246, 0.08);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      border-radius: 6px;
+      padding: 5px 8px;
+      font-family: monospace;
+    }
+    .tree-arrow {
+      display: flex;
+      align-items: center;
+      color: #334155;
+      font-size: 16px;
+    }
+    .output-box {
+      text-align: center;
+      background: rgba(59, 130, 246, 0.05);
+      border-color: rgba(59, 130, 246, 0.2);
+    }
+    .tree-output-val {
+      font-size: 24px;
+      font-weight: 800;
+      color: #38bdf8;
+    }
+    .tree-output-sub {
+      font-size: 10px;
+      font-weight: 700;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .tree-output-note {
+      font-size: 9px;
+      color: #64748b;
+      margin-top: 4px;
+      line-height: 1.3;
+    }
+    .badge-purple {
+      background: rgba(168, 85, 247, 0.15);
+      color: #c084fc;
+      border: 1px solid rgba(168, 85, 247, 0.3);
+    }
+    .kpi-value.purple {
+      color: #c084fc;
+    }
+    @media (max-width: 768px) {
+      .tree-ensemble-container {
+        flex-direction: column;
+      }
+      .tree-arrow {
+        justify-content: center;
+        transform: rotate(90deg);
+        margin: 4px 0;
+      }
+    }
+  </style>
 </head>
 <body>
   <nav class="platform-nav">
@@ -34,107 +147,182 @@
   <canvas class="data-stream-bg" id="dataStreamCanvas"></canvas>
 
   <main class="page-container">
+    <!-- Header with Dual-Track Identification -->
     <div class="page-header">
-      <h1>🧠 AI Model — XGBoost Classification Model</h1>
-      <p>Model architecture, performance metrics, and explainability analysis for deforestation risk prediction</p>
+      <div style="display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+        <div>
+          <h1>🧠 AI Model — XGBoost Classification Model</h1>
+          <p>Dual-track scientific documentation: Production Dashboard Benchmark &amp; Independent Research Model V2</p>
+        </div>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+          <span class="badge badge-blue">Track 1: Documented Benchmark</span>
+          <span class="badge badge-purple">Track 2: Research Model V2</span>
+        </div>
+      </div>
     </div>
 
-    <div class="kpi-grid">
+    <!-- Critical Scientific Track Distinction Banner -->
+    <div class="model-desc-card" style="margin-bottom: 24px; border-left: 4px solid #3b82f6; background: rgba(15, 23, 42, 0.6);">
+      <div style="display: flex; gap: 16px; align-items: flex-start;">
+        <i class="fas fa-microscope" style="color: #3b82f6; font-size: 22px; margin-top: 2px;"></i>
+        <div>
+          <div style="font-weight: 700; color: #f8fafc; font-size: 14px; margin-bottom: 4px;">Dual-Track Scientific Architecture &amp; Repository Ground Truth</div>
+          <p style="margin: 0; font-size: 13px; line-height: 1.6; color: #94a3b8;">
+            This platform strictly separates two analytical tracks:
+            <strong>Track 1 — Original Documented Production Benchmark</strong> (offline XGBoost classifier powering 150,000 precomputed spatial cells in the production dashboard; ROC-AUC = 0.82 Documented Benchmark) and
+            <strong>Track 2 — Independent Research Model V2</strong> (independent out-of-time empirical research experiment evaluating held-out PRODES 2024 clear-cuts; ROC-AUC = 0.7474 Moderate Evidence).
+            <em>Model V2 is an independent research experiment and is not presented as a reproduction of the original benchmark. Model V2 is NOT the deployed production model.</em>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Track 1: Documented Production Benchmark Header & KPI Strip -->
+    <div style="margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+      <h3 style="font-size: 14px; font-weight: 700; color: #cbd5e1; text-transform: uppercase; letter-spacing: 0.5px;">
+        <i class="fas fa-server" style="color: #3b82f6; margin-right: 6px;"></i> Track 1: Production Dashboard Documented Benchmark
+      </h3>
+      <span class="badge badge-blue">Locked Benchmark</span>
+    </div>
+
+    <div class="kpi-grid" style="margin-bottom: 24px;">
       <div class="kpi-card">
-        <div class="kpi-label">Model AUC</div>
+        <div class="kpi-label">Benchmark ROC-AUC</div>
         <div class="kpi-value green">0.82</div>
-        <div class="kpi-change down">▲ Strong</div>
+        <div class="kpi-change down" style="color: #10b981;">(Documented Benchmark)</div>
       </div>
       <div class="kpi-card">
         <div class="kpi-label">Precision</div>
         <div class="kpi-value blue">0.79</div>
+        <div class="kpi-change" style="color: #64748b;">Documented Metric</div>
       </div>
       <div class="kpi-card">
         <div class="kpi-label">Recall</div>
         <div class="kpi-value cyan" data-ssot="recall">0.84</div>
+        <div class="kpi-change" style="color: #64748b;">Documented Metric</div>
       </div>
       <div class="kpi-card">
         <div class="kpi-label">F1-Score</div>
         <div class="kpi-value amber" data-ssot="f1">0.81</div>
+        <div class="kpi-change" style="color: #64748b;">Documented Metric</div>
       </div>
       <div class="kpi-card">
-        <div class="kpi-label">Training Samples</div>
+        <div class="kpi-label">Production Grid Scale</div>
         <div class="kpi-value"><span data-ssot="total-cells">150,000</span></div>
+        <div class="kpi-change" style="color: #64748b;">Precomputed Spatial Cells</div>
       </div>
       <div class="kpi-card">
-        <div class="kpi-label">Features Used</div>
-        <div class="kpi-value blue">12</div>
+        <div class="kpi-label">Predictor Groups</div>
+        <div class="kpi-value blue">4 Families</div>
+        <div class="kpi-change" style="color: #64748b;">Tabular Geospatial Factors</div>
       </div>
     </div>
 
-    <div class="content-grid two-col" style="margin-bottom: 20px;">
+    <!-- Track 1: Model Architecture & Global Feature Importance -->
+    <div class="content-grid two-col" style="margin-bottom: 24px;">
       <section class="chart-box">
         <h3>🏗️ Model Architecture — XGBoost Classification Model</h3>
         <div class="model-desc-card" style="margin-bottom: 16px;">
-          <p>An <strong>XGBoost (Gradient Boosted Decision Trees)</strong> classification model trained on <strong>12 geospatial features</strong> to predict cell-level deforestation risk scores ranging from 0–255, with global feature importance validated via <strong>SHAP analysis</strong>.</p>
+          <p>
+            An <strong>XGBoost (Gradient Boosted Decision Trees)</strong> classification model trained offline on tabular geospatial features to predict cell-level deforestation risk scores. 
+            The production dashboard evaluates <strong>150,000 precomputed spatial cells</strong> across Rondônia, outputting relative risk scores on an integer scale (0–255) mapped to 0–100%.
+          </p>
         </div>
-        <div class="nn-container" id="nnWrapper">
-          <canvas id="nnCanvas"></canvas>
-          <div class="nn-layer" data-layer="0">
-            <div class="nn-layer-label">Input (12)</div>
-            <div class="nn-node input"></div>
-            <div class="nn-node input"></div>
-            <div class="nn-node input"></div>
-            <div class="nn-node input"></div>
-            <div class="nn-node input"></div>
-            <div class="nn-node input"></div>
+
+        <!-- XGBoost Tree Ensemble Architecture Visualizer -->
+        <div class="tree-ensemble-container">
+          <div class="tree-stage">
+            <div class="tree-stage-header">
+              <span class="tree-badge">Input Predictors</span>
+              <span class="tree-title">5 Spatial Predictors</span>
+            </div>
+            <div class="tree-box">
+              <div class="tree-spec-item"><i class="fas fa-road" style="color: #ef4444;"></i> Road Proximity</div>
+              <div class="tree-spec-item"><i class="fas fa-history" style="color: #f97316;"></i> Historical Loss Distance</div>
+              <div class="tree-spec-item"><i class="fas fa-chart-area" style="color: #8b5cf6;"></i> Prior Loss Density</div>
+              <div class="tree-spec-item"><i class="fas fa-users" style="color: #eab308;"></i> Population Pressure</div>
+              <div class="tree-spec-item"><i class="fas fa-mountain" style="color: #3b82f6;"></i> Physical Elevation</div>
+            </div>
           </div>
-          <div class="nn-layer" data-layer="1">
-            <div class="nn-layer-label">Hidden 1 (64)</div>
-            <div class="nn-node hidden"></div>
-            <div class="nn-node hidden"></div>
-            <div class="nn-node hidden"></div>
-            <div class="nn-node hidden"></div>
-            <div class="nn-node hidden"></div>
+
+          <div class="tree-arrow"><i class="fas fa-chevron-right"></i></div>
+
+          <div class="tree-stage">
+            <div class="tree-stage-header">
+              <span class="tree-badge">Boosted Trees</span>
+              <span class="tree-title">Additive Ensemble</span>
+            </div>
+            <div class="tree-box">
+              <div class="tree-node-split">T₁: Road Dist Split</div>
+              <div class="tree-node-split">T₂: Loss Proximity Split</div>
+              <div class="tree-node-split">... Residual Boosting</div>
+              <div class="tree-node-split">Tₘ: Topographic Filter</div>
+            </div>
           </div>
-          <div class="nn-layer" data-layer="2">
-            <div class="nn-layer-label">Hidden 2 (32)</div>
-            <div class="nn-node hidden"></div>
-            <div class="nn-node hidden"></div>
-            <div class="nn-node hidden"></div>
-            <div class="nn-node hidden"></div>
+
+          <div class="tree-arrow"><i class="fas fa-chevron-right"></i></div>
+
+          <div class="tree-stage">
+            <div class="tree-stage-header">
+              <span class="tree-badge">Output Aggregation</span>
+              <span class="tree-title">Relative Risk Score</span>
+            </div>
+            <div class="tree-box output-box">
+              <div class="tree-output-val">0 – 255</div>
+              <div class="tree-output-sub">Precomputed Grid Index</div>
+              <div class="tree-output-note">UI heuristic / relative spatial risk score — not a calibrated probability.</div>
+            </div>
           </div>
-          <div class="nn-layer" data-layer="3">
-            <div class="nn-layer-label">Hidden 3 (16)</div>
-            <div class="nn-node hidden"></div>
-            <div class="nn-node hidden"></div>
-            <div class="nn-node hidden"></div>
-          </div>
-          <div class="nn-layer" data-layer="4">
-            <div class="nn-layer-label">Output (1)</div>
-            <div class="nn-node output"></div>
-          </div>
+        </div>
+
+        <!-- Preserved DOM anchors to ensure complete JS compatibility with drawNN -->
+        <div id="nnWrapper" style="display: none;"><canvas id="nnCanvas"></canvas></div>
+
+        <div class="model-desc-card" style="margin-top: 16px;">
+          <p style="font-size: 12px; margin: 0; color: #64748b;">
+            <i class="fas fa-info-circle" style="color: #3b82f6;"></i>
+            <strong>Formulation Note:</strong> XGBoost minimizes binary logistic loss by iteratively constructing gradient-boosted decision trees over tabular geospatial attributes. Predictions represent relative spatial risk rankings across the precomputed grid cells.
+          </p>
         </div>
       </section>
 
       <section class="chart-box">
-        <h3>📊 Feature Importance (SHAP Values)</h3>
+        <h3>📊 Track 1 — Global Feature-Importance Evidence / Attribution</h3>
         <div class="feature-bar-container" id="featureBars"></div>
         <div class="model-desc-card" style="margin-top: 20px;">
-          <p>Feature importance reflects offline research benchmarks derived from <strong>SHAP (SHapley Additive exPlanations)</strong> analysis during model evaluation, providing a unified measure of feature contribution. <strong>Road proximity</strong> is the strongest predictor (41%), consistent with empirical deforestation research in the Amazon Basin.</p>
+          <p>
+            Global feature-importance evidence / attribution reflects offline research benchmarks derived from feature contribution analysis during model evaluation.
+            <strong>Road Proximity (41%)</strong> is documented as the strongest predictive feature, followed by <strong>Forest Loss (23%)</strong>, <strong>Population Pressure (21%)</strong>, and <strong>Elevation Constraints (15%)</strong>.
+          </p>
+          <p style="font-size: 12px; margin-top: 8px; margin-bottom: 0; color: #64748b;">
+            <em>Note: These values represent documented global feature-importance evidence / attribution for the production benchmark — they are not XGBoost coefficients, learned model weights, or Model V2 SHAP values.</em>
+          </p>
         </div>
       </section>
     </div>
 
-    <div class="content-grid two-col" style="margin-bottom: 20px;">
+    <!-- Track 1: Evaluation Evidence (ROC Curve & Confusion Matrix) -->
+    <div class="content-grid two-col" style="margin-bottom: 32px;">
       <section class="chart-box">
-        <h3>📈 ROC Curve (Receiver Operating Characteristic)</h3>
+        <h3>📈 Track 1 — ROC Curve (Documented Benchmark)</h3>
         <canvas id="rocChart" height="280"></canvas>
-        <div style="display: flex; gap: 16px; margin-top: 12px;">
-          <div class="badge badge-green">AUC = 0.82</div>
-          <div class="badge badge-blue">Threshold = 0.5</div>
+        <div style="display: flex; gap: 12px; margin-top: 12px; flex-wrap: wrap;">
+          <div class="badge badge-green">AUC = 0.82 (Documented Benchmark)</div>
+          <div class="badge badge-blue">Threshold = 0.5 (Relative Risk Heuristic)</div>
+          <div class="badge badge-amber">Offline Tabular Benchmark</div>
+        </div>
+        <div class="model-desc-card" style="margin-top: 14px;">
+          <p style="font-size: 12px; margin: 0; color: #64748b;">
+            Documented offline ROC benchmark on tabular geospatial features. 
+            <em>Not presented as independently reproduced, newly validated, or operational live accuracy.</em>
+          </p>
         </div>
       </section>
 
       <section class="chart-box">
-        <h3>🎯 Confusion Matrix</h3>
-        <div style="display: flex; align-items: center; gap: 24px; margin-top: 8px;">
-          <div style="flex: 1;">
+        <h3>🎯 Track 1 — Documented Benchmark Classification Matrix</h3>
+        <div style="display: flex; align-items: center; gap: 24px; margin-top: 8px; flex-wrap: wrap;">
+          <div style="flex: 1; min-width: 220px;">
             <div style="text-align: center; margin-bottom: 8px; font-size: 10px; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 1px;">Predicted</div>
             <div class="matrix-grid">
               <div class="matrix-label"></div>
@@ -160,65 +348,427 @@
               </div>
             </div>
           </div>
-          <div style="text-align: center;">
-            <div class="accuracy-ring">
-              <span>82%</span>
+          <div style="text-align: center; min-width: 140px;">
+            <div class="accuracy-ring" style="background: conic-gradient(#3b82f6 0% 81%, rgba(255,255,255,0.05) 81% 100%); color: #3b82f6;">
+              <span>0.81</span>
             </div>
-            <div style="margin-top: 10px; font-size: 10px; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 1px;">Overall Accuracy</div>
+            <div style="margin-top: 10px; font-size: 10px; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 1px;">Benchmark F1-Score</div>
           </div>
+        </div>
+        <div class="model-desc-card" style="margin-top: 16px;">
+          <div style="display: flex; justify-content: space-around; text-align: center; margin-bottom: 8px;">
+            <div><span style="color: #64748b; font-size: 11px;">Precision:</span> <strong style="color: #3b82f6;">0.79</strong></div>
+            <div><span style="color: #64748b; font-size: 11px;">Recall:</span> <strong style="color: #06b6d4;" data-ssot="recall">0.84</strong></div>
+            <div><span style="color: #64748b; font-size: 11px;">F1-Score:</span> <strong style="color: #f59e0b;" data-ssot="f1">0.81</strong></div>
+          </div>
+          <p style="font-size: 11px; margin: 0; color: #64748b; text-align: center;">
+            Evaluated on 150,000 precomputed spatial cells. UI heuristic / relative spatial risk score — not a calibrated probability.
+          </p>
         </div>
       </section>
     </div>
 
-    <div class="content-grid two-col">
+    <!-- ============================================================ -->
+    <!-- TRACK 2: INDEPENDENT RESEARCH MODEL V2                       -->
+    <!-- ============================================================ -->
+    <div style="margin-top: 16px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+      <div>
+        <h2 style="font-size: 20px; font-weight: 800; color: #f8fafc; margin: 0;">
+          🔬 Track 2 — Independent Research Model V2
+        </h2>
+        <p style="font-size: 13px; color: #94a3b8; margin: 4px 0 0 0;">
+          Independent out-of-time retrospective spatial evaluation on official INPE PRODES 2024 clear-cut deforestation
+        </p>
+      </div>
+      <span class="badge badge-purple">Research-Only Architecture</span>
+    </div>
+
+    <!-- Required Mandatory Statement -->
+    <div class="model-desc-card" style="margin-bottom: 20px; border-left: 4px solid #a855f7; background: rgba(88, 28, 135, 0.15);">
+      <div style="display: flex; gap: 14px; align-items: flex-start;">
+        <i class="fas fa-exclamation-circle" style="color: #c084fc; font-size: 20px; margin-top: 2px;"></i>
+        <div>
+          <div style="font-weight: 700; color: #f3e8ff; font-size: 14px; margin-bottom: 4px;">Required Scientific Declaration</div>
+          <p style="margin: 0; font-size: 13px; line-height: 1.6; color: #d8b4fe;">
+            <strong>"Model V2 is an independent research experiment and is not presented as a reproduction of the original benchmark."</strong> 
+            Model V2 is NOT the deployed production model. It operates on a neutral 7,045-unit eligible forest domain lattice across Rondônia with strict rolling out-of-time temporal partitioning and zero score inheritance.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Track 2: Locked Results KPI Grid -->
+    <div class="kpi-grid" style="margin-bottom: 24px;">
+      <div class="kpi-card">
+        <div class="kpi-label">V2 Held-Out ROC-AUC</div>
+        <div class="kpi-value purple">0.7474</div>
+        <div class="kpi-change" style="color: #c084fc;">95% CI: [0.5837, 0.9036]</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">V2 Held-Out PR-AUC</div>
+        <div class="kpi-value cyan">0.005534</div>
+        <div class="kpi-change" style="color: #22d3ee;">Rare-Event Metric (10 Pos.)</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Brier Calibration Score</div>
+        <div class="kpi-value amber">0.00693</div>
+        <div class="kpi-change" style="color: #fbbf24;">Calibration: Not Established</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Observed Test Events</div>
+        <div class="kpi-value" style="color: #f43f5e;">10 Events</div>
+        <div class="kpi-change" style="color: #64748b;">N = 7,045 (0.1419% Prev.)</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Operational Top-10% Lift</div>
+        <div class="kpi-value green">5.0x Lift</div>
+        <div class="kpi-change down" style="color: #10b981;">Captured 5 of 10 Events</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Scientific Evidence Level</div>
+        <div class="kpi-value purple" style="font-size: 20px; line-height: 32px;">Moderate Evidence</div>
+        <div class="kpi-change" style="color: #64748b;">Exceeds Random Baseline (0.509)</div>
+      </div>
+    </div>
+
+    <!-- Track 2: V2 TreeSHAP Results & Operational Prioritization -->
+    <div class="content-grid two-col" style="margin-bottom: 24px;">
       <section class="chart-box">
-        <h3>🗃️ Training Dataset</h3>
+        <h3>🌳 Model V2 SHAP Feature Attribution</h3>
+        <p style="font-size: 13px; color: #94a3b8; margin-bottom: 16px;">
+          TreeSHAP attributions calculated across all 7,045 held-out test units (PRODES 2024). 
+          Proximity to preceding clear-cuts accounted for over half (53.7%) of total model attribution.
+        </p>
+        
+        <div class="feature-bar-container">
+          <div class="feature-bar">
+            <div class="feature-bar-name" style="width: 180px;">Historical Loss Distance</div>
+            <div class="feature-bar-track"><div class="feature-bar-fill" style="width: 41.28%; background: #ef4444;"></div></div>
+            <div class="feature-bar-val">41.28%</div>
+          </div>
+          <div class="feature-bar">
+            <div class="feature-bar-name" style="width: 180px;">Road Proximity</div>
+            <div class="feature-bar-track"><div class="feature-bar-fill" style="width: 17.44%; background: #f97316;"></div></div>
+            <div class="feature-bar-val">17.44%</div>
+          </div>
+          <div class="feature-bar">
+            <div class="feature-bar-name" style="width: 180px;">Physical Elevation</div>
+            <div class="feature-bar-track"><div class="feature-bar-fill" style="width: 16.37%; background: #3b82f6;"></div></div>
+            <div class="feature-bar-val">16.37%</div>
+          </div>
+          <div class="feature-bar">
+            <div class="feature-bar-name" style="width: 180px;">Population Pressure</div>
+            <div class="feature-bar-track"><div class="feature-bar-fill" style="width: 12.46%; background: #eab308;"></div></div>
+            <div class="feature-bar-val">12.46%</div>
+          </div>
+          <div class="feature-bar">
+            <div class="feature-bar-name" style="width: 180px;">Prior Loss Density</div>
+            <div class="feature-bar-track"><div class="feature-bar-fill" style="width: 12.45%; background: #8b5cf6;"></div></div>
+            <div class="feature-bar-val">12.45%</div>
+          </div>
+        </div>
+
+        <div class="model-desc-card" style="margin-top: 20px;">
+          <p style="font-size: 12px; margin: 0; color: #94a3b8;">
+            <strong>Distinction from Production Benchmark:</strong> 
+            These are Model V2 SHAP feature attributions on the neutral forest lattice. They are completely separate from the original production benchmark attribution (Road 41%, Loss 23%, Pop 21%, Elevation 15%).
+          </p>
+        </div>
+      </section>
+
+      <section class="chart-box">
+        <h3>🎯 Model V2 Operational Prioritization (Top-K Lift)</h3>
+        <p style="font-size: 13px; color: #94a3b8; margin-bottom: 12px;">
+          Retrospective ranking capacity evaluated at predefined surveillance budget tiers on PRODES 2024 test partition (N = 7,045, 10 positive events).
+        </p>
+
         <table class="data-table">
           <thead>
             <tr>
-              <th>Property</th>
-              <th>Value</th>
+              <th>Budget Tier</th>
+              <th>Cells Inspected</th>
+              <th>Hits / Total</th>
+              <th>Recall</th>
+              <th>Lift Factor</th>
             </tr>
           </thead>
           <tbody>
-            <tr><td>Data Source</td><td><span class="badge badge-blue">Satellite + Census</span></td></tr>
-            <tr><td>Total Samples</td><td>150,000 grid cells</td></tr>
-            <tr><td>Spatial Resolution</td><td>30m/px (Multi-Band)</td></tr>
-            <tr><td>Temporal Coverage</td><td>2000 – 2030 (projected)</td></tr>
-            <tr><td>Region</td><td>Amazon Basin (Rondônia)</td></tr>
-            <tr><td>Features</td><td>12 geospatial variables</td></tr>
-            <tr><td>Train / Validation / Test</td><td>70% / 15% / 15%</td></tr>
-            <tr><td>Class Distribution</td><td>High: 64% | Med: 21% | Low: 15%</td></tr>
+            <tr>
+              <td><span class="badge badge-purple">Top 0.5%</span></td>
+              <td>35 cells</td>
+              <td>0 / 10</td>
+              <td>0.0%</td>
+              <td>0.0x</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-blue">Top 1.0%</span></td>
+              <td>70 cells</td>
+              <td>0 / 10</td>
+              <td>0.0%</td>
+              <td>0.0x</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-green">Top 5.0%</span></td>
+              <td>352 cells</td>
+              <td>2 / 10</td>
+              <td>20.0%</td>
+              <td><strong>4.0x Lift</strong></td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-green">Top 10.0%</span></td>
+              <td>704 cells</td>
+              <td>5 / 10</td>
+              <td>50.0%</td>
+              <td><strong>5.0x Lift</strong></td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-amber">Top 20.0%</span></td>
+              <td>1,409 cells</td>
+              <td>6 / 10</td>
+              <td>60.0%</td>
+              <td><strong>3.0x Lift</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="model-desc-card" style="margin-top: 14px;">
+          <p style="font-size: 12px; margin: 0; color: #64748b;">
+            <i class="fas fa-balance-scale" style="color: #eab308;"></i>
+            <strong>Scientific Boundary:</strong> The top 10% of ranked cells captured 5 of 10 observed events (5.0x enrichment relative to overall prevalence). 
+            <em>This is retrospective ranking evidence, not a measured field-operations efficiency gain.</em>
+          </p>
+        </div>
+      </section>
+    </div>
+
+    <!-- Track 2: Current Verified Data Sources & 5 Quantitative Predictors -->
+    <div class="content-grid two-col" style="margin-bottom: 24px;">
+      <section class="chart-box">
+        <h3>🗃️ Current Verified Primary Data Sources</h3>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Source Domain</th>
+              <th>Authoritative Provider</th>
+              <th>Ingestion &amp; Schema</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Roads</strong></td>
+              <td><span class="badge badge-green">OpenStreetMap (OSM)</span></td>
+              <td>Overpass API (Trunk, Primary, Secondary Corridors: BR-364, BR-421, BR-425, BR-429)</td>
+            </tr>
+            <tr>
+              <td><strong>Deforestation Labels</strong></td>
+              <td><span class="badge badge-red">INPE PRODES</span></td>
+              <td>TerraBrasilis WFS (Annual Clear-Cut Polygons &ge; 6.25 ha, SIRGAS 2000 / EPSG:4674)</td>
+            </tr>
+            <tr>
+              <td><strong>Population</strong></td>
+              <td><span class="badge badge-amber">IBGE 2022 Census</span></td>
+              <td>IBGE API (All 52 Municipalities of Rond&ocirc;nia, Official Headcounts)</td>
+            </tr>
+            <tr>
+              <td><strong>Elevation</strong></td>
+              <td><span class="badge badge-blue">Copernicus DEM GLO-90</span></td>
+              <td>Open-Meteo Elevation API (90-meter physical topographic elevation)</td>
+            </tr>
+            <tr>
+              <td><strong>Territorial Mask</strong></td>
+              <td><span class="badge badge-purple">INPE Sovereignty Mask</span></td>
+              <td>Official Rond&ocirc;nia Boundary &amp; 3,265 Natural Non-Forest Polygons</td>
+            </tr>
           </tbody>
         </table>
       </section>
 
       <section class="chart-box">
-        <h3>🔬 Input Features (12 Variables)</h3>
+        <h3>🔬 Current Verified V2 Features (5 Quantitative Predictors)</h3>
         <table class="data-table">
           <thead>
             <tr>
-              <th>Feature</th>
-              <th>Type</th>
-              <th>Source</th>
+              <th>Feature Identifier</th>
+              <th>Human-Readable Label</th>
+              <th>Physical Dimension</th>
             </tr>
           </thead>
           <tbody>
-            <tr><td>Road Proximity</td><td><span class="badge badge-green">Spatial</span></td><td>OpenStreetMap</td></tr>
-            <tr><td>Previous Forest Loss</td><td><span class="badge badge-red">Temporal</span></td><td>Hansen GFC</td></tr>
-            <tr><td>Population Pressure</td><td><span class="badge badge-amber">Census</span></td><td>WorldPop</td></tr>
-            <tr><td>Elevation</td><td><span class="badge badge-green">Spatial</span></td><td>SRTM DEM</td></tr>
-            <tr><td>Slope</td><td><span class="badge badge-green">Spatial</span></td><td>SRTM DEM</td></tr>
-            <tr><td>River Distance</td><td><span class="badge badge-green">Spatial</span></td><td>HydroSHEDS</td></tr>
-            <tr><td>Protected Area</td><td><span class="badge badge-blue">Policy</span></td><td>WDPA</td></tr>
-            <tr><td>NDVI</td><td><span class="badge badge-green">Spectral</span></td><td>Landsat 8</td></tr>
-            <tr><td>Soil Moisture</td><td><span class="badge badge-green">Spatial</span></td><td>SMAP</td></tr>
-            <tr><td>Fire Frequency</td><td><span class="badge badge-red">Temporal</span></td><td>FIRMS</td></tr>
-            <tr><td>Logging Concessions</td><td><span class="badge badge-blue">Policy</span></td><td>Gov. Data</td></tr>
-            <tr><td>Urban Proximity</td><td><span class="badge badge-amber">Census</span></td><td>WorldPop</td></tr>
+            <tr>
+              <td><code>dist_road_km</code></td>
+              <td><span class="badge badge-green">Road Proximity</span></td>
+              <td>Euclidean distance to nearest OSM highway corridor (km)</td>
+            </tr>
+            <tr>
+              <td><code>dist_hist_loss_km</code></td>
+              <td><span class="badge badge-red">Historical Loss Distance</span></td>
+              <td>Euclidean distance to preceding PRODES clear-cut boundary (km)</td>
+            </tr>
+            <tr>
+              <td><code>prior_loss_dens</code></td>
+              <td><span class="badge badge-purple">Prior Loss Density</span></td>
+              <td>Kernel density of preceding deforestation events within 15 km</td>
+            </tr>
+            <tr>
+              <td><code>pop_pressure</code></td>
+              <td><span class="badge badge-amber">Population Pressure</span></td>
+              <td>Distance-weighted municipal population gravity index</td>
+            </tr>
+            <tr>
+              <td><code>elevation_m</code></td>
+              <td><span class="badge badge-blue">Physical Elevation</span></td>
+              <td>Copernicus DEM topographic elevation in meters ASL</td>
+            </tr>
           </tbody>
         </table>
+        <div class="model-desc-card" style="margin-top: 14px;">
+          <p style="font-size: 12px; margin: 0; color: #64748b;">
+            <em>Note: Model V2 uses strictly these 5 quantitative predictors across 4 feature groups. It does not use 12 predictors or unverified satellite raster bands.</em>
+          </p>
+        </div>
       </section>
+    </div>
+
+    <!-- Four-Way Comparison Matrix -->
+    <div class="chart-box" style="margin-bottom: 24px;">
+      <h3>⚖️ Four-Way Methodological &amp; Empirical Comparison Matrix</h3>
+      <p style="font-size: 13px; color: #94a3b8; margin-bottom: 14px;">
+        To prevent scientific ambiguity, four distinct evaluations across project phases are clearly distinguished. They evaluate different populations and questions and must never be collapsed into a single metric:
+      </p>
+      <div style="overflow-x: auto;">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Dimension</th>
+              <th>(A) Original Benchmark</th>
+              <th>(B) Phase 5C PRODES Audit</th>
+              <th>(C) Phase 5D Neutral Lattice</th>
+              <th>(D) Model V2 Research Experiment</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Population</strong></td>
+              <td>150,000 Precomputed Cells</td>
+              <td>150,000 Production Grid</td>
+              <td>7,045 Neutral Forest Units</td>
+              <td><strong>7,045 Neutral Forest Units</strong> (N=21,135 Panel)</td>
+            </tr>
+            <tr>
+              <td><strong>Predictor Source</strong></td>
+              <td>4 Feature Families (Tabular)</td>
+              <td>Production Risk Score</td>
+              <td>Production Risk Score</td>
+              <td><strong>4 Reconstructed Groups (5 Predictors)</strong></td>
+            </tr>
+            <tr>
+              <td><strong>Label Ground Truth</strong></td>
+              <td>Offline Tabular Loss</td>
+              <td>INPE PRODES 2024</td>
+              <td>INPE PRODES 2024</td>
+              <td><strong>Official INPE PRODES Clear-Cuts</strong> (2022–2024)</td>
+            </tr>
+            <tr>
+              <td><strong>Temporal Protocol</strong></td>
+              <td>Static Snapshot</td>
+              <td>Post-hoc Overlay</td>
+              <td>Post-hoc Overlay</td>
+              <td><strong>Strict Rolling Out-of-Time</strong> (&le; T-1 &rarr; Year T)</td>
+            </tr>
+            <tr>
+              <td><strong>ROC-AUC</strong></td>
+              <td><span class="badge badge-blue">0.8200 (Documented Benchmark)</span></td>
+              <td><span class="badge badge-amber">0.5288</span></td>
+              <td><span class="badge badge-amber">0.6517</span></td>
+              <td><span class="badge badge-purple">0.7474 [0.5837, 0.9036]</span></td>
+            </tr>
+            <tr>
+              <td><strong>Comparability Role</strong></td>
+              <td>Documented Historical Benchmark</td>
+              <td>Production Grid Association</td>
+              <td>Re-gridded Association</td>
+              <td><strong>Independent Genuine Trained Pipeline</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Scientific Boundaries, Calibration & Temporal Qualification -->
+    <div class="content-grid two-col" style="margin-bottom: 24px;">
+      <section class="chart-box">
+        <h3>🛡️ Scientific Boundaries &amp; Calibration</h3>
+        <ul style="font-size: 13px; line-height: 1.8; color: #94a3b8; padding-left: 20px; margin: 0;">
+          <li>
+            <strong>Probabilistic Calibration:</strong> 
+            Brier Score = 0.00693; probabilistic calibration is not established. Outputs are interpreted as relative spatial risk scores.
+          </li>
+          <li>
+            <strong>UI Confidence / Score Language:</strong> 
+            UI heuristic / relative spatial risk score — not a calibrated probability.
+          </li>
+          <li>
+            <strong>Rare-Event Imbalance:</strong> 
+            Base deforestation prevalence in 2024 was 0.1419% (10 events in 7,045 units). Default 0.5 classification threshold is uninformative; capacity-based ranking (Top-K) is mathematically required.
+          </li>
+          <li>
+            <strong>Retrospective Ranking:</strong> 
+            Observed lift reflects retrospective ranking evidence, not a measured field-operations efficiency gain.
+          </li>
+          <li>
+            <strong>Non-Causal Association:</strong> 
+            Attributions reflect predictive feature association, not causal explanations of deforestation drivers.
+          </li>
+        </ul>
+      </section>
+
+      <section class="chart-box">
+        <h3>⏳ Temporal Qualification &amp; Data Auditing</h3>
+        <ul style="font-size: 13px; line-height: 1.8; color: #94a3b8; padding-left: 20px; margin: 0;">
+          <li>
+            <strong>2022 Population:</strong> 
+            Out-of-time static proxy (IBGE 2022 Census published June 28, 2023; municipal hierarchy proxy).
+          </li>
+          <li>
+            <strong>2023 Population:</strong> 
+            Out-of-time static proxy (published 11 months post monitoring cutoff).
+          </li>
+          <li>
+            <strong>2024 Population:</strong> 
+            Temporally valid for held-out test (published 1 month before August 1, 2023 monitoring cutoff).
+          </li>
+          <li>
+            <strong>Zero Blanket Claim:</strong> 
+            Blanket zero temporal leakage is not claimed across all periods; each data vintage is partitioned with explicit chronological cutoffs.
+          </li>
+          <li>
+            <strong>Deforestation History:</strong> 
+            Preceding PRODES loss features strictly query data prior to observation year T (Features &le; T-1 &rarr; Labels in Year T).
+          </li>
+        </ul>
+      </section>
+    </div>
+
+    <!-- Research Documentation & Reproducibility Footer -->
+    <div class="model-desc-card" style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255, 255, 255, 0.08);">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+        <div>
+          <div style="font-weight: 700; color: #f8fafc; font-size: 14px; margin-bottom: 4px;">
+            <i class="fas fa-terminal" style="color: #3b82f6; margin-right: 6px;"></i> Research Reproducibility &amp; Documentation
+          </div>
+          <div style="font-size: 12px; color: #64748b;">
+            Model V2 pipeline entry point: <code>python scripts/model_v2/run.py</code> | Test suite: 52/52 passing (<code>python tests/run_all_python_tests.py</code>)
+          </div>
+        </div>
+        <div style="display: flex; gap: 12px;">
+          <a href="https://github.com/mamdouhahmed5455-lang/Amoazon2" target="_blank" rel="noopener noreferrer" class="badge badge-blue" style="text-decoration: none; padding: 8px 14px; font-size: 12px;">
+            <i class="fab fa-github"></i> Repository Docs
+          </a>
+          <a href="../docs/model-v2/RESULTS.md" class="badge badge-purple" style="text-decoration: none; padding: 8px 14px; font-size: 12px;">
+            <i class="fas fa-book-open"></i> Model V2 Results
+          </a>
+        </div>
+      </div>
     </div>
   </main>
 
