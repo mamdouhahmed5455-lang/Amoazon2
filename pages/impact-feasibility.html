@@ -8,7 +8,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="../assets/css/platform.css">
-  <link rel="stylesheet" href="../assets/pages/index/styles.css">
   <style>
     :root {
       --bg-dark: #070c18;
@@ -25,6 +24,13 @@
       --rose: #f43f5e;
     }
 
+    html {
+      overflow-y: auto;
+      overflow-x: hidden;
+      height: auto;
+      scroll-behavior: smooth;
+    }
+
     body.if-page {
       background: var(--bg-dark);
       background-image: 
@@ -36,6 +42,8 @@
       margin: 0;
       padding-top: 68px;
       min-height: 100vh;
+      height: auto;
+      overflow-y: auto;
       overflow-x: hidden;
       line-height: 1.5;
     }
@@ -44,6 +52,9 @@
       max-width: 1200px;
       margin: 0 auto;
       padding: 36px 24px 80px 24px;
+      min-height: calc(100vh - 68px);
+      height: auto;
+      overflow: visible;
     }
 
     /* Page Header */
