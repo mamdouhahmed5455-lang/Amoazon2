@@ -173,7 +173,7 @@
             </div>
 
             <div class="analysis-card">
-                <div class="card-label">Risk Probability</div>
+                <div class="card-label">Risk Score (Heuristic)</div>
                 <div id="sideRiskScore" class="card-value">--</div>
                 <div class="risk-meter-container">
                     <div id="riskMeterFill"></div>
@@ -275,7 +275,7 @@
                     <div id="dsLocationName" class="ds-primary-val">Rondônia Arc Hotspot</div>
                     <div id="dsLocationCoords" class="ds-secondary-val">LAT -11.9182 | LON -63.8722</div>
                     <div class="ds-pill-row">
-                        <span id="dsLocationRiskBadge" class="ds-badge red">84% Risk Probability</span>
+                        <span id="dsLocationRiskBadge" class="ds-badge red">84% Risk Score (Heuristic)</span>
                         <span id="dsLocationPriorityBadge" class="ds-badge urgent">Priority: Urgent</span>
                     </div>
                     <button id="dsTargetHotspotBtn" class="btn-hotspot-target" type="button" onclick="focusTopHotspot()">
@@ -351,7 +351,7 @@
                             <i class="fas fa-clipboard-check"></i> Prioritize independent verification / targeted field inspection.
                         </div>
                         <div id="dsActionWindow" class="ds-action-meta">
-                            Assigned Response Window: <strong>24–72 hours</strong> for priority frontier inspection.
+                            Suggested Planning Window: <strong>Illustrative</strong> for targeted inspection planning.
                         </div>
                     </div>
                     <button class="panel-action-btn ds-alert-dispatch-btn" type="button" onclick="sendManualAlert()">
@@ -625,7 +625,7 @@
                         <label>Display Metrics</label>
                         <select id="metricSelector" onchange="updateMetric(this.value)">
                             <option value="risk">Deforestation Risk</option>
-                            <option value="probability">Probability %</option>
+                            <option value="probability">Risk Score %</option>
                             <option value="confidence">Model Confidence</option>
                         </select>
                     </div>
@@ -872,7 +872,7 @@
                             
                             <div class="fw-box fw-red">
                                 <div class="fw-title">Deforestation Risk Prediction</div>
-                                <div class="fw-desc">Probability Scoring & Classification</div>
+                                <div class="fw-desc">Risk Scoring & Priority Classification</div>
                             </div>
                             <div class="fw-arrow"><i class="fas fa-arrow-down"></i></div>
                             
@@ -1002,8 +1002,8 @@
                                     <div class="spec-value">Gradient Boosting</div>
                                 </div>
                                 <div class="spec-card">
-                                    <div class="spec-label">Resolution</div>
-                                    <div class="spec-value">10m/px (Sentinel-2) & Landsat</div>
+                                    <div class="spec-label">Spatial Data</div>
+                                    <div class="spec-value">Precomputed Cell Grid</div>
                                 </div>
                                 <div class="spec-card">
                                     <div class="spec-label">Framework</div>

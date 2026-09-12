@@ -264,7 +264,7 @@ function initializeDashboard(data) {
             const displayMetricValue = getDisplayMetricValue(object);
             const displayMetricLabel = currentMetric === 'risk'
                 ? 'Risk Score'
-                : (currentMetric === 'probability' ? 'Probability' : 'Confidence');
+                : (currentMetric === 'probability' ? 'Risk Score' : 'Confidence');
             const validationEvidence = getValidationEvidence(object);
             const distanceToRoadKm = getDistanceToRoadKm(object);
             const regionPoints = getLocalRegionPoints(object);
@@ -286,7 +286,7 @@ function initializeDashboard(data) {
                                 </span>
                             </div>
                             <div style="font-size:18px; font-weight:800; color:#f8fafc; margin-bottom:4px;">
-                                ${(getProbabilityPercent(pointScore) / 100).toFixed(2)} <span style="font-size:10px; color:#64748b; font-weight:400">prob.</span>
+                                ${(getProbabilityPercent(pointScore) / 100).toFixed(2)} <span style="font-size:10px; color:#64748b; font-weight:400">score</span>
                             </div>
                             <span style="color:#94a3b8; font-size:11px;">${displayMetricLabel}: <b style="color:#f8fafc">${displayMetricValue}${currentMetric === 'risk' ? '' : '%'}</b></span><br>
                             <span style="color:#94a3b8; font-size:11px;">Simulated Timeline Year: <b style="color:#f8fafc">${object.event_year}</b></span><br>
@@ -897,8 +897,8 @@ function updateSideTrajectoryChart(point = null) {
     });
     if (meta) {
         meta.innerText = sourcePoint
-            ? `${getRegionName(sourcePoint.lat, sourcePoint.lon)} under ${SCENARIO_CONFIG[currentScenario].label}: projected probability trend from 2030 to 2035.`
-            : `Active scene baseline under ${SCENARIO_CONFIG[currentScenario].label}: reference probability trend from 2030 to 2035.`;
+            ? `${getRegionName(sourcePoint.lat, sourcePoint.lon)} under ${SCENARIO_CONFIG[currentScenario].label}: projected risk trajectory from 2030 to 2035.`
+            : `Active scene baseline under ${SCENARIO_CONFIG[currentScenario].label}: reference risk trajectory from 2030 to 2035.`;
     }
     const context = ctx.getContext('2d');
     let gradientFill = 'rgba(59, 130, 246, 0.16)';
@@ -944,7 +944,7 @@ function updateSideTrajectoryChart(point = null) {
                     titleColor: '#f8fafc',
                     bodyColor: '#cbd5e1',
                     callbacks: {
-                        label: contextItem => ` ${contextItem.parsed.y.toFixed(1)}% probability`
+                        label: contextItem => ` ${contextItem.parsed.y.toFixed(1)}% risk score`
                     }
                 }
             },
@@ -1966,7 +1966,7 @@ function buildRiskReportMarkup(record) {
         : `Current scene | ${SCENARIO_CONFIG[currentScenario].label} | ${getModeLabel(currentMode)} view`;
     const metrics = hasPoint ? [
         { label: 'Risk score', value: record.risk_score, tone: 'high' },
-        { label: 'Probability', value: `${record.probability}%`, tone: 'medium' },
+        { label: 'Risk Score (Heuristic)', value: `${record.probability}%`, tone: 'medium' },
         { label: 'Confidence', value: record.confidence, tone: 'info' },
         { label: 'Response window', value: record.response_window, tone: 'success' }
     ] : [
@@ -2390,7 +2390,7 @@ function buildChart(low, medium, high, total) {
     })
 }
 const INSIGHT_TEMPLATES = {
-    cluster: "ALERT: High-density risk cluster identified in sector [SECTOR]. Probability of localized forest loss exceeds 85%. Immediate verification recommended.",
+    cluster: "ALERT: High-density risk cluster identified in sector [SECTOR]. High-priority localized forest-loss risk score detected. Immediate verification recommended.",
     proximity: "MISSION ADVISORY: Detected significant spatial pressure near [NEARBY_FEATURE]. Corridor expansion confirmed. Escalation window: 72 hours.",
     scenario: "STRATEGIC OVERVIEW: [SCENARIO] conditions are intensifying pressure on the basin fringe. Aggregate risk trajectory is trending upward.",
     nominal: "STATUS: SCANNING. Monitoring nominal basin conditions. No critical clusters dominating current viewport.",
@@ -2462,7 +2462,7 @@ function updateAlertState(activeData, highCount) {
     const probability = getProbabilityPercent(getPointScore(highest));
     if (banner) banner.classList.remove('low');
     if (headline) headline.innerText = 'High Risk Cluster Detected';
-    if (meta) meta.innerText = `Scenario: ${SCENARIO_CONFIG[currentScenario].label} | Probability: ${probability}% | Target Year: ${highest.event_year}`;
+    if (meta) meta.innerText = `Scenario: ${SCENARIO_CONFIG[currentScenario].label} | Risk Score: ${probability}% | Target Year: ${highest.event_year}`;
     if (icon) icon.innerText = '!';
 
     if (typeof emailjs !== 'undefined') {
@@ -2693,7 +2693,7 @@ function generateRiskReport() {
             subtitle: `${record.region} | LAT ${record.latitude} | LON ${record.longitude} | ${record.scenario}`,
             metrics: [
                 { label: 'Risk score', value: record.risk_score, tone: 'high' },
-                { label: 'Probability', value: `${record.probability}%`, tone: 'medium' },
+                { label: 'Risk Score (Heuristic)', value: `${record.probability}%`, tone: 'medium' },
                 { label: 'Confidence', value: record.confidence, tone: 'info' },
                 { label: 'Response window', value: record.response_window, tone: 'success' }
             ],
@@ -2870,7 +2870,7 @@ function updateDecisionStory(obj, pointScore, probability, priority) {
         if (nameEl) nameEl.textContent = "Rondônia Arc Hotspot";
         if (coordsEl) coordsEl.textContent = "LAT -11.9182 | LON -63.8722 (Baseline)";
         if (riskBadge) {
-            riskBadge.textContent = "84% Risk Probability";
+            riskBadge.textContent = "84% Risk Score (Heuristic)";
             riskBadge.className = "ds-badge red";
         }
         if (priorityBadge) {
@@ -2883,7 +2883,7 @@ function updateDecisionStory(obj, pointScore, probability, priority) {
     if (nameEl) nameEl.textContent = regionName;
     if (coordsEl) coordsEl.textContent = `LAT ${obj.lat.toFixed(4)} | LON ${obj.lon.toFixed(4)}`;
     if (riskBadge) {
-        riskBadge.textContent = `${probability}% Risk Probability`;
+        riskBadge.textContent = `${probability}% Risk Score (Heuristic)`;
         riskBadge.className = pointScore > 170 ? 'ds-badge red' : 'ds-badge';
     }
     if (priorityBadge) {
@@ -2892,7 +2892,7 @@ function updateDecisionStory(obj, pointScore, probability, priority) {
     }
     if (actionWinEl) {
         const win = pointScore > 170 ? '24 hours' : (pointScore > 165 ? '72 hours' : '7 days');
-        actionWinEl.innerHTML = `Assigned Response Window: <strong>${win}</strong> for targeted inspection.`;
+        actionWinEl.innerHTML = `Suggested Planning Window: <strong>${win}</strong> for targeted inspection planning.`;
     }
 }
 
