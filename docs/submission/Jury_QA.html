@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GeoAI Deforestation Risk Platform — Jury Q&amp;A and Defense Package</title>
+  <meta name="description" content="Official Jury Q&amp;A, Technical Defense Guide, and Claim Guardrail Package. Bibliotheca Alexandrina Youth Creators Award 2026 — Technology Creativity Track. Principal Developer: Mamdouh Alwakil." />
+  <style>
+    /* ==========================================================================
+       PAGE SETUP & PRINT CONTROL (STRICT 8-PAGE A4 PORTRAIT)
+       ========================================================================== */
+    @page {
+      size: A4 portrait;
+      margin: 10mm 12mm 10mm 12mm;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --navy: #0b1329;
+      --navy-mid: #0f172a;
+      --navy-light: #1e293b;
+      --slate-dark: #334155;
+      --slate-mid: #64748b;
+      --slate-light: #94a3b8;
+      --border: #cbd5e1;
+      --border-light: #e2e8f0;
+      --bg-subtle: #f8fafc;
+      --bg-card: #ffffff;
+      --blue-primary: #1d4ed8;
+      --blue-sky: #0284c7;
+      --blue-light: #eff6ff;
+      --teal: #0f766e;
+      --teal-light: #f0fdfa;
+      --amber: #b45309;
+      --amber-light: #fffbeb;
+      --green: #15803d;
+      --green-light: #f0fdf4;
+      --purple: #6b21a8;
+      --purple-light: #faf5ff;
+      --red: #b91c1c;
+      --red-light: #fef2f2;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-size: 7.7pt;
+      line-height: 1.38;
+      color: var(--slate-dark);
+      background: #ffffff;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .page {
+      width: 100%;
+      height: 275mm;
+      max-height: 275mm;
+      page-break-after: always;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      box-sizing: border-box;
+      padding: 0 0 1mm 0;
+    }
+
+    .page:last-child {
+      page-break-after: auto;
+    }
+
+    /* ==========================================================================
+       RUNNING HEADER & FOOTER
+       ========================================================================== */
+    .page-header {
+      border-bottom: 1.5px solid var(--navy);
+      padding-bottom: 4px;
+      margin-bottom: 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .header-left {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .header-doc-title {
+      font-size: 8.0pt;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--navy);
+    }
+
+    .header-doc-sub {
+      font-size: 6.6pt;
+      color: var(--slate-mid);
+      font-weight: 500;
+    }
+
+    .header-badge {
+      font-size: 6.6pt;
+      font-weight: 700;
+      background: var(--navy);
+      color: #ffffff;
+      padding: 2px 7px;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+
+    .page-footer {
+      border-top: 1px solid var(--border);
+      padding-top: 3px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 6.6pt;
+      color: var(--slate-mid);
+    }
+
+    .footer-left {
+      font-weight: 500;
+    }
+
+    .footer-right {
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    /* ==========================================================================
+       COMMON TYPOGRAPHY & CARDS
+       ========================================================================== */
+    .section-title {
+      font-size: 7.9pt;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--navy);
+      margin: 4px 0 3px 0;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .section-title::before {
+      content: "";
+      display: inline-block;
+      width: 3px;
+      height: 9px;
+      background: var(--blue-primary);
+      border-radius: 1px;
+    }
+
+    .banner {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-left: 3.5px solid var(--blue-primary);
+      border-radius: 3px;
+      padding: 5px 8px;
+      margin-bottom: 5px;
+    }
+
+    .banner-title {
+      font-size: 7.4pt;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 2px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .banner-text {
+      font-size: 6.9pt;
+      line-height: 1.35;
+      color: var(--slate-dark);
+    }
+
+    .badge-pill {
+      display: inline-block;
+      font-size: 5.9pt;
+      font-weight: 700;
+      padding: 1px 4.5px;
+      border-radius: 2px;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .pill-blue   { background: var(--blue-light); color: var(--blue-primary); border: 0.5px solid #bfdbfe; }
+    .pill-teal   { background: var(--teal-light); color: var(--teal); border: 0.5px solid #99f6e4; }
+    .pill-green  { background: var(--green-light); color: var(--green); border: 0.5px solid #bbf7d0; }
+    .pill-amber  { background: var(--amber-light); color: var(--amber); border: 0.5px solid #fde68a; }
+    .pill-purple { background: var(--purple-light); color: var(--purple); border: 0.5px solid #e9d5ff; }
+    .pill-red    { background: var(--red-light); color: var(--red); border: 0.5px solid #fecaca; }
+
+    /* ==========================================================================
+       QUESTION & ANSWER BLOCKS (THREE-TIER SYSTEM)
+       ========================================================================== */
+    .qa-card {
+      border: 1px solid var(--border);
+      background: #ffffff;
+      border-radius: 3px;
+      margin-bottom: 4px;
+      padding: 4px 7px;
+      display: flex;
+      flex-direction: column;
+      gap: 2.5px;
+    }
+
+    .qa-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 5px;
+    }
+
+    .qa-num-title {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 7.3pt;
+      font-weight: 800;
+      color: var(--navy);
+    }
+
+    .qa-num {
+      background: var(--navy);
+      color: #ffffff;
+      font-size: 6.0pt;
+      font-weight: 800;
+      padding: 1px 4px;
+      border-radius: 2px;
+    }
+
+    .qa-tier {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5px;
+      padding-left: 2px;
+    }
+
+    .tier-label {
+      font-size: 6.0pt;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .t1-lbl { color: var(--blue-primary); }
+    .t2-lbl { color: var(--teal); }
+    .t3-lbl { color: var(--purple); }
+
+    .tier-text {
+      font-size: 6.8pt;
+      line-height: 1.33;
+      color: var(--slate-dark);
+    }
+
+    .tier-text strong {
+      color: var(--navy);
+    }
+
+    /* ==========================================================================
+       TABLES
+       ========================================================================== */
+    table.data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 6.7pt;
+      margin-bottom: 4px;
+    }
+
+    table.data-table th, table.data-table td {
+      border: 1px solid var(--border);
+      padding: 3px 5px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    table.data-table th {
+      background: var(--bg-subtle);
+      font-weight: 700;
+      color: var(--navy);
+      text-transform: uppercase;
+      font-size: 6.1pt;
+      letter-spacing: 0.04em;
+    }
+
+    table.data-table tr:nth-child(even) td {
+      background: #fafbfc;
+    }
+
+    /* ==========================================================================
+       OVERCLAIM TRAP CARDS (PAGE 6)
+       ========================================================================== */
+    .trap-card {
+      border: 1px solid var(--border);
+      border-left: 3.5px solid var(--red);
+      background: #ffffff;
+      border-radius: 3px;
+      padding: 4px 7px;
+      margin-bottom: 4.5px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .trap-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .trap-question {
+      font-size: 7.2pt;
+      font-weight: 800;
+      color: var(--red);
+    }
+
+    .trap-correction {
+      font-size: 6.8pt;
+      font-weight: 700;
+      color: var(--navy);
+      background: var(--bg-subtle);
+      padding: 2px 5px;
+      border-radius: 2px;
+      border-left: 2px solid var(--green);
+    }
+
+    .trap-response {
+      font-size: 6.7pt;
+      line-height: 1.32;
+      color: var(--slate-dark);
+    }
+
+    .trap-dont-say {
+      font-size: 6.5pt;
+      color: var(--red);
+      font-weight: 600;
+      background: var(--red-light);
+      padding: 1.5px 5px;
+      border-radius: 2px;
+    }
+
+    /* ==========================================================================
+       RAPID-FIRE TWO-COLUMN GRID (PAGE 2)
+       ========================================================================== */
+    .rapid-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px 6px;
+    }
+
+    .rapid-item {
+      border: 1px solid var(--border);
+      background: #ffffff;
+      border-radius: 3px;
+      padding: 3.5px 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5px;
+    }
+
+    .rapid-q {
+      font-size: 6.8pt;
+      font-weight: 800;
+      color: var(--navy);
+      display: flex;
+      align-items: center;
+      gap: 3px;
+    }
+
+    .rapid-q-num {
+      background: var(--blue-light);
+      color: var(--blue-primary);
+      font-size: 5.8pt;
+      font-weight: 800;
+      padding: 0.5px 3px;
+      border-radius: 1.5px;
+    }
+
+    .rapid-a {
+      font-size: 6.6pt;
+      line-height: 1.30;
+      color: var(--slate-dark);
+    }
+
+    /* ==========================================================================
+       PAGE 1 & 8 HERO BOXES
+       ========================================================================== */
+    .hero-strip-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5px;
+      margin-bottom: 5px;
+    }
+
+    .hero-anchor-box {
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      padding: 5px 7px;
+      background: #ffffff;
+    }
+
+    .hero-box-title {
+      font-size: 7.2pt;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 3px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .hero-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 2.5px;
+    }
+
+    .hero-list li {
+      font-size: 6.7pt;
+      line-height: 1.30;
+      display: flex;
+      align-items: flex-start;
+      gap: 4px;
+    }
+
+    .hero-list li::before {
+      content: "•";
+      font-size: 8.0pt;
+      line-height: 1;
+    }
+
+    .box-green { border-left: 3.5px solid var(--green); }
+    .box-green .hero-box-title { color: var(--green); }
+    .box-green .hero-list li::before { color: var(--green); }
+
+    .box-red { border-left: 3.5px solid var(--red); }
+    .box-red .hero-box-title { color: var(--red); }
+    .box-red .hero-list li::before { color: var(--red); }
+
+    .box-blue { border-left: 3.5px solid var(--blue-primary); }
+    .box-blue .hero-box-title { color: var(--blue-primary); }
+    .box-blue .hero-list li::before { color: var(--blue-primary); }
+
+    .box-purple { border-left: 3.5px solid var(--purple); }
+    .box-purple .hero-box-title { color: var(--purple); }
+    .box-purple .hero-list li::before { color: var(--purple); }
+  </style>
+</head>
+<body>
+
+  <!-- ======================================================================== -->
+  <!-- PAGE 1: JURY DEFENSE MASTER SHEET & CORE POSITIONING                     -->
+  <!-- ======================================================================== -->
+  <div class="page" id="page-1">
+    <div>
+      <header class="page-header">
+        <div class="header-left">
+          <div class="header-doc-title">GEOAI DEFORESTATION RISK PLATFORM · JURY Q&amp;A &amp; DEFENSE PACKAGE</div>
+          <div class="header-doc-sub">Bibliotheca Alexandrina Youth Creators Award 2026 · Technology Creativity Track · Principal Developer: Mamdouh Alwakil</div>
+        </div>
+        <div class="header-badge">PAGE 1 OF 8 · JURY DEFENSE MASTER SHEET</div>
+      </header>
+
+      <!-- Executive Defense Stance Banner -->
+      <div class="banner">
+        <div class="banner-title">
+          <span>EXECUTIVE DEFENSE STANCE &amp; COMPETITION JURY POSTURE</span>
+          <span class="badge-pill pill-blue">SOVEREIGN-GROUNDED DECISION SUPPORT</span>
+        </div>
+        <div class="banner-text">
+          This platform is an independent <strong>academic and creative technology research prototype</strong> for the Brazilian Amazon state of <strong>Rondônia</strong>. 
+          It does <strong>not replace</strong> sovereign Brazilian monitoring systems (INPE PRODES/DETER), nor does it predict future clearing events or output calibrated probabilities. 
+          Its contribution is translating multi-source spatial indicators into a <strong>relative spatial risk ranking across ~150,000 precomputed cells</strong> to structure spatial attention toward <strong>verification planning</strong>. 
+          Defend every result with rigorous transparency: disclose empirical data boundaries, separate Track 1 from Track 2, and highlight honest limitations.
+        </div>
+      </div>
+
+      <!-- The Three-Tier Response Protocol -->
+      <div class="section-title">The Three-Tier Answer Architecture (Consistent Depth Control)</div>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th style="width: 15%;">Depth Level</th>
+            <th style="width: 20%;">Target Duration</th>
+            <th style="width: 35%;">Strategic Purpose</th>
+            <th style="width: 30%;">Presenter Delivery Posture</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong style="color: var(--blue-primary);">LEVEL 1</strong></td>
+            <td><strong>10–15 Seconds</strong> (~25–35 words)</td>
+            <td>Direct, definitive answer for fast-moving panels; eliminates ambiguity instantly.</td>
+            <td>Calm, confident, direct. Zero filler phrases. Never evade or waffle.</td>
+          </tr>
+          <tr>
+            <td><strong style="color: var(--teal);">LEVEL 2</strong></td>
+            <td><strong>25–30 Seconds</strong> (~55–70 words)</td>
+            <td>Standard competition answer; adds one supporting verified metric or system mechanism.</td>
+            <td>Authoritative, structured. Connects concept to verified repository evidence.</td>
+          </tr>
+          <tr>
+            <td><strong style="color: var(--purple);">LEVEL 3</strong></td>
+            <td><strong>45–60 Seconds</strong> (~100–140 words)</td>
+            <td>Deep technical answer for ML/GIS domain judges challenging methodology or edge cases.</td>
+            <td>Methodically rigorous. Explains underlying protocol, CI bounds, or tradeoffs.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Core Narrative Triad -->
+      <div class="section-title">Core Scientific Narrative Triad</div>
+      <div class="banner" style="border-left-color: var(--teal); background: var(--teal-light);">
+        <div class="banner-title" style="color: var(--teal);">THE THREE-BEAT DEFENSE FORMULA</div>
+        <div class="banner-text">
+          1. <strong>The Sovereign Context:</strong> Brazil already monitors deforestation at world-class scale through INPE's PRODES and DETER.<br>
+          2. <strong>The Prototype Contribution:</strong> We explore how multi-source spatial indicators (roads, past loss, population, elevation) can be structured into an offline-evaluated relative risk ranking.<br>
+          3. <strong>The Operational Goal:</strong> To support human analysts in prioritizing capacity-constrained verification planning—not to replace monitoring or make autonomous enforcement decisions.
+        </div>
+      </div>
+
+      <!-- Hero Anchor Boxes: 7 Facts vs 7 Things Never To Say -->
+      <div class="hero-strip-grid">
+        <div class="hero-anchor-box box-green">
+          <div class="hero-box-title">7 Facts To Never Forget (Unshakable Foundation)</div>
+          <ul class="hero-list">
+            <li><strong>Study Area:</strong> State of Rondônia, Brazilian Amazon Basin (237,590 km²).</li>
+            <li><strong>Spatial Resolution:</strong> Approximately 150,000 precomputed hexagonal grid cells.</li>
+            <li><strong>Model Architecture:</strong> Offline-trained XGBoost tree ensemble evaluating spatial features.</li>
+            <li><strong>Track 1 Benchmark:</strong> Documented production benchmark achieving ROC-AUC 0.82.</li>
+            <li><strong>Track 2 Evaluation:</strong> Independent Model V2 on held-out 2024 PRODES achieving ROC-AUC 0.7474.</li>
+            <li><strong>Prioritization Power:</strong> 5.0× retrospective top-decile enrichment (captures 50% of clearing in top 10%).</li>
+            <li><strong>System Function:</strong> Interactive decision-support for verification planning, NOT live satellite telemetry.</li>
+          </ul>
+        </div>
+        <div class="hero-anchor-box box-red">
+          <div class="hero-box-title">7 Things To Never Say (Instant Disqualification Words)</div>
+          <ul class="hero-list">
+            <li><em>“84% probability of deforestation”</em> $\rightarrow$ Say: <strong>“84% Risk Score (Heuristic) / relative spatial ranking.”</strong></li>
+            <li><em>“Real-time AI prediction / live satellite feed”</em> $\rightarrow$ Say: <strong>“Precomputed spatial surface evaluated offline.”</strong></li>
+            <li><em>“Improves ranger patrol efficiency by 500%”</em> $\rightarrow$ Say: <strong>“5.0× retrospective top-decile enrichment.”</strong></li>
+            <li><em>“Replaces INPE PRODES / DETER”</em> $\rightarrow$ Say: <strong>“Complements monitoring via pre-screening workflows.”</strong></li>
+            <li><em>“Guaranteed future loss prevention / carbon saved”</em> $\rightarrow$ Say: <strong>“Exploratory sensitivity modeling; zero direct carbon claims.”</strong></li>
+            <li><em>“Official operational partnership with IBAMA”</em> $\rightarrow$ Say: <strong>“Independent academic research prototype.”</strong></li>
+            <li><em>“Autonomous AI enforcement”</em> $\rightarrow$ Say: <strong>“Human-in-the-loop decision-support for inspection planning.”</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- The 4-Step Challenge Handling Protocol -->
+      <div class="section-title">The Four-Step Protocol When Challenged by Judges</div>
+      <div class="banner" style="border-left-color: var(--amber); margin-bottom: 0;">
+        <div class="banner-title" style="color: var(--amber);">RESPONSE SEQUENCE FOR SKEPTICAL QUESTIONS</div>
+        <div class="banner-text">
+          <strong>Step 1: Direct Agreement on Premise</strong> (“You are absolutely right to ask that...”) $\rightarrow$
+          <strong>Step 2: State the Verified Evidence</strong> (“In our independent 2024 evaluation, the metric was 0.7474...”) $\rightarrow$
+          <strong>Step 3: Acknowledge the Exact Scientific Boundary</strong> (“We deliberately do not claim calibrated probability or zero leakage...”) $\rightarrow$
+          <strong>Step 4: Bridge to Next Engineering Milestone</strong> (“Before operational deployment, multi-year validation and field calibration would be required.”).
+        </div>
+      </div>
+    </div>
+
+    <footer class="page-footer">
+      <span class="footer-left">GeoAI Deforestation Risk Platform · Bibliotheca Alexandrina Youth Creators Award 2026</span>
+      <span class="footer-right">Page 1 of 8</span>
+    </footer>
+  </div>
+
+  <!-- ======================================================================== -->
+  <!-- PAGE 2: TOP 20 RAPID-FIRE PRE-STAGE JURY CHEATSHEET                      -->
+  <!-- ======================================================================== -->
+  <div class="page" id="page-2">
+    <div>
+      <header class="page-header">
+        <div class="header-left">
+          <div class="header-doc-title">GEOAI DEFORESTATION RISK PLATFORM · JURY Q&amp;A &amp; DEFENSE PACKAGE</div>
+          <div class="header-doc-sub">Top 20 Rapid-Fire Questions &amp; Razor-Sharp Answers · Ready Reference Before Presentation</div>
+        </div>
+        <div class="header-badge">PAGE 2 OF 8 · TOP 20 RAPID-FIRE</div>
+      </header>
+
+      <div class="rapid-grid">
+
+        <!-- Item 01 -->
+        <div class="rapid-item">
+          <div class="rapid-q"><span class="rapid-q-num">01</span> What did you build?</div>
+          <div class="rapid-a">An interactive GeoAI decision-support prototype that transforms multi-source spatial indicators into a relative deforestation risk ranking across ~150,000 precomputed cells in Rondônia.</div>
+        </div>
+
+        <!-- Item 02 -->
+        <div class="rapid-item">
+          <div class="rapid-q"><span class="rapid-q-num">02</span> Why Rondônia?</div>
+          <div class="rapid-a">Rondônia sits in the heart of the Amazonian Arc of Deforestation, featuring heavy agricultural frontier pressure, extensive road networks (BR-364), and rich 25-year PRODES data.</div>
+        </div>
+
+        <!-- Item 03 -->
+        <div class="rapid-item">
+          <div class="rapid-q"><span class="rapid-q-num">03</span> Is this real-time satellite AI?</div>
+          <div class="rapid-a">No. The platform uses precomputed spatial risk layers evaluated offline. It is designed for analytical pre-screening, not real-time satellite telemetry or live alert generation.</div>
+        </div>
+
+        <!-- Item 04 -->
+        <div class="rapid-item">
+          <div class="rapid-q"><span class="rapid-q-num">04</span> Is the risk score a probability?</div>
+          <div class="rapid-a">No. Scores are relative spatial rankings indicating which cells exhibit higher exposure to known deforestation drivers. They are not calibrated physical probabilities.</div>
+        </div>
+
+        <!-- Item 05 -->
+        <div class="rapid-item">
+          <div class="rapid-q"><span class="rapid-q-num">05</span> Why choose XGBoost?</div>
+          <div class="rapid-a">XGBoost excels on tabular spatial distance features, captures non-linear driver thresholds without deep data starvation, and supports TreeSHAP explainability.</div>
+        </div>
+
+        <!-- Item 06 -->
+        <div class="rapid-item">
+          <div class="rapid-q"><span class="rapid-q-num">06</span> What is Track 1 (ROC-AUC 0.82)?</div>
+          <div class="rapid-a">Track 1 represents the documented production benchmark inherited from earlier project development, demonstrating strong discriminative ranking under historical assumptions.</div>
+        </div>
+
+        <!-- Item 07 -->
+        <div class="rapid-item">
+          <div class="rapid-q"><span class="rapid-q-num">07</span> What is Track 2 (ROC-AUC 0.7474)?</div>
+          <div class="rapid-a">Track 2 is our independent Model V2 research evaluation tested strictly on held-out PRODES 2024 data, providing fully reproducible scientific proof under rare-event conditions.</div>
+        </div>
+
+        <!-- Item 08 -->
+        <div class="rapid-item">
+          <div class="rapid-q"><span class="rapid-q-num">08</span> Why are there two separate tracks?</div>
+          <div class="rapid-a">Because the original legacy training code and exact seed were unavailable, we halted reproduction rather than inventing labels, providing an independent Model V2 evaluation instead.</div>
+        </div>
+
+        <!-- Item 09 -->
+        <div class="rapid-item">
+          <div class="rapid-q"><span class="rapid-q-num">09</span> What is the 5.0× enrichment?</div>
+          <div class="rapid-a">In retrospective 2024 testing, the top 10% highest-ranked cells captured 50% of all observed clearing events, delivering 5.0 times the recall of random spatial inspection.</div>
+        </div>
+
+        <!-- Item 10 -->
+        <div class="rapid-item">
+          <div class="rapid-q"><span class="rapid-q-num">10</span> Does 5× mean rangers work 5× faster?</div>
+          <div class="rapid-a">No. It is a retrospective statistical enrichment metric on a test lattice, not an operational efficiency guarantee across real-world physical ranger logistics.</div>
+        </div>
+
+        <!-- Item 11 -->
+        <div class="rapid-item">
+          <div class="rapid-q"><span class="rapid-q-num">11</span> What does TreeSHAP reveal?</div>
+          <div class="rapid-a">In Model V2, proximity to historical loss contributes 41.3% of model attribution, followed by roads (17.4%), elevation (16.4%), population (12.5%), and prior loss density (12.5%).</div>
+        </div>
+
+        <!-- Item 12 -->
+        <div class="rapid-item">
+          <div class="rapid-q"><span class="rapid-q-num">12</span> Why did historical loss beat the full model?</div>
+          <div class="rapid-a">Historical loss alone achieved 0.7797 vs 0.7474 full model. In this test sample, spatial persistence was the dominant signal, while secondary features added slight variance.</div>
+        </div>
+
+        <!-- Item 13 -->
+        <div class="rapid-item">
+          <div class="rapid-q"><span class="rapid-q-num">13</span> Is there data leakage?</div>
+          <div class="rapid-a">We strictly isolate target years (2022 train, 2023 val, 2024 test). However, because static predictors share observation epochs, we make no blanket zero-leakage claim.</div>
+        </div>
+
+        <!-- Item 14 -->
+        <div class="rapid-item">
+          <div class="rapid-q"><span class="rapid-q-num">14</span> What are the 150,000 cells?</div>
+          <div class="rapid-a">A discrete spatial tessellation covering Rondônia. Each cell carries precomputed geographic coordinates, environmental indicators, and relative spatial risk scores.</div>
+        </div>
+
+        <!-- Item 15 -->
+        <div class="rapid-item">
+          <div class="rapid-q"><span class="rapid-q-num">15</span> What do the 3D columns represent?</div>
+          <div class="rapid-a">Column height and color represent relative spatial risk intensity (0–100%), visualized via Deck.gl WebGL instancing. They do not represent physical terrain elevation.</div>
+        </div>
+
+        <!-- Item 16 -->
+        <div class="rapid-item">
+          <div class="rapid-q"><span class="rapid-q-num">16</span> Is the simulator a live forecast?</div>
+          <div class="rapid-a">No. The scenario simulator is an exploratory sensitivity tool that tests how risk priorities shift under hypothetical road expansion or strict conservation policies.</div>
+        </div>
+
+        <!-- Item 17 -->
+        <div class="rapid-item">
+          <div class="rapid-q"><span class="rapid-q-num">17</span> Do you partner with IBAMA or SEDAM?</div>
+          <div class="rapid-a">No. We have no formal institutional partnerships. This is an independent research prototype developed for competition review and methodology demonstration.</div>
+        </div>
+
+        <!-- Item 18 -->
+        <div class="rapid-item">
+          <div class="rapid-q"><span class="rapid-q-num">18</span> Does this replace PRODES or DETER?</div>
+          <div class="rapid-a">Never. PRODES is the official gold standard for historical accounting. This prototype operates upstream to assist analysts in prioritizing where to look before clearing occurs.</div>
+        </div>
+
+        <!-- Item 19 -->
+        <div class="rapid-item">
+          <div class="rapid-q"><span class="rapid-q-num">19</span> What happens if the model is wrong?</div>
+          <div class="rapid-a">False positives generate unnecessary screening reviews; false negatives miss clearing. Because it informs verification planning rather than autonomous action, human oversight catches errors.</div>
+        </div>
+
+        <!-- Item 20 -->
+        <div class="rapid-item">
+          <div class="rapid-q"><span class="rapid-q-num">20</span> What is the single core innovation?</div>
+          <div class="rapid-a">Synthesizing multi-source spatial indicators into an end-to-end, explainable, WebGL-accelerated decision-support pipeline anchored by transparent dual-track scientific integrity.</div>
+        </div>
+
+      </div>
+
+      <!-- Quick Advice Box -->
+      <div class="banner" style="margin-top: 5px; margin-bottom: 0; padding: 4px 8px; border-left-color: var(--blue-primary);">
+        <div class="banner-title" style="font-size: 7.0pt; color: var(--blue-primary);">RAPID PRESENTATION PACING RULE</div>
+        <div class="banner-text" style="font-size: 6.6pt;">
+          When an uninterrupted question is asked, deliver the 1-sentence Rapid-Fire answer first. Pause for 1 second. If the judge nods, stop. If they probe, transition into Level 2 or Level 3 depth without rushing.
+        </div>
+      </div>
+    </div>
+
+    <footer class="page-footer">
+      <span class="footer-left">GeoAI Deforestation Risk Platform · Bibliotheca Alexandrina Youth Creators Award 2026</span>
+      <span class="footer-right">Page 2 of 8</span>
+    </footer>
+  </div>
+
+  <!-- ======================================================================== -->
+  <!-- PAGE 3: SCIENTIFIC & MACHINE LEARNING DEFENSE (QUESTIONS 01–08)          -->
+  <!-- ======================================================================== -->
+  <div class="page" id="page-3">
+    <div>
+      <header class="page-header">
+        <div class="header-left">
+          <div class="header-doc-title">GEOAI DEFORESTATION RISK PLATFORM · JURY Q&amp;A &amp; DEFENSE PACKAGE</div>
+          <div class="header-doc-sub">Domain &amp; Technical Defense · Questions 01–08: Problem Framing, ML Architecture &amp; Data Pipeline</div>
+        </div>
+        <div class="header-badge">PAGE 3 OF 8 · SCIENTIFIC &amp; ML DEFENSE</div>
+      </header>
+
+      <!-- Q01 -->
+      <div class="qa-card">
+        <div class="qa-header">
+          <div class="qa-num-title"><span class="qa-num">Q01</span> What exactly did you build?</div>
+          <span class="badge-pill pill-blue">SYSTEM OVERVIEW</span>
+        </div>
+        <div class="qa-tier"><span class="tier-label t1-lbl">15s Direct:</span><div class="tier-text">I built an interactive GeoAI decision-support platform that transforms multi-source spatial indicators into a relative deforestation risk surface across ~150,000 precomputed cells in Rondônia.</div></div>
+        <div class="qa-tier"><span class="tier-label t2-lbl">30s Supporting:</span><div class="tier-text">The system combines an offline XGBoost classifier with high-performance Deck.gl WebGL 3D visualization. It allows environmental analysts to move from state-wide macro screening into hotspot inspection, driver explainability, and structured verification planning without relying on live satellite telemetry.</div></div>
+        <div class="qa-tier"><span class="tier-label t3-lbl">Deep Technical:</span><div class="tier-text">The prototype consists of a browser-based presentation layer consuming precomputed binary geospatial payloads, backed by an independent Model V2 research repository. We engineered five spatial features using KD-Tree spatial distance queries and validated the classifier against official INPE PRODES 2024 clearing polygons across an independent lattice.</div></div>
+      </div>
+
+      <!-- Q02 -->
+      <div class="qa-card">
+        <div class="qa-header">
+          <div class="qa-num-title"><span class="qa-num">Q02</span> What specific problem are you solving?</div>
+          <span class="badge-pill pill-teal">PROBLEM FRAMING</span>
+        </div>
+        <div class="qa-tier"><span class="tier-label t1-lbl">15s Direct:</span><div class="tier-text">Most forest platforms map where deforestation already occurred; this platform structures spatial risk signals before clearing happens to support proactive verification planning.</div></div>
+        <div class="qa-tier"><span class="tier-label t2-lbl">30s Supporting:</span><div class="tier-text">Historical systems like PRODES provide gold-standard annual accounting, but environmental inspection teams operate with strictly limited field resources. By ranking spatial cells by relative risk exposure, we help decision-makers prioritize which areas warrant early satellite or aerial verification.</div></div>
+        <div class="qa-tier"><span class="tier-label t3-lbl">Deep Technical:</span><div class="tier-text">Deforestation in the Amazon follows well-documented spatial dynamics—it concentrates along agricultural expansion fronts and road infrastructure. We address the analytical bottleneck of synthesizing disparate environmental datasets into a coherent, interpretable prioritization workflow.</div></div>
+      </div>
+
+      <!-- Q03 -->
+      <div class="qa-card">
+        <div class="qa-header">
+          <div class="qa-num-title"><span class="qa-num">Q03</span> Why Rondônia as the study area?</div>
+          <span class="badge-pill pill-green">STUDY AREA</span>
+        </div>
+        <div class="qa-tier"><span class="tier-label t1-lbl">15s Direct:</span><div class="tier-text">Rondônia represents an intensive agricultural frontier with the classic 'fishbone' clearing pattern, making it the ideal geographic benchmark for spatial risk modeling.</div></div>
+        <div class="qa-tier"><span class="tier-label t2-lbl">30s Supporting:</span><div class="tier-text">With over 237,000 km² and 25 years of uninterrupted PRODES monitoring data, Rondônia offers a statistically rich historical baseline. Its high road fragmentation along Highway BR-364 provides distinct, verifiable spatial gradients for feature engineering.</div></div>
+        <div class="qa-tier"><span class="tier-label t3-lbl">Deep Technical:</span><div class="tier-text">Rondônia experienced extensive forest loss between 2001 and 2025, but exhibits diverse sub-regional trends—from consolidated cattle ranching in the south to active pressure along protected boundaries. This variation provides an ideal stress-test for spatial classifier discrimination.</div></div>
+      </div>
+
+      <!-- Q04 -->
+      <div class="qa-card">
+        <div class="qa-header">
+          <div class="qa-num-title"><span class="qa-num">Q04</span> Why choose XGBoost over Deep Learning or CNNs?</div>
+          <span class="badge-pill pill-purple">MODEL ARCHITECTURE</span>
+        </div>
+        <div class="qa-tier"><span class="tier-label t1-lbl">15s Direct:</span><div class="tier-text">Gradient boosted decision trees consistently outperform deep neural networks on tabular spatial distance features while providing native TreeSHAP interpretability.</div></div>
+        <div class="qa-tier"><span class="tier-label t2-lbl">30s Supporting:</span><div class="tier-text">Our features are tabular spatial measurements—distances to roads, historical loss proximity, and elevation. XGBoost handles tabular non-linearities and severe class imbalance exceptionally well without requiring millions of satellite training tiles.</div></div>
+        <div class="qa-tier"><span class="tier-label t3-lbl">Deep Technical:</span><div class="tier-text">Deep convolutional architectures require massive image datasets and heavy GPU infrastructure during inference. XGBoost models train in seconds, execute deterministically, serialize into lightweight artifacts, and allow exact mathematical decomposition of feature attributions via TreeSHAP.</div></div>
+      </div>
+
+      <!-- Q05 & Q06 -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px;">
+        <div class="qa-card">
+          <div class="qa-header"><div class="qa-num-title"><span class="qa-num">Q05</span> What are the model inputs?</div><span class="badge-pill pill-blue">FEATURES</span></div>
+          <div class="qa-tier"><span class="tier-label t1-lbl">15s Direct:</span><div class="tier-text">Model V2 uses 5 features: road distance, historical loss distance, prior loss density, population pressure, and elevation.</div></div>
+          <div class="qa-tier"><span class="tier-label t2-lbl">30s Supporting:</span><div class="tier-text">Formally: <code>dist_road_km</code>, <code>dist_hist_loss_km</code>, <code>prior_loss_dens</code>, <code>pop_pressure</code>, and <code>elevation_m</code>, capturing physical access, historical persistence, human gravity, and topography.</div></div>
+          <div class="qa-tier"><span class="tier-label t3-lbl">Deep Technical:</span><div class="tier-text">Distances are Euclidean approximations via cKDTree over planar UTM coordinates. Density aggregates historical clearing events within adaptive radii, and elevation is extracted from Copernicus DEM 30m rasters.</div></div>
+        </div>
+        <div class="qa-card">
+          <div class="qa-header"><div class="qa-num-title"><span class="qa-num">Q06</span> Where did the data come from?</div><span class="badge-pill pill-teal">DATA SOURCES</span></div>
+          <div class="qa-tier"><span class="tier-label t1-lbl">15s Direct:</span><div class="tier-text">All data comes from official public repositories: INPE PRODES, IBGE, OpenStreetMap/DNIT, and Copernicus DEM.</div></div>
+          <div class="qa-tier"><span class="tier-label t2-lbl">30s Supporting:</span><div class="tier-text">Deforestation ground truth is sourced from Brazil's National Institute for Space Research (INPE). Roads originate from DNIT/OSM, municipal population centers from IBGE, and topography from Copernicus GLO-30.</div></div>
+          <div class="qa-tier"><span class="tier-label t3-lbl">Deep Technical:</span><div class="tier-text">Every input file is cryptographically hashed in our reproducible research pipeline. We strictly enforce sovereign administrative boundaries using IBGE's official Rondônia state polygon.</div></div>
+        </div>
+      </div>
+
+      <!-- Q07 & Q08 -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px; margin-top: 1px;">
+        <div class="qa-card">
+          <div class="qa-header"><div class="qa-num-title"><span class="qa-num">Q07</span> How was target label created?</div><span class="badge-pill pill-green">LABELS</span></div>
+          <div class="qa-tier"><span class="tier-label t1-lbl">15s Direct:</span><div class="tier-text">Target labels were generated by a spatial point-in-polygon join between our neutral test lattice and PRODES 2024 clearing polygons.</div></div>
+          <div class="qa-tier"><span class="tier-label t2-lbl">30s Supporting:</span><div class="tier-text">If a neutral test cell centroid fell within an official PRODES 2024 primary deforestation polygon, it was assigned binary label 1; otherwise, binary label 0. Zero synthetic labels were created.</div></div>
+          <div class="qa-tier"><span class="tier-label t3-lbl">Deep Technical:</span><div class="tier-text">The lattice was filtered against Rondônia's sovereign boundary and non-forest masks to eliminate rivers and urban zones. This guarantees ground-truth validity independent of model risk scores.</div></div>
+        </div>
+        <div class="qa-card">
+          <div class="qa-header"><div class="qa-num-title"><span class="qa-num">Q08</span> What does 0.1419% prevalence imply?</div><span class="badge-pill pill-amber">CLASS IMBALANCE</span></div>
+          <div class="qa-tier"><span class="tier-label t1-lbl">15s Direct:</span><div class="tier-text">Only 10 positive events occurred across 7,045 eligible neutral cells, reflecting the severe physical rarity of annual clearing.</div></div>
+          <div class="qa-tier"><span class="tier-label t2-lbl">30s Supporting:</span><div class="tier-text">Under 0.1419% prevalence, a trivial dummy model predicting 'zero' achieves 99.86% accuracy. That is why standard accuracy is completely useless here, and why PR-AUC and top-decile enrichment are essential.</div></div>
+          <div class="qa-tier"><span class="tier-label t3-lbl">Deep Technical:</span><div class="tier-text">Extreme class imbalance shrinks PR-AUC baselines to 0.0014. Our Model V2 achieved PR-AUC 0.005534, interpreted in the context of an extremely rare positive class (0.1419% prevalence), and successfully captured 50% of positive events in the top 10% ranked decile.</div></div>
+        </div>
+      </div>
+
+    </div>
+
+    <footer class="page-footer">
+      <span class="footer-left">GeoAI Deforestation Risk Platform · Bibliotheca Alexandrina Youth Creators Award 2026</span>
+      <span class="footer-right">Page 3 of 8</span>
+    </footer>
+  </div>
+
+  <!-- ======================================================================== -->
+  <!-- PAGE 4: VALIDATION PROTOCOL & DUAL-TRACK INTEGRITY (QUESTIONS 09–16)     -->
+  <!-- ======================================================================== -->
+  <div class="page" id="page-4">
+    <div>
+      <header class="page-header">
+        <div class="header-left">
+          <div class="header-doc-title">GEOAI DEFORESTATION RISK PLATFORM · JURY Q&amp;A &amp; DEFENSE PACKAGE</div>
+          <div class="header-doc-sub">Dual-Track Verification &amp; Statistical Auditing · Questions 09–16: Metrics, Ablation &amp; Reproducibility</div>
+        </div>
+        <div class="header-badge">PAGE 4 OF 8 · VALIDATION PROTOCOL</div>
+      </header>
+
+      <!-- Q09 -->
+      <div class="qa-card">
+        <div class="qa-header">
+          <div class="qa-num-title"><span class="qa-num">Q09</span> Why are there two different model evidence tracks?</div>
+          <span class="badge-pill pill-purple">DUAL-TRACK INTEGRITY</span>
+        </div>
+        <div class="qa-tier"><span class="tier-label t1-lbl">15s Direct:</span><div class="tier-text">Track 1 is the documented production benchmark (0.82 ROC-AUC); Track 2 is an independent research evaluation on held-out 2024 data (0.7474 ROC-AUC).</div></div>
+        <div class="qa-tier"><span class="tier-label t2-lbl">30s Supporting:</span><div class="tier-text">Rather than claiming the production model was re-trained from scratch when original legacy scripts were incomplete, we separated the documented prototype benchmark from an independent, fully reproducible research evaluation built on Model V2.</div></div>
+        <div class="qa-tier"><span class="tier-label t3-lbl">Deep Technical:</span><div class="tier-text">This separation preserves total academic honesty. Track 1 documents historical UI performance under legacy assumptions. Track 2 subjects the methodology to strict out-of-sample temporal validation on held-out PRODES 2024 clearing polygons across a neutral lattice.</div></div>
+      </div>
+
+      <!-- Q10 -->
+      <div class="qa-card">
+        <div class="qa-header">
+          <div class="qa-num-title"><span class="qa-num">Q10</span> What does the 0.82 ROC-AUC mean, and why wasn't it reproduced?</div>
+          <span class="badge-pill pill-blue">TRACK 1 REPRODUCTION</span>
+        </div>
+        <div class="qa-tier"><span class="tier-label t1-lbl">15s Direct:</span><div class="tier-text">It documents strong ranking discrimination in early development, but reproduction was halted because original seeds and training scripts were not preserved.</div></div>
+        <div class="qa-tier"><span class="tier-label t2-lbl">30s Supporting:</span><div class="tier-text">The original benchmark reported 0.82 ROC-AUC, 0.79 precision, and 0.84 recall. When auditing the repository, we discovered the exact training harness was missing. Instead of synthesizing fake data to pretend reproduction, we transparently documented the boundary.</div></div>
+        <div class="qa-tier"><span class="tier-label t3-lbl">Deep Technical:</span><div class="tier-text">Halting reproduction was an intentional ethical choice. Creating pseudo-labels to force an exact 0.82 match would have violated scientific integrity. We preserved Track 1 as documented evidence and engineered Track 2 to provide auditable mathematical proof.</div></div>
+      </div>
+
+      <!-- Q11 & Q12 -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px;">
+        <div class="qa-card">
+          <div class="qa-header"><div class="qa-num-title"><span class="qa-num">Q11</span> What does 0.7474 ROC-AUC mean?</div><span class="badge-pill pill-teal">TRACK 2 EVALUATION</span></div>
+          <div class="qa-tier"><span class="tier-label t1-lbl">15s Direct:</span><div class="tier-text">It means the classifier has a 74.7% probability of ranking a true clearing event higher than a non-clearing cell on held-out 2024 data.</div></div>
+          <div class="qa-tier"><span class="tier-label t2-lbl">30s Supporting:</span><div class="tier-text">Evaluated on 7,045 neutral cells in 2024, Model V2 achieved 0.7474 ROC-AUC (95% CI [0.5837, 0.9036]), rated as 'Moderate Evidence' under severe rare-event conditions.</div></div>
+          <div class="qa-tier"><span class="tier-label t3-lbl">Deep Technical:</span><div class="tier-text">This is an out-of-sample temporal holdout test. The model was trained on historical data up to 2022/2023 and evaluated strictly against 2024 PRODES polygons, demonstrating genuine temporal generalization.</div></div>
+        </div>
+        <div class="qa-card">
+          <div class="qa-header"><div class="qa-num-title"><span class="qa-num">Q12</span> How is 5.0× enrichment calculated?</div><span class="badge-pill pill-green">TOP-K PRIORITIZATION</span></div>
+          <div class="qa-tier"><span class="tier-label t1-lbl">15s Direct:</span><div class="tier-text">The top 10% highest-ranked cells captured 5 of the 10 real clearing events, achieving 50% recall compared to a 10% random baseline.</div></div>
+          <div class="qa-tier"><span class="tier-label t2-lbl">30s Supporting:</span><div class="tier-text">Dividing 50% observed recall by the 10% sample fraction yields exactly 5.0× retrospective enrichment. It mathematically proves the model prioritizes true clearing into the top decile.</div></div>
+          <div class="qa-tier"><span class="tier-label t3-lbl">Deep Technical:</span><div class="tier-text">Formally: $\text{Enrichment}_{10\%} = \frac{\text{Recall}_{10\%}}{\alpha} = \frac{0.50}{0.10} = 5.0\times$. For capacity-constrained screening, inspecting just 10% of the landscape uncovers half of all positive events.</div></div>
+        </div>
+      </div>
+
+      <!-- Q13 & Q14 -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px; margin-top: 1px;">
+        <div class="qa-card">
+          <div class="qa-header"><div class="qa-num-title"><span class="qa-num">Q13</span> What about PR-AUC and Brier Score?</div><span class="badge-pill pill-amber">METRICS</span></div>
+          <div class="qa-tier"><span class="tier-label t1-lbl">15s Direct:</span><div class="tier-text">PR-AUC = 0.005534, interpreted in the context of an extremely rare positive class (0.1419% prevalence), with Brier score 0.00693.</div></div>
+          <div class="qa-tier"><span class="tier-label t2-lbl">30s Supporting:</span><div class="tier-text">Because true events comprise only 0.1419% of cells, precision-recall curves operate under severe class imbalance. PR-AUC = 0.005534 must be evaluated in this physical context, while the 0.00693 Brier score reflects uncalibrated ranking error.</div></div>
+          <div class="qa-tier"><span class="tier-label t3-lbl">Deep Technical:</span><div class="tier-text">We explicitly disclose that the Brier score represents mean squared error on an uncalibrated ranking score. We do not claim probabilistic calibration or operational probability thresholds.</div></div>
+        </div>
+        <div class="qa-card">
+          <div class="qa-header"><div class="qa-num-title"><span class="qa-num">Q14</span> Why did historical loss beat the full model?</div><span class="badge-pill pill-red">ABLATION HONESTY</span></div>
+          <div class="qa-tier"><span class="tier-label t1-lbl">15s Direct:</span><div class="tier-text">Historical loss distance alone scored 0.7797 vs 0.7474 for the full model, reflecting strong spatial clustering in clearing frontiers.</div></div>
+          <div class="qa-tier"><span class="tier-label t2-lbl">30s Supporting:</span><div class="tier-text">Our ablation suite proved that proximity to past clearing is the single strongest predictor. In a single-year test with 10 events, adding roads and population introduced slight variance.</div></div>
+          <div class="qa-tier"><span class="tier-label t3-lbl">Deep Technical:</span><div class="tier-text">Road-only scored 0.4495; Road + Loss scored 0.7349; + Population scored 0.7500; Full model scored 0.7474. We openly publish the 0.7797 single-feature benchmark as proof of scientific honesty.</div></div>
+        </div>
+      </div>
+
+      <!-- Q15 & Q16 -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px; margin-top: 1px;">
+        <div class="qa-card">
+          <div class="qa-header"><div class="qa-num-title"><span class="qa-num">Q15</span> How do you address temporal leakage?</div><span class="badge-pill pill-purple">TEMPORAL PROTOCOL</span></div>
+          <div class="qa-tier"><span class="tier-label t1-lbl">15s Direct:</span><div class="tier-text">We strictly isolate training, validation, and test years, but document predictor timing honestly rather than claiming zero leakage.</div></div>
+          <div class="qa-tier"><span class="tier-label t2-lbl">30s Supporting:</span><div class="tier-text">Our exact protocol: <em>“Temporal target-year isolation was applied in Model V2 (2022 train, 2023 val, 2024 test), with predictor timing documented per source. No blanket zero-leakage claim is made.”</em></div></div>
+          <div class="qa-tier"><span class="tier-label t3-lbl">Deep Technical:</span><div class="tier-text">While PRODES clearing events are temporally disjoint across years, static features like roads (OSM) and DEM elevation aggregate observations over broader time windows. We acknowledge this explicitly.</div></div>
+        </div>
+        <div class="qa-card">
+          <div class="qa-header"><div class="qa-num-title"><span class="qa-num">Q16</span> Why is the 95% CI so wide [0.58, 0.90]?</div><span class="badge-pill pill-teal">STATISTICAL CI</span></div>
+          <div class="qa-tier"><span class="tier-label t1-lbl">15s Direct:</span><div class="tier-text">The confidence interval is wide because the held-out 2024 test set contains exactly 10 positive clearing events.</div></div>
+          <div class="qa-tier"><span class="tier-label t2-lbl">30s Supporting:</span><div class="tier-text">With 1,000 bootstrap resamples on 10 positive events, small sample variance naturally widens the interval [0.5837, 0.9036]. Disclosing this uncertainty proves our statistical integrity.</div></div>
+          <div class="qa-tier"><span class="tier-label t3-lbl">Deep Technical:</span><div class="tier-text">Any model evaluated on rare events suffers from wide bootstrap intervals unless thousands of positive observations exist. Rather than hiding the variance, we classified the result as 'Moderate Evidence'.</div></div>
+        </div>
+      </div>
+
+    </div>
+
+    <footer class="page-footer">
+      <span class="footer-left">GeoAI Deforestation Risk Platform · Bibliotheca Alexandrina Youth Creators Award 2026</span>
+      <span class="footer-right">Page 4 of 8</span>
+    </footer>
+  </div>
+
+  <!-- ======================================================================== -->
+  <!-- PAGE 5: SYSTEM ARCHITECTURE, FEASIBILITY & DECISION SUPPORT (Q17–24)      -->
+  <!-- ======================================================================== -->
+  <div class="page" id="page-5">
+    <div>
+      <header class="page-header">
+        <div class="header-left">
+          <div class="header-doc-title">GEOAI DEFORESTATION RISK PLATFORM · JURY Q&amp;A &amp; DEFENSE PACKAGE</div>
+          <div class="header-doc-sub">Interactive Architecture &amp; Decision Support · Questions 17–24: 150k Grid, WebGL &amp; Operations</div>
+        </div>
+        <div class="header-badge">PAGE 5 OF 8 · ARCHITECTURE &amp; FEASIBILITY</div>
+      </header>
+
+      <!-- Q17 -->
+      <div class="qa-card">
+        <div class="qa-header">
+          <div class="qa-num-title"><span class="qa-num">Q17</span> How does the browser handle 150,000 spatial cells without crashing?</div>
+          <span class="badge-pill pill-blue">WEBGL ARCHITECTURE</span>
+        </div>
+        <div class="qa-tier"><span class="tier-label t1-lbl">15s Direct:</span><div class="tier-text">We use Deck.gl/WebGL GPU-accelerated rendering of the precomputed spatial grid, offloading the spatial field directly to the graphics hardware.</div></div>
+        <div class="qa-tier"><span class="tier-label t2-lbl">30s Supporting:</span><div class="tier-text">Instead of creating 150,000 DOM elements or heavy GeoJSON vectors, the browser loads a compact binary buffer. Deck.gl/WebGL GPU-accelerated rendering of the precomputed spatial grid enables smooth interactive navigation without browser freeze.</div></div>
+        <div class="qa-tier"><span class="tier-label t3-lbl">Deep Technical:</span><div class="tier-text">Deck.gl's <code>ColumnLayer</code> uses instanced vertex attributes for position, height, and color. Spatial interactions like picking and camera flight (<code>flyTo</code>) utilize GPU ray-casting, eliminating main-thread JavaScript garbage collection bottlenecks.</div></div>
+      </div>
+
+      <!-- Q18 -->
+      <div class="qa-card">
+        <div class="qa-header">
+          <div class="qa-num-title"><span class="qa-num">Q18</span> What do the 3D extruded columns represent?</div>
+          <span class="badge-pill pill-teal">VISUALIZATION ENCODING</span>
+        </div>
+        <div class="qa-tier"><span class="tier-label t1-lbl">15s Direct:</span><div class="tier-text">Column height and color strictly represent relative spatial risk score intensity (0–100%), not physical terrain elevation.</div></div>
+        <div class="qa-tier"><span class="tier-label t2-lbl">30s Supporting:</span><div class="tier-text">Extrusion is a visual encoding technique designed to make high-risk clusters along access corridors immediately recognizable. Physical elevation is an independent model feature, not the 3D extrusion geometry.</div></div>
+        <div class="qa-tier"><span class="tier-label t3-lbl">Deep Technical:</span><div class="tier-text">We explicitly guard against user confusion: the dashboard includes a 2D/3D toggle (`btn3d`) so analysts who prefer standard planimetric choropleth representations can flatten the extrusion instantly.</div></div>
+      </div>
+
+      <!-- Q19 & Q20 -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px;">
+        <div class="qa-card">
+          <div class="qa-header"><div class="qa-num-title"><span class="qa-num">Q19</span> Is the Scenario Simulator a live forecast?</div><span class="badge-pill pill-amber">SCENARIO SIMULATOR</span></div>
+          <div class="qa-tier"><span class="tier-label t1-lbl">15s Direct:</span><div class="tier-text">No. It is an exploratory sensitivity simulation tool evaluating how relative risk shifts under hypothetical policy changes.</div></div>
+          <div class="qa-tier"><span class="tier-label t2-lbl">30s Supporting:</span><div class="tier-text">Analysts adjust road expansion (+20%) or strict reserve protection to observe spatial risk redistribution. It is strictly for policy trade-off exploration, never operational forecasting.</div></div>
+          <div class="qa-tier"><span class="tier-label t3-lbl">Deep Technical:</span><div class="tier-text">The simulator runs parametric delta equations derived from sensitivity coefficients. It answers 'what-if' policy questions rather than predicting real-world hectares of future loss.</div></div>
+        </div>
+        <div class="qa-card">
+          <div class="qa-header"><div class="qa-num-title"><span class="qa-num">Q20</span> What is the Decision Story workflow?</div><span class="badge-pill pill-green">DECISION SUPPORT</span></div>
+          <div class="qa-tier"><span class="tier-label t1-lbl">15s Direct:</span><div class="tier-text">It is a 5-step guided protocol: Macro Screening $\rightarrow$ Hotspot Focus $\rightarrow$ Driver Analysis $\rightarrow$ Verification Planning $\rightarrow$ Audit.</div></div>
+          <div class="qa-tier"><span class="tier-label t2-lbl">30s Supporting:</span><div class="tier-text">Instead of an unguided map, the platform takes analysts through an auditable workflow that converts raw spatial data into targeted verification tasks for field or satellite teams.</div></div>
+          <div class="qa-tier"><span class="tier-label t3-lbl">Deep Technical:</span><div class="tier-text">Step 04 generates targeted inspection bounding boxes, calculates mission distance from Porto Velho, and summarizes dominant risk drivers, completing the decision-support flow.</div></div>
+        </div>
+      </div>
+
+      <!-- Q21 & Q22 -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px; margin-top: 1px;">
+        <div class="qa-card">
+          <div class="qa-header"><div class="qa-num-title"><span class="qa-num">Q21</span> Does this replace PRODES or DETER?</div><span class="badge-pill pill-purple">MONITORING CONTEXT</span></div>
+          <div class="qa-tier"><span class="tier-label t1-lbl">15s Direct:</span><div class="tier-text">No. PRODES and DETER are sovereign monitoring systems; our prototype operates upstream for preventive risk screening.</div></div>
+          <div class="qa-tier"><span class="tier-label t2-lbl">30s Supporting:</span><div class="tier-text">PRODES produces official historical deforestation accounting. This project uses that historical record to train risk models that help prioritize where scarce inspection capacity should look next.</div></div>
+          <div class="qa-tier"><span class="tier-label t3-lbl">Deep Technical:</span><div class="tier-text">We do not replicate optical satellite processing or automated deforestation alerting. We ingest PRODES historical polygons as training ground truth to model structural vulnerability.</div></div>
+        </div>
+        <div class="qa-card">
+          <div class="qa-header"><div class="qa-num-title"><span class="qa-num">Q22</span> Do you partner with IBAMA / SEDAM?</div><span class="badge-pill pill-red">INSTITUTIONAL HONESTY</span></div>
+          <div class="qa-tier"><span class="tier-label t1-lbl">15s Direct:</span><div class="tier-text">No. We have zero formal partnerships. This is an independent research prototype developed for competition review.</div></div>
+          <div class="qa-tier"><span class="tier-label t2-lbl">30s Supporting:</span><div class="tier-text">We respect institutional authority and make no claims of official adoption. The prototype illustrates potential workflow value if an environmental agency chose to evaluate the technology.</div></div>
+          <div class="qa-tier"><span class="tier-label t3-lbl">Deep Technical:</span><div class="tier-text">All data used is public open data published under Brazilian open government mandates. No proprietary agency telemetry, confidential enforcement plans, or official endorsements exist.</div></div>
+        </div>
+      </div>
+
+      <!-- Q23 & Q24 -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px; margin-top: 1px;">
+        <div class="qa-card">
+          <div class="qa-header"><div class="qa-num-title"><span class="qa-num">Q23</span> Is this system autonomous?</div><span class="badge-pill pill-blue">HUMAN-IN-THE-LOOP</span></div>
+          <div class="qa-tier"><span class="tier-label t1-lbl">15s Direct:</span><div class="tier-text">No. The system is strictly human-in-the-loop decision-support for human analysts planning verification.</div></div>
+          <div class="qa-tier"><span class="tier-label t2-lbl">30s Supporting:</span><div class="tier-text">The platform never dispatches enforcement missions or triggers automated penalties. It organizes spatial evidence so certified human analysts can make better prioritization decisions.</div></div>
+          <div class="qa-tier"><span class="tier-label t3-lbl">Deep Technical:</span><div class="tier-text">Ethical GeoAI requires human accountability in high-stakes environmental governance. Automated law enforcement triggers without human ground verification would violate environmental due process.</div></div>
+        </div>
+        <div class="qa-card">
+          <div class="qa-header"><div class="qa-num-title"><span class="qa-num">Q24</span> What is the environmental impact today?</div><span class="badge-pill pill-teal">IMPACT REALITY</span></div>
+          <div class="qa-tier"><span class="tier-label t1-lbl">15s Direct:</span><div class="tier-text">Direct real-world impact today is zero because this is a research prototype, not a deployed field system.</div></div>
+          <div class="qa-tier"><span class="tier-label t2-lbl">30s Supporting:</span><div class="tier-text">We make no claims of hectares saved, avoided loss, or carbon credits generated. The project's impact lies in proving that spatial pre-screening and dual-track evidence can be built transparently.</div></div>
+          <div class="qa-tier"><span class="tier-label t3-lbl">Deep Technical:</span><div class="tier-text">Claiming avoided deforestation without longitudinal field deployment with control groups is unscientific. We restrict all impact claims to methodological rigor and decision-support capability.</div></div>
+        </div>
+      </div>
+
+    </div>
+
+    <footer class="page-footer">
+      <span class="footer-left">GeoAI Deforestation Risk Platform · Bibliotheca Alexandrina Youth Creators Award 2026</span>
+      <span class="footer-right">Page 5 of 8</span>
+    </footer>
+  </div>
+
+  <!-- ======================================================================== -->
+  <!-- PAGE 6: QUESTIONS DESIGNED TO EXPOSE OVERCLAIMS (10 HIGH-RISK TRAPS)     -->
+  <!-- ======================================================================== -->
+  <div class="page" id="page-6">
+    <div>
+      <header class="page-header">
+        <div class="header-left">
+          <div class="header-doc-title">GEOAI DEFORESTATION RISK PLATFORM · JURY Q&amp;A &amp; DEFENSE PACKAGE</div>
+          <div class="header-doc-sub">High-Risk Questions Designed to Expose Overclaims · Critical Traps &amp; Counter-Strategies</div>
+        </div>
+        <div class="header-badge">PAGE 6 OF 8 · OVERCLAIM-TRAP QUESTIONS</div>
+      </header>
+
+      <!-- Trap 01 -->
+      <div class="trap-card">
+        <div class="trap-header">
+          <div class="trap-question">TRAP 01: “So are you claiming 84% of future deforestation can be predicted?”</div>
+          <span class="badge-pill pill-red">HIGH RISK</span>
+        </div>
+        <div class="trap-correction">CORRECTION: No. 84% is a heuristic relative risk score for a single spatial cell, not a predictive accuracy rate or physical probability.</div>
+        <div class="trap-response">
+          <strong>Recommended Answer:</strong> “Absolutely not. The 84% badge in the UI represents a relative spatial risk score on an integer scale mapped from 0 to 100%. It indicates that this specific cell exhibits high exposure to historical clearing corridors. Our independent model evaluation achieved 0.7474 ROC-AUC on held-out 2024 data, and we explicitly do not claim to predict future deforestation events.”
+        </div>
+        <div class="trap-dont-say">NEVER SAY: “Yes, our model predicts deforestation with 84% accuracy.”</div>
+      </div>
+
+      <!-- Trap 02 -->
+      <div class="trap-card">
+        <div class="trap-header">
+          <div class="trap-question">TRAP 02: “Is 0.7474 ROC-AUC actually good enough for real-world deployment?”</div>
+          <span class="badge-pill pill-amber">STATISTICAL INTEGRITY</span>
+        </div>
+        <div class="trap-correction">CORRECTION: It qualifies as 'Moderate Evidence' under severe rare-event class imbalance, not production-ready operational certainty.</div>
+        <div class="trap-response">
+          <strong>Recommended Answer:</strong> “0.7474 demonstrates genuine discriminative ranking ability on unseen temporal holdout data under extreme 0.1419% prevalence. However, we explicitly classify it as 'Moderate Evidence'. We would never recommend immediate field enforcement based solely on this score without multi-year calibration, local field feedback, and human verification.”
+        </div>
+        <div class="trap-dont-say">NEVER SAY: “0.7474 is world-class and ready to replace operational satellite systems today.”</div>
+      </div>
+
+      <!-- Trap 03 -->
+      <div class="trap-card">
+        <div class="trap-header">
+          <div class="trap-question">TRAP 03: “Can I interpret the 84% Risk Score as an 84% chance of deforestation?”</div>
+          <span class="badge-pill pill-red">HIGH RISK</span>
+        </div>
+        <div class="trap-correction">CORRECTION: No. Raw scores are relative spatial risk rankings across precomputed cells, not calibrated physical probabilities.</div>
+        <div class="trap-response">
+          <strong>Recommended Answer:</strong> “No, that would be a serious statistical misinterpretation. In an environment where baseline clearing prevalence is less than 0.2%, an 84% physical probability would be impossible. The score is a relative ranking index used to sort and surface spatial cells for screening attention.”
+        </div>
+        <div class="trap-dont-say">NEVER SAY: “Yes, there is an 84% chance this cell will be deforested next year.”</div>
+      </div>
+
+      <!-- Trap 04 -->
+      <div class="trap-card">
+        <div class="trap-header">
+          <div class="trap-question">TRAP 04: “Does 5.0× enrichment mean rangers become 5 times more efficient?”</div>
+          <span class="badge-pill pill-amber">OPERATIONAL SCOPE</span>
+        </div>
+        <div class="trap-correction">CORRECTION: No. It is a retrospective statistical enrichment metric on a test lattice, not an operational field efficiency multiplier.</div>
+        <div class="trap-response">
+          <strong>Recommended Answer:</strong> “No. 5.0× enrichment is a mathematical property of our retrospective test lattice: prioritizing the top 10% of ranked cells captured 50% of positive events. Real-world patrol efficiency involves vehicle logistics, river navigation, weather, and legal jurisdictions that our model does not simulate.”
+        </div>
+        <div class="trap-dont-say">NEVER SAY: “Our system makes IBAMA ranger patrols 500% more productive.”</div>
+      </div>
+
+      <!-- Trap 05 -->
+      <div class="trap-card">
+        <div class="trap-header">
+          <div class="trap-question">TRAP 05: “Can this system actually stop deforestation?”</div>
+          <span class="badge-pill pill-red">HIGH RISK</span>
+        </div>
+        <div class="trap-correction">CORRECTION: No software stops deforestation; stopping deforestation requires sovereign law enforcement, governance, and policy.</div>
+        <div class="trap-response">
+          <strong>Recommended Answer:</strong> “Software alone cannot stop deforestation. Deforestation in the Amazon is driven by complex socioeconomic, legal, and agricultural factors. This platform simply provides an analytical lens to help human analysts prioritize where to verify conditions before clearing expands.”
+        </div>
+        <div class="trap-dont-say">NEVER SAY: “Yes, by deploying this AI we will halt Amazonian deforestation.”</div>
+      </div>
+
+      <!-- Trap 06 & 07 -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px;">
+        <div class="trap-card" style="margin-bottom: 0;">
+          <div class="trap-header"><div class="trap-question" style="font-size: 6.8pt;">TRAP 06: “Can you prove it causes better field decisions?”</div><span class="badge-pill pill-amber">CAUSALITY</span></div>
+          <div class="trap-correction">CORRECTION: No causal field trial has been conducted.</div>
+          <div class="trap-response"><strong>Recommended Answer:</strong> “We cannot prove causal decision improvement because the platform has not been deployed in active field operations. We demonstrate analytical capability and retrospective statistical enrichment, but make zero causal claims.”</div>
+          <div class="trap-dont-say">NEVER SAY: “Our tests prove rangers make better decisions with our tool.”</div>
+        </div>
+        <div class="trap-card" style="margin-bottom: 0;">
+          <div class="trap-header"><div class="trap-question" style="font-size: 6.8pt;">TRAP 07: “Why trust a benchmark you couldn't reproduce?”</div><span class="badge-pill pill-purple">TRACK 1 VS 2</span></div>
+          <div class="trap-correction">CORRECTION: Track 1 is documented; Track 2 is independently proven.</div>
+          <div class="trap-response"><strong>Recommended Answer:</strong> “That is precisely why we built Track 2. Rather than asking anyone to blindly trust the legacy 0.82 benchmark, we built an independent Model V2 pipeline that is 100% reproducible and verified by 52 automated tests.”</div>
+          <div class="trap-dont-say">NEVER SAY: “The 0.82 benchmark is fully verified by our code.”</div>
+        </div>
+      </div>
+
+      <!-- Trap 08 & 09 & 10 -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4px; margin-top: 4.5px;">
+        <div class="trap-card" style="margin-bottom: 0;">
+          <div class="trap-header"><div class="trap-question" style="font-size: 6.6pt;">TRAP 08: “Why V2 if past loss alone beats it?”</div><span class="badge-pill pill-teal">ABLATION</span></div>
+          <div class="trap-correction">CORRECTION: Historical loss (0.7797) proves spatial persistence.</div>
+          <div class="trap-response"><strong>Recommended Answer:</strong> “Historical loss is the strongest spatial benchmark in this sample. However, multi-feature models capture road and population pressures needed when clearing leaps into new frontiers.”</div>
+          <div class="trap-dont-say">NEVER SAY: “The full model easily beat all individual features.”</div>
+        </div>
+        <div class="trap-card" style="margin-bottom: 0;">
+          <div class="trap-header"><div class="trap-question" style="font-size: 6.6pt;">TRAP 09: “Is this AI, or just a 3D visualization?”</div><span class="badge-pill pill-blue">NOVELTY</span></div>
+          <div class="trap-correction">CORRECTION: It is an integrated ML and WebGL pipeline.</div>
+          <div class="trap-response"><strong>Recommended Answer:</strong> “It integrates both: an offline-evaluated XGBoost spatial model with TreeSHAP explainability, connected directly to a high-performance WebGL decision engine.”</div>
+          <div class="trap-dont-say">NEVER SAY: “It is a live deep learning neural network running in WebGL.”</div>
+        </div>
+        <div class="trap-card" style="margin-bottom: 0;">
+          <div class="trap-header"><div class="trap-question" style="font-size: 6.6pt;">TRAP 10: “What part of this is actually novel?”</div><span class="badge-pill pill-purple">INNOVATION</span></div>
+          <div class="trap-correction">CORRECTION: End-to-end integration and dual-track integrity.</div>
+          <div class="trap-response"><strong>Recommended Answer:</strong> “The novelty is unifying spatial feature engineering, ML explainability, 150k-cell WebGL visualization, and transparent dual-track verification into a cohesive workflow.”</div>
+          <div class="trap-dont-say">NEVER SAY: “We invented a completely new machine learning algorithm.”</div>
+        </div>
+      </div>
+
+    </div>
+
+    <footer class="page-footer">
+      <span class="footer-left">GeoAI Deforestation Risk Platform · Bibliotheca Alexandrina Youth Creators Award 2026</span>
+      <span class="footer-right">Page 6 of 8</span>
+    </footer>
+  </div>
+
+  <!-- ======================================================================== -->
+  <!-- PAGE 7: FUTURE ROADMAP, SCALABILITY & ETHICAL AI (QUESTIONS 25–32)       -->
+  <!-- ======================================================================== -->
+  <div class="page" id="page-7">
+    <div>
+      <header class="page-header">
+        <div class="header-left">
+          <div class="header-doc-title">GEOAI DEFORESTATION RISK PLATFORM · JURY Q&amp;A &amp; DEFENSE PACKAGE</div>
+          <div class="header-doc-sub">Operational Roadmap, Ethics &amp; Scalability · Questions 25–32: Deployment, Ethics &amp; Limits</div>
+        </div>
+        <div class="header-badge">PAGE 7 OF 8 · FUTURE &amp; ETHICAL AI</div>
+      </header>
+
+      <!-- Q25 -->
+      <div class="qa-card">
+        <div class="qa-header">
+          <div class="qa-num-title"><span class="qa-num">Q25</span> What would you need before operational deployment?</div>
+          <span class="badge-pill pill-blue">OPERATIONAL ROADMAP</span>
+        </div>
+        <div class="qa-tier"><span class="tier-label t1-lbl">15s Direct:</span><div class="tier-text">Operational deployment would require formal institutional data sharing, multi-year temporal validation, probability calibration, and field officer feedback loops.</div></div>
+        <div class="qa-tier"><span class="tier-label t2-lbl">30s Supporting:</span><div class="tier-text">Moving from a research prototype to an institutional tool demands three things: operational integration with agency dispatch systems, formal calibration curves using Platt scaling or isotonic regression, and strict data governance agreements with Brazilian authorities.</div></div>
+        <div class="qa-tier"><span class="tier-label t3-lbl">Deep Technical:</span><div class="tier-text">We would need to conduct prospective field trials measuring false discovery rates across multiple biomes. Furthermore, operational systems require automated data ingestion pipelines for incoming PRODES and DETER updates, secure role-based access control, and low-bandwidth mobile caching.</div></div>
+      </div>
+
+      <!-- Q26 -->
+      <div class="qa-card">
+        <div class="qa-header">
+          <div class="qa-num-title"><span class="qa-num">Q26</span> How would you transfer this platform to another biome or country?</div>
+          <span class="badge-pill pill-teal">TRANSFERABILITY</span>
+        </div>
+        <div class="qa-tier"><span class="tier-label t1-lbl">15s Direct:</span><div class="tier-text">The feature-engineering architecture is designed to be transferable, but each new biome or country would require local data, retraining, and independent validation.</div></div>
+        <div class="qa-tier"><span class="tier-label t2-lbl">30s Supporting:</span><div class="tier-text">While the concept of measuring road access, past disturbance, and topography applies broadly, transferability is strictly hypothetical. Transferring to the Cerrado or the Congo Basin would require compiling local registries, retraining models, and conducting independent validation.</div></div>
+        <div class="qa-tier"><span class="tier-label t3-lbl">Deep Technical:</span><div class="tier-text">Different biomes exhibit distinct clearing dynamics. In the Cerrado, clearing is dominated by large-scale mechanized agribusiness with different spatial patterns than Rondônia's smallholder fishbone corridors. Transfer requires retrained gradient boosted trees with localized feature weights.</div></div>
+      </div>
+
+      <!-- Q27 & Q28 -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px;">
+        <div class="qa-card">
+          <div class="qa-header"><div class="qa-num-title"><span class="qa-num">Q27</span> What if the model is wrong (FP &amp; FN)?</div><span class="badge-pill pill-amber">ERROR IMPACT</span></div>
+          <div class="qa-tier"><span class="tier-label t1-lbl">15s Direct:</span><div class="tier-text">False positives cause unnecessary screening reviews; false negatives leave clearing unmonitored. Human verification safeguards against both.</div></div>
+          <div class="qa-tier"><span class="tier-label t2-lbl">30s Supporting:</span><div class="tier-text">Because our prototype guides verification planning rather than automated enforcement, a false positive simply means an analyst reviews high-resolution satellite imagery for an intact area. It never triggers automated fines.</div></div>
+          <div class="qa-tier"><span class="tier-label t3-lbl">Deep Technical:</span><div class="tier-text">In high-stakes environmental screening, high recall (capturing true events) is prioritized over precision. Retrospective top-decile recall of 50% ensures that scarce inspection resources capture the majority of clearing activity.</div></div>
+        </div>
+        <div class="qa-card">
+          <div class="qa-header"><div class="qa-num-title"><span class="qa-num">Q28</span> Why are TreeSHAP and Global weights different?</div><span class="badge-pill pill-purple">EXPLAINABILITY SEPARATION</span></div>
+          <div class="qa-tier"><span class="tier-label t1-lbl">15s Direct:</span><div class="tier-text">Global Analytical weights represent documented regional driver importance, while TreeSHAP reflects feature attribution in the Model V2 tree-based evaluation.</div></div>
+          <div class="qa-tier"><span class="tier-label t2-lbl">30s Supporting:</span><div class="tier-text">Global weights (Road 41%, Loss 23%, Pop 21%, Elevation 15%) document regional spatial drivers in the dashboard. Model V2 TreeSHAP attribution (Historical Loss 41.3%, Roads 17.4%, Elevation 16.4%) measures exact gradient split attributions.</div></div>
+          <div class="qa-tier"><span class="tier-label t3-lbl">Deep Technical:</span><div class="tier-text">We strictly maintain these as separate analytical tracks. TreeSHAP provides non-linear Shapley values for the research tree ensemble, while global analytical weights guide macro-level regional context.</div></div>
+        </div>
+      </div>
+
+      <!-- Q29 & Q30 -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px; margin-top: 1px;">
+        <div class="qa-card">
+          <div class="qa-header"><div class="qa-num-title"><span class="qa-num">Q29</span> What are the main research weaknesses?</div><span class="badge-pill pill-red">HONEST LIMITATIONS</span></div>
+          <div class="qa-tier"><span class="tier-label t1-lbl">15s Direct:</span><div class="tier-text">Limited positive events in the 2024 test sample, lack of real-time satellite data ingestion, and heuristic UI vs research model duality.</div></div>
+          <div class="qa-tier"><span class="tier-label t2-lbl">30s Supporting:</span><div class="tier-text">Having only 10 positive events in the 2024 holdout widens confidence intervals. Additionally, the production dashboard relies on precomputed layers rather than dynamic live cloud training.</div></div>
+          <div class="qa-tier"><span class="tier-label t3-lbl">Deep Technical:</span><div class="tier-text">We openly publish all three limitations. Addressing them requires multi-year panel datasets across thousands of clearing events, live cloud raster pipelines, and end-to-end calibrated probability modeling.</div></div>
+        </div>
+        <div class="qa-card">
+          <div class="qa-header"><div class="qa-num-title"><span class="qa-num">Q30</span> What is the economic / institutional model?</div><span class="badge-pill pill-teal">ECONOMIC MODEL</span></div>
+          <div class="qa-tier"><span class="tier-label t1-lbl">15s Direct:</span><div class="tier-text">The current project is a research and creative technology prototype. Future economic feasibility would require institutional adoption analysis, operating costs, data governance, and deployment partnerships.</div></div>
+          <div class="qa-tier"><span class="tier-label t2-lbl">30s Supporting:</span><div class="tier-text">As a competition submission, the prototype demonstrates feasibility. Transitioning to production would require operational cost modeling for cloud hosting, data pipeline maintenance, and technical training.</div></div>
+          <div class="qa-tier"><span class="tier-label t3-lbl">Deep Technical:</span><div class="tier-text">We do not propose commercial SaaS monetization or carbon credit trading. Future institutional adoption would require formal operational analysis, cost modeling, deployment partnerships, and transparent data governance.</div></div>
+        </div>
+      </div>
+
+      <!-- Q31 & Q32 -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px; margin-top: 1px;">
+        <div class="qa-card">
+          <div class="qa-header"><div class="qa-num-title"><span class="qa-num">Q31</span> What is the innovation if XGBoost is standard?</div><span class="badge-pill pill-blue">CORE INNOVATION</span></div>
+          <div class="qa-tier"><span class="tier-label t1-lbl">15s Direct:</span><div class="tier-text">The innovation is the end-to-end integration: spatial lattice engineering, explainable AI, WebGL decision analytics, and dual-track integrity.</div></div>
+          <div class="qa-tier"><span class="tier-label t2-lbl">30s Supporting:</span><div class="tier-text">Many systems have ML models, and some have maps. Our innovation is bridging the gap: turning complex spatial ML into an auditable, interactive WebGL decision pipeline for verification planning.</div></div>
+          <div class="qa-tier"><span class="tier-label t3-lbl">Deep Technical:</span><div class="tier-text">Unifying precomputed spatial indexing, TreeSHAP feature attributions, scenario sensitivity modeling, and transparent dual-track verification creates a repeatable template for GeoAI decision support.</div></div>
+        </div>
+        <div class="qa-card">
+          <div class="qa-header"><div class="qa-num-title"><span class="qa-num">Q32</span> What is the most important takeaway?</div><span class="badge-pill pill-green">FINAL TAKEAWAY</span></div>
+          <div class="qa-tier"><span class="tier-label t1-lbl">15s Direct:</span><div class="tier-text">This project combines interactive engineering with explicit scientific evidence and clear research boundaries.</div></div>
+          <div class="qa-tier"><span class="tier-label t2-lbl">30s Supporting:</span><div class="tier-text">We deliver a high-performance prototype without ever exaggerating what the AI can do. We provide verified metrics, disclose wide confidence intervals, and honor sovereign monitoring systems.</div></div>
+          <div class="qa-tier"><span class="tier-label t3-lbl">Deep Technical:</span><div class="tier-text">Technology creativity requires both technical excellence and intellectual honesty. By verifying 99 automated tests, separating evidence tracks, and framing around decision support, this project sets a high standard.</div></div>
+        </div>
+      </div>
+
+    </div>
+
+    <footer class="page-footer">
+      <span class="footer-left">GeoAI Deforestation Risk Platform · Bibliotheca Alexandrina Youth Creators Award 2026</span>
+      <span class="footer-right">Page 7 of 8</span>
+    </footer>
+  </div>
+
+  <!-- ======================================================================== -->
+  <!-- PAGE 8: FINAL MEMORY CARD & CRISIS DEFENSE CHEATSHEET                    -->
+  <!-- ======================================================================== -->
+  <div class="page" id="page-8">
+    <div>
+      <header class="page-header">
+        <div class="header-left">
+          <div class="header-doc-title">GEOAI DEFORESTATION RISK PLATFORM · JURY Q&amp;A &amp; DEFENSE PACKAGE</div>
+          <div class="header-doc-sub">Final Memory Anchors, Crisis Protocols &amp; Closing Statements · Final Emergency Sheet</div>
+        </div>
+        <div class="header-badge">PAGE 8 OF 8 · FINAL DEFENSE CARD</div>
+      </header>
+
+      <!-- 7 Facts to Never Forget & 7 Things to Never Say -->
+      <div class="hero-strip-grid" style="margin-bottom: 5px;">
+        <div class="hero-anchor-box box-blue">
+          <div class="hero-box-title">7 Facts To Never Forget (The Core Foundation)</div>
+          <ul class="hero-list">
+            <li><strong>01 Study Area:</strong> State of Rondônia, Brazilian Amazon (237,590 km²).</li>
+            <li><strong>02 Precomputed Cells:</strong> Approximately 150,000 spatial cells.</li>
+            <li><strong>03 Machine Learning:</strong> Offline XGBoost tree ensemble on spatial features.</li>
+            <li><strong>04 Track 1 Benchmark:</strong> Documented production benchmark = 0.82 ROC-AUC.</li>
+            <li><strong>05 Track 2 Evaluation:</strong> Independent Model V2 on held-out 2024 = 0.7474 ROC-AUC.</li>
+            <li><strong>06 Retrospective Lift:</strong> 5.0× retrospective top-decile enrichment (captures 50% in top 10%).</li>
+            <li><strong>07 System Purpose:</strong> Decision support for verification planning, NOT monitoring replacement.</li>
+          </ul>
+        </div>
+        <div class="hero-anchor-box box-red">
+          <div class="hero-box-title">7 Things To Never Say (Instant Disqualification Words)</div>
+          <ul class="hero-list">
+            <li><strong>01 Forbidden:</strong> <em>“84% probability of future deforestation”</em> (Say: <strong>84% Risk Score (Heuristic)</strong>).</li>
+            <li><strong>02 Forbidden:</strong> <em>“Real-time AI prediction / live Sentinel feeds”</em> (Say: <strong>Precomputed spatial surface</strong>).</li>
+            <li><strong>03 Forbidden:</strong> <em>“Rangers are 5× more efficient”</em> (Say: <strong>5.0× retrospective top-decile enrichment</strong>).</li>
+            <li><strong>04 Forbidden:</strong> <em>“Replaces INPE PRODES / DETER”</em> (Say: <strong>Complements official monitoring upstream</strong>).</li>
+            <li><strong>05 Forbidden:</strong> <em>“Guaranteed future detection / avoided loss”</em> (Say: <strong>Exploratory sensitivity modeling</strong>).</li>
+            <li><strong>06 Forbidden:</strong> <em>“Official institutional partnership with IBAMA”</em> (Say: <strong>Independent research prototype</strong>).</li>
+            <li><strong>07 Forbidden:</strong> <em>“Autonomous law enforcement system”</em> (Say: <strong>Human-in-the-loop decision-support</strong>).</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 4 Emergency Response Strategies -->
+      <div class="section-title">Four Emergency Response Strategies When Challenged</div>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th style="width: 22%;">Judge Posture</th>
+            <th style="width: 38%;">Presenter Strategic Mindset</th>
+            <th style="width: 40%;">Exact Verbal Response Formula</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong style="color: var(--amber);">SKEPTICISM</strong><br>(“Sounds like too much hype”)</td>
+            <td>Immediately disarm by agreeing with their skepticism and pointing to our disclosed limitations.</td>
+            <td><em>“I share your skepticism regarding ungrounded AI claims. That is why we deliberately report an independent 0.7474 evaluation, wide confidence intervals, and zero calibrated probability claims.”</em></td>
+          </tr>
+          <tr>
+            <td><strong style="color: var(--red);">CRITICISM</strong><br>(“Historical loss alone was better”)</td>
+            <td>Embrace the criticism as proof of our scientific honesty; explain the spatial persistence reality.</td>
+            <td><em>“You are completely right, and we explicitly highlight that 0.7797 finding. It shows spatial persistence is dominant in this sample, proving our ablation protocol was genuine.”</em></td>
+          </tr>
+          <tr>
+            <td><strong style="color: var(--blue-primary);">PROOF DEMAND</strong><br>(“Prove it works in the field”)</td>
+            <td>Strictly separate prototype verification from operational field deployment proof.</td>
+            <td><em>“We have verified all 99 automated tests and held-out validation on 2024 PRODES polygons. Proving operational field impact would require live institutional pilot deployment.”</em></td>
+          </tr>
+          <tr>
+            <td><strong style="color: var(--purple);">SCOPE EXPANSION</strong><br>(“Why not all Amazon / real-time?”)</td>
+            <td>Politely decline the expanded scope; ground firmly back into the Rondônia benchmark.</td>
+            <td><em>“Expanding pan-Amazon in real time is a compelling future horizon. For this competition, we strictly scoped the prototype to Rondônia to ensure verifiable data integrity.”</em></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- 30-Second & 60-Second Elevator Answers -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px; margin-top: 4px;">
+        <div class="banner" style="border-left-color: var(--blue-primary); margin-bottom: 0;">
+          <div class="banner-title" style="font-size: 7.0pt; color: var(--blue-primary);">30-SECOND ELEVATOR DEFENSE ANSWER</div>
+          <div class="banner-text" style="font-size: 6.6pt; line-height: 1.30;">
+            “I built an interactive GeoAI platform for the Brazilian state of Rondônia that transforms multi-source spatial indicators into a relative risk ranking across ~150,000 precomputed cells. Backed by an offline XGBoost model achieving 0.7474 ROC-AUC and 5.0× retrospective enrichment on held-out 2024 data, it helps analysts prioritize verification planning before clearing expands—complementing, not replacing, official monitoring.”
+          </div>
+        </div>
+        <div class="banner" style="border-left-color: var(--teal); margin-bottom: 0;">
+          <div class="banner-title" style="font-size: 7.0pt; color: var(--teal);">60-SECOND FULL PROJECT DEFENSE ANSWER</div>
+          <div class="banner-text" style="font-size: 6.6pt; line-height: 1.30;">
+            “Brazil already monitors forests at scale through systems like PRODES. Our innovation addresses what happens before clearing occurs: synthesizing roads, past loss, population, and elevation into an interpretable spatial risk surface. Under the hood, we maintain two evidence tracks: a documented 0.82 benchmark, and an independent Model V2 evaluation on held-out 2024 PRODES achieving 0.7474 ROC-AUC with 5.0× top-decile enrichment. The result is a WebGL decision-support tool that helps teams decide where to look first.”
+          </div>
+        </div>
+      </div>
+
+      <!-- Final Closing Sentence Banner -->
+      <div class="banner" style="margin-top: 5px; margin-bottom: 0; background: var(--navy); border: 1.5px solid var(--navy-mid); border-left: 4px solid var(--blue-sky);">
+        <div class="banner-title" style="color: #ffffff; font-size: 7.3pt;">UNFORGETTABLE FINAL CLOSING SENTENCE</div>
+        <div class="banner-text" style="color: #cbd5e1; font-size: 7.0pt; font-style: italic; line-height: 1.35;">
+          “This project is not a marketing promise to stop deforestation; it is a scientifically honest, technically verified demonstration of how GeoAI and spatial analytics can help analysts decide where to look first.”
+        </div>
+      </div>
+
+    </div>
+
+    <footer class="page-footer">
+      <span class="footer-left">GeoAI Deforestation Risk Platform · Bibliotheca Alexandrina Youth Creators Award 2026</span>
+      <span class="footer-right">Page 8 of 8</span>
+    </footer>
+  </div>
+
+</body>
+</html>
