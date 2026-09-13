@@ -1,0 +1,1663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GeoAI Deforestation Risk Intelligence Platform — Competition Submission</title>
+  <meta name="description" content="Competition submission for the GeoAI Deforestation Risk Intelligence Platform — an AI-powered spatial decision-support prototype for deforestation risk assessment in Rondônia, Brazil." />
+  <style>
+    /* =============================================
+       PAGE SETUP
+    ============================================= */
+    @page {
+      size: A4 portrait;
+      margin: 18mm 15mm;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --navy-deep:   #0b1329;
+      --navy-mid:    #0f172a;
+      --navy-light:  #1e293b;
+      --blue-primary: #2563eb;
+      --blue-sky:    #0284c7;
+      --teal:        #0f766e;
+      --slate-dark:  #334155;
+      --slate-mid:   #64748b;
+      --border:      #e2e8f0;
+      --bg-light:    #f8fafc;
+      --white:       #ffffff;
+      --text-main:   #0f172a;
+      --text-muted:  #64748b;
+      --accent-green: #059669;
+      --accent-amber: #d97706;
+    }
+
+    html, body {
+      font-family: 'Segoe UI', system-ui, -apple-system, 'Inter', Roboto, sans-serif;
+      font-size: 10pt;
+      line-height: 1.65;
+      color: var(--text-main);
+      background: var(--white);
+    }
+
+    /* =============================================
+       PRINT HEADER / FOOTER
+    ============================================= */
+    @media print {
+      body { font-size: 9.5pt; }
+      .no-print { display: none !important; }
+      .page-break { page-break-before: always; }
+      section { page-break-inside: avoid; }
+    }
+
+    /* =============================================
+       LAYOUT
+    ============================================= */
+    .document {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 24px 60px;
+    }
+
+    /* =============================================
+       COVER PAGE
+    ============================================= */
+    .cover {
+      background: linear-gradient(160deg, var(--navy-deep) 0%, var(--navy-mid) 60%, #0c1e3d 100%);
+      color: var(--white);
+      padding: 56px 48px 48px;
+      margin: 0 -24px 48px;
+      position: relative;
+      overflow: hidden;
+      min-height: 320px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .cover::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--blue-sky), var(--teal), var(--blue-primary));
+    }
+
+    .cover-grid {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 32px;
+      align-items: start;
+    }
+
+    .cover-badge {
+      background: rgba(37, 99, 235, 0.25);
+      border: 1px solid rgba(37, 99, 235, 0.5);
+      color: #93c5fd;
+      font-size: 8pt;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 3px;
+      display: inline-block;
+      margin-bottom: 20px;
+    }
+
+    .cover h1 {
+      font-size: 22pt;
+      font-weight: 700;
+      line-height: 1.2;
+      color: var(--white);
+      margin-bottom: 10px;
+      letter-spacing: -0.02em;
+    }
+
+    .cover h1 span {
+      color: #60a5fa;
+    }
+
+    .cover-subtitle {
+      font-size: 11pt;
+      color: #94a3b8;
+      font-weight: 400;
+      margin-bottom: 28px;
+      line-height: 1.45;
+    }
+
+    .cover-meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 32px;
+      border-top: 1px solid rgba(255,255,255,0.12);
+      padding-top: 24px;
+    }
+
+    .cover-meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .cover-meta-label {
+      font-size: 7.5pt;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #64748b;
+      font-weight: 600;
+    }
+
+    .cover-meta-value {
+      font-size: 9pt;
+      color: #cbd5e1;
+    }
+
+    .cover-meta-value a {
+      color: #60a5fa;
+      text-decoration: none;
+    }
+
+    .cover-side {
+      text-align: right;
+    }
+
+    .cover-year {
+      font-size: 56pt;
+      font-weight: 800;
+      color: rgba(255,255,255,0.05);
+      line-height: 1;
+      letter-spacing: -0.04em;
+    }
+
+    /* =============================================
+       SECTION STRUCTURE
+    ============================================= */
+    section {
+      margin-bottom: 44px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .section-number {
+      background: var(--navy-mid);
+      color: var(--white);
+      font-size: 8pt;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      padding: 4px 10px;
+      border-radius: 3px;
+      min-width: 32px;
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 14pt;
+      font-weight: 700;
+      color: var(--navy-mid);
+      letter-spacing: -0.01em;
+    }
+
+    h3 {
+      font-size: 10.5pt;
+      font-weight: 700;
+      color: var(--navy-light);
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+
+    h4 {
+      font-size: 9.5pt;
+      font-weight: 600;
+      color: var(--slate-dark);
+      margin-top: 14px;
+      margin-bottom: 6px;
+    }
+
+    p {
+      margin-bottom: 10px;
+      color: var(--text-main);
+    }
+
+    ul, ol {
+      padding-left: 20px;
+      margin-bottom: 10px;
+    }
+
+    li {
+      margin-bottom: 4px;
+    }
+
+    strong { font-weight: 700; }
+
+    a {
+      color: var(--blue-primary);
+      text-decoration: none;
+    }
+
+    a:hover { text-decoration: underline; }
+
+    /* =============================================
+       TABLE OF CONTENTS
+    ============================================= */
+    .toc {
+      background: var(--bg-light);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 24px 28px;
+      margin-bottom: 40px;
+    }
+
+    .toc h2 {
+      font-size: 11pt;
+      margin-bottom: 16px;
+      color: var(--slate-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .toc-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px 32px;
+    }
+
+    .toc-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 3px 0;
+      font-size: 9pt;
+    }
+
+    .toc-num {
+      color: var(--blue-primary);
+      font-weight: 700;
+      font-size: 8pt;
+      min-width: 20px;
+    }
+
+    .toc-link {
+      color: var(--text-main);
+      text-decoration: none;
+    }
+
+    .toc-link:hover { color: var(--blue-primary); }
+
+    /* =============================================
+       CALLOUT / ALERT BOXES
+    ============================================= */
+    .callout {
+      padding: 14px 18px;
+      border-radius: 5px;
+      margin: 16px 0;
+      font-size: 9pt;
+    }
+
+    .callout-integrity {
+      background: #f0fdf4;
+      border-left: 4px solid var(--accent-green);
+      color: #14532d;
+    }
+
+    .callout-warning {
+      background: #fffbeb;
+      border-left: 4px solid var(--accent-amber);
+      color: #78350f;
+    }
+
+    .callout-info {
+      background: #eff6ff;
+      border-left: 4px solid var(--blue-primary);
+      color: #1e3a5f;
+    }
+
+    .callout-scientific {
+      background: #f1f5f9;
+      border-left: 4px solid var(--slate-dark);
+      color: var(--slate-dark);
+    }
+
+    .callout strong { display: inline; }
+
+    /* =============================================
+       METRIC CARDS
+    ============================================= */
+    .metric-cards {
+      display: grid;
+      gap: 12px;
+      margin: 16px 0;
+    }
+
+    .metric-cards-2 { grid-template-columns: 1fr 1fr; }
+    .metric-cards-4 { grid-template-columns: repeat(4, 1fr); }
+
+    .metric-card {
+      background: var(--bg-light);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 16px;
+      text-align: center;
+    }
+
+    .metric-card-label {
+      font-size: 7.5pt;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    .metric-card-value {
+      font-size: 18pt;
+      font-weight: 800;
+      color: var(--navy-mid);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .metric-card-sub {
+      font-size: 7.5pt;
+      color: var(--text-muted);
+    }
+
+    /* =============================================
+       DUAL TRACK TABLE
+    ============================================= */
+    .dual-track {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 20px 0;
+    }
+
+    .track-card {
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .track-card-track1 {
+      border: 2px solid var(--blue-primary);
+    }
+
+    .track-card-track2 {
+      border: 2px solid var(--teal);
+    }
+
+    .track-header {
+      padding: 12px 16px;
+      font-size: 8pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--white);
+    }
+
+    .track-header-track1 { background: var(--blue-primary); }
+    .track-header-track2 { background: var(--teal); }
+
+    .track-body {
+      padding: 12px 16px;
+      background: var(--bg-light);
+    }
+
+    .track-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 5px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 8.5pt;
+    }
+
+    .track-row:last-child { border-bottom: none; }
+
+    .track-row-label { color: var(--text-muted); font-weight: 500; }
+    .track-row-value { font-weight: 700; color: var(--navy-mid); }
+
+    /* =============================================
+       STANDARD TABLES
+    ============================================= */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 8.5pt;
+    }
+
+    .data-table th {
+      background: var(--navy-mid);
+      color: var(--white);
+      padding: 8px 12px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 8pt;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .data-table td {
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    .data-table tr:nth-child(even) td { background: var(--bg-light); }
+    .data-table tr:hover td { background: #f0f9ff; }
+
+    /* =============================================
+       ARCHITECTURE DIAGRAM
+    ============================================= */
+    .arch-diagram {
+      background: var(--navy-mid);
+      color: #e2e8f0;
+      border-radius: 8px;
+      padding: 24px;
+      font-family: 'Cascadia Code', 'Consolas', 'Courier New', monospace;
+      font-size: 8.5pt;
+      line-height: 1.7;
+      margin: 16px 0;
+      overflow-x: auto;
+    }
+
+    .arch-diagram .arch-title {
+      font-size: 7pt;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #60a5fa;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .arch-box {
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 5px;
+      padding: 12px 16px;
+      margin-bottom: 8px;
+    }
+
+    .arch-box-label {
+      font-size: 7.5pt;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #60a5fa;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .arch-box-label.teal { color: #2dd4bf; }
+    .arch-box-label.green { color: #86efac; }
+
+    .arch-box li, .arch-box p {
+      color: #cbd5e1;
+      font-size: 8pt;
+      margin-bottom: 2px;
+    }
+
+    .arch-arrow {
+      text-align: center;
+      color: #475569;
+      font-size: 12pt;
+      line-height: 1;
+      margin: 4px 0;
+    }
+
+    /* =============================================
+       WORKFLOW DIAGRAM
+    ============================================= */
+    .workflow {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin: 16px 0;
+    }
+
+    .workflow-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .workflow-line {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .workflow-dot {
+      width: 32px;
+      height: 32px;
+      background: var(--blue-primary);
+      color: var(--white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9pt;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .workflow-connector {
+      width: 2px;
+      height: 28px;
+      background: var(--border);
+      flex-shrink: 0;
+    }
+
+    .workflow-content {
+      padding-bottom: 20px;
+    }
+
+    .workflow-title {
+      font-size: 9.5pt;
+      font-weight: 700;
+      color: var(--navy-mid);
+      margin-bottom: 3px;
+    }
+
+    .workflow-desc {
+      font-size: 8.5pt;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* =============================================
+       FEATURE IMPORTANCE BAR
+    ============================================= */
+    .feature-bars {
+      margin: 16px 0;
+    }
+
+    .feature-bar-item {
+      display: grid;
+      grid-template-columns: 140px 1fr 40px;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .feature-bar-label {
+      font-size: 8.5pt;
+      font-weight: 600;
+      color: var(--slate-dark);
+    }
+
+    .feature-bar-track {
+      background: var(--border);
+      border-radius: 3px;
+      height: 10px;
+      overflow: hidden;
+    }
+
+    .feature-bar-fill {
+      height: 100%;
+      border-radius: 3px;
+      background: linear-gradient(90deg, var(--blue-primary), var(--blue-sky));
+    }
+
+    .feature-bar-pct {
+      font-size: 8.5pt;
+      font-weight: 700;
+      color: var(--navy-mid);
+      text-align: right;
+    }
+
+    /* =============================================
+       ROADMAP
+    ============================================= */
+    .roadmap {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+      margin: 16px 0;
+    }
+
+    .roadmap-item {
+      background: var(--bg-light);
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--blue-primary);
+      border-radius: 5px;
+      padding: 14px;
+    }
+
+    .roadmap-phase {
+      font-size: 7.5pt;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--blue-primary);
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .roadmap-title {
+      font-size: 9pt;
+      font-weight: 700;
+      color: var(--navy-mid);
+      margin-bottom: 6px;
+    }
+
+    .roadmap-desc {
+      font-size: 8pt;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    /* =============================================
+       COMPETITIVE TABLE
+    ============================================= */
+    .comp-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 8pt;
+      margin: 16px 0;
+    }
+
+    .comp-table th {
+      background: var(--navy-mid);
+      color: var(--white);
+      padding: 8px 10px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 7.5pt;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .comp-table td {
+      padding: 8px 10px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.45;
+    }
+
+    .comp-table tr:nth-child(even) td { background: var(--bg-light); }
+
+    .comp-tag {
+      display: inline-block;
+      background: #eff6ff;
+      color: var(--blue-primary);
+      border: 1px solid #bfdbfe;
+      border-radius: 3px;
+      font-size: 7pt;
+      font-weight: 700;
+      padding: 2px 6px;
+      white-space: nowrap;
+    }
+
+    /* =============================================
+       LIMITATIONS LIST
+    ============================================= */
+    .limit-list {
+      list-style: none;
+      padding: 0;
+      margin: 12px 0;
+    }
+
+    .limit-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      font-size: 8.5pt;
+    }
+
+    .limit-item:last-child { border-bottom: none; }
+
+    .limit-num {
+      background: var(--navy-light);
+      color: #94a3b8;
+      font-size: 7.5pt;
+      font-weight: 700;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* =============================================
+       PROJECT LINKS
+    ============================================= */
+    .links-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 16px 0;
+    }
+
+    .link-card {
+      background: var(--navy-mid);
+      color: var(--white);
+      border-radius: 8px;
+      padding: 20px 24px;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      transition: background 0.2s;
+    }
+
+    .link-card:hover {
+      background: var(--navy-light);
+      text-decoration: none;
+    }
+
+    .link-card-label {
+      font-size: 7.5pt;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #60a5fa;
+      font-weight: 700;
+    }
+
+    .link-card-url {
+      font-size: 9pt;
+      color: #e2e8f0;
+      word-break: break-all;
+    }
+
+    /* =============================================
+       FOOTER
+    ============================================= */
+    .doc-footer {
+      border-top: 1px solid var(--border);
+      padding-top: 16px;
+      margin-top: 48px;
+      font-size: 7.5pt;
+      color: var(--text-muted);
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+<div class="document">
+
+  <!-- ==========================================
+       COVER PAGE
+  =========================================== -->
+  <div class="cover">
+    <div>
+      <div class="cover-badge">Bibliotheca Alexandrina Youth Creators Award 2026 &nbsp;·&nbsp; Technology Creativity Track</div>
+      <div class="cover-grid">
+        <div>
+          <h1>GeoAI <span>Deforestation Risk</span><br>Intelligence Platform</h1>
+          <p class="cover-subtitle">An AI-Powered Spatial Decision-Support Platform for<br>Deforestation Risk Assessment in Rondônia, Brazil</p>
+        </div>
+        <div class="cover-side">
+          <div class="cover-year">2026</div>
+        </div>
+      </div>
+    </div>
+    <div class="cover-meta">
+      <div class="cover-meta-item">
+        <span class="cover-meta-label">Principal Developer</span>
+        <span class="cover-meta-value">Mamdouh Ahmed</span>
+      </div>
+      <div class="cover-meta-item">
+        <span class="cover-meta-label">Study Geography</span>
+        <span class="cover-meta-value">Rondônia, Brazilian Amazon Basin</span>
+      </div>
+      <div class="cover-meta-item">
+        <span class="cover-meta-label">Production Platform</span>
+        <span class="cover-meta-value"><a href="https://amazon-deforestation-risk-3d.vercel.app/" target="_blank">amazon-deforestation-risk-3d.vercel.app</a></span>
+      </div>
+      <div class="cover-meta-item">
+        <span class="cover-meta-label">Repository</span>
+        <span class="cover-meta-value"><a href="https://github.com/mamdouhahmed5455-lang/Amoazon2" target="_blank">github.com/mamdouhahmed5455-lang/Amoazon2</a></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       TABLE OF CONTENTS
+  =========================================== -->
+  <div class="toc">
+    <h2>Table of Contents</h2>
+    <div class="toc-grid">
+      <div class="toc-item"><span class="toc-num">01</span><a class="toc-link" href="#sec-cover">Cover Page</a></div>
+      <div class="toc-item"><span class="toc-num">11</span><a class="toc-link" href="#sec-scenario">Scenario Sensitivity Analysis</a></div>
+      <div class="toc-item"><span class="toc-num">02</span><a class="toc-link" href="#sec-exec">Executive Summary</a></div>
+      <div class="toc-item"><span class="toc-num">12</span><a class="toc-link" href="#sec-techfeas">Technical Feasibility</a></div>
+      <div class="toc-item"><span class="toc-num">03</span><a class="toc-link" href="#sec-problem">The Problem</a></div>
+      <div class="toc-item"><span class="toc-num">13</span><a class="toc-link" href="#sec-opfeas">Operational Feasibility</a></div>
+      <div class="toc-item"><span class="toc-num">04</span><a class="toc-link" href="#sec-solution">Proposed Solution</a></div>
+      <div class="toc-item"><span class="toc-num">14</span><a class="toc-link" href="#sec-econFeas">Economic Feasibility</a></div>
+      <div class="toc-item"><span class="toc-num">05</span><a class="toc-link" href="#sec-innovation">Innovation</a></div>
+      <div class="toc-item"><span class="toc-num">15</span><a class="toc-link" href="#sec-competitive">Competitive Positioning</a></div>
+      <div class="toc-item"><span class="toc-num">06</span><a class="toc-link" href="#sec-arch">System Architecture</a></div>
+      <div class="toc-item"><span class="toc-num">16</span><a class="toc-link" href="#sec-limits">Scientific Transparency &amp; Limitations</a></div>
+      <div class="toc-item"><span class="toc-num">07</span><a class="toc-link" href="#sec-tech">Technical Implementation</a></div>
+      <div class="toc-item"><span class="toc-num">17</span><a class="toc-link" href="#sec-roadmap">Future Development Roadmap</a></div>
+      <div class="toc-item"><span class="toc-num">08</span><a class="toc-link" href="#sec-ai">AI and Scientific Evidence</a></div>
+      <div class="toc-item"><span class="toc-num">18</span><a class="toc-link" href="#sec-global">Long-Term Global Potential</a></div>
+      <div class="toc-item"><span class="toc-num">09</span><a class="toc-link" href="#sec-history">Historical Environmental Intelligence</a></div>
+      <div class="toc-item"><span class="toc-num">19</span><a class="toc-link" href="#sec-conclusion">Conclusion</a></div>
+      <div class="toc-item"><span class="toc-num">10</span><a class="toc-link" href="#sec-workflow">Decision-Support Workflow</a></div>
+      <div class="toc-item"><span class="toc-num">20</span><a class="toc-link" href="#sec-links">Project Links</a></div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       SECTION 1: COVER PAGE (anchor only)
+  =========================================== -->
+  <section id="sec-cover" style="display:none;"></section>
+
+  <!-- ==========================================
+       SECTION 2: EXECUTIVE SUMMARY
+  =========================================== -->
+  <section id="sec-exec">
+    <div class="section-header">
+      <span class="section-number">02</span>
+      <h2>Executive Summary</h2>
+    </div>
+
+    <p>The <strong>GeoAI Deforestation Risk Intelligence Platform</strong> is an end-to-end GeoAI decision-support system designed to assist environmental analysts in spatially screening, prioritizing, and interpreting deforestation risk across the Brazilian Amazon.</p>
+
+    <p>The platform synthesizes multi-source geospatial and demographic data into a precomputed spatial risk dataset covering approximately <strong>150,000 spatial cells</strong> in the state of <strong>Rondônia, Brazil</strong>. An offline-trained <strong>XGBoost</strong> classification pipeline underpins the risk scoring. Risk outputs represent <strong>relative spatial risk rankings</strong>, not calibrated probabilities or forecasts of deforestation occurrence.</p>
+
+    <p>The platform is delivered as a <strong>browser-based static web application</strong> hosted on Vercel, requiring no server-side database, enabling immediate interactive exploration via WebGL-powered 2D/3D visualization.</p>
+
+    <p>Scientific evidence is maintained across two explicitly separated tracks:</p>
+
+    <div class="metric-cards metric-cards-2" style="margin:20px 0;">
+      <div style="border:2px solid var(--blue-primary); border-radius:6px; overflow:hidden;">
+        <div style="background:var(--blue-primary); color:white; padding:8px 14px; font-size:7.5pt; font-weight:700; text-transform:uppercase; letter-spacing:0.08em;">Track 1 — Documented Production Benchmark</div>
+        <div style="padding:14px; background:var(--bg-light);">
+          <div class="metric-cards metric-cards-4" style="margin:0;">
+            <div class="metric-card"><div class="metric-card-label">ROC-AUC</div><div class="metric-card-value" style="font-size:14pt;">0.82</div></div>
+            <div class="metric-card"><div class="metric-card-label">Precision</div><div class="metric-card-value" style="font-size:14pt;">0.79</div></div>
+            <div class="metric-card"><div class="metric-card-label">Recall</div><div class="metric-card-value" style="font-size:14pt;">0.84</div></div>
+            <div class="metric-card"><div class="metric-card-label">F1-Score</div><div class="metric-card-value" style="font-size:14pt;">0.81</div></div>
+          </div>
+        </div>
+      </div>
+      <div style="border:2px solid var(--teal); border-radius:6px; overflow:hidden;">
+        <div style="background:var(--teal); color:white; padding:8px 14px; font-size:7.5pt; font-weight:700; text-transform:uppercase; letter-spacing:0.08em;">Track 2 — Independent Research Model V2</div>
+        <div style="padding:14px; background:var(--bg-light);">
+          <div class="track-row"><span class="track-row-label">ROC-AUC</span><span class="track-row-value">0.7474</span></div>
+          <div class="track-row"><span class="track-row-label">95% CI</span><span class="track-row-value">[0.5837, 0.9036]</span></div>
+          <div class="track-row"><span class="track-row-label">PR-AUC</span><span class="track-row-value">0.005534</span></div>
+          <div class="track-row"><span class="track-row-label">Brier Score</span><span class="track-row-value">0.00693</span></div>
+          <div class="track-row"><span class="track-row-label">Top-Decile Lift</span><span class="track-row-value">5.0×</span></div>
+        </div>
+      </div>
+    </div>
+
+    <p>A <strong>25-year PRODES-based historical intelligence</strong> layer (2001–2025) across all nine states of the Brazilian Legal Amazon provides contextual depth for spatial interpretation.</p>
+
+    <div class="callout callout-integrity">
+      <strong>Integrity Statement:</strong> This platform does not claim real-time prediction, live satellite monitoring, causal inference, measured financial ROI, measured carbon savings, autonomous enforcement, or proven operational deployment. All risk outputs are heuristic spatial signals for decision-support purposes only.
+    </div>
+  </section>
+
+  <!-- ==========================================
+       SECTION 3: THE PROBLEM
+  =========================================== -->
+  <section id="sec-problem">
+    <div class="section-header">
+      <span class="section-number">03</span>
+      <h2>The Problem</h2>
+    </div>
+
+    <h3>Context</h3>
+    <p>The Amazon rainforest is Earth's largest terrestrial carbon reservoir and biodiversity habitat, yet it faces persistent fragmentation from infrastructure expansion, agricultural encroachment, and illegal clearing activity.</p>
+
+    <p>Brazil operates world-class forest monitoring systems:</p>
+    <ul>
+      <li><strong>PRODES</strong> (INPE): annual consolidated mapping of deforestation polygons ≥ 6.25 ha</li>
+      <li><strong>DETER</strong> (INPE): rapid optical and radar alert stream detecting active clearings ≥ 3 ha</li>
+      <li><strong>Global Forest Watch / GLAD</strong>: global canopy disturbance alerts</li>
+    </ul>
+    <p>These systems represent significant achievements in environmental surveillance. The challenge they face is not a failure of data or technology.</p>
+
+    <h3>The Gap This Project Addresses</h3>
+    <div class="callout callout-info">
+      "The challenge is not the absence of forest-monitoring data, but the gap between environmental observations and an integrated workflow for spatial risk screening, prioritization, interpretation, and verification planning."
+    </div>
+
+    <p>Environmental protection agencies operate under severe logistical, personnel, and vehicle constraints across millions of square kilometers of remote territory. Even with alert data available, enforcement coordinators require:</p>
+
+    <table class="data-table">
+      <thead><tr><th>Workflow Need</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Spatial prioritization</strong></td><td>Which zones accumulate the highest structural pressure across multiple risk factors simultaneously?</td></tr>
+        <tr><td><strong>Integrated explanation</strong></td><td>What combination of anthropogenic drivers underlies flagged cells?</td></tr>
+        <tr><td><strong>Contextual history</strong></td><td>How does current spatial risk relate to 25 years of observed deforestation patterns?</td></tr>
+        <tr><td><strong>Sensitivity exploration</strong></td><td>How might risk distributions shift under alternative infrastructure or policy conditions?</td></tr>
+        <tr><td><strong>Verification planning</strong></td><td>Which areas warrant ground-truthing or targeted monitoring attention?</td></tr>
+      </tbody>
+    </table>
+
+    <p>This platform is designed as a <strong>complementary AI-assisted decision-support layer</strong> to help bridge that workflow gap — operating alongside, not replacing, authoritative monitoring infrastructure.</p>
+  </section>
+
+  <!-- ==========================================
+       SECTION 4: PROPOSED SOLUTION
+  =========================================== -->
+  <section id="sec-solution">
+    <div class="section-header">
+      <span class="section-number">04</span>
+      <h2>Proposed Solution</h2>
+    </div>
+
+    <p>The platform delivers a structured decision-support workflow, from multi-source data ingestion through precomputed spatial inference to interactive browser-based analyst tools:</p>
+
+    <div class="arch-diagram">
+      <div class="arch-title">Decision-Support Pipeline</div>
+      <div class="arch-box">
+        <div class="arch-box-label">Multi-Source Data</div>
+        <p>Road Network · Historical Forest Loss · Population Pressure · Elevation Constraints</p>
+      </div>
+      <div class="arch-arrow">↓</div>
+      <div class="arch-box">
+        <div class="arch-box-label">Offline Feature Engineering (Python)</div>
+        <p>STRtree / cKDTree spatial joins · PRODES WFS · OSM Overpass · IBGE Census · Copernicus DEM</p>
+      </div>
+      <div class="arch-arrow">↓</div>
+      <div class="arch-box">
+        <div class="arch-box-label">XGBoost Risk Scoring (Offline Pipeline)</div>
+        <p>Precomputed spatial risk scores for ~150,000 cells · Out-of-time temporal partitions</p>
+      </div>
+      <div class="arch-arrow">↓</div>
+      <div class="arch-box">
+        <div class="arch-box-label teal">Browser Application (Static / WebGL)</div>
+        <p>Risk Signal → Spatial Explanation → Prioritization → Historical Context → Scenario Sensitivity → Verification Planning</p>
+      </div>
+    </div>
+
+    <p>The system is designed so that a trained environmental analyst can navigate from a raw spatial risk signal through feature-level explanation, historical context, sensitivity exploration, and structured verification planning — entirely within the browser, without requiring GIS desktop software or specialist data engineering capacity.</p>
+  </section>
+
+  <!-- ==========================================
+       SECTION 5: INNOVATION
+  =========================================== -->
+  <section id="sec-innovation">
+    <div class="section-header">
+      <span class="section-number">05</span>
+      <h2>Innovation</h2>
+    </div>
+
+    <h3>5.1 AI-Assisted Spatial Risk Ranking</h3>
+    <p>The platform integrates AI-assisted spatial risk ranking <strong>alongside</strong> historical observation and monitoring data. Rather than replacing authoritative detection systems, it provides a complementary structural risk layer at the multi-factor intersection of road proximity, historical forest loss, population pressure, and terrain accessibility.</p>
+    <p>Risk outputs are explicitly described as <strong>relative spatial risk scores</strong> — heuristic signals derived from the learned relationship between spatial predictors and historical deforestation outcomes. They are not calibrated probabilities or forecasts.</p>
+
+    <h3>5.2 Explainability Through Dual-Track Evidence</h3>
+    <p>Explainability is provided through two scientifically distinct methods:</p>
+    <ul>
+      <li><strong>Track 1</strong>: Documented global feature-importance evidence (analytical evidence), establishing the directional role of each predictor in the production benchmark</li>
+      <li><strong>Track 2</strong>: TreeSHAP attribution applied specifically to the independent Research Model V2, providing cell-level quantitative driver decomposition</li>
+    </ul>
+    <div class="callout callout-scientific">
+      <strong>Important:</strong> TreeSHAP attribution belongs to the Track 2 Research Model V2. It is not claimed as the explainability method for the Track 1 production benchmark.
+    </div>
+
+    <h3>5.3 Client-Side Scenario Sensitivity Simulation</h3>
+    <p>The platform includes a browser-embedded <strong>parametric sensitivity simulation</strong> module. Analysts can adjust road expansion, population pressure, fire frequency, and policy enforcement parameters to observe how the risk distribution responds under alternative conditions.</p>
+    <div class="callout callout-warning">
+      This is <strong>exploratory sensitivity simulation, not validated forecasting</strong>. Results are illustrative policy-sensitivity signals, not predictive policy forecasts.
+    </div>
+
+    <h3>5.4 Interactive WebGL-Based Geospatial Exploration</h3>
+    <p>The browser application renders approximately 150,000 spatial cells using WebGL through Deck.gl and Mapbox GL JS, supporting 3D column extrusion, 2D orthographic mapping, density heatmap rendering, and spatial hotspot filtering. Client-side rendering is optimized for interactive exploration of the precomputed spatial dataset.</p>
+
+    <h3>5.5 Dual-Track Scientific Transparency</h3>
+    <p>The platform explicitly separates the Track 1 documented production benchmark from the Track 2 independent research audit, with metrics, methodology, limitations, and evidence levels clearly documented for both. This architecture demonstrates scientific maturity rather than inflating a single performance figure.</p>
+  </section>
+
+  <!-- ==========================================
+       SECTION 6: SYSTEM ARCHITECTURE
+  =========================================== -->
+  <section id="sec-arch">
+    <div class="section-header">
+      <span class="section-number">06</span>
+      <h2>System Architecture</h2>
+    </div>
+
+    <p>The platform maintains a strict separation between the <strong>offline research and training environment</strong> and the <strong>production browser experience</strong>:</p>
+
+    <div class="arch-diagram">
+      <div class="arch-title">Full System Architecture</div>
+
+      <div class="arch-box">
+        <div class="arch-box-label">Research &amp; Training Environment (Offline Python)</div>
+        <ul>
+          <li>DATA SOURCES: INPE PRODES WFS · OpenStreetMap (Overpass) · IBGE Census · Copernicus DEM GLO-90m</li>
+          <li>FEATURE ENGINEERING: STRtree Spatial Indexing · cKDTree Spatial Join · Road proximity · Historical loss · Population · Elevation</li>
+          <li>XGBOOST PIPELINE: Gradient Boosted Decision Trees (Log-Loss) · Out-of-time partitions (2022/2023/2024) · Geographic latitude holdout (-11.0°) · 1,000-iteration bootstrap CI</li>
+          <li>OUTPUT: Precomputed spatial inference · ~150,000 cells · Risk scores · Feature values</li>
+        </ul>
+      </div>
+
+      <div class="arch-arrow">↓  Static asset deployment</div>
+
+      <div class="arch-box">
+        <div class="arch-box-label teal">Production Browser Experience (Static Web Application)</div>
+        <ul>
+          <li>Deck.gl WebGL Engine + Mapbox GL JS</li>
+          <li>Vanilla JavaScript (ES6 modular) · Chart.js · D3.js</li>
+          <li>Interactive 2D/3D Risk Maps · Decision Story · Scenario Sensitivity · History Layer</li>
+          <li>Zero server-side database · Vercel Edge CDN</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout callout-info">
+      <strong>Key separation principle:</strong> No live model training or real-time prediction occurs in the browser. The browser application loads precomputed spatial data and delivers interactive visualization, explanation, and scenario sensitivity tools.
+    </div>
+  </section>
+
+  <!-- ==========================================
+       SECTION 7: TECHNICAL IMPLEMENTATION
+  =========================================== -->
+  <section id="sec-tech">
+    <div class="section-header">
+      <span class="section-number">07</span>
+      <h2>Technical Implementation</h2>
+    </div>
+
+    <h3>Data Engineering</h3>
+    <table class="data-table">
+      <thead><tr><th>Feature</th><th>Source</th><th>Engineering Method</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Road Proximity</strong></td><td>OpenStreetMap (Overpass API)</td><td>STRtree spatial indexing + cKDTree distance to nearest highway</td></tr>
+        <tr><td><strong>Historical Deforestation</strong></td><td>INPE PRODES WFS (2021–2024)</td><td>Annual clear-cut polygon intersection per spatial cell</td></tr>
+        <tr><td><strong>Population Pressure</strong></td><td>IBGE 2022 Decennial Census</td><td>Population density proxy spatially joined to grid centroids</td></tr>
+        <tr><td><strong>Elevation Constraints</strong></td><td>Copernicus DEM GLO-90m</td><td>Terrain elevation values per cell centroid</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Model Pipeline</h3>
+    <ul>
+      <li><strong>Algorithm</strong>: XGBoost gradient-boosted decision trees with log-loss objective</li>
+      <li><strong>Temporal partitioning</strong>: Temporal target-year isolation was applied in the Model V2 evaluation protocol (2022 training, 2023 validation, 2024 test), with predictor timing documented per source. Temporal alignment is not identical across all source variables and evaluation periods; therefore, no blanket zero-leakage claim is made.</li>
+      <li><strong>Geographic holdout</strong>: North/south split at −11.0° latitude for spatial generalization testing</li>
+      <li><strong>Confidence intervals</strong>: 1,000-iteration bootstrap resampling on the 2024 held-out partition</li>
+    </ul>
+
+    <h3>Browser Application</h3>
+    <table class="data-table">
+      <thead><tr><th>Module</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Interactive Risk Map</strong> (index.html)</td><td>3D extrusion / 2D orthographic / heatmap / hotspot views across ~150,000 spatial cells</td></tr>
+        <tr><td><strong>Decision Story</strong></td><td>5-step guided analytical narrative embedded in the dashboard</td></tr>
+        <tr><td><strong>Historical Intelligence</strong></td><td>25-year PRODES time series (2001–2025), 9 Legal Amazon states</td></tr>
+        <tr><td><strong>Scenario Simulator</strong></td><td>Client-side parametric sensitivity analysis</td></tr>
+        <tr><td><strong>Spatial Analysis Workspace</strong></td><td>Cluster analysis, corridor convergence, spatial filtering</td></tr>
+        <tr><td><strong>AI Model Diagnostics</strong></td><td>Feature importance, confusion matrix, model architecture visualization</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ==========================================
+       SECTION 8: AI AND SCIENTIFIC EVIDENCE
+  =========================================== -->
+  <section id="sec-ai">
+    <div class="section-header">
+      <span class="section-number">08</span>
+      <h2>AI and Scientific Evidence</h2>
+    </div>
+
+    <div class="dual-track">
+      <div class="track-card track-card-track1">
+        <div class="track-header track-header-track1">Track 1 — Documented Production Benchmark (Canonical Reference)</div>
+        <div class="track-body">
+          <div class="track-row"><span class="track-row-label">Model</span><span class="track-row-value">XGBoost (Baseline)</span></div>
+          <div class="track-row"><span class="track-row-label">ROC-AUC</span><span class="track-row-value">0.82</span></div>
+          <div class="track-row"><span class="track-row-label">Precision</span><span class="track-row-value">0.79</span></div>
+          <div class="track-row"><span class="track-row-label">Recall</span><span class="track-row-value">0.84</span></div>
+          <div class="track-row"><span class="track-row-label">F1-Score</span><span class="track-row-value">0.81</span></div>
+          <div class="track-row"><span class="track-row-label">95% Bootstrap CI</span><span class="track-row-value">Not documented upstream</span></div>
+          <div class="track-row"><span class="track-row-label">Evidence Level</span><span class="track-row-value">Canonical Benchmark (Locked)</span></div>
+          <div class="track-row"><span class="track-row-label">Explainability</span><span class="track-row-value">Global feature-importance evidence</span></div>
+        </div>
+      </div>
+      <div class="track-card track-card-track2">
+        <div class="track-header track-header-track2">Track 2 — Independent Research Model V2</div>
+        <div class="track-body">
+          <div class="track-row"><span class="track-row-label">Model</span><span class="track-row-value">XGBoost v2.0.0</span></div>
+          <div class="track-row"><span class="track-row-label">ROC-AUC</span><span class="track-row-value">0.7474</span></div>
+          <div class="track-row"><span class="track-row-label">95% Bootstrap CI</span><span class="track-row-value">[0.5837, 0.9036]</span></div>
+          <div class="track-row"><span class="track-row-label">PR-AUC</span><span class="track-row-value">0.005534</span></div>
+          <div class="track-row"><span class="track-row-label">Brier Score</span><span class="track-row-value">0.00693</span></div>
+          <div class="track-row"><span class="track-row-label">Test Events (2024)</span><span class="track-row-value">10 observed positives</span></div>
+          <div class="track-row"><span class="track-row-label">Top-Decile Lift</span><span class="track-row-value">5.0× retrospective</span></div>
+          <div class="track-row"><span class="track-row-label">Evidence Level</span><span class="track-row-value">Moderate</span></div>
+          <div class="track-row"><span class="track-row-label">Explainability</span><span class="track-row-value">TreeSHAP attribution</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout callout-scientific">
+      <strong>Explicit Scientific Statement:</strong> Track 2 (Model V2) is an independent empirical verification research experiment. It is not presented as a reproduction of the Track 1 benchmark and does not replace it.
+    </div>
+
+    <h3>Feature-Importance Evidence (Track 1 — Documented Global Attribution)</h3>
+    <div class="feature-bars">
+      <div class="feature-bar-item">
+        <span class="feature-bar-label">Road Proximity</span>
+        <div class="feature-bar-track"><div class="feature-bar-fill" style="width:41%"></div></div>
+        <span class="feature-bar-pct">41%</span>
+      </div>
+      <div class="feature-bar-item">
+        <span class="feature-bar-label">Historical Forest Loss</span>
+        <div class="feature-bar-track"><div class="feature-bar-fill" style="width:23%"></div></div>
+        <span class="feature-bar-pct">23%</span>
+      </div>
+      <div class="feature-bar-item">
+        <span class="feature-bar-label">Population Pressure</span>
+        <div class="feature-bar-track"><div class="feature-bar-fill" style="width:21%"></div></div>
+        <span class="feature-bar-pct">21%</span>
+      </div>
+      <div class="feature-bar-item">
+        <span class="feature-bar-label">Elevation Constraints</span>
+        <div class="feature-bar-track"><div class="feature-bar-fill" style="width:15%"></div></div>
+        <span class="feature-bar-pct">15%</span>
+      </div>
+    </div>
+    <div class="callout callout-scientific">
+      These are <strong>documented global feature-importance values</strong> (analytical evidence). They are <strong>not</strong> XGBoost model coefficients and should not be interpreted as causal effect sizes.
+    </div>
+
+    <h3>Track 2 Critical Interpretation Constraints</h3>
+    <div class="callout callout-warning">
+      <strong>Risk Score Interpretation:</strong> Brier score alone does not establish probabilistic calibration. Model V2 outputs must be interpreted as <strong>relative spatial risk rankings</strong>, not calibrated probabilities or frequentist estimates of deforestation occurrence likelihood.
+    </div>
+  </section>
+
+  <!-- ==========================================
+       SECTION 9: HISTORICAL INTELLIGENCE
+  =========================================== -->
+  <section id="sec-history">
+    <div class="section-header">
+      <span class="section-number">09</span>
+      <h2>Historical Environmental Intelligence</h2>
+    </div>
+
+    <p>The platform integrates a <strong>25-year historical environmental intelligence layer</strong> based on Brazil's official PRODES deforestation accounting program.</p>
+
+    <table class="data-table">
+      <thead><tr><th>Dimension</th><th>Detail</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Data source</strong></td><td>INPE PRODES (TerraBrasilis WFS)</td></tr>
+        <tr><td><strong>Temporal range</strong></td><td>2001–2025</td></tr>
+        <tr><td><strong>Geographic scope</strong></td><td>All 9 states of the Brazilian Legal Amazon</td></tr>
+        <tr><td><strong>Focus state</strong></td><td>Rondônia</td></tr>
+        <tr><td><strong>Polygon threshold</strong></td><td>≥ 6.25 hectares per clear-cut unit</td></tr>
+      </tbody>
+    </table>
+
+    <p>Historical intelligence serves three decision-support functions:</p>
+    <ol>
+      <li><strong>Contextual anchoring</strong>: Allows analysts to situate current risk signals within long-term deforestation trajectories per state and sub-region</li>
+      <li><strong>Baseline reference</strong>: Establishes empirical deforestation patterns used as training labels in the XGBoost pipeline</li>
+      <li><strong>State comparison</strong>: Enables cross-state comparison of annual deforestation rates across all nine Legal Amazon states from 2001 to 2025</li>
+    </ol>
+
+    <div class="callout callout-info">
+      <strong>Important distinction:</strong> Historical intelligence reflects <strong>retrospective measurement</strong> of past deforestation events. It does not constitute forward-looking prediction of future deforestation occurrence.
+    </div>
+  </section>
+
+  <!-- ==========================================
+       SECTION 10: DECISION-SUPPORT WORKFLOW
+  =========================================== -->
+  <section id="sec-workflow">
+    <div class="section-header">
+      <span class="section-number">10</span>
+      <h2>Decision-Support Workflow</h2>
+    </div>
+
+    <p>The platform guides analysts through a structured five-step decision-support workflow embedded in the dashboard interface:</p>
+
+    <div class="workflow">
+      <div class="workflow-step">
+        <div class="workflow-line">
+          <div class="workflow-dot">1</div>
+          <div class="workflow-connector"></div>
+        </div>
+        <div class="workflow-content">
+          <div class="workflow-title">Where is the risk?</div>
+          <div class="workflow-desc">Identify spatial cells with the highest relative risk scores across Rondônia using the interactive 3D / 2D map interface.</div>
+        </div>
+      </div>
+      <div class="workflow-step">
+        <div class="workflow-line">
+          <div class="workflow-dot">2</div>
+          <div class="workflow-connector"></div>
+        </div>
+        <div class="workflow-content">
+          <div class="workflow-title">Why is it flagged?</div>
+          <div class="workflow-desc">Inspect the feature-level explanation for a selected cell: road proximity, historical forest loss, population pressure, elevation. Understand the multi-factor combination underlying the risk signal.</div>
+        </div>
+      </div>
+      <div class="workflow-step">
+        <div class="workflow-line">
+          <div class="workflow-dot">3</div>
+          <div class="workflow-connector"></div>
+        </div>
+        <div class="workflow-content">
+          <div class="workflow-title">How does the spatial pattern change?</div>
+          <div class="workflow-desc">Use the spatial analysis workspace to examine cluster distributions, road corridor convergence, and risk tier transitions across adjacent cells.</div>
+        </div>
+      </div>
+      <div class="workflow-step">
+        <div class="workflow-line">
+          <div class="workflow-dot">4</div>
+          <div class="workflow-connector"></div>
+        </div>
+        <div class="workflow-content">
+          <div class="workflow-title">What should be investigated next?</div>
+          <div class="workflow-desc">Apply the scenario sensitivity simulator to understand how the spatial risk distribution responds to parametric changes in key pressure variables.</div>
+        </div>
+      </div>
+      <div class="workflow-step">
+        <div class="workflow-line">
+          <div class="workflow-dot">5</div>
+        </div>
+        <div class="workflow-content">
+          <div class="workflow-title">What additional verification or analysis may be valuable?</div>
+          <div class="workflow-desc">Use prioritized risk rankings to structure verification planning. All planning windows and inspection guidance are <strong>illustrative and non-prescriptive</strong>.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout callout-info">
+      <strong>Scope boundary:</strong> The workflow supports <strong>strategic screening and prioritization</strong>. It does not autonomously dispatch enforcement resources, generate legal instruments, or replace ground-truth verification.
+    </div>
+  </section>
+
+  <!-- ==========================================
+       SECTION 11: SCENARIO SENSITIVITY
+  =========================================== -->
+  <section id="sec-scenario">
+    <div class="section-header">
+      <span class="section-number">11</span>
+      <h2>Scenario Sensitivity Analysis</h2>
+    </div>
+
+    <p>The platform includes a client-side parametric sensitivity simulation module. Analysts can interactively adjust four pressure variables:</p>
+
+    <table class="data-table">
+      <thead><tr><th>Variable</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Road Expansion</strong></td><td>Simulates the effect of additional road corridor proximity on spatial risk distribution</td></tr>
+        <tr><td><strong>Population Pressure</strong></td><td>Models changes in demographic density and its influence on risk signal</td></tr>
+        <tr><td><strong>Fire Frequency</strong></td><td>Adjusts fire-related pressure signals across the spatial grid</td></tr>
+        <tr><td><strong>Protection Policy</strong></td><td>Toggles the effect of simulated reserve enforcement constraints on risk tier allocation</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout callout-warning">
+      <strong>Scientific Classification:</strong> This is <strong>exploratory sensitivity simulation, not validated forecasting</strong>. Results are illustrative sensitivity signals for qualitative scenario reasoning. The simulation does not constitute a validated policy forecast, represent a predictive model of future deforestation rates, or claim causal inference between policy interventions and outcomes.
+    </div>
+  </section>
+
+  <!-- ==========================================
+       SECTION 12: TECHNICAL FEASIBILITY
+  =========================================== -->
+  <section id="sec-techfeas">
+    <div class="section-header">
+      <span class="section-number">12</span>
+      <h2>Technical Feasibility</h2>
+    </div>
+
+    <p>The platform is a <strong>fully functional static web prototype</strong> demonstrating end-to-end feasibility of the GeoAI decision-support concept:</p>
+
+    <table class="data-table">
+      <thead><tr><th>Component</th><th>Feasibility Basis</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Offline Python pipeline</strong></td><td>Fully implemented and documented in repository</td></tr>
+        <tr><td><strong>Precomputed spatial dataset</strong></td><td>Generated and deployed as static asset (~150,000 cells)</td></tr>
+        <tr><td><strong>XGBoost model pipeline</strong></td><td>Implemented with documented evaluation protocol</td></tr>
+        <tr><td><strong>Deck.gl / Mapbox visualization</strong></td><td>Operational in production deployment</td></tr>
+        <tr><td><strong>Client-side sensitivity simulation</strong></td><td>Functional parametric simulation module</td></tr>
+        <tr><td><strong>Vercel deployment</strong></td><td>Live at canonical production URL</td></tr>
+      </tbody>
+    </table>
+
+    <p>Client-side rendering is optimized for interactive exploration of the precomputed spatial dataset. No unsupported latency benchmarks are claimed.</p>
+
+    <p>A transition from prototype to operational-scale deployment would require automated data ingestion pipelines, scheduled batch model re-scoring, tiled spatial data delivery, and role-based access control for institutional analyst workflows.</p>
+  </section>
+
+  <!-- ==========================================
+       SECTION 13: OPERATIONAL FEASIBILITY
+  =========================================== -->
+  <section id="sec-opfeas">
+    <div class="section-header">
+      <span class="section-number">13</span>
+      <h2>Operational Feasibility</h2>
+    </div>
+
+    <p>The platform operates as an analyst-facing <strong>browser-based decision-support tool</strong> requiring no specialized GIS software or server-side infrastructure management.</p>
+
+    <h3>Target Analyst Profile</h3>
+    <ul>
+      <li>Environmental intelligence analysts reviewing spatial pressure patterns</li>
+      <li>Forest protection planners prioritizing patrol allocation under logistical constraints</li>
+      <li>Conservation researchers exploring multi-factor deforestation risk drivers</li>
+    </ul>
+
+    <h3>Potential Future Institutional Integration</h3>
+    <div class="callout callout-info">
+      Potential future integration with environmental monitoring and conservation institutions — such as IBAMA, ICMBio, or SEDAM-RO — is subject to institutional validation, data governance requirements, and formal deployment agreements. <strong>No current partnership, institutional deployment, or government adoption is claimed.</strong>
+    </div>
+
+    <h3>Planning Windows and Inspection Guidance</h3>
+    <p>Any inspection prioritization windows or planning guidance presented in the platform are:</p>
+    <ul>
+      <li><strong>Illustrative</strong>: provided as suggested planning guidance for demonstration purposes only</li>
+      <li><strong>Non-prescriptive</strong>: not to be interpreted as operational SLAs, guaranteed response times, or official operating procedures</li>
+    </ul>
+  </section>
+
+  <!-- ==========================================
+       SECTION 14: ECONOMIC FEASIBILITY
+  =========================================== -->
+  <section id="sec-econFeas">
+    <div class="section-header">
+      <span class="section-number">14</span>
+      <h2>Economic Feasibility</h2>
+    </div>
+
+    <div class="callout callout-integrity">
+      <strong>Scope:</strong> This section discusses economic feasibility qualitatively only. No invented currency figures, validated ROI claims, or financial savings projections are presented. All economic benefits remain qualitative hypotheses requiring field pilot validation.
+    </div>
+
+    <h3>Current Prototype Cost Profile</h3>
+    <table class="data-table">
+      <thead><tr><th>Cost Dimension</th><th>Current Status</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Data Acquisition</strong></td><td>PRODES/IBGE API access (open), OSM highway data, Copernicus DEM</td></tr>
+        <tr><td><strong>Compute (Research)</strong></td><td>Python environment, XGBoost training, bootstrap resampling</td></tr>
+        <tr><td><strong>Infrastructure</strong></td><td>Vercel Edge hosting (static assets); negligible at current scale</td></tr>
+        <tr><td><strong>Maintenance</strong></td><td>Dataset refresh cadence, model re-evaluation, browser compatibility</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Production-Scale Cost Categories</h3>
+    <table class="data-table">
+      <thead><tr><th>Category</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Automated Data Pipelines</strong></td><td>Scheduled satellite data ingestion and feature re-computation</td></tr>
+        <tr><td><strong>Batch Model Inference</strong></td><td>Periodic re-scoring of spatial grid as new deforestation polygons are registered</td></tr>
+        <tr><td><strong>Cloud Tile Caching</strong></td><td>Tiled spatial delivery infrastructure for larger geographic extents</td></tr>
+        <tr><td><strong>Analyst Training</strong></td><td>Human capacity development for platform interpretation and workflow integration</td></tr>
+        <tr><td><strong>Institutional Integration</strong></td><td>IT infrastructure, data governance, access control</td></tr>
+        <tr><td><strong>Field Verification</strong></td><td>Ground-truth validation costs for priority zone inspection</td></tr>
+      </tbody>
+    </table>
+
+    <p>A complementary spatial screening layer has the potential — subject to field pilot validation — to reduce the investigative surface area that analysts must manually prioritize. No measured efficiency gains, patrol cost reductions, carbon savings, or financial ROI are claimed.</p>
+  </section>
+
+  <!-- ==========================================
+       SECTION 15: COMPETITIVE POSITIONING
+  =========================================== -->
+  <section id="sec-competitive">
+    <div class="section-header">
+      <span class="section-number">15</span>
+      <h2>Competitive Positioning</h2>
+    </div>
+
+    <p>The platform is positioned as a <strong>complementary AI-assisted decision-support layer</strong>, not a replacement for or competitor to authoritative monitoring systems.</p>
+
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>System</th>
+          <th>Agency</th>
+          <th>Primary Scope</th>
+          <th>Cadence</th>
+          <th>Relationship</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>PRODES</strong></td>
+          <td>INPE (Brazil)</td>
+          <td>Annual official consolidated deforestation accounting</td>
+          <td>Annual</td>
+          <td><span class="comp-tag">Complementary</span> PRODES maps confirmed historical loss; this platform provides precomputed spatial risk screening alongside PRODES-derived intelligence</td>
+        </tr>
+        <tr>
+          <td><strong>DETER</strong></td>
+          <td>INPE (Brazil)</td>
+          <td>Rapid optical/radar alert stream ≥ 3 ha</td>
+          <td>Daily/Weekly</td>
+          <td><span class="comp-tag">Complementary</span> DETER detects active clearings; this platform models underlying multi-factor structural susceptibility</td>
+        </tr>
+        <tr>
+          <td><strong>Global Forest Watch</strong></td>
+          <td>WRI</td>
+          <td>Global canopy disturbance alerts</td>
+          <td>Near-continuous</td>
+          <td><span class="comp-tag">Geographic complement</span> GFW operates globally; this platform provides localized Amazonian anthropogenic risk modeling</td>
+        </tr>
+        <tr>
+          <td><strong>MapBiomas</strong></td>
+          <td>NGO Consortium</td>
+          <td>Multi-decade land cover classification</td>
+          <td>Annual</td>
+          <td><span class="comp-tag">Temporal complement</span> MapBiomas provides historical land use; this platform focuses on current structural risk ranking</td>
+        </tr>
+        <tr>
+          <td><strong>Planet NICFI</strong></td>
+          <td>Norway / Planet</td>
+          <td>High-resolution monthly basemaps</td>
+          <td>Monthly</td>
+          <td><span class="comp-tag">Layer complement</span> NICFI provides visual imagery; this platform provides ML risk inference on demographic and infrastructure drivers</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout callout-info">
+      <strong>Positioning niche:</strong> An explainable spatial screening layer bridging environmental observation data and structured verification planning workflows. This platform does not claim superiority over any authoritative monitoring system.
+    </div>
+  </section>
+
+  <!-- ==========================================
+       SECTION 16: SCIENTIFIC TRANSPARENCY
+  =========================================== -->
+  <section id="sec-limits">
+    <div class="section-header">
+      <span class="section-number">16</span>
+      <h2>Scientific Transparency and Limitations</h2>
+    </div>
+
+    <p>Scientific transparency is a <strong>core design principle</strong> of this project, not an afterthought. The following limitations are disclosed explicitly to demonstrate scientific maturity.</p>
+
+    <ul class="limit-list">
+      <li class="limit-item">
+        <span class="limit-num">1</span>
+        <div><strong>Risk Score Interpretation</strong> — Displayed risk scores are relative spatial risk rankings, not calibrated probabilities. They should not be interpreted as calibrated probabilities of deforestation occurrence, likelihood percentages of clearing events, or actuarial estimates of future forest loss.</div>
+      </li>
+      <li class="limit-item">
+        <span class="limit-num">2</span>
+        <div><strong>Track 2 Small Sample Constraint</strong> — The Track 2 held-out 2024 test partition contains only <strong>10 observed positive deforestation events</strong> out of 7,045 spatial cells (0.142% prevalence). Confidence intervals are wide: ROC-AUC 95% CI [0.5837, 0.9036]. Point estimates carry substantial finite-sample uncertainty.</div>
+      </li>
+      <li class="limit-item">
+        <span class="limit-num">3</span>
+        <div><strong>Probabilistic Calibration</strong> — The Brier score (0.00693) alone does not establish probabilistic calibration. A low Brier score in severely imbalanced datasets primarily reflects the class distribution, not calibration quality.</div>
+      </li>
+      <li class="limit-item">
+        <span class="limit-num">4</span>
+        <div><strong>Temporal Demographic Alignment</strong> — Population feature temporal alignment is not perfectly consistent: 2022 and 2023 partitions use IBGE Census data published after the respective prediction cutoffs (static proxies). Universal zero temporal leakage is not claimed.</div>
+      </li>
+      <li class="limit-item">
+        <span class="limit-num">5</span>
+        <div><strong>Scenario Simulation Scope</strong> — The scenario sensitivity module is exploratory parametric simulation, not validated forecasting. It does not constitute a calibrated policy prediction model and does not claim causal inference.</div>
+      </li>
+      <li class="limit-item">
+        <span class="limit-num">6</span>
+        <div><strong>Non-Causal Inference</strong> — Feature importance evidence and SHAP attributions reflect predictive correlations within the model, not real-world causal treatment effects. No causal inference is claimed.</div>
+      </li>
+      <li class="limit-item">
+        <span class="limit-num">7</span>
+        <div><strong>Track 1 Reproduction</strong> — Track 1 exact reproduction is not independently claimed when original training artifacts from the documented benchmark are unavailable. Track 1 metrics are the canonical documented reference values.</div>
+      </li>
+      <li class="limit-item">
+        <span class="limit-num">8</span>
+        <div><strong>Precomputed Dataset</strong> — The production browser application loads a static precomputed spatial dataset. No live model inference, real-time satellite data integration, or dynamic score updating occurs in the browser.</div>
+      </li>
+      <li class="limit-item">
+        <span class="limit-num">9</span>
+        <div><strong>Heuristic UI Layers</strong> — Some dashboard layers (e.g., risk tier thresholds, planning guidance text) incorporate heuristic classification decisions. These are clearly documented and do not claim statistical derivation.</div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ==========================================
+       SECTION 17: FUTURE DEVELOPMENT ROADMAP
+  =========================================== -->
+  <section id="sec-roadmap">
+    <div class="section-header">
+      <span class="section-number">17</span>
+      <h2>Future Development Roadmap</h2>
+    </div>
+
+    <div class="roadmap">
+      <div class="roadmap-item">
+        <div class="roadmap-phase">Phase 1</div>
+        <div class="roadmap-title">Prototype Consolidation</div>
+        <div class="roadmap-desc">Cross-browser compatibility testing, performance profiling, accessibility review, reproducibility packaging.</div>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-phase">Phase 2</div>
+        <div class="roadmap-title">Automated Data Pipelines</div>
+        <div class="roadmap-desc">Scheduled PRODES/OSM/IBGE ingestion, DEM refresh pipelines, temporal alignment tracking.</div>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-phase">Phase 3</div>
+        <div class="roadmap-title">Operational Model Serving</div>
+        <div class="roadmap-desc">Cloud-scheduled batch re-scoring, model versioning, automated evaluation against new held-out partitions.</div>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-phase">Phase 4</div>
+        <div class="roadmap-title">Multi-Source Validation</div>
+        <div class="roadmap-desc">Benchmarking against DETER alerts, cross-referencing GLAD/RADD, field verification logistics, independent audit.</div>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-phase">Phase 5</div>
+        <div class="roadmap-title">Regional Expansion</div>
+        <div class="roadmap-desc">Extension beyond Rondônia to additional Legal Amazon states, cross-state feature standardization.</div>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-phase">Phase 6</div>
+        <div class="roadmap-title">Institutional Integration</div>
+        <div class="roadmap-desc">Formal engagement with potential conservation institutions, data governance, GPS/GeoPackage field export (QField, Garmin GPX).</div>
+      </div>
+    </div>
+
+    <div class="callout callout-scientific">
+      All future development phases are <strong>aspirational roadmap stages</strong>, subject to resource availability and institutional requirements. No current partnerships or deployment commitments are implied.
+    </div>
+  </section>
+
+  <!-- ==========================================
+       SECTION 18: LONG-TERM GLOBAL POTENTIAL
+  =========================================== -->
+  <section id="sec-global">
+    <div class="section-header">
+      <span class="section-number">18</span>
+      <h2>Long-Term Global Potential</h2>
+    </div>
+
+    <p>The platform's architectural approach — precomputed spatial risk scoring, WebGL-based interactive visualization, multi-factor feature engineering, and dual-track scientific transparency — <strong>could potentially evolve</strong> beyond the current Rondônia prototype.</p>
+
+    <h3>Possible Future Directions</h3>
+    <ul>
+      <li><strong>Pan-Amazonian expansion</strong>: Extension across the full Brazilian Legal Amazon and potentially adjacent Amazonian nations (Bolivia, Peru, Colombia, Venezuela) where analogous spatial predictors apply</li>
+      <li><strong>Other tropical forest biomes</strong>: Adaptation to Congo Basin, Southeast Asian peatlands, or other regions facing analogous anthropogenic deforestation pressure patterns</li>
+      <li><strong>Multi-hazard environmental intelligence</strong>: Integration of wildfire risk, habitat fragmentation metrics, or hydrological stress indicators alongside deforestation risk</li>
+      <li><strong>Interoperability with international monitoring frameworks</strong>: Data exchange protocols with GFW, GLAD/RADD, or INPE alert infrastructure for cross-platform verification workflows</li>
+    </ul>
+
+    <div class="callout callout-scientific">
+      The current system operates exclusively within Rondônia, Brazil, as a browser-based prototype with a precomputed static dataset. Long-term global potential is a <strong>future vision</strong> contingent on additional research, validation, resource mobilization, and institutional collaboration. <strong>No current global operational capability is claimed.</strong>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       SECTION 19: CONCLUSION
+  =========================================== -->
+  <section id="sec-conclusion">
+    <div class="section-header">
+      <span class="section-number">19</span>
+      <h2>Conclusion</h2>
+    </div>
+
+    <p>The <strong>GeoAI Deforestation Risk Intelligence Platform</strong> demonstrates that rigorous scientific discipline, careful engineering execution, and responsible AI practice can coexist with visual excellence and practical decision-support utility.</p>
+
+    <div class="metric-cards metric-cards-2">
+      <div class="metric-card" style="text-align:left; border-left:4px solid var(--blue-primary);">
+        <div class="metric-card-label">Scientific Rigor</div>
+        <p style="font-size:8.5pt; margin-top:6px; color:var(--text-main);">Dual-track evidence architecture with explicit benchmark separation, bootstrapped confidence intervals, and comprehensive limitation disclosure.</p>
+      </div>
+      <div class="metric-card" style="text-align:left; border-left:4px solid var(--teal);">
+        <div class="metric-card-label">Engineering Execution</div>
+        <p style="font-size:8.5pt; margin-top:6px; color:var(--text-main);">End-to-end GeoAI prototype from offline data engineering through precomputed spatial inference to WebGL browser visualization — fully operational at the production URL.</p>
+      </div>
+      <div class="metric-card" style="text-align:left; border-left:4px solid var(--accent-green);">
+        <div class="metric-card-label">Responsible AI</div>
+        <p style="font-size:8.5pt; margin-top:6px; color:var(--text-main);">Explicit rejection of unsupported probability claims, causal inference assertions, and promotional exaggeration. Honest, interpretable spatial risk ranking.</p>
+      </div>
+      <div class="metric-card" style="text-align:left; border-left:4px solid var(--accent-amber);">
+        <div class="metric-card-label">Environmental Relevance</div>
+        <p style="font-size:8.5pt; margin-top:6px; color:var(--text-main);">A complementary decision-support layer targeting the workflow gap between environmental observation data and structured spatial prioritization.</p>
+      </div>
+    </div>
+
+    <p style="margin-top:20px;">The platform successfully provides a complementary spatial screening tier that translates multi-source geospatial data into prioritized, interpretable <strong>relative risk rankings</strong> across approximately <strong>150,000 spatial cells</strong> in Rondônia, Brazil, supported by dual-track scientific benchmarks, a 25-year historical intelligence foundation, and high-performance WebGL visualization.</p>
+  </section>
+
+  <!-- ==========================================
+       SECTION 20: PROJECT LINKS
+  =========================================== -->
+  <section id="sec-links">
+    <div class="section-header">
+      <span class="section-number">20</span>
+      <h2>Project Links</h2>
+    </div>
+
+    <div class="links-grid">
+      <a class="link-card" href="https://amazon-deforestation-risk-3d.vercel.app/" target="_blank">
+        <span class="link-card-label">Production Platform</span>
+        <span class="link-card-url">https://amazon-deforestation-risk-3d.vercel.app/</span>
+      </a>
+      <a class="link-card" href="https://github.com/mamdouhahmed5455-lang/Amoazon2" target="_blank">
+        <span class="link-card-label">GitHub Repository</span>
+        <span class="link-card-url">https://github.com/mamdouhahmed5455-lang/Amoazon2</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       FOOTER
+  =========================================== -->
+  <div class="doc-footer">
+    <p>GeoAI Deforestation Risk Intelligence Platform &nbsp;·&nbsp; Bibliotheca Alexandrina Youth Creators Award 2026 &nbsp;·&nbsp; Technology Creativity Track</p>
+    <p style="margin-top:4px;">All metrics, claims, and technical descriptions reflect the current state of the repository. No additional claims, institutional partnerships, or operational deployments are implied beyond those explicitly documented herein.</p>
+  </div>
+
+</div>
+</body>
+</html>
