@@ -17,7 +17,7 @@
 
 *Note: In accordance with competition packaging integrity rules, personal biographical credentials, academic degrees, and employment histories are not fabricated or inferred. The applicant must attach their verified official CV, academic transcripts, and personal statement to this submission document prior to final committee review.*
 
-- **Project Lead / Developer**: Mamdouh Ahmed
+- **Project Lead / Developer**: Mamdouh Alwakil
 - **Repository Account**: `mamdouhahmed5455-lang`
 - **GitHub Profile / Project Repository**: [https://github.com/mamdouhahmed5455-lang/Amoazon2](https://github.com/mamdouhahmed5455-lang/Amoazon2)
 - **Role in Submission**: Concept Design, Machine Learning Engineering, Geospatial Data Pipeline Development, WebGL Frontend Development, and Scientific Documentation.

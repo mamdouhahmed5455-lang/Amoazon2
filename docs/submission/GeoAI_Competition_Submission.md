@@ -50,7 +50,7 @@
 |   Bibliotheca Alexandrina Youth Creators Award 2026                  |
 |   Technology Creativity Track                                        |
 |                                                                      |
-|   Principal Developer & Researcher: Mamdouh Ahmed                   |
+|   Principal Developer & Researcher: Mamdouh Alwakil                 |
 |   Spatial Data Engineering . Machine Learning . WebGL Development    |
 |                                                                      |
 |   Production: amazon-deforestation-risk-3d.vercel.app                |

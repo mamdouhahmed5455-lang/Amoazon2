@@ -1,0 +1,1596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GeoAI Deforestation Risk Intelligence Platform — Technical & Scientific Evidence Dossier</title>
+  <meta name="description" content="Technical & Scientific Evidence Dossier for the GeoAI Deforestation Risk Intelligence Platform. Bibliotheca Alexandrina Youth Creators Award 2026." />
+  <style>
+    /* ==========================================================================
+       PAGE SETUP & PRINT CONTROL (STRICT 7-PAGE A4 PORTRAIT)
+       ========================================================================== */
+    @page {
+      size: A4 portrait;
+      margin: 10mm 12mm 10mm 12mm;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --navy: #0b1329;
+      --navy-mid: #0f172a;
+      --navy-light: #1e293b;
+      --slate-dark: #334155;
+      --slate-mid: #64748b;
+      --slate-light: #94a3b8;
+      --border: #cbd5e1;
+      --border-light: #e2e8f0;
+      --bg-subtle: #f8fafc;
+      --bg-card: #ffffff;
+      --blue-primary: #1d4ed8;
+      --blue-sky: #0284c7;
+      --blue-light: #eff6ff;
+      --teal: #0f766e;
+      --teal-light: #f0fdfa;
+      --amber: #b45309;
+      --amber-light: #fffbeb;
+      --green: #15803d;
+      --green-light: #f0fdf4;
+      --red: #b91c1c;
+      --red-light: #fef2f2;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-size: 8.4pt;
+      line-height: 1.48;
+      color: var(--slate-dark);
+      background: #ffffff;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .page {
+      width: 100%;
+      height: 275mm;
+      max-height: 275mm;
+      page-break-after: always;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      box-sizing: border-box;
+      padding: 0 0 2mm 0;
+    }
+
+    .page:last-child {
+      page-break-after: auto;
+    }
+
+    /* ==========================================================================
+       RUNNING HEADER & FOOTER
+       ========================================================================== */
+    .page-header {
+      border-bottom: 1.5px solid var(--navy);
+      padding-bottom: 4px;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .header-left {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .header-doc-title {
+      font-size: 8pt;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--navy);
+    }
+
+    .header-doc-sub {
+      font-size: 7pt;
+      color: var(--slate-mid);
+      font-weight: 600;
+    }
+
+    .header-badge {
+      background: var(--navy);
+      color: #ffffff;
+      font-size: 6.5pt;
+      font-weight: 700;
+      padding: 2.5px 8px;
+      border-radius: 2px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .page-footer {
+      border-top: 1px solid var(--border-light);
+      padding-top: 4px;
+      margin-top: 6px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 7pt;
+      color: var(--slate-mid);
+    }
+
+    .footer-left {
+      font-weight: 500;
+    }
+
+    .footer-right {
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .page-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    /* ==========================================================================
+       TYPOGRAPHY & HEADINGS
+       ========================================================================== */
+    h1 {
+      font-size: 15.5pt;
+      font-weight: 800;
+      color: var(--navy);
+      letter-spacing: -0.02em;
+      line-height: 1.22;
+    }
+
+    h2 {
+      font-size: 11pt;
+      font-weight: 800;
+      color: var(--navy);
+      letter-spacing: -0.01em;
+      line-height: 1.25;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border-bottom: 1.5px solid var(--border-light);
+      padding-bottom: 4px;
+      margin-bottom: 3px;
+    }
+
+    h3 {
+      font-size: 9pt;
+      font-weight: 700;
+      color: var(--navy-light);
+      margin-top: 2px;
+      margin-bottom: 1px;
+    }
+
+    p {
+      color: var(--slate-dark);
+    }
+
+    strong {
+      color: var(--navy);
+      font-weight: 700;
+    }
+
+    /* ==========================================================================
+       COMPONENTS: METRIC CARDS & STRIPS
+       ========================================================================== */
+    .kpi-strip {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      margin: 4px 0;
+    }
+
+    .kpi-card {
+      background: var(--navy);
+      color: #ffffff;
+      border-radius: 5px;
+      padding: 10px 8px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .kpi-label {
+      font-size: 6.5pt;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--slate-light);
+      margin-bottom: 3px;
+    }
+
+    .kpi-value {
+      font-size: 11pt;
+      font-weight: 800;
+      color: #38bdf8;
+      line-height: 1.15;
+    }
+
+    .kpi-sub {
+      font-size: 6.8pt;
+      color: #cbd5e1;
+      margin-top: 2px;
+    }
+
+    /* ==========================================================================
+       COMPONENTS: CALLOUT BOXES & ANCHORS
+       ========================================================================== */
+    .callout {
+      border-radius: 4px;
+      padding: 9px 12px;
+      font-size: 7.8pt;
+      line-height: 1.48;
+      border-left: 3.5px solid;
+    }
+
+    .callout-blue {
+      background: var(--blue-light);
+      border-left-color: var(--blue-primary);
+      color: #1e3a8a;
+    }
+
+    .callout-teal {
+      background: var(--teal-light);
+      border-left-color: var(--teal);
+      color: #134e4a;
+    }
+
+    .callout-amber {
+      background: var(--amber-light);
+      border-left-color: var(--amber);
+      color: #78350f;
+    }
+
+    .callout-gray {
+      background: var(--bg-subtle);
+      border-left-color: var(--slate-mid);
+      color: var(--slate-dark);
+      border: 1px solid var(--border-light);
+      border-left: 3.5px solid var(--slate-mid);
+    }
+
+    .anchor-banner {
+      background: linear-gradient(90deg, #0f172a 0%, #1e293b 100%);
+      color: #f8fafc;
+      border-left: 3.5px solid #38bdf8;
+      border-radius: 4px;
+      padding: 8px 12px;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .anchor-tag {
+      font-size: 6.5pt;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      background: rgba(56, 189, 248, 0.2);
+      color: #38bdf8;
+      padding: 2.5px 6px;
+      border-radius: 2px;
+      white-space: nowrap;
+    }
+
+    .anchor-text {
+      font-size: 8.2pt;
+      font-weight: 600;
+      font-style: italic;
+      color: #ffffff;
+    }
+
+    /* ==========================================================================
+       COMPONENTS: TABLES
+       ========================================================================== */
+    table.data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 7.6pt;
+      margin: 3px 0;
+    }
+
+    table.data-table th {
+      background: var(--navy);
+      color: #ffffff;
+      padding: 6px 8px;
+      text-align: left;
+      font-weight: 700;
+      font-size: 7pt;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      border-top: 1px solid var(--navy);
+      border-bottom: 1px solid var(--navy);
+    }
+
+    table.data-table td {
+      padding: 6px 8px;
+      border-bottom: 1px solid var(--border-light);
+      vertical-align: middle;
+      line-height: 1.42;
+    }
+
+    table.data-table tr:nth-child(even) td {
+      background: var(--bg-subtle);
+    }
+
+    .mono {
+      font-family: ui-monospace, "Cascadia Code", "Consolas", monospace;
+      font-size: 7.2pt;
+    }
+
+    .badge-pill {
+      font-size: 6.2pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 2px 5.5px;
+      border-radius: 3px;
+      display: inline-block;
+      white-space: nowrap;
+    }
+
+    .badge-green { background: #dcfce7; color: #166534; }
+    .badge-blue { background: #dbeafe; color: #1e40af; }
+    .badge-amber { background: #fef3c7; color: #92400e; }
+    .badge-red { background: #fee2e2; color: #991b1b; }
+    .badge-gray { background: #f1f5f9; color: #475569; }
+
+    /* ==========================================================================
+       COMPONENTS: CARDS & GRIDS
+       ========================================================================== */
+    .card-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .card-grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+    }
+
+    .card-grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+
+    .panel-box {
+      border: 1px solid var(--border-light);
+      border-radius: 4px;
+      background: var(--bg-card);
+      padding: 9px 11px;
+    }
+
+    .panel-title {
+      font-size: 7.8pt;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--navy);
+      margin-bottom: 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-light);
+      padding-bottom: 4px;
+    }
+
+    .progress-bar-bg {
+      background: var(--border-light);
+      border-radius: 2px;
+      height: 7px;
+      overflow: hidden;
+      margin: 2px 0;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: var(--blue-primary);
+      border-radius: 2px;
+    }
+
+    /* ==========================================================================
+       PAGE-SPECIFIC PROPORTIONS & VERTICAL REBALANCING
+       ========================================================================== */
+    #page-1 .page-content {
+      gap: 13px;
+    }
+    #page-1 .kpi-strip {
+      gap: 9px;
+      margin: 3px 0;
+    }
+    #page-1 .kpi-card {
+      padding: 13px 10px;
+    }
+    #page-1 .kpi-label {
+      font-size: 7pt;
+      margin-bottom: 4px;
+    }
+    #page-1 .kpi-value {
+      font-size: 11pt;
+    }
+    #page-1 .kpi-sub {
+      font-size: 7.2pt;
+      margin-top: 3px;
+    }
+    #page-1 .panel-box {
+      padding: 12px 14px;
+    }
+    #page-1 .panel-title {
+      font-size: 8.5pt;
+      margin-bottom: 7px;
+      padding-bottom: 5px;
+    }
+    #page-1 table.data-table th {
+      padding: 8px 11px;
+      font-size: 7.4pt;
+    }
+    #page-1 table.data-table td {
+      padding: 10px 11px;
+      font-size: 8.1pt;
+      line-height: 1.5;
+    }
+    #page-1 .callout {
+      padding: 12px 16px;
+      font-size: 8.2pt;
+      line-height: 1.54;
+    }
+
+    #page-2 .page-content {
+      gap: 10px;
+    }
+    #page-2 table.data-table th {
+      padding: 6px 8px;
+      font-size: 7pt;
+    }
+    #page-2 table.data-table td {
+      padding: 5.5px 8px;
+      font-size: 7.5pt;
+      line-height: 1.4;
+    }
+
+    #page-3 .page-content {
+      gap: 12px;
+    }
+    #page-3 .panel-box {
+      padding: 11px 13px;
+    }
+    #page-3 .panel-title {
+      font-size: 8.2pt;
+      margin-bottom: 6px;
+      padding-bottom: 4px;
+    }
+    #page-3 table.data-table th {
+      padding: 7px 9px;
+      font-size: 7.2pt;
+    }
+    #page-3 table.data-table td {
+      padding: 7.5px 9px;
+      font-size: 7.7pt;
+      line-height: 1.46;
+    }
+    #page-3 .callout {
+      padding: 10px 14px;
+      font-size: 8pt;
+      line-height: 1.5;
+    }
+
+    #page-4 .page-content {
+      gap: 12px;
+    }
+    #page-4 .panel-box {
+      padding: 12px 13px;
+    }
+    #page-4 .panel-title {
+      font-size: 8.2pt;
+      margin-bottom: 6px;
+    }
+    #page-4 table.data-table th {
+      padding: 7px 9px;
+      font-size: 7.2pt;
+    }
+    #page-4 table.data-table td {
+      padding: 7px 9px;
+      font-size: 7.6pt;
+      line-height: 1.44;
+    }
+    #page-4 .callout {
+      padding: 11px 14px;
+      font-size: 8pt;
+      line-height: 1.5;
+    }
+
+    #page-5 .page-content {
+      gap: 9px;
+    }
+    #page-5 .kpi-card {
+      padding: 9px 8px;
+    }
+    #page-5 .kpi-value {
+      font-size: 11pt;
+    }
+    #page-5 .panel-box {
+      padding: 9px 11px;
+    }
+    #page-5 table.data-table th {
+      padding: 5.5px 7.5px;
+      font-size: 7pt;
+    }
+    #page-5 table.data-table td {
+      padding: 5.5px 7.5px;
+      font-size: 7.5pt;
+      line-height: 1.38;
+    }
+    #page-5 .callout {
+      padding: 8px 11px;
+      font-size: 7.6pt;
+      line-height: 1.45;
+    }
+
+    #page-6 .page-content {
+      gap: 11px;
+    }
+    #page-6 .panel-box {
+      padding: 11px 13px;
+    }
+    #page-6 .panel-title {
+      font-size: 8.2pt;
+      margin-bottom: 6px;
+    }
+    #page-6 table.data-table th {
+      padding: 6.5px 8.5px;
+      font-size: 7.2pt;
+    }
+    #page-6 table.data-table td {
+      padding: 6.5px 8.5px;
+      font-size: 7.6pt;
+      line-height: 1.42;
+    }
+
+    #page-7 .page-content {
+      gap: 13px;
+    }
+    #page-7 .panel-box {
+      padding: 12px 14px;
+    }
+    #page-7 .panel-title {
+      font-size: 8.4pt;
+      margin-bottom: 6px;
+    }
+    #page-7 table.data-table th {
+      padding: 7px 9px;
+      font-size: 7.2pt;
+    }
+    #page-7 table.data-table td {
+      padding: 7.5px 9px;
+      font-size: 7.8pt;
+      line-height: 1.45;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================================================
+       PAGE 1: EVIDENCE AT A GLANCE (EXECUTIVE TECHNICAL SNAPSHOT)
+       ========================================================================== -->
+  <div class="page" id="page-1">
+    <div class="page-header">
+      <div class="header-left">
+        <span class="header-doc-title">GeoAI Deforestation Risk Intelligence Platform</span>
+        <span class="header-doc-sub">Phase 2 Technical &amp; Scientific Evidence Dossier · Executive Summary</span>
+      </div>
+      <span class="header-badge">Evidence Snapshot</span>
+    </div>
+
+    <div class="page-content">
+      <!-- Title Block -->
+      <div style="background: var(--navy); color:#fff; border-radius:6px; padding:18px 22px; margin-bottom:2px; border:1px solid #1e293b;">
+        <div style="font-size:7.2pt; font-weight:700; color:#38bdf8; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:4px;">
+          Bibliotheca Alexandrina Youth Creators Award 2026 · Technology Creativity Track
+        </div>
+        <h1 style="color:#ffffff; font-size:16pt; margin-bottom:5px; line-height:1.25;">GeoAI Deforestation Risk Intelligence Platform</h1>
+        <p style="color:#94a3b8; font-size:8.2pt; line-height:1.45;">
+          An AI-Powered Spatial Decision-Support Platform for Deforestation Risk Assessment in Rondônia, Brazil.<br />
+          <strong style="color:#cbd5e1;">Author &amp; Researcher:</strong> Mamdouh Alwakil &nbsp;|&nbsp;
+          <strong style="color:#cbd5e1;">Platform:</strong> amazon-deforestation-risk-3d.vercel.app &nbsp;|&nbsp;
+          <strong style="color:#cbd5e1;">Repository:</strong> github.com/mamdouhahmed5455-lang/Amoazon2
+        </p>
+      </div>
+
+      <!-- Core Purpose Anchor -->
+      <div class="anchor-banner">
+        <span class="anchor-tag">Core Purpose</span>
+        <span class="anchor-text">"An AI-assisted spatial decision-support prototype for interpreting and prioritizing relative deforestation risk."</span>
+      </div>
+
+      <!-- Verified Evidence KPI Strip -->
+      <div class="kpi-strip">
+        <div class="kpi-card">
+          <span class="kpi-label">Study Geography</span>
+          <span class="kpi-value">Rondônia, Brazil</span>
+          <span class="kpi-sub">Legal Amazon Basin</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">Spatial Coverage</span>
+          <span class="kpi-value">~150,000 Cells</span>
+          <span class="kpi-sub">Precomputed Grid</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">Model Pipeline</span>
+          <span class="kpi-value">Offline XGBoost</span>
+          <span class="kpi-sub">Gradient Boosted Trees</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">Track 1 Benchmark</span>
+          <span class="kpi-value">ROC-AUC 0.82</span>
+          <span class="kpi-sub">F1-Score: 0.81 (Locked)</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">Track 2 Research</span>
+          <span class="kpi-value">ROC-AUC 0.7474</span>
+          <span class="kpi-sub">5.0× Top-Decile Lift</span>
+        </div>
+      </div>
+
+      <!-- Five Mandatory Jury Inquiries -->
+      <div class="panel-box" style="padding:12px 14px;">
+        <div class="panel-title">
+          <span>Multidisciplinary Jury Evaluation Matrix (The Five Core Questions)</span>
+          <span class="badge-pill badge-blue">Executive Overview</span>
+        </div>
+        <table class="data-table" style="margin:0;">
+          <thead>
+            <tr>
+              <th style="width:20%;">Inquiry</th>
+              <th style="width:80%;">Verified Technical Reality &amp; Evaluation Findings</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>WHAT is evaluated?</strong></td>
+              <td>An end-to-end GeoAI decision-support prototype that synthesizes multi-source geospatial and demographic indicators into interpretable, relative spatial risk rankings across the state of Rondônia.</td>
+            </tr>
+            <tr>
+              <td><strong>WHERE does it operate?</strong></td>
+              <td>State of Rondônia, Brazilian Amazon Basin — covering approximately 150,000 precomputed spatial cells, contextualized by 25 years of official INPE PRODES deforestation history (2001–2025) across all 9 Legal Amazon states.</td>
+            </tr>
+            <tr>
+              <td><strong>WHAT technology?</strong></td>
+              <td>Offline-trained XGBoost classification pipeline, spatial feature engineering (STRtree / cKDTree / Copernicus DEM), and a static client-side WebGL (Deck.gl / Mapbox GL JS) visualization engine deployed on Vercel Edge CDN with zero backend database requirement.</td>
+            </tr>
+            <tr>
+              <td><strong>WHAT is demonstrated?</strong></td>
+              <td><strong>Two Distinct Evidence Tracks:</strong> Documented Production Benchmark (Track 1: ROC-AUC 0.82, Precision 0.79, Recall 0.84, F1 0.81) + Independent Research Evaluation (Track 2: ROC-AUC 0.7474, 95% CI: [0.5837, 0.9036], Brier 0.00693, 10 positive events, 5.0× Retrospective Top-Decile Enrichment).</td>
+            </tr>
+            <tr>
+              <td><strong>WHY does it matter?</strong></td>
+              <td>The project explores how environmental observations can be organized into a structured workflow for spatial risk screening, prioritization, interpretation, and verification planning under severe logistical and physical resource constraints.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- High-Level Verdict & Evidence Level Box -->
+      <div class="callout callout-gray">
+        <strong>Evidence Classification &amp; Scientific Verdict:</strong> Categorized as <strong>MODERATE EVIDENCE</strong>. Empirical out-of-time testing establishes that the model identifies subsequent PRODES clear-cut locations with moderate ranking skill (ROC-AUC 0.7474, 5.0× top-decile lift). All outputs represent <strong>relative spatial risk rankings</strong>, not calibrated probabilities. The prototype serves as an operational screening filter, not a replacement for satellite monitoring systems.
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span class="footer-left">GeoAI Deforestation Risk Intelligence Platform · Technical Evidence Dossier</span>
+      <span class="footer-right">Page 1 of 7</span>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       PAGE 2: TWO-TRACK AI EVIDENCE ARCHITECTURE
+       ========================================================================== -->
+  <div class="page" id="page-2">
+    <div class="page-header">
+      <div class="header-left">
+        <span class="header-doc-title">GeoAI Deforestation Risk Intelligence Platform</span>
+        <span class="header-doc-sub">Phase 2 Technical &amp; Scientific Evidence Dossier · Benchmark Architecture</span>
+      </div>
+      <span class="header-badge">Track Separation</span>
+    </div>
+
+    <div class="page-content">
+      <h2>Section 2 · Dual-Track Evidence Architecture &amp; Benchmark Separation</h2>
+
+      <div class="anchor-banner">
+        <span class="anchor-tag">Rigor Principle</span>
+        <span class="anchor-text">"Two evidence tracks, clearly separated: documented production benchmark vs. independent research evaluation."</span>
+      </div>
+
+      <p style="font-size:8.2pt; line-height:1.48;">
+        A foundational principle of this evaluation is the <strong>strict scientific separation</strong> between two distinct evidence tracks. Collapsing these tracks into a single claim or presenting research experiments as exact reproductions of legacy benchmarks is scientifically invalid. Both tracks are documented with complete transparency:
+      </p>
+
+      <div class="card-grid-2">
+        <div class="panel-box" style="border-top:3px solid var(--blue-primary);">
+          <div class="panel-title">
+            <span>Track 1 — Documented Production Benchmark</span>
+            <span class="badge-pill badge-blue">Canonical Reference</span>
+          </div>
+          <p style="font-size:7.5pt; margin-bottom:5px; line-height:1.45;">
+            The original engineering benchmark documented with the production prototype. Evaluated on a historical partition reflecting the initial project release.
+          </p>
+          <ul style="padding-left:16px; font-size:7.4pt; line-height:1.48;">
+            <li><strong>Model:</strong> Offline-trained XGBoost classification model.</li>
+            <li><strong>Metrics:</strong> ROC-AUC 0.82 | Precision 0.79 | Recall 0.84 | F1 0.81.</li>
+            <li><strong>Status:</strong> Locked upstream reference asset.</li>
+            <li><strong>Scientific Boundary:</strong> Original training code, split seeds, and raw training rasters were unrecorded upstream. Exact reproduction is not claimed.</li>
+          </ul>
+        </div>
+
+        <div class="panel-box" style="border-top:3px solid var(--teal);">
+          <div class="panel-title">
+            <span>Track 2 — Independent Research Model V2</span>
+            <span class="badge-pill badge-green">Empirical Verification</span>
+          </div>
+          <p style="font-size:7.5pt; margin-bottom:5px; line-height:1.45;">
+            An independent, fully reproducible empirical research experiment designed to test whether open geospatial features can rank subsequent deforestation risk out-of-time.
+          </p>
+          <ul style="padding-left:16px; font-size:7.4pt; line-height:1.48;">
+            <li><strong>Model:</strong> XGBoost v2.0.0 pipeline trained on neutral lattice.</li>
+            <li><strong>Metrics:</strong> ROC-AUC 0.7474 (95% CI: [0.5837, 0.9036]) | PR-AUC 0.0055.</li>
+            <li><strong>Evaluation:</strong> Held-out PRODES 2024 target year (10 events).</li>
+            <li><strong>Status:</strong> 100% reproducible via repository scripts and 52 tests.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Side-by-Side Comparison Table -->
+      <div class="panel-box">
+        <div class="panel-title">
+          <span>Side-by-Side Methodological &amp; Empirical Comparison Matrix</span>
+          <span class="badge-pill badge-gray">Multi-Perspective Audit</span>
+        </div>
+        <table class="data-table" style="margin:0;">
+          <thead>
+            <tr>
+              <th style="width:24%;">Methodological Dimension</th>
+              <th style="width:38%;">Track 1: Documented Production Benchmark</th>
+              <th style="width:38%;">Track 2: Independent Research Model V2</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Spatial Population</strong></td>
+              <td>~150,000 Web Display Grid Cells (Rondônia)</td>
+              <td>7,045 Neutral Spatial Units (Multi-year panel: 21,135)</td>
+            </tr>
+            <tr>
+              <td><strong>Feature Inputs</strong></td>
+              <td>12 documented legacy rasters (unrecorded code)</td>
+              <td>5 engineered variables across 4 groups (OSM, PRODES, IBGE, DEM)</td>
+            </tr>
+            <tr>
+              <td><strong>Target Ground Truth</strong></td>
+              <td>Documented historical clear-cut loss</td>
+              <td>Official INPE PRODES Clear-Cut Polygons (≥ 6.25 ha)</td>
+            </tr>
+            <tr>
+              <td><strong>Temporal Protocol</strong></td>
+              <td>Static snapshot partition (circa 2020)</td>
+              <td>Strict out-of-time rolling annual isolation (2022/2023/2024)</td>
+            </tr>
+            <tr>
+              <td><strong>Discrimination (ROC-AUC)</strong></td>
+              <td><strong>0.8200</strong> (Documented reference)</td>
+              <td><strong>0.7474</strong> (95% Bootstrap CI: [0.5837, 0.9036])</td>
+            </tr>
+            <tr>
+              <td><strong>Precision / Recall / F1</strong></td>
+              <td>Prec: 0.79 | Rec: 0.84 | F1: 0.81</td>
+              <td>Top-10% Prec: 0.0071 | Top-10% Rec: 0.50 (5/10 events)</td>
+            </tr>
+            <tr>
+              <td><strong>Precision-Recall AUC</strong></td>
+              <td>Unrecorded upstream</td>
+              <td><strong>0.005534</strong> (Baseline prevalence: 0.001419)</td>
+            </tr>
+            <tr>
+              <td><strong>Calibration Metric</strong></td>
+              <td>Unrecorded upstream</td>
+              <td><strong>Brier Score: 0.00693</strong> (Relative ranking; not calibration)</td>
+            </tr>
+            <tr>
+              <td><strong>Top-Decile Enrichment</strong></td>
+              <td>Unrecorded upstream</td>
+              <td><strong>5.0× retrospective lift</strong> (Captured 50% of test events)</td>
+            </tr>
+            <tr>
+              <td><strong>Scientific Reproducibility</strong></td>
+              <td>Historical reference (Locked upstream)</td>
+              <td>100% deterministic code &amp; data (<span class="mono">scripts/model_v2/run.py</span>)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout callout-teal">
+        <strong>Explicit Scientific Statement:</strong> Track 2 (Model V2) is an independent empirical verification research experiment. It is not presented as a reproduction of the Track 1 benchmark and does not replace it. Both tracks are maintained to provide the competition jury with complete transparency regarding what is documented historically versus what has been independently validated.
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span class="footer-left">GeoAI Deforestation Risk Intelligence Platform · Technical Evidence Dossier</span>
+      <span class="footer-right">Page 2 of 7</span>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       PAGE 3: DATA PROVENANCE & EXPERIMENTAL METHODOLOGY
+       ========================================================================== -->
+  <div class="page" id="page-3">
+    <div class="page-header">
+      <div class="header-left">
+        <span class="header-doc-title">GeoAI Deforestation Risk Intelligence Platform</span>
+        <span class="header-doc-sub">Phase 2 Technical &amp; Scientific Evidence Dossier · Methodology</span>
+      </div>
+      <span class="header-badge">Data &amp; Protocol</span>
+    </div>
+
+    <div class="page-content">
+      <h2>Section 3 · Authoritative Data Provenance &amp; Experimental Protocol</h2>
+
+      <p style="font-size:8.2pt; line-height:1.48;">
+        Model V2 was constructed using exclusively primary, authoritative open datasets acquired directly from Brazilian federal agencies and international scientific repositories. Zero synthetic data was used.
+      </p>
+
+      <!-- Data Source Registry Table -->
+      <div class="panel-box">
+        <div class="panel-title">
+          <span>Authoritative Primary Data Sources Registry</span>
+          <span class="badge-pill badge-blue">Source Audit</span>
+        </div>
+        <table class="data-table" style="margin:0;">
+          <thead>
+            <tr>
+              <th style="width:20%;">Data Source</th>
+              <th style="width:22%;">Asset Description</th>
+              <th style="width:22%;">Coordinate System / Format</th>
+              <th style="width:36%;">Role in Empirical Pipeline</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>INPE TerraBrasilis PRODES</strong></td>
+              <td>Annual official clear-cut deforestation polygons (2021–2024)</td>
+              <td>SIRGAS 2000 / EPSG:4674 GeoJSON / Shapefile</td>
+              <td>Ground-truth binary labels ($y \in \{0, 1\}$) for clear-cuts ≥ 6.25 ha and historical loss distance features.</td>
+            </tr>
+            <tr>
+              <td><strong>OpenStreetMap (OSM) Overpass</strong></td>
+              <td>Highway network corridors (BR-364, BR-421, BR-425, BR-429)</td>
+              <td>EPSG:4326 GeoJSON line vectors</td>
+              <td>Euclidean road proximity calculations via STRtree spatial indexing and cKDTree spatial joins.</td>
+            </tr>
+            <tr>
+              <td><strong>IBGE 2022 Decennial Census</strong></td>
+              <td>Municipal populations &amp; municipal seat centroids</td>
+              <td>Tabular API / EPSG:4326 point coordinates</td>
+              <td>Demographic gravity potential model representing localized agricultural and settlement pressure.</td>
+            </tr>
+            <tr>
+              <td><strong>Copernicus DEM GLO-90</strong></td>
+              <td>90-meter physical topographic elevation model</td>
+              <td>Raster GLO-90 / API elevation queries</td>
+              <td>Terrain accessibility filtering; steep terrain represents a physical barrier to heavy machinery.</td>
+            </tr>
+            <tr>
+              <td><strong>INPE Sovereignty &amp; Mask Layers</strong></td>
+              <td>Rondônia boundary &amp; 3,265 natural non-forest polygons</td>
+              <td>EPSG:4674 multi-polygons</td>
+              <td>Sovereign geographic envelope filtering and exclusion of water bodies, savanna (cerrado), and rock outcrops.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Feature Engineering Specification Table -->
+      <div class="panel-box">
+        <div class="panel-title">
+          <span>Model V2 Feature Engineering Specification (5 Variables Across 4 Groups)</span>
+          <span class="badge-pill badge-green">Feature Engine</span>
+        </div>
+        <table class="data-table" style="margin:0;">
+          <thead>
+            <tr>
+              <th style="width:20%;">Variable Name</th>
+              <th style="width:16%;">Physical Group</th>
+              <th style="width:22%;">Mathematical Definition</th>
+              <th style="width:42%;">Physical Domain Rationale</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="mono">dist_road_km</span></td>
+              <td>Infrastructure</td>
+              <td>$\min_{k} \|x_i - r_k\|_2$ (km to highway)</td>
+              <td>Paved and unpaved corridors provide access for timber extraction and cattle ranching.</td>
+            </tr>
+            <tr>
+              <td><span class="mono">dist_hist_loss_km</span></td>
+              <td>Historical Loss</td>
+              <td>$\min_{j} \|x_i - h_j\|_2$ (km to loss $\le T-1$)</td>
+              <td>Deforestation frontiers expand outward contiguously from existing clearing edges.</td>
+            </tr>
+            <tr>
+              <td><span class="mono">prior_loss_dens</span></td>
+              <td>Historical Loss</td>
+              <td>$\sum_{j} \mathbb{I}(\|x_i - h_j\| \le 10\text{km})$</td>
+              <td>Aggregated historical loss density measures active frontier momentum.</td>
+            </tr>
+            <tr>
+              <td><span class="mono">pop_pressure</span></td>
+              <td>Demographic</td>
+              <td>$\sum_{m} \text{Pop}_m / (d_{im} + 1)^2$</td>
+              <td>Urban and municipal centers drive local agricultural commodity demand.</td>
+            </tr>
+            <tr>
+              <td><span class="mono">elevation_m</span></td>
+              <td>Topography</td>
+              <td>DEM altitude value at centroid $x_i$</td>
+              <td>Lowland flat terrain is preferentially cleared for mechanized agriculture over steep uplands.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Spatial Lattice & Temporal Protocol -->
+      <div class="card-grid-2">
+        <div class="panel-box">
+          <div class="panel-title"><span>Neutral Spatial Lattice Design</span></div>
+          <p style="font-size:7.5pt; line-height:1.46;">
+            Evaluated on a systematic <strong>0.05° (~5.5 km) geographic grid</strong> across Rondônia. Every cell centroid was strictly validated: must lie within state sovereignty AND outside all 3,265 non-forest mask polygons.
+            This yields exactly <strong>7,045 eligible forest units</strong> evaluated annually (<strong>21,135 multi-year panel observations</strong>). Zero score inheritance from production files was permitted.
+          </p>
+        </div>
+
+        <div class="panel-box">
+          <div class="panel-title"><span>Temporal Split Protocol &amp; Class Sparsity</span></div>
+          <p style="font-size:7.5pt; line-height:1.46;">
+            <strong>Annual Monitoring Partitions:</strong><br />
+            • <em>Training (2022):</em> 7,045 cells | 41 positives | 0.5820% prevalence (1 in 172)<br />
+            • <em>Validation (2023):</em> 7,045 cells | 23 positives | 0.3265% prevalence (1 in 306)<br />
+            • <em>Held-Out Test (2024):</em> 7,045 cells | 10 positives | 0.1419% prevalence (1 in 705)<br />
+            Reflects authentic real-world rare-event physical class imbalance.
+          </p>
+        </div>
+      </div>
+
+      <!-- Mandatory Temporal Qualification Box -->
+      <div class="callout callout-amber">
+        <strong>Temporal Qualification &amp; Zero-Leakage Disclaimer:</strong> Temporal target-year isolation was applied in the Model V2 evaluation protocol (2022 training, 2023 validation, 2024 test), with predictor timing documented per source. Temporal alignment is not identical across all source variables and evaluation periods; therefore, no blanket zero-leakage claim is made.
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span class="footer-left">GeoAI Deforestation Risk Intelligence Platform · Technical Evidence Dossier</span>
+      <span class="footer-right">Page 3 of 7</span>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       PAGE 4: MODEL EXPLAINABILITY
+       ========================================================================== -->
+  <div class="page" id="page-4">
+    <div class="page-header">
+      <div class="header-left">
+        <span class="header-doc-title">GeoAI Deforestation Risk Intelligence Platform</span>
+        <span class="header-doc-sub">Phase 2 Technical &amp; Scientific Evidence Dossier · Interpretability</span>
+      </div>
+      <span class="header-badge">Explainability</span>
+    </div>
+
+    <div class="page-content">
+      <h2>Section 4 · Model Explainability: TreeSHAP vs. Global Analytical Evidence</h2>
+
+      <p style="font-size:8.2pt; line-height:1.5;">
+        To ensure responsible AI deployment, the platform maintains two distinct interpretability frameworks. They answer different scientific questions and operate on different data populations. Neither framework represents linear regression coefficients or causal effect sizes.
+      </p>
+
+      <div class="card-grid-2">
+        <!-- Block A: Model V2 TreeSHAP -->
+        <div class="panel-box" style="border-top:3px solid var(--teal);">
+          <div class="panel-title">
+            <span>Block A · Model V2 TreeSHAP Attribution</span>
+            <span class="badge-pill badge-green">Empirical SHAP</span>
+          </div>
+          <p style="font-size:7.6pt; line-height:1.45; margin-bottom:6px;">
+            Computed via exact TreeSHAP across all <strong>7,045 held-out test units</strong> (PRODES 2024). Measures the marginal algorithmic contribution of each feature to Model V2 log-odds predictions.
+          </p>
+
+          <table class="data-table" style="margin-bottom:6px;">
+            <thead>
+              <tr>
+                <th>Feature</th>
+                <th>Physical Group</th>
+                <th>Mean |SHAP|</th>
+                <th>Share %</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="mono">dist_hist_loss_km</span></td>
+                <td>Historical Loss</td>
+                <td class="mono">1.4130</td>
+                <td><strong>41.28%</strong></td>
+              </tr>
+              <tr>
+                <td><span class="mono">dist_road_km</span></td>
+                <td>Road Proximity</td>
+                <td class="mono">0.5969</td>
+                <td><strong>17.44%</strong></td>
+              </tr>
+              <tr>
+                <td><span class="mono">elevation_m</span></td>
+                <td>Topography</td>
+                <td class="mono">0.5604</td>
+                <td><strong>16.37%</strong></td>
+              </tr>
+              <tr>
+                <td><span class="mono">pop_pressure</span></td>
+                <td>Demographic</td>
+                <td class="mono">0.4266</td>
+                <td><strong>12.46%</strong></td>
+              </tr>
+              <tr>
+                <td><span class="mono">prior_loss_dens</span></td>
+                <td>Historical Loss</td>
+                <td class="mono">0.4260</td>
+                <td><strong>12.45%</strong></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div style="font-size:7.6pt; line-height:1.45; color:var(--slate-dark); margin-top:6px;">
+            • <strong>Combined Historical Loss Impact: 53.73%</strong> (distance + density).<br />
+            • In this empirical 2024 test partition, proximity to prior clear-cuts accounted for the largest share of decision-tree attributions.
+          </div>
+        </div>
+
+        <!-- Block B: Global Analytical Evidence -->
+        <div class="panel-box" style="border-top:3px solid var(--blue-primary);">
+          <div class="panel-title">
+            <span>Block B · Documented Global Analytical Importance</span>
+            <span class="badge-pill badge-blue">Track 1 Reference</span>
+          </div>
+          <p style="font-size:7.6pt; line-height:1.45; margin-bottom:6px;">
+            Documented global feature-importance evidence from the original platform documentation. Reflects macro-structural regional driver attribution.
+          </p>
+
+          <table class="data-table" style="margin-bottom:6px;">
+            <thead>
+              <tr>
+                <th>Feature Driver</th>
+                <th>Analytical Importance</th>
+                <th>Visual Distribution</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Road Proximity</strong></td>
+                <td><strong>41.0%</strong></td>
+                <td>
+                  <div class="progress-bar-bg"><div class="progress-bar-fill" style="width:41%;"></div></div>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Forest Loss (History)</strong></td>
+                <td><strong>23.0%</strong></td>
+                <td>
+                  <div class="progress-bar-bg"><div class="progress-bar-fill" style="width:23%;"></div></div>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Population Pressure</strong></td>
+                <td><strong>21.0%</strong></td>
+                <td>
+                  <div class="progress-bar-bg"><div class="progress-bar-fill" style="width:21%;"></div></div>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Elevation Constraints</strong></td>
+                <td><strong>15.0%</strong></td>
+                <td>
+                  <div class="progress-bar-bg"><div class="progress-bar-fill" style="width:15%;"></div></div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div style="font-size:7.6pt; line-height:1.45; color:var(--slate-dark); margin-top:6px;">
+            • <strong>Road Infrastructure Dominance (41%):</strong> Highlights highway corridors (BR-364) as the historical conduits of Amazonian frontier expansion.<br />
+            • <strong>Sum of Weights: Exactly 100%</strong> across the four canonical drivers.
+          </div>
+        </div>
+      </div>
+
+      <!-- Comparison of Explainability Questions -->
+      <div class="panel-box">
+        <div class="panel-title">
+          <span>Comparative Analysis: Why the Two Explainability Views Differ</span>
+          <span class="badge-pill badge-gray">Scientific Interpretation</span>
+        </div>
+        <table class="data-table" style="margin:0;">
+          <thead>
+            <tr>
+              <th style="width:22%;">Dimension</th>
+              <th style="width:39%;">Block A: Empirical Model V2 TreeSHAP</th>
+              <th style="width:39%;">Block B: Documented Global Analytical Importance</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Analytical Scope</strong></td>
+              <td>Marginal algorithmic split contribution on 2024 test data</td>
+              <td>Macro-structural regional frontier driver attribution</td>
+            </tr>
+            <tr>
+              <td><strong>Primary Driver</strong></td>
+              <td><strong>Historical Loss Proximity (41.28% / 53.73% combined)</strong></td>
+              <td><strong>Road Corridor Proximity (41.00%)</strong></td>
+            </tr>
+            <tr>
+              <td><strong>Why the Shift Occurred</strong></td>
+              <td>In the 2024 test set, clear-cuts occurred adjacent to previous clearings; historical loss was the strongest immediate spatial separator.</td>
+              <td>Over multi-decade timescales, road networks provide the macro accessibility that enabled clearings to occur in the first place.</td>
+            </tr>
+            <tr>
+              <td><strong>Mathematical Status</strong></td>
+              <td>Shapley values based on game theory (<span class="mono">shap.TreeExplainer</span>)</td>
+              <td>Documented analytical weighting benchmark (canonical reference)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout callout-amber">
+        <strong>Critical Methodological Notice:</strong> TreeSHAP attribution is specific to Track 2 (Research Model V2) and is not claimed as the explainability method for the Track 1 production benchmark. Neither set of values should be interpreted as causal effect sizes or policy intervention levers.
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span class="footer-left">GeoAI Deforestation Risk Intelligence Platform · Technical Evidence Dossier</span>
+      <span class="footer-right">Page 4 of 7</span>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       PAGE 5: EMPIRICAL VALIDATION & ABLATION FINDINGS
+       ========================================================================== -->
+  <div class="page" id="page-5">
+    <div class="page-header">
+      <div class="header-left">
+        <span class="header-doc-title">GeoAI Deforestation Risk Intelligence Platform</span>
+        <span class="header-doc-sub">Phase 2 Technical &amp; Scientific Evidence Dossier · Empirical Results</span>
+      </div>
+      <span class="header-badge">Validation &amp; Enrichment</span>
+    </div>
+
+    <div class="page-content">
+      <h2>Section 5 · Empirical Validation, Retrospective Top-K Enrichment &amp; Ablation Findings</h2>
+
+      <!-- Primary Metrics Strip -->
+      <div class="kpi-strip">
+        <div class="kpi-card">
+          <span class="kpi-label">ROC-AUC (Test 2024)</span>
+          <span class="kpi-value">0.7474</span>
+          <span class="kpi-sub">95% CI: [0.5837, 0.9036]</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">PR-AUC</span>
+          <span class="kpi-value">0.005534</span>
+          <span class="kpi-sub">Baseline: 0.001419 (3.9×)</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">Brier Score</span>
+          <span class="kpi-value">0.00693</span>
+          <span class="kpi-sub">Mean Squared Error</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">Top-10% Lift</span>
+          <span class="kpi-value">5.0×</span>
+          <span class="kpi-sub">5/10 Test Events Hit</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">Observed Positives</span>
+          <span class="kpi-value">10 Cells</span>
+          <span class="kpi-sub">N = 7,045 (0.1419%)</span>
+        </div>
+      </div>
+
+      <!-- Four-Stage Incremental Ablation Table -->
+      <div class="panel-box">
+        <div class="panel-title">
+          <span>Four-Stage Incremental Ablation Study &amp; Single-Feature Baselines</span>
+          <span class="badge-pill badge-green">Feature Ablation</span>
+        </div>
+        <table class="data-table" style="margin:0;">
+          <thead>
+            <tr>
+              <th style="width:28%;">Model Configuration</th>
+              <th style="width:14%;">Features</th>
+              <th style="width:28%;">Variables Included</th>
+              <th style="width:15%;">ROC-AUC</th>
+              <th style="width:15%;">PR-AUC</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Model A (Road Only)</strong></td>
+              <td>1 var</td>
+              <td><span class="mono">dist_road_km</span></td>
+              <td class="mono">0.4495</td>
+              <td class="mono">0.001833</td>
+            </tr>
+            <tr>
+              <td><strong>Model B (Road + Loss)</strong></td>
+              <td>3 vars</td>
+              <td><span class="mono">dist_road_km, dist_hist_loss_km, prior_loss_dens</span></td>
+              <td class="mono">0.7349</td>
+              <td class="mono">0.003753</td>
+            </tr>
+            <tr>
+              <td><strong>Model C (Road + Loss + Pop)</strong></td>
+              <td>4 vars</td>
+              <td>Model B + <span class="mono">pop_pressure</span></td>
+              <td class="mono">0.7500</td>
+              <td class="mono">0.008011</td>
+            </tr>
+            <tr>
+              <td><strong>Model D (All 4 Groups — Full V2)</strong></td>
+              <td>5 vars</td>
+              <td>Model C + <span class="mono">elevation_m</span></td>
+              <td class="mono"><strong>0.7474</strong></td>
+              <td class="mono"><strong>0.005534</strong></td>
+            </tr>
+            <tr style="background:#fefce8; border-top:1.5px solid var(--amber);">
+              <td><strong>Historical-Loss-Only Benchmark</strong></td>
+              <td>1 var</td>
+              <td><span class="mono">dist_hist_loss_km</span> (Inverse distance)</td>
+              <td class="mono" style="color:var(--amber); font-weight:800;">0.7797</td>
+              <td class="mono">0.004900</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Required Scientific Finding Callout (Exact User Approved Wording) -->
+      <div class="callout callout-amber" style="padding:8px 11px; font-size:7.8pt; line-height:1.45;">
+        <strong>Key Scientific Finding:</strong> Showing that proximity to historical loss was the strongest single-feature benchmark in this evaluation sample and outperformed the full multi-factor V2 model. Historical clear-cut edges exhibit strong localized spatial inertia. The value of multi-feature integration (Model V2) lies in stabilizing spatial risk rankings across diverse terrain and sub-regions where simple proximity heuristics fail.
+      </div>
+
+      <!-- Retrospective Top-K Prioritization & Subregion Diagnostics Grid -->
+      <div class="card-grid-2">
+        <!-- Top-K Lift Table -->
+        <div class="panel-box">
+          <div class="panel-title">
+            <span>RETROSPECTIVE TOP-K PRIORITIZATION</span>
+          </div>
+          <table class="data-table" style="margin:0;">
+            <thead>
+              <tr>
+                <th>Inspection Tier</th>
+                <th>Cells</th>
+                <th>Hits / Total</th>
+                <th>Recall</th>
+                <th>Lift</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Top 1.0%</td><td>70</td><td>0 / 10</td><td>0.0%</td><td>0.0×</td></tr>
+              <tr><td>Top 5.0%</td><td>352</td><td>2 / 10</td><td>20.0%</td><td><strong>4.0×</strong></td></tr>
+              <tr style="background:#eff6ff; font-weight:700;"><td>Top 10.0%</td><td>704</td><td>5 / 10</td><td>50.0%</td><td><strong>5.0×</strong></td></tr>
+              <tr><td>Top 20.0%</td><td>1,409</td><td>6 / 10</td><td>60.0%</td><td><strong>3.0×</strong></td></tr>
+            </tbody>
+          </table>
+          <p style="font-size:6.6pt; color:var(--slate-mid); margin-top:3px;">
+            *Retrospective ranking evidence across 2024 test events, not a measured field operational efficiency gain.
+          </p>
+        </div>
+
+        <!-- Subregion Diagnostics Table -->
+        <div class="panel-box">
+          <div class="panel-title">
+            <span>Spatial Subregion Diagnostics (Small-Sample)</span>
+          </div>
+          <table class="data-table" style="margin:0;">
+            <thead>
+              <tr>
+                <th>Diagnostic Partition</th>
+                <th>Samples</th>
+                <th>Positives</th>
+                <th>ROC-AUC</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Southern Region (Interior)</td><td>3,268</td><td>4 events</td><td><strong>0.9092</strong></td></tr>
+              <tr><td>Northern Region (Frontier)</td><td>3,777</td><td>6 events</td><td><strong>0.6109</strong></td></tr>
+              <tr><td>Cross: North '22 → South '24</td><td>3,268</td><td>4 events</td><td><strong>0.8795</strong></td></tr>
+              <tr><td>Cross: South '22 → North '24</td><td>3,777</td><td>6 events</td><td><strong>0.5614</strong></td></tr>
+            </tbody>
+          </table>
+          <p style="font-size:6.6pt; color:var(--slate-mid); margin-top:3px;">
+            *Exploratory spatial diagnostics based on small positive samples (4–6 events); interpret with caution.
+          </p>
+        </div>
+      </div>
+
+      <div class="callout callout-gray" style="padding:8px 11px; font-size:7.4pt; line-height:1.42;">
+        <strong>Interpretation Boundary:</strong> Brier score (0.00693) reflects low mean squared error driven by extreme class rarity (0.14% positive prevalence). It does <strong>not</strong> prove probabilistic calibration. Model V2 outputs are relative spatial risk rankings, not calibrated probabilities.
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span class="footer-left">GeoAI Deforestation Risk Intelligence Platform · Technical Evidence Dossier</span>
+      <span class="footer-right">Page 5 of 7</span>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       PAGE 6: REPRODUCIBILITY AUDIT & FORENSIC BOUNDARY ANALYSIS
+       ========================================================================== -->
+  <div class="page" id="page-6">
+    <div class="page-header">
+      <div class="header-left">
+        <span class="header-doc-title">GeoAI Deforestation Risk Intelligence Platform</span>
+        <span class="header-doc-sub">Phase 2 Technical &amp; Scientific Evidence Dossier · Forensic Audit</span>
+      </div>
+      <span class="header-badge">Reproducibility</span>
+    </div>
+
+    <div class="page-content">
+      <h2>Section 6 · Reproducibility Audit &amp; The Scientific Halt Notice</h2>
+
+      <div class="anchor-banner">
+        <span class="anchor-tag">Integrity Rule</span>
+        <span class="anchor-text">"A scientifically valid halt due to missing evidence is better than a fabricated reproduction."</span>
+      </div>
+
+      <p style="font-size:8.2pt; line-height:1.48;">
+        A hallmark of institutional scientific maturity is the willingness to document what could <em>not</em> be reproduced, rather than forcing artificial alignment. A rigorous forensic audit classified all repository modeling assets into three clear tiers:
+      </p>
+
+      <!-- Three-Tier Boundary Matrix Table -->
+      <div class="panel-box">
+        <div class="panel-title">
+          <span>Component-by-Component Reconstruction Boundary Matrix</span>
+          <span class="badge-pill badge-gray">Forensic Audit</span>
+        </div>
+        <table class="data-table" style="margin:0;">
+          <thead>
+            <tr>
+              <th style="width:22%;">Pipeline Component</th>
+              <th style="width:16%;">Classification</th>
+              <th style="width:62%;">Specific Technical Status &amp; Scientific Boundary</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>A. Production Spatial Grid</strong></td>
+              <td><span class="badge-pill badge-green">Tier 1: Reproducible</span></td>
+              <td><span class="mono">data/forest_data_clean.json</span> (150,000 cells), coordinates, precomputed scores, and extrusion values.</td>
+            </tr>
+            <tr>
+              <td><strong>B. Historical Time Series</strong></td>
+              <td><span class="badge-pill badge-green">Tier 1: Reproducible</span></td>
+              <td><span class="mono">data/prodes_historical.json</span> (2001–2025 series across all 9 Legal Amazon states).</td>
+            </tr>
+            <tr>
+              <td><strong>C. WebGL Frontend</strong></td>
+              <td><span class="badge-pill badge-green">Tier 1: Reproducible</span></td>
+              <td>Fully functional static client application running in modern WebGL browsers with zero backend server.</td>
+            </tr>
+            <tr>
+              <td><strong>D. Model V2 Pipeline</strong></td>
+              <td><span class="badge-pill badge-green">Tier 1: Reproducible</span></td>
+              <td>Complete end-to-end Python pipeline (<span class="mono">scripts/model_v2/run.py</span>) executing deterministically with fixed seed.</td>
+            </tr>
+            <tr>
+              <td><strong>E. Feature Reconstruction</strong></td>
+              <td><span class="badge-pill badge-amber">Tier 2: Assumptions</span></td>
+              <td>Conceptual features (Roads, Forest Loss, Population, DEM) reconstructed via authoritative public APIs.</td>
+            </tr>
+            <tr>
+              <td><strong>F. Benchmark Training Code</strong></td>
+              <td><span class="badge-pill badge-red">Tier 3: Blocked</span></td>
+              <td>Original training scripts, split seed, and raw input rasters were unrecorded upstream; reproduction halted.</td>
+            </tr>
+            <tr>
+              <td><strong>G. Benchmark Ground-Truth</strong></td>
+              <td><span class="badge-pill badge-red">Tier 3: Blocked</span></td>
+              <td>Original binary clear-cut labels ($y \in \{0, 1\}$) were completely absent from the web repository.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- The Scientific Halt Notice Box -->
+      <div class="panel-box" style="border-left:3.5px solid var(--red); background:#fef2f2; padding:12px 14px;">
+        <div class="panel-title" style="color:var(--red);">
+          <span>The Scientific Halt Decision: Why We Refused to Fabricate Pseudo-Labels</span>
+          <span class="badge-pill badge-red">Protocol Halt</span>
+        </div>
+        <p style="font-size:7.6pt; line-height:1.48; color:#7f1d1d; margin-bottom:5px;">
+          When forensic discovery confirmed that original ground-truth binary labels ($y \in \{0, 1\}$) were absent from the repository, the research team faced a critical choice:
+        </p>
+        <p style="font-size:7.5pt; line-height:1.46; color:#991b1b;">
+          A common superficial shortcut is creating synthetic pseudo-labels by thresholding the model's own predictions (e.g., $y_{\text{fake}} = 1$ if $\text{risk\_score} \ge 170$). <strong>We formally rejected this practice as scientific misconduct:</strong><br />
+          1. <strong>Self-Referential Target Leakage:</strong> Training on thresholded outputs trains a model to predict its own prior outputs, bypassing real-world satellite ground truth entirely.<br />
+          2. <strong>Deceitful Validation:</strong> The resulting metrics would measure surrogate approximation error, not true deforestation detection performance.<br />
+          3. <strong>Proper Scientific Resolution:</strong> The team instead constructed Model V2 as a clean, independent experiment using authentic INPE PRODES clear-cut polygons acquired from TerraBrasilis.
+        </p>
+      </div>
+
+      <!-- Automated Regression Testing Framework -->
+      <div class="panel-box" style="padding:11px 13px;">
+        <div class="panel-title">
+          <span>Automated Test Suite Coverage (100% Deterministic Pass Rate)</span>
+          <span class="badge-pill badge-green">99 Total Tests</span>
+        </div>
+        <div class="card-grid-3" style="font-size:7.4pt; line-height:1.45;">
+          <div style="background:var(--bg-subtle); padding:9px 10px; border-radius:4px;">
+            <strong>Python Model V2 Suite:</strong><br />
+            <strong>52 Tests Passing</strong> (~51.1s)<br />
+            Verifies feature bounds, coordinate envelopes, temporal isolation, zero data leakage, and training determinism.
+          </div>
+          <div style="background:var(--bg-subtle); padding:9px 10px; border-radius:4px;">
+            <strong>Node.js Unit Tests:</strong><br />
+            <strong>38 Tests Passing</strong><br />
+            Validates feature importance sums (100%), score normalizations [0, 100], scenario directionality, and priority tiers.
+          </div>
+          <div style="background:var(--bg-subtle); padding:9px 10px; border-radius:4px;">
+            <strong>Historical PRODES Suite:</strong><br />
+            <strong>9 Tests Passing</strong><br />
+            Verifies 25-year series integrity (2001–2025), Legal Amazon state sums (6,518 / 5,731 km²), and trend classifications.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span class="footer-left">GeoAI Deforestation Risk Intelligence Platform · Technical Evidence Dossier</span>
+      <span class="footer-right">Page 6 of 7</span>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       PAGE 7: SCIENTIFIC BOUNDARIES, RESPONSIBLE USE & INTEGRITY STATEMENT
+       ========================================================================== -->
+  <div class="page" id="page-7">
+    <div class="page-header">
+      <div class="header-left">
+        <span class="header-doc-title">GeoAI Deforestation Risk Intelligence Platform</span>
+        <span class="header-doc-sub">Phase 2 Technical &amp; Scientific Evidence Dossier · Governance</span>
+      </div>
+      <span class="header-badge">Boundaries &amp; Integrity</span>
+    </div>
+
+    <div class="page-content">
+      <h2>Section 7 · Scientific Boundaries, Operational Context &amp; Integrity Statement</h2>
+
+      <div class="anchor-banner">
+        <span class="anchor-tag">Vision Principle</span>
+        <span class="anchor-text">"Prototype today, scalable environmental intelligence tomorrow."</span>
+      </div>
+
+      <!-- Explicit Non-Claims Matrix -->
+      <div class="panel-box">
+        <div class="panel-title">
+          <span>Explicit Scientific Boundaries: What the Platform Is and Is NOT</span>
+          <span class="badge-pill badge-red">Claim Discipline</span>
+        </div>
+        <table class="data-table" style="margin:0;">
+          <thead>
+            <tr>
+              <th style="width:25%;">Dimension</th>
+              <th style="width:37%;">What the Platform IS (Demonstrated Scope)</th>
+              <th style="width:38%;">What the Platform Is NOT (Explicit Non-Claims)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Telemetry &amp; Satellites</strong></td>
+              <td>Multi-source static geospatial data synthesis.</td>
+              <td><strong>NOT live telemetry</strong> from NASA FIRMS or Sentinel-2 streaming.</td>
+            </tr>
+            <tr>
+              <td><strong>Machine Learning Execution</strong></td>
+              <td>Precomputed offline XGBoost model inference.</td>
+              <td><strong>NOT live runtime training</strong> or inference executed in the browser.</td>
+            </tr>
+            <tr>
+              <td><strong>Risk Score Semantics</strong></td>
+              <td>Relative spatial risk rankings across ~150,000 cells.</td>
+              <td><strong>NOT calibrated frequentist probabilities</strong> or event forecasts.</td>
+            </tr>
+            <tr>
+              <td><strong>Enforcement Actions</strong></td>
+              <td>Strategic decision-support for patrol prioritization.</td>
+              <td><strong>NOT autonomous dispatch</strong> or legal enforcement instruments.</td>
+            </tr>
+            <tr>
+              <td><strong>Institutional Status</strong></td>
+              <td>Independent scientific and technology competition entry.</td>
+              <td><strong>NO formal partnerships claimed</strong> with IBAMA, ICMBio, or SEDAM.</td>
+            </tr>
+            <tr>
+              <td><strong>3D Map Extrusion</strong></td>
+              <td>Aesthetic visual height representation (<span class="mono">risk_norm × 4000</span>).</td>
+              <td><strong>NOT true physical terrain altitude</strong> in the 3D map extrusion.</td>
+            </tr>
+            <tr>
+              <td><strong>Economic / Carbon Impact</strong></td>
+              <td>Theoretical capacity-constrained lift calculations.</td>
+              <td><strong>NO measured carbon savings</strong>, financial ROI, or revenue claimed.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Prerequisites for Future Operational Deployment -->
+      <div class="panel-box">
+        <div class="panel-title">
+          <span>Prerequisites for Future Operational Deployment (Research Roadmap)</span>
+          <span class="badge-pill badge-blue">Roadmap</span>
+        </div>
+        <div class="card-grid-2" style="font-size:7.8pt; line-height:1.5; gap:14px;">
+          <div>
+            • <strong>Institutional Governance:</strong> Formal data-sharing protocols and role-based access with sovereign environmental authorities.<br />
+            • <strong>Automated Satellite Ingestion:</strong> Operational pipelines for real-time DETER optical/radar alert streaming.
+          </div>
+          <div>
+            • <strong>Edge Field Interoperability:</strong> Offline export to ruggedized field GIS platforms (QField, Garmin GPX, GeoPackage).<br />
+            • <strong>Cross-Biome Validation:</strong> Formal model transferability testing in Cerrado, Pantanal, and Pan-Amazonian biomes.
+          </div>
+        </div>
+      </div>
+
+      <!-- Formal Evidence Integrity Statement -->
+      <div class="panel-box" style="border:1.5px solid var(--navy); background:var(--bg-subtle); padding:14px 18px; border-radius:6px; margin-top:2px;">
+        <div style="font-size:8.6pt; font-weight:800; text-transform:uppercase; color:var(--navy); margin-bottom:6px; letter-spacing:0.07em;">
+          Formal Evidence Integrity &amp; Scientific Transparency Commitment
+        </div>
+        <p style="font-size:7.8pt; line-height:1.55; color:var(--slate-dark); margin-bottom:10px;">
+          This Technical &amp; Scientific Evidence Dossier represents an exhaustive, unembellished record of the GeoAI Deforestation Risk Intelligence Platform as preserved in the public repository. All metrics, sample sizes, confidence intervals, ablation drops, and scientific limitations have been reported with complete fidelity. No negative findings have been concealed, no ungrounded capabilities have been exaggerated, and no speculative operational deployments have been claimed.
+        </p>
+        <div style="display:flex; justify-content:space-between; align-items:flex-end; border-top:1px solid var(--border-light); padding-top:8px;">
+          <div style="font-size:7.2pt; color:var(--slate-mid); line-height:1.42;">
+            <strong>Principal Developer &amp; Researcher:</strong> Mamdouh Alwakil<br />
+            Spatial Data Engineering · Machine Learning · WebGL Geovisualization
+          </div>
+          <div style="text-align:right; font-size:7.2pt; color:var(--navy); font-weight:700; line-height:1.42;">
+            Bibliotheca Alexandrina Youth Creators Award 2026<br />
+            Technology Creativity Track
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span class="footer-left">GeoAI Deforestation Risk Intelligence Platform · Technical Evidence Dossier</span>
+      <span class="footer-right">Page 7 of 7</span>
+    </div>
+  </div>
+
+</body>
+</html>

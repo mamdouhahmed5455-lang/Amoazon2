@@ -206,7 +206,7 @@ The post-competition operationalization roadmap comprises four structured stages
 
 *This project was developed for academic, scientific research, and competition submission.*
 
-- **Principal Developer & Researcher**: Mamdouh Ahmed
+- **Principal Developer & Researcher**: Mamdouh Alwakil
 - **Role**: Spatial Data Engineering, Machine Learning Architecture, Frontend WebGL Development
 - **Repository**: [github.com/mamdouhahmed5455-lang/Amoazon2](https://github.com/mamdouhahmed5455-lang/Amoazon2)
 - **Live Platform**: [amazon-deforestation-risk-3d.vercel.app](https://amazon-deforestation-risk-3d.vercel.app)
