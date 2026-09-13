@@ -107,7 +107,7 @@ The goal is **not** to perform unstructured exploration or make speculative clai
 - **Screen:** `index.html` (Sidebar `Story` Tab $\rightarrow$ click button `Target Highest-Risk Hotspot` / `focusTopHotspot()`)
 - **Tag:** `[Must Show]`
 - **Action:** Open sidebar `Story` Tab; click button `Target Highest-Risk Hotspot`.
-- **Show:** Smooth camera transition targeting the Rondônia Arc Hotspot (LAT -11.9182 | LON -63.8722). Inspect 84% Relative Risk Score, Urgent Priority badge, and driver contribution summary.
+- **Show:** Smooth camera transition targeting the Rondônia Arc Hotspot (LAT -11.9182 | LON -63.8722). Inspect 84% Risk Score (Heuristic), Urgent Priority badge, and driver contribution summary.
 - **Purpose:** Ground the macro-scale surface into a concrete, auditable point screening event.
 - **Presenter Script (SAY):**
   > *“By targeting the highest-priority hotspot, we see exactly why the area receives a higher relative spatial risk score and is surfaced for screening. The platform flags this cell because it sits at the immediate intersection of active clearing frontiers and primary access corridors.”*
