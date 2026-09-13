@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GeoAI Deforestation Risk Platform — Official Jury Demo Path</title>
+  <meta name="description" content="Official 3-5 minute live demonstration path and jury presentation guide for the GeoAI Deforestation Risk Intelligence Platform. Bibliotheca Alexandrina Youth Creators Award 2026." />
+  <style>
+    /* ==========================================================================
+       PAGE SETUP & PRINT CONTROL (STRICT 3-PAGE A4 PORTRAIT)
+       ========================================================================== */
+    @page {
+      size: A4 portrait;
+      margin: 10mm 12mm 10mm 12mm;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --navy: #0b1329;
+      --navy-mid: #0f172a;
+      --navy-light: #1e293b;
+      --slate-dark: #334155;
+      --slate-mid: #64748b;
+      --slate-light: #94a3b8;
+      --border: #cbd5e1;
+      --border-light: #e2e8f0;
+      --bg-subtle: #f8fafc;
+      --bg-card: #ffffff;
+      --blue-primary: #1d4ed8;
+      --blue-sky: #0284c7;
+      --blue-light: #eff6ff;
+      --teal: #0f766e;
+      --teal-light: #f0fdfa;
+      --amber: #b45309;
+      --amber-light: #fffbeb;
+      --green: #15803d;
+      --green-light: #f0fdf4;
+      --purple: #6b21a8;
+      --purple-light: #faf5ff;
+      --red: #b91c1c;
+      --red-light: #fef2f2;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-size: 8.0pt;
+      line-height: 1.42;
+      color: var(--slate-dark);
+      background: #ffffff;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .page {
+      width: 100%;
+      height: 275mm;
+      max-height: 275mm;
+      page-break-after: always;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      box-sizing: border-box;
+      padding: 0 0 1mm 0;
+    }
+
+    .page:last-child {
+      page-break-after: auto;
+    }
+
+    /* ==========================================================================
+       RUNNING HEADER & FOOTER
+       ========================================================================== */
+    .page-header {
+      border-bottom: 1.5px solid var(--navy);
+      padding-bottom: 4px;
+      margin-bottom: 6px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .header-left {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .header-doc-title {
+      font-size: 8.2pt;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--navy);
+    }
+
+    .header-doc-sub {
+      font-size: 7.0pt;
+      color: var(--slate-mid);
+      font-weight: 600;
+    }
+
+    .header-badge {
+      background: var(--navy);
+      color: #ffffff;
+      font-size: 6.5pt;
+      font-weight: 700;
+      padding: 2.5px 8px;
+      border-radius: 2px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .page-footer {
+      border-top: 1px solid var(--border-light);
+      padding-top: 3.5px;
+      margin-top: 3px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 6.8pt;
+      color: var(--slate-mid);
+    }
+
+    .footer-left {
+      font-weight: 500;
+    }
+
+    .footer-right {
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    /* ==========================================================================
+       COMMON CARD & TYPOGRAPHY STYLES
+       ========================================================================== */
+    .banner {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-left: 3.5px solid var(--blue-primary);
+      border-radius: 4px;
+      padding: 6px 10px;
+      margin-bottom: 7px;
+    }
+
+    .banner-title {
+      font-size: 8.2pt;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 2px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .banner-text {
+      font-size: 7.2pt;
+      color: var(--slate-dark);
+      line-height: 1.38;
+    }
+
+    .section-title {
+      font-size: 8.0pt;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--navy);
+      margin-bottom: 4.5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .section-title::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: var(--border-light);
+    }
+
+    /* ==========================================================================
+       PAGE 1: TIMELINE & SUMMARY STYLES
+       ========================================================================== */
+    .timeline-strip {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 8px;
+    }
+
+    .timeline-node {
+      flex: 1;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--slate-mid);
+      border-radius: 3px;
+      padding: 4.5px 5px;
+      text-align: center;
+    }
+
+    .timeline-node.t1 { border-top-color: var(--blue-sky); }
+    .timeline-node.t2 { border-top-color: var(--blue-primary); }
+    .timeline-node.t3 { border-top-color: var(--red); }
+    .timeline-node.t4 { border-top-color: var(--purple); }
+    .timeline-node.t5 { border-top-color: var(--amber); }
+    .timeline-node.t6 { border-top-color: var(--teal); }
+    .timeline-node.t7 { border-top-color: var(--green); }
+
+    .t-time {
+      font-size: 6.6pt;
+      font-weight: 800;
+      color: var(--navy);
+      display: block;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .t-step {
+      font-size: 5.8pt;
+      font-weight: 700;
+      color: var(--slate-mid);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-top: 1px;
+    }
+
+    .t-title {
+      font-size: 6.8pt;
+      font-weight: 700;
+      color: var(--navy);
+      margin-top: 2px;
+      line-height: 1.15;
+    }
+
+    .table-dense {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 7.1pt;
+      margin-bottom: 8px;
+    }
+
+    .table-dense th {
+      background: var(--navy);
+      color: #ffffff;
+      text-align: left;
+      padding: 4px 6px;
+      font-weight: 700;
+      font-size: 6.7pt;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .table-dense td {
+      padding: 4px 6px;
+      border-bottom: 1px solid var(--border-light);
+      vertical-align: top;
+      line-height: 1.32;
+    }
+
+    .table-dense tr:nth-child(even) td {
+      background: var(--bg-subtle);
+    }
+
+    .step-pill {
+      font-weight: 800;
+      font-size: 6.4pt;
+      padding: 1.5px 5px;
+      border-radius: 2px;
+      display: inline-block;
+      text-align: center;
+      min-width: 20px;
+    }
+
+    .pill-blue { background: var(--blue-light); color: var(--blue-primary); border: 1px solid rgba(29, 78, 216, 0.25); }
+    .pill-red { background: var(--red-light); color: var(--red); border: 1px solid rgba(185, 28, 28, 0.25); }
+    .pill-purple { background: var(--purple-light); color: var(--purple); border: 1px solid rgba(107, 33, 168, 0.25); }
+    .pill-amber { background: var(--amber-light); color: var(--amber); border: 1px solid rgba(180, 83, 9, 0.25); }
+    .pill-teal { background: var(--teal-light); color: var(--teal); border: 1px solid rgba(15, 118, 110, 0.25); }
+    .pill-green { background: var(--green-light); color: var(--green); border: 1px solid rgba(21, 128, 61, 0.25); }
+
+    .matrix-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr 1fr;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+
+    .matrix-col {
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .matrix-header {
+      padding: 4px 6px;
+      font-size: 6.8pt;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .mh-must { background: var(--blue-light); color: var(--blue-primary); border-top: 3px solid var(--blue-primary); }
+    .mh-nice { background: var(--amber-light); color: var(--amber); border-top: 3px solid var(--amber); }
+    .mh-skip { background: var(--red-light); color: var(--red); border-top: 3px solid var(--red); }
+
+    .matrix-list {
+      padding: 5px 7px;
+      list-style: none;
+      font-size: 6.8pt;
+      display: flex;
+      flex-direction: column;
+      gap: 3.5px;
+    }
+
+    .matrix-list li {
+      position: relative;
+      padding-left: 10px;
+      line-height: 1.3;
+    }
+
+    .matrix-list li::before {
+      content: "•";
+      position: absolute;
+      left: 2px;
+      color: var(--slate-mid);
+      font-weight: bold;
+    }
+
+    .rubric-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 5px;
+      margin-bottom: 2px;
+    }
+
+    .rubric-card {
+      border: 1px solid var(--border);
+      background: var(--bg-subtle);
+      border-radius: 3px;
+      padding: 4.5px 6px;
+    }
+
+    .rubric-num {
+      font-size: 6.0pt;
+      font-weight: 800;
+      color: var(--blue-primary);
+      text-transform: uppercase;
+    }
+
+    .rubric-head {
+      font-size: 7.0pt;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 1px;
+    }
+
+    .rubric-body {
+      font-size: 6.4pt;
+      color: var(--slate-dark);
+      line-height: 1.25;
+    }
+
+    /* ==========================================================================
+       PAGE 2: SCREEN-BY-SCREEN WALKTHROUGH STYLES
+       ========================================================================== */
+    .steps-container {
+      display: flex;
+      flex-direction: column;
+      gap: 5.5px;
+    }
+
+    .step-card {
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: #ffffff;
+      padding: 5px 8px;
+      display: grid;
+      grid-template-columns: 96px 1fr 1fr;
+      gap: 8px;
+      align-items: start;
+    }
+
+    .step-card.border-blue { border-left: 3.5px solid var(--blue-primary); }
+    .step-card.border-red { border-left: 3.5px solid var(--red); }
+    .step-card.border-purple { border-left: 3.5px solid var(--purple); }
+    .step-card.border-amber { border-left: 3.5px solid var(--amber); }
+    .step-card.border-teal { border-left: 3.5px solid var(--teal); }
+    .step-card.border-green { border-left: 3.5px solid var(--green); }
+
+    .step-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .step-badge-row {
+      display: flex;
+      gap: 3px;
+      align-items: center;
+      margin-bottom: 1px;
+    }
+
+    .step-tag-must {
+      font-size: 5.6pt;
+      font-weight: 800;
+      background: var(--blue-primary);
+      color: #ffffff;
+      padding: 1px 4px;
+      border-radius: 2px;
+      text-transform: uppercase;
+    }
+
+    .step-tag-nice {
+      font-size: 5.6pt;
+      font-weight: 800;
+      background: var(--amber);
+      color: #ffffff;
+      padding: 1px 4px;
+      border-radius: 2px;
+      text-transform: uppercase;
+    }
+
+    .step-num-title {
+      font-size: 7.2pt;
+      font-weight: 800;
+      color: var(--navy);
+      line-height: 1.2;
+    }
+
+    .step-time-budget {
+      font-size: 6.4pt;
+      font-weight: 700;
+      color: var(--slate-mid);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .step-target-route {
+      font-size: 5.9pt;
+      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+      color: var(--blue-primary);
+      background: var(--bg-subtle);
+      padding: 1.5px 3px;
+      border-radius: 2px;
+      border: 1px solid var(--border-light);
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .step-action-box {
+      font-size: 6.8pt;
+      line-height: 1.34;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .step-label {
+      font-weight: 800;
+      font-size: 6.0pt;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--slate-mid);
+      display: inline-block;
+      margin-right: 3px;
+    }
+
+    .step-script-box {
+      font-size: 6.8pt;
+      line-height: 1.34;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-light);
+      border-radius: 3px;
+      padding: 4.5px 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .say-quote {
+      color: var(--navy);
+      font-weight: 600;
+      font-style: italic;
+    }
+
+    .skip-alert {
+      font-size: 6.2pt;
+      color: var(--red);
+      font-weight: 500;
+      border-top: 1px dashed var(--border-light);
+      padding-top: 2px;
+      margin-top: 1px;
+    }
+
+    /* ==========================================================================
+       PAGE 3: FAILSAFE & Q&A DEFENSE STYLES
+       ========================================================================== */
+    .failsafe-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 6.9pt;
+      margin-bottom: 7px;
+    }
+
+    .failsafe-table th {
+      background: var(--navy);
+      color: #ffffff;
+      padding: 3.5px 6px;
+      font-size: 6.5pt;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      text-align: left;
+    }
+
+    .failsafe-table td {
+      padding: 3.5px 6px;
+      border-bottom: 1px solid var(--border-light);
+      vertical-align: top;
+      line-height: 1.3;
+    }
+
+    .failsafe-table tr:nth-child(even) td {
+      background: var(--bg-subtle);
+    }
+
+    .qa-container {
+      display: flex;
+      flex-direction: column;
+      gap: 4.5px;
+      margin-bottom: 6px;
+    }
+
+    .qa-card {
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--blue-primary);
+      border-radius: 3px;
+      padding: 4.5px 7px;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5px;
+    }
+
+    .qa-q {
+      font-size: 7.2pt;
+      font-weight: 800;
+      color: var(--navy);
+      display: flex;
+      gap: 5px;
+    }
+
+    .qa-q-prefix {
+      color: var(--blue-primary);
+    }
+
+    .qa-a {
+      font-size: 6.8pt;
+      color: var(--slate-dark);
+      line-height: 1.34;
+      padding-left: 14px;
+    }
+
+    .qa-a strong {
+      color: var(--navy);
+    }
+
+    .protocol-box {
+      background: var(--blue-light);
+      border: 1px solid rgba(29, 78, 216, 0.3);
+      border-radius: 3px;
+      padding: 5px 8px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      font-size: 6.7pt;
+      line-height: 1.3;
+    }
+
+    .protocol-item strong {
+      color: var(--blue-primary);
+      display: block;
+      font-size: 6.8pt;
+      margin-bottom: 1px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ======================================================================== -->
+  <!-- PAGE 1: THE 4-MINUTE JURY DEMO — TIMELINE, ROUTE & STRATEGY              -->
+  <!-- ======================================================================== -->
+  <div class="page" id="page-1">
+    <div>
+      <header class="page-header">
+        <div class="header-left">
+          <div class="header-doc-title">GEOAI DEFORESTATION RISK PLATFORM · OFFICIAL JURY DEMO PATH</div>
+          <div class="header-doc-sub">Bibliotheca Alexandrina Youth Creators Award 2026 · Technology Creativity Track · Principal Developer: Mamdouh Alwakil</div>
+        </div>
+        <div class="header-badge">PAGE 1 OF 3 · MASTER TIMELINE &amp; STRATEGY</div>
+      </header>
+
+      <!-- Narrative & Concept Banner -->
+      <div class="banner">
+        <div class="banner-title">
+          <span>MASTER DEMONSTRATION NARRATIVE: “OBSERVE → IDENTIFY → EXPLAIN → CONTEXTUALIZE → EXPLORE → DECIDE”</span>
+          <span style="font-size: 7.0pt; color: var(--blue-primary); font-weight: 700;">Target Duration: 3:30–4:00 (Max 5:00)</span>
+        </div>
+        <div class="banner-text">
+          A disciplined, reproducible live walkthrough of the production platform designed for a multidisciplinary evaluation jury. 
+          The goal is <strong>not</strong> to sell future promises or perform ad-hoc exploration, but to guide the jury through a structured spatial screening workflow 
+          that proves technical innovation, empirical explainability, and practical decision-support value—anchored strictly by verified scientific guardrails.
+        </div>
+      </div>
+
+      <!-- Master Visual Timeline -->
+      <div class="section-title">Master 4-Minute Presentation Timeline</div>
+      <div class="timeline-strip">
+        <div class="timeline-node t1">
+          <span class="t-time">0:00–0:20</span>
+          <span class="t-step">Step 01</span>
+          <div class="t-title">Orient</div>
+          <div style="font-size: 5.8pt; color: var(--slate-mid); margin-top: 1px;">Rondônia Context &amp; ~150k Cells</div>
+        </div>
+        <div class="timeline-node t2">
+          <span class="t-time">0:20–1:10</span>
+          <span class="t-step">Step 02</span>
+          <div class="t-title">Spatial Risk Field</div>
+          <div style="font-size: 5.8pt; color: var(--slate-mid); margin-top: 1px;">3D Extrusion &amp; Relative Surface</div>
+        </div>
+        <div class="timeline-node t3">
+          <span class="t-time">1:10–1:45</span>
+          <span class="t-step">Step 03</span>
+          <div class="t-title">High-Risk Focus</div>
+          <div style="font-size: 5.8pt; color: var(--slate-mid); margin-top: 1px;">Rondônia Arc Hotspot (84%)</div>
+        </div>
+        <div class="timeline-node t4">
+          <span class="t-time">1:45–2:30</span>
+          <span class="t-step">Step 04</span>
+          <div class="t-title">Explain Risk Signal</div>
+          <div style="font-size: 5.8pt; color: var(--slate-mid); margin-top: 1px;">Dual-Track &amp; TreeSHAP Bars</div>
+        </div>
+        <div class="timeline-node t5">
+          <span class="t-time">2:30–3:10</span>
+          <span class="t-step">Step 05</span>
+          <div class="t-title">Historical Context</div>
+          <div style="font-size: 5.8pt; color: var(--slate-mid); margin-top: 1px;">25-Yr PRODES (2001–2025)</div>
+        </div>
+        <div class="timeline-node t6">
+          <span class="t-time">3:10–3:40</span>
+          <span class="t-step">Step 06</span>
+          <div class="t-title">Scenario Explore</div>
+          <div style="font-size: 5.8pt; color: var(--slate-mid); margin-top: 1px;">Sensitivity Simulation Sliders</div>
+        </div>
+        <div class="timeline-node t7">
+          <span class="t-time">3:40–4:00</span>
+          <span class="t-step">Step 07</span>
+          <div class="t-title">Decision Close</div>
+          <div style="font-size: 5.8pt; color: var(--slate-mid); margin-top: 1px;">Verification &amp; Value Flow</div>
+        </div>
+      </div>
+
+      <!-- Master 7-Step Sequence Table -->
+      <div class="section-title">Verified Application Route &amp; Action Sequence</div>
+      <table class="table-dense">
+        <thead>
+          <tr>
+            <th style="width: 50px;">Step</th>
+            <th style="width: 105px;">Narrative Phase</th>
+            <th style="width: 145px;">Application Route / Component</th>
+            <th>Primary Presenter Action</th>
+            <th style="width: 140px;">Core Evidence Displayed</th>
+            <th style="width: 60px; text-align: right;">Budget</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="step-pill pill-blue">01</span></td>
+            <td><strong>Orient &amp; Scope</strong></td>
+            <td><code>index.html</code> (Hero / Status dot)</td>
+            <td>State study area, problem scale, and platform differentiation</td>
+            <td>Rondônia boundary; ~150,000 precomputed cells</td>
+            <td style="text-align: right; font-weight: 700;">0:20 (20s)</td>
+          </tr>
+          <tr>
+            <td><span class="step-pill pill-blue">02</span></td>
+            <td><strong>Spatial Risk Field</strong></td>
+            <td><code>index.html</code> (Map Controls: 3D/2D)</td>
+            <td>Rotate 3D Deck.gl view; toggle 2D grid and Hotspot layers</td>
+            <td>3D risk extrusion (BR-364 corridor); relative risk scale</td>
+            <td style="text-align: right; font-weight: 700;">0:50 (50s)</td>
+          </tr>
+          <tr>
+            <td><span class="step-pill pill-red">03</span></td>
+            <td><strong>High-Risk Focus</strong></td>
+            <td>Sidebar <code>Story</code> Tab &rarr; Target Btn</td>
+            <td>Click <code>Target Highest-Risk Hotspot</code> (auto-fly to Arc Hotspot)</td>
+            <td>LAT -11.9182, LON -63.8722; 84% Risk; Urgent priority</td>
+            <td style="text-align: right; font-weight: 700;">0:35 (35s)</td>
+          </tr>
+          <tr>
+            <td><span class="step-pill pill-purple">04</span></td>
+            <td><strong>Explain Risk Signal</strong></td>
+            <td><code>pages/ai-model.html</code></td>
+            <td>Show Dual-Track Architecture &amp; TreeSHAP attribution bars</td>
+            <td>Track 1 (AUC 0.82) vs Track 2 (AUC 0.7474, 5.0× lift); SHAP</td>
+            <td style="text-align: right; font-weight: 700;">0:45 (45s)</td>
+          </tr>
+          <tr>
+            <td><span class="step-pill pill-amber">05</span></td>
+            <td><strong>Historical Context</strong></td>
+            <td><code>pages/historical-intelligence.html</code></td>
+            <td>Toggle "Compare with Rondônia" checkbox; click 2004/2012 cards</td>
+            <td>25-yr official PRODES series (2001–2025); Rondônia vs Basin</td>
+            <td style="text-align: right; font-weight: 700;">0:40 (40s)</td>
+          </tr>
+          <tr>
+            <td><span class="step-pill pill-teal">06</span></td>
+            <td><strong>Scenario Exploration</strong></td>
+            <td><code>pages/scenario-simulator.html</code></td>
+            <td>Adjust Road slider; toggle Strict Reserve policy switch</td>
+            <td>Projected risk shift (+2.3% to -4.1%); distribution shift</td>
+            <td style="text-align: right; font-weight: 700;">0:30 (30s)</td>
+          </tr>
+          <tr>
+            <td><span class="step-pill pill-green">07</span></td>
+            <td><strong>Decision Story Close</strong></td>
+            <td><code>index.html</code> (Sidebar Story Steps 04–05)</td>
+            <td>Highlight targeted verification protocol and 5-node value flow</td>
+            <td>Targeted inspection planning; structured decision workflow</td>
+            <td style="text-align: right; font-weight: 700;">0:20 (20s)</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Must Show vs Skip Matrix -->
+      <div class="section-title">Presenter Discipline: Must Show vs. Skip Decision Matrix</div>
+      <div class="matrix-grid">
+        <div class="matrix-col">
+          <div class="matrix-header mh-must">
+            <span>MUST SHOW (Core Credibility)</span>
+            <span>Step Ref</span>
+          </div>
+          <ul class="matrix-list">
+            <li><strong>3D Spatial Risk Extrusion:</strong> Visual prioritization across Rondônia (Steps 01–02).</li>
+            <li><strong>~150,000 Spatial Scale:</strong> Precomputed cell resolution covering the state territory (Step 01).</li>
+            <li><strong>Specific Hotspot Inspection:</strong> Rondônia Arc cell (84% score, Urgent priority) (Step 03).</li>
+            <li><strong>Dual-Track Transparency:</strong> Track 1 (AUC 0.82) vs Track 2 (AUC 0.7474) (Step 04).</li>
+            <li><strong>TreeSHAP Attribution:</strong> Proximity to historical clear-cuts (41.3%) + roads (41.0%) (Step 04).</li>
+            <li><strong>25-Year PRODES History:</strong> Official INPE ground-truth from 2001 to 2025 (Step 05).</li>
+            <li><strong>Decision-Support Purpose:</strong> Screening and verification workflow close (Step 07).</li>
+          </ul>
+        </div>
+
+        <div class="matrix-col">
+          <div class="matrix-header mh-nice">
+            <span>NICE TO SHOW (If Time Permits)</span>
+            <span>Secondary</span>
+          </div>
+          <ul class="matrix-list">
+            <li><strong>Basemap Switcher:</strong> Toggle Analytical &rarr; Terrain/Satellite basemaps.</li>
+            <li><strong>Risk Trajectory Chart:</strong> Point-level 2030–2035 trend canvas in sidebar.</li>
+            <li><strong>Report Export Modal:</strong> CSV, GeoJSON, and PDF export trigger buttons.</li>
+            <li><strong>Policy Preset Buttons:</strong> "Worst Case" vs "Conservation Focus" buttons in simulator.</li>
+            <li><strong>Jurisdiction Dropdown:</strong> Switching from Amazônia Legal to Pará or Mato Grosso.</li>
+            <li><strong>Historical Milestone Cards:</strong> Clicking 2004 peak or 2012 historic trough.</li>
+          </ul>
+        </div>
+
+        <div class="matrix-col">
+          <div class="matrix-header mh-skip">
+            <span>DELIBERATELY SKIP (Avoid Rabbit Holes)</span>
+            <span>Do Not Show</span>
+          </div>
+          <ul class="matrix-list">
+            <li><strong>Source Code Walkthrough:</strong> Do not open IDE or inspect JS libraries unless asked.</li>
+            <li><strong>WebGL Shaders:</strong> Avoid deep dives into Deck.gl buffer vertex shaders.</li>
+            <li><strong>Calibrated Probabilities:</strong> Never claim a score predicts % chance of future loss.</li>
+            <li><strong>Live Telemetry:</strong> Never claim live streaming satellite connections (NASA FIRMS).</li>
+            <li><strong>Live XGBoost Retraining:</strong> Sliders are analytical sensitivities, not live fitting.</li>
+            <li><strong>Institutional Deployment:</strong> Do not claim formal IBAMA/ICMBio operational integration.</li>
+            <li><strong>Carbon ROI Dollars:</strong> Never speculate on dollar values of carbon credits.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Jury Rubric Alignment -->
+      <div class="section-title">Jury Evaluation Rubric Alignment</div>
+      <div class="rubric-strip">
+        <div class="rubric-card">
+          <div class="rubric-num">Criterion 01</div>
+          <div class="rubric-head">Technological Innovation</div>
+          <div class="rubric-body">Deck.gl 3D WebGL rendering, 150k precomputed cell architecture, multi-factor GeoAI pipeline.</div>
+        </div>
+        <div class="rubric-card">
+          <div class="rubric-num">Criterion 02</div>
+          <div class="rubric-head">Scientific Credibility</div>
+          <div class="rubric-body">Dual-track separation, out-of-time PRODES 2024 testing, TreeSHAP interpretability, strict non-claims.</div>
+        </div>
+        <div class="rubric-card">
+          <div class="rubric-num">Criterion 03</div>
+          <div class="rubric-head">Decision-Support Utility</div>
+          <div class="rubric-body">Shifts from passive loss mapping to proactive screening, capacity-constrained ranking, and inspection alerts.</div>
+        </div>
+        <div class="rubric-card">
+          <div class="rubric-num">Criterion 04</div>
+          <div class="rubric-head">Presentation Maturity</div>
+          <div class="rubric-body">Tight 4-minute time discipline, verified interactions only, zero unsupported claims, confident Q&amp;A defense.</div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="page-footer">
+      <span class="footer-left">GeoAI Deforestation Risk Platform · Bibliotheca Alexandrina Youth Creators Award 2026</span>
+      <span class="footer-right">Page 1 of 3</span>
+    </footer>
+  </div>
+
+  <!-- ======================================================================== -->
+  <!-- PAGE 2: SCREEN-BY-SCREEN PRESENTER SCRIPT & APPLICATION ROUTE            -->
+  <!-- ======================================================================== -->
+  <div class="page" id="page-2">
+    <div>
+      <header class="page-header">
+        <div class="header-left">
+          <div class="header-doc-title">GEOAI DEFORESTATION RISK PLATFORM · OFFICIAL JURY DEMO PATH</div>
+          <div class="header-doc-sub">Screen-by-Screen Walkthrough · Presenter Script &amp; Interaction Protocol · Steps 01 to 07</div>
+        </div>
+        <div class="header-badge">PAGE 2 OF 3 · PRESENTER SCRIPT</div>
+      </header>
+
+      <div class="steps-container">
+
+        <!-- STEP 01 -->
+        <div class="step-card border-blue">
+          <div class="step-meta">
+            <div class="step-badge-row">
+              <span class="step-pill pill-blue">01</span>
+              <span class="step-tag-must">Must Show</span>
+            </div>
+            <div class="step-num-title">ORIENT &amp; SCOPE</div>
+            <div class="step-time-budget">0:00–0:20 (20s)</div>
+            <div class="step-target-route">index.html</div>
+          </div>
+          <div class="step-action-box">
+            <div><span class="step-label">Show:</span> Landing screen over Rondônia, top navigation bar, status dot ("Pre-calculated Predictive Dashboard"), and ~150,000 spatial cells scale.</div>
+            <div><span class="step-label">Purpose:</span> Establish the project's identity, geographic focus (Rondônia), territorial scale, and fundamental distinction: proactive risk screening vs passive post-loss monitoring.</div>
+          </div>
+          <div class="step-script-box">
+            <div class="say-quote">“This platform organizes environmental spatial data into proactive risk intelligence for Rondônia in the Brazilian Amazon. Rather than mapping deforestation after tree cover is lost, it evaluates 150,000 precomputed cells to surface areas of elevated spatial vulnerability.”</div>
+            <div class="skip-alert">SKIP: Code implementation, GitHub repo, or detailed data ingestion mechanics.</div>
+          </div>
+        </div>
+
+        <!-- STEP 02 -->
+        <div class="step-card border-blue">
+          <div class="step-meta">
+            <div class="step-badge-row">
+              <span class="step-pill pill-blue">02</span>
+              <span class="step-tag-must">Must Show</span>
+            </div>
+            <div class="step-num-title">SPATIAL RISK FIELD</div>
+            <div class="step-time-budget">0:20–1:10 (50s)</div>
+            <div class="step-target-route">index.html (btn3d/btn2d)</div>
+          </div>
+          <div class="step-action-box">
+            <div><span class="step-label">Action:</span> Pan/tilt 3D Deck.gl layer; click <code>2D</code> (`btn2d`) and <code>Hotspots</code> (`btnHotspot`).</div>
+            <div><span class="step-label">Show:</span> 3D column extrusion where height and color encode relative spatial risk. Highlight high-risk clusters concentrated along Highway BR-364 and expanding agricultural frontiers.</div>
+            <div><span class="step-label">Purpose:</span> Demonstrate high-performance WebGL visualization while establishing scientific guardrails: relative risk ranking, not calibrated probability; visual extrusion, not physical elevation.</div>
+          </div>
+          <div class="step-script-box">
+            <div class="say-quote">“The 3D surface visually prioritizes landscape risk. Vertical column height is a visual representation of normalized risk intensity, not physical elevation. Crucially, this represents a relative spatial risk ranking, not a calibrated probability forecast.”</div>
+            <div class="skip-alert">SKIP: Speculating on physical tree height or claiming real-time satellite telemetry.</div>
+          </div>
+        </div>
+
+        <!-- STEP 03 -->
+        <div class="step-card border-red">
+          <div class="step-meta">
+            <div class="step-badge-row">
+              <span class="step-pill pill-red">03</span>
+              <span class="step-tag-must">Must Show</span>
+            </div>
+            <div class="step-num-title">HIGH-RISK FOCUS</div>
+            <div class="step-time-budget">1:10–1:45 (35s)</div>
+            <div class="step-target-route">index.html (focusTopHotspot)</div>
+          </div>
+          <div class="step-action-box">
+            <div><span class="step-label">Action:</span> Open sidebar <code>Story</code> Tab; click button <code>Target Highest-Risk Hotspot</code>.</div>
+            <div><span class="step-label">Show:</span> Smooth camera transition targeting Rondônia Arc Hotspot (LAT -11.9182 | LON -63.8722). Inspect 84% Relative Risk Score, Urgent Priority badge, and driver contribution summary.</div>
+            <div><span class="step-label">Purpose:</span> Ground the macro-scale surface into a concrete, auditable point screening event.</div>
+          </div>
+          <div class="step-script-box">
+            <div class="say-quote">“By targeting the highest-priority hotspot, we see exactly why the area receives a higher relative spatial risk score and is surfaced for screening. The platform flags this cell because it sits at the immediate intersection of active clearing frontiers and primary access corridors.”</div>
+            <div class="skip-alert">SKIP: Claiming this point is a verified real-world clearing event today without evidence.</div>
+          </div>
+        </div>
+
+        <!-- STEP 04 -->
+        <div class="step-card border-purple">
+          <div class="step-meta">
+            <div class="step-badge-row">
+              <span class="step-pill pill-purple">04</span>
+              <span class="step-tag-must">Must Show</span>
+            </div>
+            <div class="step-num-title">EXPLAIN RISK SIGNAL</div>
+            <div class="step-time-budget">1:45–2:30 (45s)</div>
+            <div class="step-target-route">pages/ai-model.html</div>
+          </div>
+          <div class="step-action-box">
+            <div><span class="step-label">Action:</span> Navigate to <code>AI Model</code>; scroll through Tree Ensemble to Dual-Track KPI grids.</div>
+            <div><span class="step-label">Show:</span> Track 1 Documented Production Benchmark (ROC-AUC 0.82) vs Track 2 Independent Research Model V2 (ROC-AUC 0.7474, 5.0× retrospective enrichment). Show TreeSHAP attribution: Historical Loss (41.3%) and Road Proximity (41.0%).</div>
+            <div><span class="step-label">Purpose:</span> Prove machine learning interpretability and transparent scientific integrity.</div>
+          </div>
+          <div class="step-script-box">
+            <div class="say-quote">“The system does not treat AI as a black box; it exposes the spatial signals behind every score. We strictly separate the documented 0.82 production benchmark from our independent research evaluation, where TreeSHAP shows that historical clear-cuts and road corridors drive over 80% of model attribution.”</div>
+            <div class="skip-alert">SKIP: Math derivations of tree boosting; do not claim Model V2 is running live in production.</div>
+          </div>
+        </div>
+
+        <!-- STEP 05 -->
+        <div class="step-card border-amber">
+          <div class="step-meta">
+            <div class="step-badge-row">
+              <span class="step-pill pill-amber">05</span>
+              <span class="step-tag-must">Must Show</span>
+            </div>
+            <div class="step-num-title">HISTORICAL CONTEXT</div>
+            <div class="step-time-budget">2:30–3:10 (40s)</div>
+            <div class="step-target-route">pages/historical-intelligence.html</div>
+          </div>
+          <div class="step-action-box">
+            <div><span class="step-label">Action:</span> Check <code>Compare with Rondônia</code> (`hiCompareRondonia`); click 2004/2012 callouts.</div>
+            <div><span class="step-label">Show:</span> 25-year official PRODES time series (2001–2025). Compare Amazônia Legal (5,731 km² in 2025) with Rondônia benchmark (647 km²). Highlight historical inflection points.</div>
+            <div><span class="step-label">Purpose:</span> Contextualize risk predictions within sovereign historical environmental monitoring.</div>
+          </div>
+          <div class="step-script-box">
+            <div class="say-quote">“Spatial risk cannot be evaluated in isolation. We place the risk layer inside a 25-year historical monitoring continuum from INPE PRODES, allowing analysts to compare current spatial vulnerability against multi-decade basin trends and policy shifts.”</div>
+            <div class="skip-alert">SKIP: Lengthy political commentary on past Brazilian presidential administrations.</div>
+          </div>
+        </div>
+
+        <!-- STEP 06 -->
+        <div class="step-card border-teal">
+          <div class="step-meta">
+            <div class="step-badge-row">
+              <span class="step-pill pill-teal">06</span>
+              <span class="step-tag-nice">Nice to Show</span>
+            </div>
+            <div class="step-num-title">SCENARIO EXPLORE</div>
+            <div class="step-time-budget">3:10–3:40 (30s)</div>
+            <div class="step-target-route">pages/scenario-simulator.html</div>
+          </div>
+          <div class="step-action-box">
+            <div><span class="step-label">Action:</span> Move <code>Road Expansion</code> slider (`roadSlider`); toggle <code>Strict Forest Reserve</code>.</div>
+            <div><span class="step-label">Show:</span> Dynamic shift in Projected Regional Risk (+2.3% to -4.1%) and risk distribution chart.</div>
+            <div><span class="step-label">Purpose:</span> Demonstrate exploratory policy sensitivity simulation with strict scientific guardrails against false forecasting claims.</div>
+          </div>
+          <div class="step-script-box">
+            <div class="say-quote">“The simulator allows decision-makers to explore policy assumptions through analytical sensitivity modeling. We explicitly present this as exploratory sensitivity simulation, not live browser-side XGBoost retraining or deterministic forecasting.”</div>
+            <div class="skip-alert">SKIP: Claiming this predicts exact hectares or financial carbon offset credit revenues.</div>
+          </div>
+        </div>
+
+        <!-- STEP 07 -->
+        <div class="step-card border-green">
+          <div class="step-meta">
+            <div class="step-badge-row">
+              <span class="step-pill pill-green">07</span>
+              <span class="step-tag-must">Must Show</span>
+            </div>
+            <div class="step-num-title">DECISION STORY / CLOSE</div>
+            <div class="step-time-budget">3:40–4:00 (20s)</div>
+            <div class="step-target-route">index.html (Sidebar Story 04–05)</div>
+          </div>
+          <div class="step-action-box">
+            <div><span class="step-label">Action:</span> Return to <code>index.html</code>; highlight Decision Story Step 04 &amp; 05 Value Flow.</div>
+            <div><span class="step-label">Show:</span> Inspection planning window and decision-support value flow toward verification planning.</div>
+            <div><span class="step-label">Purpose:</span> Conclude with a memorable, grounded statement defining the platform's true utility.</div>
+          </div>
+          <div class="step-script-box">
+            <div class="say-quote">“The purpose is not to replace established forest-monitoring systems. It is to organize spatial evidence into an interpretable workflow for risk screening, prioritization, contextual analysis, and verification planning.”</div>
+            <div class="skip-alert">SKIP: Overpromising guaranteed real-world patrol enforcement cost reductions.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <footer class="page-footer">
+      <span class="footer-left">GeoAI Deforestation Risk Platform · Bibliotheca Alexandrina Youth Creators Award 2026</span>
+      <span class="footer-right">Page 2 of 3</span>
+    </footer>
+  </div>
+
+  <!-- ======================================================================== -->
+  <!-- PAGE 3: FAILSAFE FALLBACK & JURY DEFENSE STRATEGY                        -->
+  <!-- ======================================================================== -->
+  <div class="page" id="page-3">
+    <div>
+      <header class="page-header">
+        <div class="header-left">
+          <div class="header-doc-title">GEOAI DEFORESTATION RISK PLATFORM · OFFICIAL JURY DEMO PATH</div>
+          <div class="header-doc-sub">Demonstration Failure Safety &amp; Live Jury Q&amp;A Defense Strategy</div>
+        </div>
+        <div class="header-badge">PAGE 3 OF 3 · FAILSAFE &amp; DEFENSE</div>
+      </header>
+
+      <!-- Failsafe Strategy Section -->
+      <div class="section-title">Demonstration Failure Safety &amp; 4-Tier Fallback Protocol</div>
+      <table class="failsafe-table">
+        <thead>
+          <tr>
+            <th style="width: 105px;">Failure Scenario</th>
+            <th style="width: 110px;">Trigger / Symptom</th>
+            <th style="width: 155px;">Immediate Technical Pivot</th>
+            <th>Presenter Script &amp; Behavioral Protocol</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Tier 1: WebGL Crash / GPU Context Lost</strong></td>
+            <td>3D map canvas turns black or Deck.gl fails to initialize.</td>
+            <td>Click <code>2D</code> button (`btn2d`) or <code>Analytical</code> basemap (`styleDark`). 2D canvas renders reliably without GPU instancing.</td>
+            <td><em>“Let us switch instantly to our high-contrast 2D spatial screening view. This isolates the spatial risk field across the 150,000 cells without requiring 3D WebGL depth buffers.”</em> (Keep momentum, no apology).</td>
+          </tr>
+          <tr>
+            <td><strong>Tier 2: Network Throttling / Slow Basemap</strong></td>
+            <td>Mapbox satellite tiles load sluggishly or show blank grey grid.</td>
+            <td>Toggle to <code>Analytical</code> style (`styleDark`). The vector polygon grid is precomputed and cached locally in memory.</td>
+            <td><em>“The precomputed 150,000 risk cells are fully cached in browser memory, enabling analytical spatial screening independent of external satellite tile delivery.”</em></td>
+          </tr>
+          <tr>
+            <td><strong>Tier 3: Full Browser Freeze / Tab Crash</strong></td>
+            <td>Browser becomes unresponsive during 3D camera transitions.</td>
+            <td>Pivot immediately to pre-opened fallback tab or high-resolution PDF dossier (<code>GeoAI_Technical_Evidence.pdf</code>).</td>
+            <td><em>“As documented in our technical evidence dossier, the identical precomputed risk field can be examined directly here in our published submission records.”</em> (Never claim a static PDF is live data).</td>
+          </tr>
+          <tr>
+            <td><strong>Tier 4: Interaction / Slider Stutter</strong></td>
+            <td>Simulator sliders or animation loops hitch or lag.</td>
+            <td>Skip simulator; pivot directly to Step 02 &amp; 03 of the Decision Story sidebar in <code>index.html</code>.</td>
+            <td><em>“The analytical sensitivity model demonstrates that road proximity drives +41% of risk expansion, as verified in our sidebar feature attribution panel.”</em></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Presenter Recovery Protocol -->
+      <div class="section-title">Presenter Execution Rules for Live Browser Demonstrations</div>
+      <div class="protocol-box">
+        <div class="protocol-item">
+          <strong>Rule 01: Pre-Load Exact Tabs</strong>
+          Before entering the jury room, pre-load three browser tabs: (1) <code>index.html</code>, (2) <code>pages/ai-model.html</code>, and (3) <code>pages/historical-intelligence.html</code>. Avoid live reloads.
+        </div>
+        <div class="protocol-item">
+          <strong>Rule 02: Never Bluff Glitches</strong>
+          If an interaction fails, acknowledge it with professional poise and pivot to the next verified view. Never pretend a static fallback is streaming live data.
+        </div>
+        <div class="protocol-item">
+          <strong>Rule 03: Anchor on Locked Metrics</strong>
+          When challenged on numbers, cite locked submission metrics: ROC-AUC 0.82 (Track 1) and ROC-AUC 0.7474 with 5.0× retrospective enrichment (Track 2).
+        </div>
+      </div>
+
+      <!-- Top 5 Jury Q&A Defense -->
+      <div class="section-title" style="margin-top: 7px;">Jury Defense: Top 5 Technical Challenge Questions</div>
+      <div class="qa-container">
+
+        <div class="qa-card">
+          <div class="qa-q">
+            <span class="qa-q-prefix">Q1:</span>
+            <span>“Is this model predicting the exact probability of deforestation occurring next month?”</span>
+          </div>
+          <div class="qa-a">
+            <strong>Defense:</strong> “No. We explicitly do <strong>not</strong> claim calibrated probability forecasts. Because deforestation is an extreme rare event (0.14% annual prevalence in the test lattice), Raw scores are interpreted as relative spatial risk rankings across the precomputed cells, not as calibrated probabilities.”
+          </div>
+        </div>
+
+        <div class="qa-card">
+          <div class="qa-q">
+            <span class="qa-q-prefix">Q2:</span>
+            <span>“What does the 5.0× lift metric actually mean, and how was it measured?”</span>
+          </div>
+          <div class="qa-a">
+            <strong>Defense:</strong> “The 5.0× metric represents <strong>retrospective top-decile enrichment</strong> evaluated out-of-time on official PRODES 2024 clear-cuts. When inspecting the top 10% highest-ranked test cells, the model captured 5 out of the 10 observed clearing events (50% recall), which is exactly 5.0 times higher than random inspection (10%). It is not an operational patrol field measurement.”
+          </div>
+        </div>
+
+        <div class="qa-card">
+          <div class="qa-q">
+            <span class="qa-q-prefix">Q3:</span>
+            <span>“Does your platform ingest live real-time satellite telemetry or NASA FIRMS alerts?”</span>
+          </div>
+          <div class="qa-a">
+            <strong>Defense:</strong> “No. The current production application operates on <strong>150,000 precomputed spatial cells</strong> derived from authoritative annual INPE PRODES, IBGE, and infrastructure records. Real-time satellite alert integration is documented as a future deployment phase, not an active prototype feature.”
+          </div>
+        </div>
+
+        <div class="qa-card">
+          <div class="qa-q">
+            <span class="qa-q-prefix">Q4:</span>
+            <span>“Why does historical loss proximity dominate the model over road infrastructure in Model V2?”</span>
+          </div>
+          <div class="qa-a">
+            <strong>Defense:</strong> “In this evaluation sample, proximity to historical loss was the strongest single-feature benchmark, suggesting strong spatial persistence in the observed clearing pattern. This is an empirical finding, not a universal causal claim.”
+          </div>
+        </div>
+
+        <div class="qa-card">
+          <div class="qa-q">
+            <span class="qa-q-prefix">Q5:</span>
+            <span>“Why did you develop Model V2 instead of simply reproducing the original 0.82 benchmark?”</span>
+          </div>
+          <div class="qa-a">
+            <strong>Defense:</strong> “The original 0.82 benchmark is documented from the project's inception, but its training labels were unrecorded in the repository. Rather than manufacturing synthetic pseudo-labels to fake a reproduction, we exercised <strong>scientific discipline</strong>: locking the 0.82 benchmark as Track 1 and conducting an independent, reproducible out-of-time evaluation (Model V2) as Track 2.”
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Q&A Closing Transition -->
+      <div class="banner" style="margin-bottom: 0; padding: 4.5px 8px; border-left-color: var(--green);">
+        <div class="banner-title" style="font-size: 7.2pt; color: var(--green);">CONFIDENT TRANSITION INTO JURY Q&amp;A</div>
+        <div class="banner-text" style="font-size: 6.8pt;">
+          <em>“Thank you. We have structured this platform to prove that AI in conservation is most valuable when it provides transparent, interpretable decision support within rigorously defined scientific boundaries. I welcome your questions.”</em>
+        </div>
+      </div>
+    </div>
+
+    <footer class="page-footer">
+      <span class="footer-left">GeoAI Deforestation Risk Platform · Bibliotheca Alexandrina Youth Creators Award 2026</span>
+      <span class="footer-right">Page 3 of 3</span>
+    </footer>
+  </div>
+
+</body>
+</html>
