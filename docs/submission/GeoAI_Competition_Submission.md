@@ -59,6 +59,22 @@
 +======================================================================+
 ```
 
+### Executive Jury Brief (60-Second Overview)
+
+> **Core Purpose**: "An AI-assisted spatial decision-support prototype for interpreting and prioritizing relative deforestation risk."
+
+#### Verified Technical Evidence Strip
+| Study Geography | Spatial Coverage | Machine Learning Engine | Track 1 Benchmark | Track 2 Research Evaluation |
+|:---|:---|:---|:---|:---|
+| **Rondônia, Brazil** | **~150,000 Precomputed Grid Cells** | **Offline XGBoost Pipeline** | **ROC-AUC: 0.82** (F1: 0.81) | **ROC-AUC: 0.7474** (5.0× Retrospective Top-Decile Enrichment) |
+
+#### Multidisciplinary Jury Evaluation Matrix
+- **WHAT is the project?**: An end-to-end GeoAI decision-support prototype that synthesizes multi-source geospatial and demographic indicators into interpretable, relative spatial risk rankings.
+- **WHERE does it operate?**: State of Rondônia, Brazilian Amazon Basin — covering approximately 150,000 precomputed spatial cells, contextualized by 25 years of PRODES deforestation history (2001–2025) across all 9 Legal Amazon states.
+- **WHAT technology does it use?**: Offline-trained XGBoost classification pipeline, spatial feature engineering (STRtree / cKDTree / Copernicus DEM), and a static client-side WebGL (Deck.gl / Mapbox GL JS) visualization engine deployed on Vercel Edge CDN with zero backend database requirement.
+- **WHAT has actually been demonstrated?**: Two Distinct Evidence Tracks: Documented Production Benchmark (Track 1: ROC-AUC 0.82, Precision 0.79, Recall 0.84) + Independent Research Evaluation (Track 2: ROC-AUC 0.7474, 95% CI: [0.5837, 0.9036], Brier 0.00693, 5.0× Retrospective Top-Decile Enrichment).
+- **WHY does it matter?**: The project explores how environmental observations can be organized into a structured workflow for spatial risk screening, prioritization, interpretation, and verification planning.
+
 ---
 
 ## 2. Executive Summary
@@ -106,6 +122,8 @@ Environmental protection agencies operate under severe logistical, personnel, an
 - **Verification planning**: Which areas warrant ground-truthing or targeted monitoring attention?
 
 This platform is designed as a **complementary AI-assisted decision-support layer** to help bridge that workflow gap — operating alongside, not replacing, authoritative monitoring infrastructure.
+
+> **Anchor Principle**: *"A complementary intelligence layer, not a replacement for monitoring systems."*
 
 ---
 
@@ -290,6 +308,8 @@ The offline Python pipeline performs spatial feature engineering through:
 
 The platform maintains an explicit scientific separation between two independent evidence tracks:
 
+> **Anchor Principle**: *"Two evidence tracks, clearly separated: documented production benchmark vs. independent research evaluation."*
+
 ```
 +==============================+==============================+
 |  TRACK 1                     |  TRACK 2                     |
@@ -341,6 +361,8 @@ The platform maintains an explicit scientific separation between two independent
 
 > **Critical Interpretation Constraint**: Brier score alone does not establish probabilistic calibration. Model V2 outputs must be interpreted as **relative spatial risk rankings**, not calibrated probabilities or frequentist estimates of deforestation occurrence likelihood.
 
+> **Anchor Principle**: *"Relative risk ranking, not calibrated probability."*
+
 > **TreeSHAP scope**: TreeSHAP attribution is specific to Track 2 (Research Model V2) and is not claimed as the explainability method for the Track 1 production benchmark.
 
 ---
@@ -372,6 +394,8 @@ Historical intelligence serves three decision-support functions:
 ---
 
 ## 10. Decision-Support Workflow
+
+> **Anchor Principle**: *"From risk signal to verification planning."*
 
 The platform guides analysts through a structured five-step decision-support workflow embedded in the dashboard interface:
 
@@ -682,7 +706,40 @@ The platform's architectural approach — precomputed spatial risk scoring, WebG
 
 ## 19. Conclusion
 
+> **Anchor Principle**: *"Prototype today, scalable environmental intelligence tomorrow."*
+
 The **GeoAI Deforestation Risk Intelligence Platform** demonstrates that rigorous scientific discipline, careful engineering execution, and responsible AI practice can coexist with visual excellence and practical decision-support utility.
+
+### Architectural Progression: From Prototype to Future Environmental Intelligence
+
+```
++--------------------------------------------------------------------------------------------------+
+| PROTOTYPE (Current Implementation)                                                               |
+| High-performance static browser application covering ~150,000 precomputed cells in Rondonia,     |
+| delivering WebGL 2D/3D visualization with zero runtime server-side database infrastructure.      |
++--------------------------------------------------------------------------------------------------+
+                                                |
+                                                v
++--------------------------------------------------------------------------------------------------+
+| VERIFIED EVIDENCE (Dual-Track Rigor)                                                             |
+| Transparent empirical validation separating documented production benchmarks (Track 1: 0.82)     |
+| from out-of-time retrospective research evaluation (Track 2: 0.7474 with 5.0x top-decile lift).  |
++--------------------------------------------------------------------------------------------------+
+                                                |
+                                                v
++--------------------------------------------------------------------------------------------------+
+| DECISION SUPPORT (Practical Workflow)                                                            |
+| Structured 5-step operational protocol: spatial risk screening -> multi-factor driver inspection  |
+| -> spatial cluster analysis -> parametric sensitivity simulation -> verification planning.      |
++--------------------------------------------------------------------------------------------------+
+                                                |
+                                                v
++--------------------------------------------------------------------------------------------------+
+| FUTURE ENVIRONMENTAL INTELLIGENCE INFRASTRUCTURE (Aspirational Vision)                           |
+| Methodological architecture positioned for potential multi-biome expansion, multi-hazard         |
+| environmental risk layering, and sovereign institutional interoperability (pending resources).    |
++--------------------------------------------------------------------------------------------------+
+```
 
 The platform makes four core contributions:
 
