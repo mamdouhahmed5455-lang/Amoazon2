@@ -55,7 +55,7 @@ The goal is **not** to perform unstructured exploration or make speculative clai
 - **~150,000 Spatial Scale:** Precomputed cell resolution covering the entire state territory (Step 01).
 - **Specific Hotspot Inspection:** Rondônia Arc cell at LAT -11.9182, LON -63.8722 (84% score, Urgent priority) (Step 03).
 - **Dual-Track Scientific Distinction:** Track 1 (Production Benchmark: ROC-AUC 0.82) vs Track 2 (Independent Research Model V2: ROC-AUC 0.7474, 5.0× retrospective enrichment) (Step 04).
-- **TreeSHAP Attribution:** Dominance of historical loss distance (41.3%) and road proximity (41.0%) (Step 04).
+- **Model Attribution vs Drivers:** Model V2 TreeSHAP shows historical-loss distance at 41.28%; separate documented global analytical driver importance assigns 41% to road proximity (Step 04).
 - **25-Year PRODES History:** Official INPE ground-truth from 2001 to 2025 (Step 05).
 - **Decision-Support Framing:** Clear positioning as risk screening and verification planning, not loss replacement (Step 07).
 
@@ -119,10 +119,10 @@ The goal is **not** to perform unstructured exploration or make speculative clai
 - **Screen:** `pages/ai-model.html`
 - **Tag:** `[Must Show]`
 - **Action:** Navigate to `AI Model`; scroll through Tree Ensemble architecture to the Dual-Track KPI grids and TreeSHAP attribution bars.
-- **Show:** Dual-track scientific architecture: Track 1 Documented Production Benchmark (ROC-AUC 0.82) vs Track 2 Independent Research Model V2 (ROC-AUC 0.7474, 5.0× retrospective top-decile enrichment). Show TreeSHAP attribution: Historical Loss Distance (41.3%) and Road Proximity (41.0%).
+- **Show:** Track 1 (0.82) vs Track 2 (0.7474, 5.0× retrospective top-decile enrichment); Model V2 TreeSHAP shows historical-loss distance at 41.28%. The separate documented global analytical driver importance assigns 41% to road proximity.
 - **Purpose:** Prove machine learning interpretability and transparent scientific integrity.
 - **Presenter Script (SAY):**
-  > *“The system does not treat AI as a black box; it exposes the spatial signals behind every score. We strictly separate the documented 0.82 production benchmark from our independent research evaluation, where TreeSHAP shows that historical clear-cuts and road corridors drive over 80% of model attribution.”*
+  > *“The system does not treat AI as a black box; it exposes the spatial signals behind every score. We strictly separate the documented 0.82 production benchmark from our independent research evaluation: Model V2 TreeSHAP shows historical-loss distance at 41.28%, while the separate documented global analytical driver importance assigns 41% to road proximity.”*
 - **Deliberately Skip:** Mathematical derivations of gradient boosted trees; do not claim Model V2 is running live in production.
 
 ---
