@@ -1,3 +1,11 @@
+> [!NOTE]
+> **[ARCHIVAL DOCUMENT]**  
+> This document reflects an earlier project stage and may contain terminology or methodological descriptions that were superseded by the current GeoAI Deforestation Risk Intelligence Platform documentation.  
+> For the current scientific scope, metrics, and limitations, see:  
+> - `docs/submission/GeoAI_Competition_Submission`  
+> - `docs/submission/GeoAI_Technical_Evidence`  
+> - `docs/model-v2/`
+
 # Graduation Project Report
 ## AI-Based Deforestation Risk Prediction Model – Amazon Basin
 

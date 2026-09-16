@@ -1,9 +1,19 @@
 .vercel
 
-verify_token.js
+# Python caches
+__pycache__/
+*.pyc
 
+# Local verification & test files
 verify_token.js
 verify_spatial_app.js
 verify_live.html
 verify_spatial.html
 live_index_now.html
+test_page3.html
+test_token.js
+
+# Local QA & build artifacts
+docs/submission/pdf_qa_pages/
+video-output/
+scratch/

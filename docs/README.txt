@@ -1,3 +1,10 @@
+[ARCHIVAL DOCUMENT]
+This document reflects an earlier project stage and may contain terminology or methodological descriptions that were superseded by the current GeoAI Deforestation Risk Intelligence Platform documentation.
+For the current scientific scope, metrics, and limitations, see:
+docs/submission/GeoAI_Competition_Submission
+docs/submission/GeoAI_Technical_Evidence
+docs/model-v2/
+
 # Amazon Risk Project
 
 This repository contains the GeoAI Deforestation Risk Prediction Framework for the Amazon Basin.
